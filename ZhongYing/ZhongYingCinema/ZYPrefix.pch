@@ -1,0 +1,45 @@
+//
+//  ZYPrefix.pch
+//  ZhongYingCinema
+//
+//  Created by 小菜皮 on 2016/11/15.
+//  Copyright © 2016年 小菜皮. All rights reserved.
+//
+
+#ifndef ZYPrefix_pch
+#define ZYPrefix_pch
+
+// ZYViewController、ZYTabBarController、ZYNavigationController
+#import "ZYViewController.h"
+#import "ZYTabBarController.h"
+#import "ZYNavigationController.h"
+// 所有宏定义
+#import "ZYDefineHeader.h"
+// 类别的封装
+#import "FanShuToolClass.h"
+// 上下拉刷新
+#import "MJRefresh.h"
+#import "MBProgressHUD.h"
+// 用户登录状态
+#import "LoginData.h"
+// 类别
+#import "UIViewController+Commen.h"
+#import "NSString+Commen.h"
+// 键盘第三方
+#import "LJWKeyboardHandlerHeaders.h"
+// 网络请求
+#import "AFNetworking.h"
+#import "ZhongYingConnect.h"
+// 图片加载
+#import "UIImageView+AFNetworking.h"
+
+#import "MJChiBaoZiHeader.h"
+#import "MJChiBaoZiFooter2.h"
+#import <UMMobClick/MobClick.h>
+
+
+#import "ZYConstant.h"
+#import "UIView+tool.h"
+
+
+#endif /* ZYPrefix_pch */

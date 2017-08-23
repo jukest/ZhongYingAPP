@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "b1a71eac-8061-8141-a4e8-e1561ef590b7++6422",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "b1a71eac-8061-8141-a4e8-e1561ef590b7++6422" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "b1a71eac-8061-8141-a4e8-e1561ef590b7++6422" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "74800428-BC2D-4314-A5B2-62B94A550DBB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "b1a71eac-8061-8141-a4e8-e1561ef590b7++6422" : "ZhongYing\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ZhongYingCinema",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ZhongYingCinema.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/192.168.1.22:8443\/svn\/baiyi",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "b1a71eac-8061-8141-a4e8-e1561ef590b7++6422"
+    }
+  ]
+}
