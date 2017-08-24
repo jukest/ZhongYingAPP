@@ -98,7 +98,6 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
     
-    
 }
 
 
@@ -116,7 +115,6 @@
 
 - (void)addSegmentContro {
     self.navigationItem.titleView = self.segemetnControl;
-//    [self segementControlDidSelectIndex:0];
 
 }
 
