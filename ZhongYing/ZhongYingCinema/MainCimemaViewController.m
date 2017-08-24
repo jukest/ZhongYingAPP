@@ -81,13 +81,13 @@
     self.leftButton = leftButton;
     leftButton.frame = CGRectMake(0, 0, 50, 30);
     [leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -40, 0, 0)];
-    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+    [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0, 35, 0, 0)];
     leftButton.backgroundColor = [UIColor clearColor];
     leftButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [leftButton.titleLabel sizeToFit];
     [leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [leftButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"down_1"] forState:UIControlStateNormal];
     
     [leftButton setTitle:@"深圳市" forState:UIControlStateNormal];
 
@@ -190,9 +190,13 @@
     
     if (index == 0) {
         [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.leftButton setImage:[UIImage imageNamed:@"down_1"] forState:UIControlStateNormal];
+
         
     } else {
         [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.leftButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+
     }
     
     
