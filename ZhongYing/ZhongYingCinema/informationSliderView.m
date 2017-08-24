@@ -25,9 +25,8 @@
         // 轮播图
         self.adView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height / 4 * 3) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
         self.adView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-        //cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
-        //cycleScrollView3.pageDotImage = [UIImage imageNamed:@"pageControlDot"];
-        //cycleScrollView2.titlesGroup = titles;
+        
+        
         self.adView.currentPageDotColor = Color(252, 186, 0, 1.0); // 自定义分页控件小圆标颜色
         self.adView.pageDotColor = [UIColor whiteColor];
         //self.adView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
