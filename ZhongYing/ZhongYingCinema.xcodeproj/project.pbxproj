@@ -57,12 +57,17 @@
 		183022A91F42A1AF007CE14C /* MainCimemaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183022A81F42A1AF007CE14C /* MainCimemaViewController.m */; };
 		183022B01F42C505007CE14C /* ZYConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 183022AF1F42C505007CE14C /* ZYConstant.m */; };
 		183022B41F42FC24007CE14C /* FilmCategoryTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 183022B31F42FC24007CE14C /* FilmCategoryTagView.m */; };
+		184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC6251F5012C6006A86BC /* ZYMallViewController.m */; };
 		185E94C61F4AABE300F364F2 /* MovePictureSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */; };
 		185E94CD1F4AACB700F364F2 /* SCAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C91F4AACB700F364F2 /* SCAdCollectionViewLayout.m */; };
 		185E94CE1F4AACB700F364F2 /* SCAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94CB1F4AACB700F364F2 /* SCAdView.m */; };
 		185E94D11F4AB0C900F364F2 /* MovePictureSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94D01F4AB0C900F364F2 /* MovePictureSliderCell.m */; };
 		1862AF551F4419BB0003C5BF /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862AF541F4419BB0003C5BF /* MainTableViewController.m */; };
 		1862AF581F441A080003C5BF /* MainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862AF571F441A080003C5BF /* MainTableView.m */; };
+		18A0016D1F53B18D00F1EEA2 /* ZYFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0016C1F53B18D00F1EEA2 /* ZYFoodViewController.m */; };
+		18A001701F53B1AC00F1EEA2 /* ZYMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0016F1F53B1AC00F1EEA2 /* ZYMemberViewController.m */; };
+		18A001741F53BDE500F1EEA2 /* WXMoveBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */; };
+		18A001771F53E58600F1EEA2 /* ZYMallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001761F53E58600F1EEA2 /* ZYMallCell.m */; };
 		342337A51DE3D44C005069D2 /* MyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A41DE3D44C005069D2 /* MyLoginView.m */; };
 		342337A81DE3D87B005069D2 /* LoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A71DE3D87B005069D2 /* LoginData.m */; };
 		342337AC1DE3DF69005069D2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337AB1DE3DF69005069D2 /* LoginViewController.m */; };
@@ -497,6 +502,8 @@
 		183022AF1F42C505007CE14C /* ZYConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConstant.m; sourceTree = "<group>"; };
 		183022B21F42FC24007CE14C /* FilmCategoryTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmCategoryTagView.h; sourceTree = "<group>"; };
 		183022B31F42FC24007CE14C /* FilmCategoryTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmCategoryTagView.m; sourceTree = "<group>"; };
+		184DC6241F5012C6006A86BC /* ZYMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallViewController.h; sourceTree = "<group>"; };
+		184DC6251F5012C6006A86BC /* ZYMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallViewController.m; sourceTree = "<group>"; };
 		185E94C41F4AABE300F364F2 /* MovePictureSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePictureSliderView.h; sourceTree = "<group>"; };
 		185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovePictureSliderView.m; sourceTree = "<group>"; };
 		185E94C81F4AACB700F364F2 /* SCAdCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAdCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -510,6 +517,14 @@
 		1862AF541F4419BB0003C5BF /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		1862AF561F441A080003C5BF /* MainTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableView.h; sourceTree = "<group>"; };
 		1862AF571F441A080003C5BF /* MainTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableView.m; sourceTree = "<group>"; };
+		18A0016B1F53B18D00F1EEA2 /* ZYFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFoodViewController.h; sourceTree = "<group>"; };
+		18A0016C1F53B18D00F1EEA2 /* ZYFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFoodViewController.m; sourceTree = "<group>"; };
+		18A0016E1F53B1AC00F1EEA2 /* ZYMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMemberViewController.h; sourceTree = "<group>"; };
+		18A0016F1F53B1AC00F1EEA2 /* ZYMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMemberViewController.m; sourceTree = "<group>"; };
+		18A001721F53BDE500F1EEA2 /* WXMoveBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMoveBtn.h; sourceTree = "<group>"; };
+		18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoveBtn.m; sourceTree = "<group>"; };
+		18A001751F53E58600F1EEA2 /* ZYMallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallCell.h; sourceTree = "<group>"; };
+		18A001761F53E58600F1EEA2 /* ZYMallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallCell.m; sourceTree = "<group>"; };
 		342337A31DE3D44C005069D2 /* MyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLoginView.h; sourceTree = "<group>"; };
 		342337A41DE3D44C005069D2 /* MyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLoginView.m; sourceTree = "<group>"; };
 		342337A61DE3D87B005069D2 /* LoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginData.h; sourceTree = "<group>"; };
@@ -1458,6 +1473,17 @@
 			path = FilmCategoryTagView;
 			sourceTree = "<group>";
 		};
+		184DC6231F501254006A86BC /* 商城 */ = {
+			isa = PBXGroup;
+			children = (
+				184DC6241F5012C6006A86BC /* ZYMallViewController.h */,
+				184DC6251F5012C6006A86BC /* ZYMallViewController.m */,
+				18A0016A1F53B16E00F1EEA2 /* 美食 */,
+				18A001691F53B16E00F1EEA2 /* 会员通卡 */,
+			);
+			path = "商城";
+			sourceTree = "<group>";
+		};
 		185E94C71F4AACB700F364F2 /* SCAdView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1468,6 +1494,35 @@
 				185E94CC1F4AACB700F364F2 /* SCAdViewRenderDelegate.h */,
 			);
 			path = SCAdView;
+			sourceTree = "<group>";
+		};
+		18A001691F53B16E00F1EEA2 /* 会员通卡 */ = {
+			isa = PBXGroup;
+			children = (
+				18A0016E1F53B1AC00F1EEA2 /* ZYMemberViewController.h */,
+				18A0016F1F53B1AC00F1EEA2 /* ZYMemberViewController.m */,
+			);
+			path = "会员通卡";
+			sourceTree = "<group>";
+		};
+		18A0016A1F53B16E00F1EEA2 /* 美食 */ = {
+			isa = PBXGroup;
+			children = (
+				18A0016B1F53B18D00F1EEA2 /* ZYFoodViewController.h */,
+				18A0016C1F53B18D00F1EEA2 /* ZYFoodViewController.m */,
+			);
+			path = "美食";
+			sourceTree = "<group>";
+		};
+		18A001711F53BCFC00F1EEA2 /* 商城_view */ = {
+			isa = PBXGroup;
+			children = (
+				18A001721F53BDE500F1EEA2 /* WXMoveBtn.h */,
+				18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */,
+				18A001751F53E58600F1EEA2 /* ZYMallCell.h */,
+				18A001761F53E58600F1EEA2 /* ZYMallCell.m */,
+			);
+			path = "商城_view";
 			sourceTree = "<group>";
 		};
 		342337A91DE3DF49005069D2 /* 登录、注册、注册协议 */ = {
@@ -1700,6 +1755,7 @@
 			isa = PBXGroup;
 			children = (
 				3480D29F1DDA9A6000671769 /* 影院 */,
+				184DC6231F501254006A86BC /* 商城 */,
 				3480D29E1DDA9A5900671769 /* 资讯 */,
 				3480D29D1DDA9A4E00671769 /* 我的 */,
 			);
@@ -1786,6 +1842,7 @@
 				E40AC5451E5555CC007196B4 /* 画廊 */,
 				E4416F461E1B8AE9008861FB /* SeatView */,
 				348CEA691DDC351700FFF211 /* 影院 */,
+				18A001711F53BCFC00F1EEA2 /* 商城_view */,
 				348CEA681DDC350F00FFF211 /* 资讯 */,
 				348CEA671DDC350500FFF211 /* 我的 */,
 			);
@@ -3791,11 +3848,13 @@
 				E4093D781E0516FD004F02FD /* MJRefreshConst.m in Sources */,
 				E4CB36DF1DEE561400C2E519 /* PGIndexBannerSubiew.m in Sources */,
 				E42AF4341DE46F3300F67C87 /* FilmHeatTableViewCell.m in Sources */,
+				18A001771F53E58600F1EEA2 /* ZYMallCell.m in Sources */,
 				E40A44221DF644D100D9084C /* AFURLSessionManager.m in Sources */,
 				E40C19AE1E00FB7C008A6A85 /* NewsComment.m in Sources */,
 				183022B01F42C505007CE14C /* ZYConstant.m in Sources */,
 				E4093D6E1E0516FD004F02FD /* MJRefreshAutoGifFooter.m in Sources */,
 				E43836E71DE7CD03009687DD /* CinemaMsgSliderView.m in Sources */,
+				18A0016D1F53B18D00F1EEA2 /* ZYFoodViewController.m in Sources */,
 				E4EEC5261DF016BF0072EAFA /* CouponDescriptionViewCtl.m in Sources */,
 				E4416F7F1E1B9507008861FB /* MJFoundation.m in Sources */,
 				347793491DDEA90300DF3D18 /* HistoryTableViewCtl.m in Sources */,
@@ -3921,9 +3980,11 @@
 				E42AF42C1DE442D600F67C87 /* BoxOfficeTableViewCell.m in Sources */,
 				E4416F811E1B9507008861FB /* MJPropertyKey.m in Sources */,
 				E407AAC31DFB9242000CE0A2 /* UIImageView+WebCache.m in Sources */,
+				184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */,
 				E4093D7C1E0516FD004F02FD /* UIView+MJExtension.m in Sources */,
 				E41582911E0CC9A800CBA0DB /* Shop.m in Sources */,
 				E4E8C3D61DE9216600E7BC86 /* MovieDetailsHeaderView.m in Sources */,
+				18A001701F53B1AC00F1EEA2 /* ZYMemberViewController.m in Sources */,
 				E42AF4141DE42D1000F67C87 /* NewsInfoViewController.m in Sources */,
 				182D7C921F44294B0028F4ED /* MainView.m in Sources */,
 				E442C2871DFE4D3B001409C8 /* JSONHTTPClient.m in Sources */,
@@ -4034,6 +4095,7 @@
 				E40A442C1DF644D100D9084C /* UIWebView+AFNetworking.m in Sources */,
 				182D7C8F1F44294B0028F4ED /* ItemBaseView.m in Sources */,
 				E4F8C4731E4C41080087FCAF /* PaymentViewCtl.m in Sources */,
+				18A001741F53BDE500F1EEA2 /* WXMoveBtn.m in Sources */,
 				E41052DC1DF79684002EEF98 /* MyCouponCell.m in Sources */,
 				E4416F5D1E1B8AE9008861FB /* ZFSeatButton.m in Sources */,
 				E4E1D36C1DFA6376002042A3 /* MyIntegralCell.m in Sources */,
@@ -4210,7 +4272,7 @@
 				GCC_PREFIX_HEADER = ZhongYingCinema/ZYPrefix.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ZhongYingCinema/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4274,7 +4336,7 @@
 				GCC_PREFIX_HEADER = ZhongYingCinema/ZYPrefix.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ZhongYingCinema/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

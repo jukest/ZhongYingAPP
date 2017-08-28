@@ -12,15 +12,49 @@
 
 @property (nonatomic, strong)NSArray <NSString *> *items;
 
-@property (nonatomic, strong)NSMutableArray <UIButton *> *buttons;
 
 @property (nonatomic, strong)UIButton *selectBtn;
 
+/**
+ 选中的背景颜色
+ */
+@property (nonatomic, strong) UIColor *selectedBackgroundColor;
 
+/**
+ 未选中的背景颜色
+ */
+@property (nonatomic, strong) UIColor *backgroundColor;
+
+
+/**
+ 记录特殊的背景颜色的数组
+ */
+@property (nonatomic, strong) NSMutableArray <UIColor *> *backgroundColors;
+
+
+/**
+ 记录特殊的被选中的背景颜色的数组
+ */
+@property (nonatomic, strong) NSMutableArray <UIColor *> *selectedBackgroundColors;
 
 @end
 
 @implementation WXSegementControl
+
+- (NSMutableArray<UIColor *> *)backgroundColors {
+    if (!_backgroundColors) {
+        _backgroundColors = [NSMutableArray arrayWithCapacity:10];
+    }
+    return _backgroundColors;
+}
+
+- (NSMutableArray<UIColor *> *)selectedBackgroundColors {
+    if (!_selectedBackgroundColors) {
+        _selectedBackgroundColors = [NSMutableArray arrayWithCapacity:10];
+    }
+    return _selectedBackgroundColors;
+}
+
 
 - (NSMutableArray<UIButton *> *)buttons {
     if (!_buttons) {
@@ -73,11 +107,13 @@
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             btn.selected = YES;
             self.selectBtn = btn;
+            
         } else {
             btn.backgroundColor = Color(123, 116, 133, 0.4);
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
+        
         [self addSubview:btn];
         [self.buttons addObject:btn];
         
@@ -92,14 +128,9 @@
         return;
     }
     
-    
-    
-    
     self.selectBtn.selected = NO;
     
     sender.selected = YES;
-    
-    
     
     
     if (sender.tag == 1) {
@@ -109,6 +140,12 @@
 
     }
     
+//    [self setSelectedBackgroundColor:self.selectedBackgroundColors[sender.tag] forIndex:sender.tag];
+//    [self setBackgroundColor:self.backgroundColors[self.selectBtn.tag] forIndex:self.selectBtn.tag];
+    
+    
+    
+    
     self.selectBtn = sender;
 
     
@@ -117,8 +154,84 @@
             [self.delegate segementControlDidSelectIndex:sender.tag];
         }
     }
+    
+    if (self.callBackBlock != nil) {
+        self.callBackBlock(sender.tag);
+    }
         
 }
+
+#pragma mark - 设置
+
+- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state forIndex:(NSInteger)index {
+
+    
+    for (int i = 0; i<self.buttons.count; i++) {
+        
+        
+        if (i == index) {
+            UIButton *button = self.buttons[i];
+            [button setTitleColor:color forState:state];
+        }
+        
+    }
+    
+}
+
+
+- (void)setBackgroundColor:(UIColor *)color forIndex:(NSInteger)index {
+    for (int i = 0; i < self.buttons.count; i++) {
+        
+        UIButton *btn = self.buttons[i];
+        if (index == i) {
+            
+            if (self.backgroundColors.count != 0) {
+                
+                
+                
+            }
+            
+            if (self.backgroundColors[index]) {
+                
+                [self.backgroundColors insertObject:color atIndex:index];
+            }
+            btn.backgroundColor = color;
+        }
+        
+    }
+    
+    
+}
+
+- (void)setSelectedBackgroundColor:(UIColor *)color forIndex:(NSInteger)index {
+    
+    for (int i = 0; i < self.buttons.count; i++) {
+        UIButton *btn = self.buttons[i];
+
+        if (index == i) {
+            
+            if (self.selectedBackgroundColors[index]) {
+                
+                [self.selectedBackgroundColors insertObject:color atIndex:index];
+            }
+            
+            
+            btn.backgroundColor = color;
+        }
+    }
+    
+}
+
+
+#pragma mark --重写set方法
+
+- (void)setSelectedBackgroundColor:(UIColor *)selectedBackgroundColor {
+    _selectedBackgroundColor = selectedBackgroundColor;
+
+}
+
+
+
 
 
 

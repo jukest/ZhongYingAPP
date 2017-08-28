@@ -55,9 +55,32 @@ CGFloat const InformationViewControllerTableViewHeaderImgHeight = 251;
 /** 资讯首页tableViewcell中图片的高度 */
 CGFloat const InformationViewControllerTableViewCellImgWidth = 150;
 
+#pragma mark -- 商场常量
 
+/** 商场首页cell的高度 */
+CGFloat const ZYMallViewControllerCellHeight = 115;
 
+/** 商场首页cell上图片的高度 */
+CGFloat const ZYMallViewControllerCellImgViewHeight = 95;
 
+/** 商场首页cell上图片的宽度 */
+CGFloat const ZYMallViewControllerCellImgViewWeight = ZYMallViewControllerCellImgViewHeight;
 
+/** 商城首页cell上美食名字的高度 */
+CGFloat const ZYMallViewControllerCellMallNameHeight = 20;
 
+/** 商城首页cell上美食价格label的高度 */
+CGFloat const ZYMallViewControllerCellMallPriceHeight = 20;
+
+/** 商城界面的间距 */
+CGFloat const ZYMallViewControllerMarge = 10;
+
+/** 商城首页cell + 按钮的宽高 */
+CGFloat const ZYMallViewControllerCellBtnWH = 35;
+
+/** 商城首页cell 显示数量的宽 */
+CGFloat const ZYMallViewControllerCellNumberLabelWidth = 30;
+
+/** 商城首页cell 显示数量的高 */
+CGFloat const ZYMallViewControllerCellNumberLabelHeight = ZYMallViewControllerCellBtnWH;
 

@@ -63,13 +63,17 @@
             
             ZFSeatModel *seatModel = seatsModel.columns[i];
             ZFSeatButton *seatBtn = [[ZFSeatButton alloc] init];
+//            seatBtn.backgroundColor = [UIColor redColor];
             seatBtn.seatmodel = seatModel;
             seatBtn.seatsmodel = seatsModel;
             
             if (![seatModel.type isEqualToString:@"road"]) {
+                
+//                NSLog(@"seatsModel:%d----seatModel:%d",idx,i);
+//                NSLog(@"x:%@---y:%@,rowValue:%@---cloValue:%@",seatModel.x,seatModel.y,seatModel.rowValue,seatModel.columnValue);
+                
                 if ([seatModel.seatStatus isEqualToString:@"ok"]) {
                     [seatBtn setImage:[UIImage imageNamed:@"choosable"] forState:UIControlStateNormal];//这里更改座位图标
-                    
 //                    UIImage *image = [UIImage imageNamed:@"selected"];
 //                    //                    NSInteger row = [seatBtn.seatmodel.rowValue integerValue];
 //                    //                    NSInteger col = [seatBtn.seatmodel.columnValue integerValue];
@@ -96,8 +100,8 @@
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[ZFSeatButton class]]) {
             ZFSeatButton *seatBtn = (ZFSeatButton *)view;
-            NSInteger Col = [seatBtn.seatsmodel.columns indexOfObject:seatBtn.seatmodel];
-            NSInteger Row = [seatBtn.seatsmodel.rowNum integerValue] - 1;
+            NSInteger Col = [seatBtn.seatsmodel.columns indexOfObject:seatBtn.seatmodel];//获取该座位所在的 列数(从 0 开始)
+            NSInteger Row = [seatBtn.seatsmodel.rowNum integerValue] - 1;//获取该座位所在的 排数(从 1 开始，故要 -1)
             seatBtn.frame = CGRectMake(Col * self.seatBtnHeight,Row * self.seatBtnHeight, self.seatBtnWidth, self.seatBtnHeight);
         }
     }

@@ -34,6 +34,7 @@
     [self initCinemaCommentUI];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -58,6 +59,7 @@
     starRatingView.center = CGPointMake(ScreenWidth / 2, 90 + 15);
     starRatingView.delegate = self;
     [_scrollView addSubview:starRatingView];
+    starRatingView.backgroundColor = [UIColor clearColor];;
     
     _contentView = [[UITextView alloc] initWithFrame:CGRectMake(16, 90 + 35 + 25, (ScreenWidth - 32), 140)];
     _contentView.delegate = self;

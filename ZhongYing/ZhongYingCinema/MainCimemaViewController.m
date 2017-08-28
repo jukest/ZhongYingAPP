@@ -54,10 +54,12 @@
 - (void)viewWillDisappear:(BOOL)animated{
     
     //    如果不想让其他页面的导航栏变为透明 需要重置
-
+    [super viewWillDisappear:animated];
     self.navigationBarBackgroundView.alpha = 1;
     self.navigationController.navigationBar.barTintColor = Color(252, 186, 0, 1.0);
     [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -150,6 +152,9 @@
     if (!_segemetnControl) {
         _segemetnControl = [[WXSegementControl alloc]initWithFrame:CGRectMake(0, 0, 150, 30) withItems:self.segementControlTitles];
         _segemetnControl.delegate = self;
+        [_segemetnControl setTitleColor:[UIColor redColor] forState:UIControlStateSelected forIndex:0];
+//        [_segemetnControl setBackgroundColor:Color(123, 116, 133, 0.4) forIndex:1];
+//        [_segemetnControl setSelectedBackgroundColor:Color(123, 116, 133, 1) forIndex:1];
     }
     return _segemetnControl;
 }
@@ -177,6 +182,14 @@
 - (void)segementControlDidSelectIndex:(NSInteger)index {
     
     NSLog(@"%@",self.segementControlTitles[index]);
+    
+    
+//    if (index == 1) {
+//        self.segemetnControl.buttons[index].backgroundColor = Color(123, 116, 133, 1);
+//    } else if(index == 0) {
+//        self.segemetnControl.buttons[index].backgroundColor = Color(123, 116, 133, 0.4);
+//
+//    }
     
 //    //获取子控制器
     UIViewController *childController = self.childViewControllers[index];

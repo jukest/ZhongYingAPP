@@ -12,6 +12,7 @@
 #import "InformationViewController.h"
 #import "MainCimemaViewController.h"
 #import "MainTableViewController.h"
+#import "ZYMallViewController.h"
 
 @interface ZYTabBarController ()
 
@@ -23,10 +24,10 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"InformationViewController",@"MyViewController"];
-    NSArray *ctlTitleArr = @[@"影院",@"资讯",@"我的"];
-    NSArray *ctlIconArr = @[@"tabbar_info_selected",@"tabbar_cinema_selected",@"tabbar_my_selected"];
-    NSArray *ctlNotIconArr = @[@"tabbar_info_not_selected",@"tabbar_cinema_not_selected",@"tabbar_my_not_selected"];
+    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"ZYMallViewController",@"InformationViewController",@"MyViewController"];
+    NSArray *ctlTitleArr = @[@"影院",@"商城",@"资讯",@"我的"];
+    NSArray *ctlIconArr = @[@"tabbar_info_selected",@"tabbar_mall_selected",@"tabbar_cinema_selected",@"tabbar_my_selected"];
+    NSArray *ctlNotIconArr = @[@"tabbar_info_not_selected",@"tabbar_mall_not_selected",@"tabbar_cinema_not_selected",@"tabbar_my_not_selected"];
     NSMutableArray *ctlMutArr = [NSMutableArray array];
     for (int i=0; i<ctlNameArr.count; i++) {
         UIViewController *ctl = [[NSClassFromString(ctlNameArr[i]) alloc] init];
@@ -104,15 +105,15 @@
 //    cinemaViewCtl.cinemaMsg = nil;
 //    [cinemaViewCtl loadCinemaMessage];
     
-    UINavigationController *newNavigationController1 = [self.viewControllers objectAtIndex:1];
-    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
-    if (informationCtl.informationArr.count != 0) {
-        [informationCtl.informationTableView removeFromSuperview];
-        informationCtl.currentPage = 0;
-        informationCtl.informationTableView = nil;
-        [informationCtl.informationArr removeAllObjects];
-        [informationCtl.slidersArr removeAllObjects];
-    }
+//    UINavigationController *newNavigationController1 = [self.viewControllers objectAtIndex:1];
+//    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
+//    if (informationCtl.informationArr.count != 0) {
+//        [informationCtl.informationTableView removeFromSuperview];
+//        informationCtl.currentPage = 0;
+//        informationCtl.informationTableView = nil;
+//        [informationCtl.informationArr removeAllObjects];
+//        [informationCtl.slidersArr removeAllObjects];
+//    }
 }
 
 - (void)reSetCinemaViewController

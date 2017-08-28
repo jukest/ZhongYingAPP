@@ -179,15 +179,15 @@
 //                        [cinema.filmsArr removeAllObjects];
 //                        cinema.cinemaMsg = nil;
                         
-                        UINavigationController *newNavigationController1 = self.tabBarController.viewControllers[1];
-                        InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
-                        if (informationCtl.informationArr.count != 0) {
-                            informationCtl.currentPage = 0;
-                            [informationCtl.informationTableView removeFromSuperview];
-                            informationCtl.informationTableView = nil;
-                            [informationCtl.informationArr removeAllObjects];
-                            [informationCtl.slidersArr removeAllObjects];
-                        }
+//                        UINavigationController *newNavigationController1 = self.tabBarController.viewControllers[1];
+//                        InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
+//                        if (informationCtl.informationArr.count != 0) {
+//                            informationCtl.currentPage = 0;
+//                            [informationCtl.informationTableView removeFromSuperview];
+//                            informationCtl.informationTableView = nil;
+//                            [informationCtl.informationArr removeAllObjects];
+//                            [informationCtl.slidersArr removeAllObjects];
+//                        }
                         
                         double delayInSeconds = 0.5f;
                         __block LoginViewController *loginCtl = self;

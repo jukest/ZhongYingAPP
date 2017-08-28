@@ -16,5 +16,5 @@
 @property(nonatomic,copy) NSString<Optional> *detail; //!<<卖品详情
 @property(nonatomic,assign) NSInteger price; //!<<售卖价格
 @property(nonatomic,assign) NSInteger type; //!<<卖品类型1-单品|2-合成品|3-套餐|4-纪念品
-
+@property (nonatomic, assign) NSInteger selectedNumber;
 @end

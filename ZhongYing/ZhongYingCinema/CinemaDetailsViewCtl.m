@@ -236,11 +236,9 @@
         if ([dataBack[@"code"] integerValue] == 0) {
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"goods"]) {
-                NSError *error;
-                Goods *goods = [[Goods alloc] initWithDictionary:dict error:&error];
-                if (error) {
-                    NSLog(@"goods_error >>>>>>>>>>>>> %@",error);
-                }
+                
+                Goods *goods = [Goods mj_objectWithKeyValues:dict];
+                
                 [self.goodsList addObject:goods];
             }
             if (_loadCinemaFinish&&_loadGoodsFinish) {

@@ -4,7 +4,7 @@
 //
 //  Created by qq 316917975  on 16/7/9.
 //
-//
+// 座位安排的视图
 
 #import "ZFSeatSelectionView.h"
 #import "ZFSeatsModel.h"
@@ -48,12 +48,21 @@
     if (self = [super initWithFrame:frame]) {//初始化操作
         self.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
         self.actionBlock = actionBlock;
+        
+        //初始化滚动视图
         [self initScrollView];
+        
         //[self initappLogo];
+        //座位视图
         [self initSeatsView:seatsArray];
+        //左上角指示器
         [self initindicator:seatsArray];
+        //左边索引条
         [self initRowIndexView:seatsArray];
+        //中心线
         [self initcenterLine:seatsArray];
+        
+        
         [self inithallLogo:hallName];
         [self startAnimation];//开场动画
     }
@@ -88,11 +97,11 @@
 -(void)initScrollView{
     UIScrollView *seatScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     self.seatScrollView = seatScrollView;
-    self.seatScrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.seatScrollView.decelerationRate = UIScrollViewDecelerationRateFast;//规定用户提起手指后的滚动减速速率
     self.seatScrollView.delegate = self;
     self.seatScrollView.showsHorizontalScrollIndicator = NO;
     self.seatScrollView.showsVerticalScrollIndicator = NO;
-    self.seatScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.seatScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;//自动调整子控件与父控件中间的位置，宽高。
     [self addSubview:self.seatScrollView];
 }
 
@@ -106,6 +115,13 @@
     self.maoyanLogo = maoyanLogo;
     [self.seatScrollView insertSubview:maoyanLogo atIndex:0];
 }
+
+
+/**
+ 左侧索引条
+
+ @param seatsArray 座位数组
+ */
 -(void)initRowIndexView:(NSMutableArray *)seatsArray{
     ZFRowIndexView *rowindexView = [[ZFRowIndexView alloc]init];
     rowindexView.indexsArray = seatsArray;
@@ -116,6 +132,7 @@
     self.rowindexView = rowindexView;
     [self.seatScrollView addSubview:rowindexView];
 }
+
 -(void)initcenterLine:(NSMutableArray *)seatsArray{
     ZFCenterLineView *centerLine = [[ZFCenterLineView alloc]init];
     centerLine.backgroundColor = [UIColor clearColor];
@@ -169,12 +186,15 @@
     self.seatScrollView.maximumZoomScale = ZFseastMaxW_H / seatView.seatBtnWidth;
     self.seatScrollView.contentInset = UIEdgeInsetsMake(ZFseastsColMargin, (self.width - seatView.seatViewWidth)/2,ZFseastsColMargin,(self.width - seatView.seatViewWidth)/2);
 }
+
+//设置左上角的指示器
 -(void)initindicator:(NSMutableArray *)seatsArray{
     
     CGFloat Ratio = 2;
     ZFSeatsModel *seatsModel = seatsArray.firstObject;
-    NSUInteger cloCount = [seatsModel.columns count];
+    NSUInteger cloCount = [seatsModel.columns count];//列数
     if (cloCount % 2) cloCount += 1;
+   
     CGFloat ZFMiniMeIndicatorMaxHeight = self.height / 6;//设置最大高度
     CGFloat MaxWidth = (self.width - 2 * ZFseastsRowMargin) * 0.5;
     CGFloat currentMiniBtnW_H = MaxWidth / cloCount;
@@ -194,6 +214,7 @@
     indicator.height = MaxHeight;
     self.indicator = indicator;
     [self addSubview:indicator];
+
     
 }
 
