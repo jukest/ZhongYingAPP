@@ -173,9 +173,9 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_LoadCouponHUD hide:YES];
+        [_LoadCouponHUD hideAnimated:YES];
     } failure:^(NSError *error) {
-        [_LoadCouponHUD hide:YES];
+        [_LoadCouponHUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -235,6 +235,7 @@
         [self jumpToCouponViewControler];
         
     }else if (btn.tag == GotoPayEvent){ //确认支付
+        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"id"] = @(self.goods.id);
         dict[@"number"] = @([_amountFld.text integerValue]);

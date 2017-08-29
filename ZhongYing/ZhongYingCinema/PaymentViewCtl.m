@@ -93,9 +93,9 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }

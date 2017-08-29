@@ -10,6 +10,7 @@
 #import "WXMoveBtn.h"
 #import "Goods.h"
 #import "ZYMallCell.h"
+#import "ZYMallConfirmViewController.h"
 
 @interface ZYFoodViewController ()<UITableViewDelegate,UITableViewDataSource,ZYMallCellDelegate>
 
@@ -20,8 +21,10 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 
+
 @property(nonatomic,strong) NSMutableArray *goodsList;
 
+@property (nonatomic, assign) NSInteger totalNumber;
 
 @end
 
@@ -60,6 +63,9 @@ static NSString *reuseIdentifier = @"mallCell";
     self.view.backgroundColor  = Color(246, 246, 246, 1);
 ;
     [self setupUI];
+    
+    self.totalNumber = 0;
+    
     //加载数据
 //    [self loadData];
 }
@@ -109,6 +115,7 @@ static NSString *reuseIdentifier = @"mallCell";
     if ([self.tableView.mj_header isRefreshing]) {//下拉刷新时,数据清零
         [self.tableView.mj_header endRefreshing];
         [self.goodsList removeAllObjects];
+        self.totalNumber = 0;
     }
     
     
@@ -121,14 +128,20 @@ static NSString *reuseIdentifier = @"mallCell";
         if (![LoginYesOrNoStr isEqualToString:@"YES"]) {
             [(ZYNavigationController *)weakSelf.navigationController showLoginViewController];
         }else{
-            NSLog(@"购买");
-
-//            ConfirmPackageOrderViewCtl *confirmOrder = [[ConfirmPackageOrderViewCtl alloc] init];
-//            Goods *goods = self.goodsList[indexPath.row];
-//            confirmOrder.goods = goods;
-//            confirmOrder.cinemaMsg = self.cinemaMsg;
-//            [confirmOrder setHidesBottomBarWhenPushed:YES];
-//            [self.navigationController pushViewController:confirmOrder animated:YES];
+            
+            if ([weakSelf selectedGoodsNumber] == 0) {
+                
+                [weakSelf showHudMessage:@"请选择商品"];
+                return ;
+            }
+            ZYMallConfirmViewController *confirmVC = [[ZYMallConfirmViewController alloc]init];
+            confirmVC.goodsList = [[weakSelf selectedGoods] mutableCopy];
+            confirmVC.hidesBottomBarWhenPushed = YES;
+            confirmVC.callBack = ^{
+                
+                [weakSelf.tableView reloadData];
+            };
+            [weakSelf.navigationController pushViewController:confirmVC animated:YES];
         }
     };
     [self.view addSubview:self.buyBtn];
@@ -160,13 +173,41 @@ static NSString *reuseIdentifier = @"mallCell";
 - (void)mallCell:(UITableViewCell *)cell plusBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number {
     NSInteger index = [self.tableView indexPathForCell:cell].row;
     Goods *good = self.goodsList[index];
-    NSLog(@"买%ld",(long)good.selectedNumber);
+//    NSLog(@"买%ld",(long)good.selectedNumber);
+
 }
 
 - (void)mallCell:(UITableViewCell *)cell subtractBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number {
     NSInteger index = [self.tableView indexPathForCell:cell].row;
     Goods *good = self.goodsList[index];
-    NSLog(@"还剩:%ld",(long)good.selectedNumber);
+//    NSLog(@"还剩:%ld",(long)good.selectedNumber);
+    
+    
+}
+
+#pragma mark -- 获取选中的商品
+- (NSArray <Goods *>*)selectedGoods {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
+    for (int i = 0; i < self.goodsList.count; i++) {
+        Goods *good = self.goodsList[i];
+        if (good.selectedNumber != 0) {
+            [array addObject:good];
+        }
+    }
+    return [array copy];
+}
+
+#pragma mark -- 获取选中商品的总数
+- (NSInteger)selectedGoodsNumber {
+    NSInteger totalNumber = 0;
+    
+    for (int i = 0; i < self.goodsList.count; i++) {
+        Goods *good = self.goodsList[i];
+        totalNumber += good.selectedNumber;
+    }
+    
+    
+    return totalNumber;
 }
 
 #pragma mark - 加载数据
@@ -195,6 +236,7 @@ static NSString *reuseIdentifier = @"mallCell";
                 Goods *goods = [Goods mj_objectWithKeyValues:dict];
                 
                 [weakSelf.goodsList addObject:goods];
+
             }
             
             [self.tableView reloadData];

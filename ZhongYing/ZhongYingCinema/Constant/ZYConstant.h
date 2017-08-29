@@ -84,4 +84,9 @@ UIKIT_EXTERN CGFloat const ZYMallViewControllerCellNumberLabelWidth;
 /** 商城首页cell 显示数量的高 */
 UIKIT_EXTERN CGFloat const ZYMallViewControllerCellNumberLabelHeight;
 
+/** 商城确认订单页tableViewSectionFooter的高度 */
+UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierHeight;
+
+/** 商城确认订单页tableViewSectionFooter上label的高度  */
+UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight;
 

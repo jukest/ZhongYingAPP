@@ -188,6 +188,12 @@ static ZYMapManager *_instance;
     else
     {
       NSLog(@"反geo检索发送失败");
+        if (self.locationBlock == nil) {
+            
+        } else {
+            
+            self.locationBlock(nil,NO);
+        }
     }
 }
 

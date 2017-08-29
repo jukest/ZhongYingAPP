@@ -31,6 +31,7 @@
 		18123BFA1F4C29BB00A42EDB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18123BF31F4C29BB00A42EDB /* libssl.a */; };
 		18123BFB1F4C29BB00A42EDB /* updatelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18123BF41F4C29BB00A42EDB /* updatelog.txt */; };
 		1814277F1F454A2B009590F2 /* CinemaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814277E1F454A2B009590F2 /* CinemaCollectionViewCell.m */; };
+		182BD92E1F55104C009085A7 /* ZYMallConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BD92D1F55104C009085A7 /* ZYMallConfirmViewController.m */; };
 		182D7C8F1F44294B0028F4ED /* ItemBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D7C821F44294B0028F4ED /* ItemBaseView.m */; };
 		182D7C901F44294B0028F4ED /* LHTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D7C841F44294B0028F4ED /* LHTabView.m */; };
 		182D7C911F44294B0028F4ED /* LHTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D7C861F44294B0028F4ED /* LHTitleView.m */; };
@@ -448,6 +449,8 @@
 		18123BF41F4C29BB00A42EDB /* updatelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = updatelog.txt; sourceTree = "<group>"; };
 		1814277D1F454A2B009590F2 /* CinemaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaCollectionViewCell.h; sourceTree = "<group>"; };
 		1814277E1F454A2B009590F2 /* CinemaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaCollectionViewCell.m; sourceTree = "<group>"; };
+		182BD92C1F55104C009085A7 /* ZYMallConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallConfirmViewController.h; sourceTree = "<group>"; };
+		182BD92D1F55104C009085A7 /* ZYMallConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallConfirmViewController.m; sourceTree = "<group>"; };
 		182D7C811F44294B0028F4ED /* ItemBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemBaseView.h; sourceTree = "<group>"; };
 		182D7C821F44294B0028F4ED /* ItemBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemBaseView.m; sourceTree = "<group>"; };
 		182D7C831F44294B0028F4ED /* LHTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHTabView.h; sourceTree = "<group>"; };
@@ -1510,6 +1513,8 @@
 			children = (
 				18A0016B1F53B18D00F1EEA2 /* ZYFoodViewController.h */,
 				18A0016C1F53B18D00F1EEA2 /* ZYFoodViewController.m */,
+				182BD92C1F55104C009085A7 /* ZYMallConfirmViewController.h */,
+				182BD92D1F55104C009085A7 /* ZYMallConfirmViewController.m */,
 			);
 			path = "美食";
 			sourceTree = "<group>";
@@ -3868,6 +3873,7 @@
 				E4416F5F1E1B8AE9008861FB /* ZFSeatsView.m in Sources */,
 				E40A448C1E66ADBE0081FF2F /* WMPlayer.m in Sources */,
 				E407AAB91DFB9242000CE0A2 /* SDWebImageDecoder.m in Sources */,
+				182BD92E1F55104C009085A7 /* ZYMallConfirmViewController.m in Sources */,
 				E4EEC52E1DF025B50072EAFA /* PaymentTableViewCell.m in Sources */,
 				3480D2B61DDAA4EF00671769 /* ViewController.m in Sources */,
 				E4F12ED41E14E54D00D97068 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -4300,7 +4306,7 @@
 					"$(PROJECT_DIR)/ZhongYingCinema/BaiduNaviSDK/thirdlibs",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Fanc.JKMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Fanc.JKMovies-temp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4365,7 +4371,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Fanc.JKMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Fanc.JKMovies-temp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

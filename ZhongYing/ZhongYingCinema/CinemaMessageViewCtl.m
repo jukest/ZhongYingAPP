@@ -133,10 +133,10 @@
             }else{
                 [self showHudMessage:dataBack[@"message"]];
             }
-            [_concernHUD hide:YES];
+            [_concernHUD hideAnimated:YES];
         } failure:^(NSError *error) {
             [self showHudMessage:@"连接服务器失败!"];
-            [_concernHUD hide:YES];
+            [_concernHUD hideAnimated:YES];
         }];
     }
 }
@@ -155,15 +155,15 @@
 //    [cinema.filmsArr removeAllObjects];
 //    cinema.cinemaMsg = nil;
     
-    UINavigationController *newNavigationController1 = self.tabBarController.viewControllers[1];
-    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
-    if (informationCtl.informationArr.count != 0) {
-        informationCtl.currentPage = 0;
-        [informationCtl.informationTableView removeFromSuperview];
-        informationCtl.informationTableView = nil;
-        [informationCtl.informationArr removeAllObjects];
-        [informationCtl.slidersArr removeAllObjects];
-    }
+//    UINavigationController *newNavigationController1 = self.tabBarController.viewControllers[1];
+//    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
+//    if (informationCtl.informationArr.count != 0) {
+//        informationCtl.currentPage = 0;
+//        [informationCtl.informationTableView removeFromSuperview];
+//        informationCtl.informationTableView = nil;
+//        [informationCtl.informationArr removeAllObjects];
+//        [informationCtl.slidersArr removeAllObjects];
+//    }
 }
 
 #pragma mark - 懒加载

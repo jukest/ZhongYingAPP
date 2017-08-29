@@ -41,7 +41,7 @@
 
 - (NSArray<NSString *> *)segementControlTitles {
     if (!_segementControlTitles) {
-        _segementControlTitles = @[@"美食",@"会员通卡"];
+        _segementControlTitles = @[@"美食",@"会员卡"];
     }
     return _segementControlTitles;
 }

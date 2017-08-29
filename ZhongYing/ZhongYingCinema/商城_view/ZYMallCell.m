@@ -211,6 +211,8 @@
 }
 
 - (void)subtractBtnAction:(UIButton *)sender {
+    
+    
     self.good.selectedNumber--;
     if (self.good.selectedNumber == 0) {
         sender.hidden = YES;
@@ -220,12 +222,13 @@
         sender.hidden = NO;
 
     }
-    
     if (self.delegate != nil) {
         if ([self.delegate respondsToSelector:@selector(mallCell:subtractBtnDidClick:withNumberOfGood:)]) {
             [self.delegate mallCell:self subtractBtnDidClick:sender withNumberOfGood:self.good.selectedNumber];
-        }
+        } 
     }
+
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

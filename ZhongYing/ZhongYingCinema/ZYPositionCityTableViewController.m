@@ -59,7 +59,8 @@
             weakSelf.hud.label.text = @"定位失败,请重试";
         }
         
-        [weakSelf.hud hideAnimated:YES];
+        [weakSelf.hud hideAnimated:YES afterDelay:0.5];
+        weakSelf.hud = nil;
 
         [weakSelf.tableView reloadData];
         
@@ -161,9 +162,6 @@
         self.positionBlock(city.city_name);
     }
 
-    
-    
-    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

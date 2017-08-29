@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#pragma mark --  首页常量
+
 /** 首页顶部视图的高度 */
 CGFloat const CinemaViewControllerHeaderScrollImageH = 201 ;
 
 CGFloat const CinemaViewControllerFilmCagetoryTagViewH = 30;
-
 
 /** 正在热映电影cell的列间距 */
 CGFloat const ItemBaseViewConllectViewCellInteritemSpace = 10;
@@ -44,6 +45,7 @@ CGFloat const ItemBaseViewConllectViewCell3DBtnW = 15;
 /** 正在热映电影cell的对电影的描述label的高度 */
 CGFloat const ItemBaseViewConllectViewCellDescrip = 40;
 
+#pragma mark --  资讯常量
 
 /** 资讯首页tableViewcell的高度 */
 CGFloat const InformationViewControllerTableViewCellHeight = 115;
@@ -83,4 +85,11 @@ CGFloat const ZYMallViewControllerCellNumberLabelWidth = 30;
 
 /** 商城首页cell 显示数量的高 */
 CGFloat const ZYMallViewControllerCellNumberLabelHeight = ZYMallViewControllerCellBtnWH;
+
+/** 商城确认订单页tableViewSectionFooter的高度 */
+CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierHeight = 150;
+
+/** 商城确认订单页tableViewSectionFooter上label的高度  */
+UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight = 30;
+
 

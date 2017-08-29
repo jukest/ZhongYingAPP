@@ -265,6 +265,7 @@
             for (ZFSeatButton *button in self.selectedSeats) {
                 [seatIDs addObject:button.seatmodel.cineSeatId];
             }
+            
             NSString *seat_id = [seatIDs componentsJoinedByString:@","];
             NSArray *keyArr = [self.dict allKeys];
             NSMutableArray *goods = [NSMutableArray array];
