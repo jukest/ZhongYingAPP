@@ -26,7 +26,6 @@
     UIView *_lineView;
     NSInteger _index;
     MBProgressHUD *_HUD;
-  
     BOOL _once;
     BOOL _loadCinemaFinish;
     BOOL _loadGoodsFinish;
@@ -120,7 +119,6 @@
                 });
                 return ;
             }
-            //获取 播放 计划
             for (NSDictionary *dict in content[@"list"]) {
                 NSError *error;
                 Schedule *schedule = [[Schedule alloc] initWithDictionary:dict error:&error];
@@ -141,15 +139,11 @@
                         break;
                 }
             }
-            
-            //获取 影院 信息
             NSError *cinema_error;
             self.cinemaMsg = [[Cinema alloc] initWithDictionary:content[@"detail"] error:&cinema_error];
             if (cinema_error) {
                 NSLog(@"cinema_error=%@",cinema_error);
             }
-            
-            //获取 电影 数量
             for (NSInteger i = 0; i < [content[@"film"] count]; i ++) {
                 NSError *film_error;
                 HotFilm *film = [[HotFilm alloc] initWithDictionary:content[@"film"][i] error:&film_error];
@@ -162,7 +156,6 @@
                 [self.filmsArr addObject:film];
             }
             //[self initCinemaDetailUI];
-            //记录当前展示 播放计划 的视图 的标志
             _index = 0;
             if (self.todaySchedule.count == 0) {
                 _index = 1;
@@ -236,7 +229,7 @@
         if ([dataBack[@"code"] integerValue] == 0) {
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"goods"]) {
-                
+
                 Goods *goods = [Goods mj_objectWithKeyValues:dict];
                 
                 [self.goodsList addObject:goods];

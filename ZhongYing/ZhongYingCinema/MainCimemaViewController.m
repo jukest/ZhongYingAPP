@@ -44,7 +44,16 @@
     [self setup];
     [self setupLeftNavigationItem];
     
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCityName:) name:@"updateCityNotification" object:nil];
+    
 }
+
+- (void)updateCityName:(NSNotification *)notification {
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]);
+    [self.leftButton setTitle:UserCurrentCityName forState:UIControlStateNormal];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -91,7 +100,7 @@
     
     [leftButton setImage:[UIImage imageNamed:@"down_1"] forState:UIControlStateNormal];
     
-    [leftButton setTitle:@"深圳市" forState:UIControlStateNormal];
+    [leftButton setTitle:UserCurrentCityName? UserCurrentCityName:@"深圳市" forState:UIControlStateNormal];
 
     [leftButton addTarget:self action:@selector(locationBtn:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
@@ -245,7 +254,6 @@
     [positionVC setHidesBottomBarWhenPushed:YES];
     
     [self.navigationController pushViewController:positionVC animated:YES];
-    
     
 }
 

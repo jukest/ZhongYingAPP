@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 #pragma mark --  首页常量
 /** 首页头部图片高度 */
 UIKIT_EXTERN CGFloat const CinemaViewControllerHeaderScrollImageH;

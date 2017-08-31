@@ -19,6 +19,10 @@ static CGFloat  NavigationHeight = 64;
 
 #define TabViewScrollToTopNotification @"TabViewScrollToTopNotification"
 #define ItemScrollToTopNotification @"ItemScrollToTopNotification"
+
+#define ZYInformationTabViewScrollToTopNotification @"ZYInformationTabViewScrollToTopNotification"
+#define ZYInformationScrollBaseScrollToTopNotification @"ZYInformationScrollBaseScrollToTopNotification"
+
 #define random_color  [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
 
 
@@ -75,6 +79,10 @@ static CGFloat  NavigationHeight = 64;
 #define ApiLngStr [[NSUserDefaults standardUserDefaults] objectForKey:@"lng"]
 // 手机定位纬度
 #define ApiLatStr [[NSUserDefaults standardUserDefaults] objectForKey:@"lat"]
+
+//当前所在的城市
+#define UserCurrentCityName [[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]
+
 // 影院id
 #define ApiCinemaIDStr [[NSUserDefaults standardUserDefaults] objectForKey:@"Apicinema_id"]
 // 用户id

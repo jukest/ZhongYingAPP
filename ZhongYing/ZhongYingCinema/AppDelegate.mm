@@ -19,10 +19,9 @@
 #import "WXApiManager.h"
 #import "MovieDetailsViewCtl.h"
 #import "EvaluateViewCtl.h"
-//#import "CinemaViewController.h"
-#import "MainCimemaViewController.h"
 #import "HotFilm.h"
 #import "AdvertiseView.h"
+#import "MainCimemaViewController.h"
 
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
@@ -87,6 +86,7 @@
         self.advertise = advertiseView;
         advertiseView.filePath = filePath;
         [advertiseView show];
+        
     }
 }
 
@@ -374,9 +374,6 @@
     if (!ret) {
         NSLog(@"地图管理启动失败!");
     }
-    //授权TTS必须品
-    [BNCoreServices_Instance setTTSAppId:@"9288147"];
-
     [BNCoreServices_Instance initServices:NAVI_TEST_APP_KEY];
     [BNCoreServices_Instance startServicesAsyn:nil fail:nil];
 }

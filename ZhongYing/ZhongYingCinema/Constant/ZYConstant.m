@@ -10,6 +10,8 @@
 
 #pragma mark --  首页常量
 
+
+
 /** 首页顶部视图的高度 */
 CGFloat const CinemaViewControllerHeaderScrollImageH = 201 ;
 
@@ -25,19 +27,19 @@ CGFloat const ItemBaseViewConllectViewCellLineSpace = 10;
 CGFloat const ItemBaseViewConllectViewCellWidth = 150;
 
 /** 正在热映电影cell的高度 */
-CGFloat const ItemBaseViewConllectViewCellHeight = 280;
+CGFloat const ItemBaseViewConllectViewCellHeight = 285;
 
 /** 正在热映电影cell的电影图片的高度 */
 CGFloat const ItemBaseViewConllectViewCellFilmImgHeight = 200;
 
 /** 正在热映电影名label的高度 */
-CGFloat const ItemBaseViewConllectViewCellFilmNameLabelH = 20;
+CGFloat const ItemBaseViewConllectViewCellFilmNameLabelH = 30;
 
 /** 正在热映电影cell间控件的间距  */
 CGFloat const ItemBaseViewConllectViewCellMarge = 10;
 
 /** 正在热映电影cell的购票按钮的宽度 */
-CGFloat const ItemBaseViewConllectViewCellBuyBtnW = 35;
+CGFloat const ItemBaseViewConllectViewCellBuyBtnW = 40;
 
 /** 正在热映电影cell的3D按钮的宽度 */
 CGFloat const ItemBaseViewConllectViewCell3DBtnW = 15;
@@ -51,7 +53,7 @@ CGFloat const ItemBaseViewConllectViewCellDescrip = 40;
 CGFloat const InformationViewControllerTableViewCellHeight = 115;
 
 /** 资讯首页头部图片的高度 */
-CGFloat const InformationViewControllerTableViewHeaderImgHeight = 251;
+CGFloat const InformationViewControllerTableViewHeaderImgHeight = 201;
 
 
 /** 资讯首页tableViewcell中图片的高度 */

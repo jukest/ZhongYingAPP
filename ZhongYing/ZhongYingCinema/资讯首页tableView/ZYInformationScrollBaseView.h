@@ -1,16 +1,17 @@
 //
-//  ItemBaseView.h
-//  SimultaneousTest
+//  ZYInformationScrollBaseView.h
+//  ZhongYingCinema
 //
-//  Created by Leon.Hwa on 17/4/28.
-//  Copyright © 2017年 Leon. All rights reserved.
+//  Created by apple on 2017/8/31.
+//  Copyright © 2017年 小菜皮. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ItemBaseViewBlock)(UITableView *,NSInteger *selectIndex);
+typedef void(^ZYInformationScrollBaseViewBlock)(UITableView *,NSInteger *selectIndex);
 
-@interface ItemBaseView : UIView<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDataSource,UITableViewDelegate>
+
+@interface ZYInformationScrollBaseView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)NSMutableArray *datas;
 
@@ -20,12 +21,10 @@ typedef void(^ItemBaseViewBlock)(UITableView *,NSInteger *selectIndex);
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, strong) ItemBaseViewBlock callBackBlock;
+@property (nonatomic, strong) ZYInformationScrollBaseViewBlock callBackBlock;
 
 @property (nonatomic, strong) UIViewController *viewController;
 
 - (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar;
-
-
 
 @end

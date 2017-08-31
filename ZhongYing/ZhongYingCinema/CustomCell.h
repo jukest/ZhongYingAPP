@@ -12,5 +12,5 @@
 @interface CustomCell : UITableViewCell
 @property (nonatomic, strong)NSMutableArray *datas;
 @property (nonatomic, strong) UIViewController *VC;
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withVC:(UIViewController *)VC;
+//- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withVC:(UIViewController *)VC;
 @end

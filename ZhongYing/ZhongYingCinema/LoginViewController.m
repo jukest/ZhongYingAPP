@@ -11,7 +11,6 @@
 #import "ForgetViewController.h"
 #import "InformationViewController.h"
 #import "JPUSHService.h"
-#import "MainCimemaViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,UIScrollViewDelegate>
 {
@@ -168,7 +167,7 @@
                         // 上极光推送registrationID
                         [self uploadRegistrationID];
                         
-                        //登录后刷新影院模块
+//                        //登录后刷新影院模块
 //                        UINavigationController *nav = self.tabBarController.viewControllers[0];
 //                        CinemaViewController *cinema = [nav.viewControllers objectAtIndex:0];
 //                        cinema.currentPage = 0;
@@ -178,7 +177,7 @@
 //                        [cinema.slidersArr removeAllObjects];
 //                        [cinema.filmsArr removeAllObjects];
 //                        cinema.cinemaMsg = nil;
-                        
+//                        
 //                        UINavigationController *newNavigationController1 = self.tabBarController.viewControllers[1];
 //                        InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
 //                        if (informationCtl.informationArr.count != 0) {

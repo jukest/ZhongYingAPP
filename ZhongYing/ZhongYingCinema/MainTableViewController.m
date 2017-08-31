@@ -140,6 +140,7 @@
     }
     
     if(offsetY >= CinemaViewControllerHeaderScrollImageH - 64){
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:TabViewScrollToTopNotification object:@(YES)];
         
         self.shouldScroll = NO;
@@ -149,7 +150,6 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:TabViewScrollToTopNotification object:@(NO)];
         
-//        self.shouldScroll = YES;
         
     }
     

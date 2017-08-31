@@ -17,7 +17,7 @@
 @end
 @implementation LHTabView
 
-- (instancetype)initWithItemsName:(NSArray *)itemsName childrenView:(NSArray <ItemBaseView *>*)childrenView
+- (instancetype)initWithItemsName:(NSArray *)itemsName childrenView:(NSArray <ItemBaseView *>*)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar
 {
     self = [super init];
     if (self) {
@@ -26,7 +26,7 @@
         [self addSubview:_titleView];
 
   
-        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, HEIGHT - NavigationHeight - TitleViewHeight - 49)];
+        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, HEIGHT - (hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49)];
         _itemContainer.pagingEnabled = YES;
         _itemContainer.bounces = NO;
         _itemContainer.delegate = self;
@@ -36,10 +36,10 @@
         
         for (NSInteger i = 0; i < childrenView.count; i++) {
             ItemBaseView *itemView = childrenView[i];
-            [itemView renderWithIndex:i];
+            [itemView renderWithIndex:i withTableView:isTableView hasNavigationBar:hasNavigationBar];
             [_itemContainer addSubview:itemView];
         }
-                __weak typeof(self) weakSelf= self;
+        __weak typeof(self) weakSelf= self;
         _titleView.selectRow = ^(NSInteger row){
             [weakSelf.itemContainer setContentOffset:CGPointMake(WIDTH * row, 0)];
         };

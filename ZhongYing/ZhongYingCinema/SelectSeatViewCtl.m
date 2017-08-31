@@ -19,7 +19,6 @@
 #import "UIViewController+BackButtonHandler.h"
 #import "UIView+Extension.h"
 #import "UIImage+DrawText.h"
-
 @interface SelectSeatViewCtl ()<UITableViewDelegate,UITableViewDataSource,PackageTableViewCellDelegate,SelectSeatViewDelegate,MovieTimesViewDelegate>
 {
     SelectSeatView *_headerView;
@@ -27,7 +26,6 @@
     UIButton *_confirmBtn;
     ZFSeatSelectionView *_seatsView;
     NSArray *_recommend; // 推荐座位
-    
 }
 
 @property(nonatomic,strong) NSMutableDictionary *filmMessage;
@@ -47,15 +45,12 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.cinemaMsg.title;
-    
-    //
     [self registerLJWKeyboardHandler];
 
     _headerView = [[SelectSeatView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 418)];
     _headerView.delegate = self;
     _dict = [NSMutableDictionary dictionary];
     self.SelectSeatTableView.tableHeaderView = _headerView;
-    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"name"] = self.hotFilm.name;
     dict[@"index"] = @(self.index);
@@ -93,9 +88,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
-    // 取消当前网络请求
-    [connect cancel];
+//    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
+//    // 取消当前网络请求
+//    [connect cancel];
 }
 
 #pragma mark - help Methods
@@ -118,7 +113,6 @@
             [self.afterSchedule removeAllObjects];
             [self.seatsList removeAllObjects];
             [self.selectedSeats removeAllObjects];
-            
             _dict = [NSMutableDictionary dictionary];
             _confirmBtn.enabled = YES;
             _confirmBtn.backgroundColor = Color(204, 204, 204, 1.0);
@@ -143,7 +137,6 @@
             _recommend = content[@"recommend"];
             
             self.seatsList = [self fillSeatsListWithSeats:content[@"seat"]];
-            
             self.filmMessage[@"index"] = @(self.index);
             [_headerView configMovieRoomWithDict:self.filmMessage];
             [_headerView changeBestSeatViewWith:self.selectedSeats SeatsCount:4];
@@ -187,7 +180,6 @@
     [_headerView.movieRoomView addSubview:selectionView];
 }
 
-
 - (NSMutableArray *)fillSeatsListWithSeats:(NSArray *)seats
 {
     NSMutableArray *arr = [NSMutableArray array];
@@ -207,9 +199,6 @@
         seatsModel.rowNum = [(ZFSeatModel *)seatsModelArray[0] x];
         [arr addObject:seatsModel];
     }
-    
-    
-    
     return arr;
 }
 
@@ -265,7 +254,6 @@
             for (ZFSeatButton *button in self.selectedSeats) {
                 [seatIDs addObject:button.seatmodel.cineSeatId];
             }
-            
             NSString *seat_id = [seatIDs componentsJoinedByString:@","];
             NSArray *keyArr = [self.dict allKeys];
             NSMutableArray *goods = [NSMutableArray array];

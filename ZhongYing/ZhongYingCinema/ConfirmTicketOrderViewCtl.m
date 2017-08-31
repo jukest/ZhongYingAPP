@@ -118,7 +118,7 @@
                 [self showHudMessage:dataBack[@"message"]];
             }
         }
-        [_HUD hide:YES];
+        
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
         [_HUD hide:YES];
@@ -366,8 +366,7 @@
         payHeight = 144;
     }
     UIView *payView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 46, ScreenWidth, payHeight) backgroundColor:[UIColor whiteColor]];
-    
-    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
+    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
     [payView addSubview:self.finalPaymentLb];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.finalPaymentLb.text];
     NSRange strRange = [self.finalPaymentLb.text rangeOfString:@"还需支付："];

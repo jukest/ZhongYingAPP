@@ -81,6 +81,7 @@ static NSString *cellID = @"cinemaCollectionCell";
 }
 
 
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -102,6 +103,7 @@ static NSString *cellID = @"cinemaCollectionCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     MovieDetailsViewCtl *movieDetails = [[MovieDetailsViewCtl alloc] init];
     HotFilm *hotFilm = self.datas[indexPath.row];
     movieDetails.hotFilm = hotFilm;
@@ -114,6 +116,23 @@ static NSString *cellID = @"cinemaCollectionCell";
     [self.vc.navigationController pushViewController:movieDetails animated:YES];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 
+}
+
+
+// 获取当前VC
+- (UIViewController *)topVC:(UIViewController *)rootViewController{
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tab = (UITabBarController *)rootViewController;
+        return [self topVC:tab.selectedViewController];
+    }else if ([rootViewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navc = (UINavigationController *)rootViewController;
+        return [self topVC:navc.visibleViewController];
+    }else if (rootViewController.presentedViewController){
+        UIViewController *pre = (UIViewController *)rootViewController.presentedViewController;
+        return [self topVC:pre];
+    }else{
+        return rootViewController;
+    }
 }
 
 

@@ -10,7 +10,7 @@
 #import "CinemaCollectionViewCell.h"
 
 @interface ItemBaseView()
-
+@property (nonatomic, assign)BOOL hasNavigationBar;
 @end
 @implementation ItemBaseView
 
@@ -18,18 +18,27 @@
 
 
 
-- (void)renderWithIndex:(NSInteger)index
+- (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar
 {
-    
+    self.hasNavigationBar = hasNavigationBar;
+    if (isTableView) {//tableView
+        [self setupTalbeView];
+    } else { //collectionView
     [self setupCollectionView];
+    }
     
-
-    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - NavigationHeight - TitleViewHeight - 49);
+    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - 20 - TitleViewHeight - 49);
+    self.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollAction:) name:TabViewScrollToTopNotification object:nil];
     
-    
-   
+}
 
+- (void)setupTalbeView {
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49) style:UITableViewStylePlain];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"tableViewCell"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self addSubview:self.tableView];
 }
 
 - (void)setupCollectionView {
@@ -68,6 +77,7 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
+    
     if(offsetY <= 0){
         
         [[NSNotificationCenter defaultCenter]  postNotificationName:ItemScrollToTopNotification object:@(YES)];
@@ -86,6 +96,19 @@
 }
 
 
+#pragma mark -- UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
+
+
+
+#pragma mark -- UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }

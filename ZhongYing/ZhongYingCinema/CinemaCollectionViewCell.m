@@ -123,9 +123,9 @@
     NSString *name = hotFilm.name;
     CGSize size =[name sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     
-    if (size.width > self.width - ItemBaseViewConllectViewCellBuyBtnW * widthFloat) {
+    if (size.width > self.width - ItemBaseViewConllectViewCellBuyBtnW  ) {
         
-        self.cinemaTitleLabel.frame = CGRectMake(0, (CGRectGetMaxY(self.imageView.frame) + ItemBaseViewConllectViewCellMarge) , self.width - ItemBaseViewConllectViewCellBuyBtnW - ItemBaseViewConllectViewCell3DBtnW , ItemBaseViewConllectViewCellFilmNameLabelH);
+        self.cinemaTitleLabel.frame = CGRectMake(0, (CGRectGetMaxY(self.imageView.frame) + ItemBaseViewConllectViewCellMarge) , self.width - ItemBaseViewConllectViewCellBuyBtnW , ItemBaseViewConllectViewCellFilmNameLabelH);
 
     } else {
         

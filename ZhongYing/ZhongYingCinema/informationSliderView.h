@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger,InfoSliderViewEvents){
 };
 @protocol infoSliderViewDelegate <NSObject>
 
+@optional
 - (void)infoSliderViewDelegateWithTag:(NSInteger)tag;
 
 @end
@@ -23,9 +24,9 @@ typedef NS_ENUM(NSInteger,InfoSliderViewEvents){
 
 @property(nonatomic,strong) NSMutableArray *imageArr;
 @property(nonatomic,strong) SDCycleScrollView *adView;
-@property(nonatomic,strong) UIButton *newsInfoBtn;
-@property(nonatomic,strong) UIButton *movieInfoBtn;
-@property(nonatomic,strong) UIButton *boxOfficeBtn;
+//@property(nonatomic,strong) UIButton *newsInfoBtn;
+//@property(nonatomic,strong) UIButton *movieInfoBtn;
+//@property(nonatomic,strong) UIButton *boxOfficeBtn;
 @property(nonatomic,weak) id<infoSliderViewDelegate> delegate;
 
 - (void)configCellWithArray:(NSMutableArray *)picArr;

@@ -13,6 +13,9 @@
 #import "MainCimemaViewController.h"
 #import "MainTableViewController.h"
 #import "ZYMallViewController.h"
+#import "ZYMapManager.h"
+#import "ZYInformationMaintViewController.h"
+
 
 @interface ZYTabBarController ()
 
@@ -20,11 +23,16 @@
 
 @implementation ZYTabBarController
 
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"ZYMallViewController",@"InformationViewController",@"MyViewController"];
+    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"ZYMallViewController",@"ZYInformationMaintViewController",@"MyViewController"];
     NSArray *ctlTitleArr = @[@"影院",@"商城",@"资讯",@"我的"];
     NSArray *ctlIconArr = @[@"tabbar_info_selected",@"tabbar_mall_selected",@"tabbar_cinema_selected",@"tabbar_my_selected"];
     NSArray *ctlNotIconArr = @[@"tabbar_info_not_selected",@"tabbar_mall_not_selected",@"tabbar_cinema_not_selected",@"tabbar_my_not_selected"];
@@ -55,6 +63,8 @@
     
     // 账号在其他地方登陆通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToCinemaViewController) name:@"AccountDidReLogin" object:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,12 +72,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (void)showLoginViewController{
     LoginViewController *login = [[LoginViewController alloc] init];
     [login setHidesBottomBarWhenPushed:YES];
     ZYNavigationController *ZYNav = [[ZYNavigationController alloc] initWithRootViewController:login];
     [self presentViewController:ZYNav animated:YES completion:nil];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self showHudMessage:@"已经显示"];
+}
+
 
 - (void)popToCinemaViewController
 {
@@ -128,15 +145,15 @@
 //    [cinemaViewCtl.filmsArr removeAllObjects];
 //    cinemaViewCtl.cinemaMsg = nil;
     
-    UINavigationController *newNavigationController1 = [self.viewControllers objectAtIndex:1];
-    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
-    if (informationCtl.informationArr.count != 0) {
-        [informationCtl.informationTableView removeFromSuperview];
-        informationCtl.currentPage = 0;
-        informationCtl.informationTableView = nil;
-        [informationCtl.informationArr removeAllObjects];
-        [informationCtl.slidersArr removeAllObjects];
-    }
+//    UINavigationController *newNavigationController1 = [self.viewControllers objectAtIndex:1];
+//    InformationViewController *informationCtl = [newNavigationController1.viewControllers objectAtIndex:0];
+//    if (informationCtl.informationArr.count != 0) {
+//        [informationCtl.informationTableView removeFromSuperview];
+//        informationCtl.currentPage = 0;
+//        informationCtl.informationTableView = nil;
+//        [informationCtl.informationArr removeAllObjects];
+//        [informationCtl.slidersArr removeAllObjects];
+//    }
 }
 
 @end

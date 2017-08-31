@@ -14,10 +14,6 @@
 
 @interface SelectSeatViewCtl : ZYViewController
 
-
-/**
- tableView
- */
 @property(nonatomic,strong) UITableView *SelectSeatTableView;
 @property(nonatomic,strong) Schedule *schedule; // 排片表
 @property(nonatomic,strong) HotFilm *hotFilm;  //影片信息
