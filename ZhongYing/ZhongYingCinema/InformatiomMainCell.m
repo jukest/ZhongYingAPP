@@ -42,7 +42,7 @@
 //    weiboView.viewController = self.VC;
 //    [self.itemBaseViews addObject:weiboView];
     
-    _tabView = [[LHTabView alloc]initWithItemsName:@[@"新闻",@"票房"] childrenView:@[newsView,boxOfficeView] withTableView:YES withHasNavigationBar:NO];// [[LHTabView alloc]initWithItemsName:@[@"新闻",@"票房"] childrenView:@[newsView,boxOfficeView] withTableView:YES ];
+    _tabView = [[LHTabView alloc]initWithItemsName:@[@"新闻资讯",@"票房"] withImages:@[@"info_news",@"info_boxoffice"] childrenView:@[newsView,boxOfficeView] withTableView:YES withHasNavigationBar:NO];// [[LHTabView alloc]initWithItemsName:@[@"新闻",@"票房"] childrenView:@[newsView,boxOfficeView] withTableView:YES ];//@[@"info_news",@"info_boxoffice"]
     [self.contentView addSubview:_tabView];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     

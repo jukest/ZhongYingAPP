@@ -16,7 +16,7 @@ typedef void (^ZhongYingConnectFailed)(NSError *error);
 + (id)shareInstance;
 
 // 回调字典接口[所有的接口通道，返回的是总字典]
-- (void)getZhongYingDictSuccessURL:(NSString *)url parameters:(NSDictionary *)parameters result:(ZhongYingConnectResult)dataBack failure:(ZhongYingConnectFailed)failed;
+- (AFHTTPRequestOperationManager *)getZhongYingDictSuccessURL:(NSString *)url parameters:(NSDictionary *)parameters result:(ZhongYingConnectResult)dataBack failure:(ZhongYingConnectFailed)failed;
 
 // 上传数据使用
 - (void)uploadZhongYingData:(NSData *)data fileName:(NSString *)fileName SuccessURL:(NSString *)url parameters:(NSDictionary *)parameters result:(ZhongYingConnectResult)dataBack failure:(ZhongYingConnectFailed)failed;

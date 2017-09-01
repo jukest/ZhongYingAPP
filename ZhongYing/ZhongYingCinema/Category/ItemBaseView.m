@@ -27,7 +27,7 @@
     [self setupCollectionView];
     }
     
-    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - 20 - TitleViewHeight - 49);
+    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - NavigationHeight - TitleViewHeight - 49);
     self.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollAction:) name:TabViewScrollToTopNotification object:nil];
     

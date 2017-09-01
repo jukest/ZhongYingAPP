@@ -46,7 +46,7 @@
 }
 
 // 回调字典接口[所有的接口通道，返回的是总字典]
-- (void)getZhongYingDictSuccessURL:(NSString *)url parameters:(NSDictionary *)parameters result:(ZhongYingConnectResult)dataBack failure:(ZhongYingConnectFailed)failed{
+- (AFHTTPRequestOperationManager *)getZhongYingDictSuccessURL:(NSString *)url parameters:(NSDictionary *)parameters result:(ZhongYingConnectResult)dataBack failure:(ZhongYingConnectFailed)failed{
     [_manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSLog(@"调用接口：%@ 回调数据：%@",url,dict);
@@ -78,6 +78,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failed(error);
     }];
+    return _manager;
 }
 
 // 上传数据使用

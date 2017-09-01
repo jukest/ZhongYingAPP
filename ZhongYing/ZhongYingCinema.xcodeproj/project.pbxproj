@@ -69,6 +69,7 @@
 		18397B631F57AA3F0003CA20 /* ZYInformationNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B621F57AA3F0003CA20 /* ZYInformationNewsView.m */; };
 		18397B661F57AAA10003CA20 /* ZYInformationBoxOfficeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B651F57AAA10003CA20 /* ZYInformationBoxOfficeView.m */; };
 		18397B691F57B2D30003CA20 /* ZYInformationScrollBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */; };
+		18397B741F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */; };
 		184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC6251F5012C6006A86BC /* ZYMallViewController.m */; };
 		185E94C61F4AABE300F364F2 /* MovePictureSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */; };
 		185E94CD1F4AACB700F364F2 /* SCAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C91F4AACB700F364F2 /* SCAdCollectionViewLayout.m */; };
@@ -531,6 +532,8 @@
 		18397B651F57AAA10003CA20 /* ZYInformationBoxOfficeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationBoxOfficeView.m; sourceTree = "<group>"; };
 		18397B671F57B2D30003CA20 /* ZYInformationScrollBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformationScrollBaseView.h; sourceTree = "<group>"; };
 		18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationScrollBaseView.m; sourceTree = "<group>"; };
+		18397B721F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformantionMainNetworingRequst.h; sourceTree = "<group>"; };
+		18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformantionMainNetworingRequst.m; sourceTree = "<group>"; };
 		184DC6241F5012C6006A86BC /* ZYMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallViewController.h; sourceTree = "<group>"; };
 		184DC6251F5012C6006A86BC /* ZYMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallViewController.m; sourceTree = "<group>"; };
 		185E94C41F4AABE300F364F2 /* MovePictureSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePictureSliderView.h; sourceTree = "<group>"; };
@@ -1513,6 +1516,23 @@
 			path = "资讯首页tableView";
 			sourceTree = "<group>";
 		};
+		18397B701F57BCC40003CA20 /* NetworkingRequstManager */ = {
+			isa = PBXGroup;
+			children = (
+				18397B711F57BCC40003CA20 /* ZYInformation */,
+			);
+			path = NetworkingRequstManager;
+			sourceTree = "<group>";
+		};
+		18397B711F57BCC40003CA20 /* ZYInformation */ = {
+			isa = PBXGroup;
+			children = (
+				18397B721F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.h */,
+				18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */,
+			);
+			path = ZYInformation;
+			sourceTree = "<group>";
+		};
 		184DC6231F501254006A86BC /* 商城 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1739,6 +1759,7 @@
 				3480D29B1DDA975F00671769 /* AppDelegate */,
 				3480D29C1DDA99D900671769 /* ViewControllers */,
 				348CEA661DDC34F000FFF211 /* Views */,
+				18397B701F57BCC40003CA20 /* NetworkingRequstManager */,
 				347F248E1DDD523A00CD41B1 /* Third */,
 				3480D2741DDA95F800671769 /* Assets.xcassets */,
 				3480D2B21DDAA4E300671769 /* Main.storyboard */,
@@ -4096,6 +4117,7 @@
 				E4F12ED01E14E54D00D97068 /* MASLayoutConstraint.m in Sources */,
 				E4E1D36F1DFA63CF002042A3 /* ExchangeRecordCell.m in Sources */,
 				E4CB36D51DEE556600C2E519 /* ViewPackagesView.m in Sources */,
+				18397B741F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m in Sources */,
 				18397B661F57AAA10003CA20 /* ZYInformationBoxOfficeView.m in Sources */,
 				182D7C9B1F44296F0028F4ED /* CustomCell.m in Sources */,
 				183022B41F42FC24007CE14C /* FilmCategoryTagView.m in Sources */,

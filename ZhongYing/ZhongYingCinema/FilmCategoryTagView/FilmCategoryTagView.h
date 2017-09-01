@@ -30,6 +30,8 @@ typedef void (^LHTitleViewSelectRow)(NSInteger row);
 
 +(instancetype)filmCategoryTagViewWithFrame:(CGRect)frame withItems:(NSArray <NSString *>*)items;
 -(instancetype)initWithFrame:(CGRect)frame withItems:(NSArray <NSString *>*)items;
+-(instancetype)initWithFrame:(CGRect)frame withItems:(NSArray <NSString *>*)items withImages:(NSArray <NSString *>*)images;
+
 @property (nonatomic, weak) id <FilmCategoryTagViewDelegate> delegate;
 
 

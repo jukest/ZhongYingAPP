@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong)NSArray <NSString *> *items;
 
+@property (nonatomic, strong) NSArray <NSString *> *images;
 
 @property (nonatomic, strong)UIButton *selectBtn;
 
@@ -35,6 +36,17 @@
     return [[self alloc]initWithFrame:frame withItems:items];
 }
 
+-(instancetype)initWithFrame:(CGRect)frame withItems:(NSArray <NSString *>*)items withImages:(NSArray <NSString *>*)images {
+    
+    if (self = [super initWithFrame:frame]) {
+        self.items = items;
+        self.images = images;
+        
+        [self setupUI];
+    }
+    
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame withItems:(NSArray<NSString *> *)items {
     
@@ -63,6 +75,11 @@
         btn.tag = i;
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitle:self.items[i] forState:UIControlStateNormal];
+        
+        if (self.images.count != 0) {
+            [btn setImage:[UIImage imageNamed:self.images[i]] forState:UIControlStateNormal];
+            btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        }
         
         btn.backgroundColor = [UIColor colorWithWhite:255 alpha:1];
         [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];

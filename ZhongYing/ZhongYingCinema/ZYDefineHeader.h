@@ -23,6 +23,18 @@ static CGFloat  NavigationHeight = 64;
 #define ZYInformationTabViewScrollToTopNotification @"ZYInformationTabViewScrollToTopNotification"
 #define ZYInformationScrollBaseScrollToTopNotification @"ZYInformationScrollBaseScrollToTopNotification"
 
+//更新新闻资讯数据的通知
+#define ZYInformationUpdataNewsDataNotification @"ZYInformationUpdataNewsDataNotification"
+//更新票房数据的通知
+#define ZYInformationUpdataBoxOfficeNotification @"ZYInformationUpdataBoxOfficeNotification"
+
+//加载更多新闻数据的通知
+#define ZYInformationUpdataMoreNewsDataNotification @"ZYInformationUpdataMoreNewsDataNotification"
+
+//加载更多票房数据的通知
+#define ZYInformationUpdataMoreBoxOfficeNotification @"ZYInformationUpdataMoreBoxOfficeNotification"
+
+
 #define random_color  [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
 
 

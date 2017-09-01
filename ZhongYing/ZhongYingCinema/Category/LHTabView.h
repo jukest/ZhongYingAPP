@@ -17,5 +17,5 @@
 @interface LHTabView : UIView
 @property (nonatomic, weak) id <LHTabViewDelegate> delegate;
 @property (nonatomic, assign) CGPoint offset;
-- (instancetype)initWithItemsName:(NSArray *)itemsName childrenView:(NSArray <ItemBaseView *>*)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar;
+- (instancetype)initWithItemsName:(NSArray *)itemsName withImages:(NSArray *)imges childrenView:(NSArray *)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar;
 @end

@@ -19,6 +19,7 @@
 #import "FanShuToolClass.h"
 // 上下拉刷新
 #import "MJRefresh.h"
+#import "BZProgressHUD.h"
 #import "MBProgressHUD.h"
 // 用户登录状态
 #import "LoginData.h"

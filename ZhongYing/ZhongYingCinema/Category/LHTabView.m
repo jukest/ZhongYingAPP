@@ -17,12 +17,13 @@
 @end
 @implementation LHTabView
 
-- (instancetype)initWithItemsName:(NSArray *)itemsName childrenView:(NSArray <ItemBaseView *>*)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar
+- (instancetype)initWithItemsName:(NSArray *)itemsName withImages:(NSArray *)imges childrenView:(NSArray *)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar
 {
     self = [super init];
     if (self) {
         
-        _titleView = [[FilmCategoryTagView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, TitleViewHeight) withItems:itemsName];
+        _titleView = [[FilmCategoryTagView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, TitleViewHeight) withItems:itemsName withImages:imges];
+        
         [self addSubview:_titleView];
 
   
