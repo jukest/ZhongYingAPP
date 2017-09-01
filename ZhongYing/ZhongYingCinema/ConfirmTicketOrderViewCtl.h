@@ -32,6 +32,8 @@
 
 @property(nonatomic,strong) UITableView *recommendTableView;
 
+
+
 @property(nonatomic,assign) BOOL hasSnack;  //!< 是否有卖品
 
 @end

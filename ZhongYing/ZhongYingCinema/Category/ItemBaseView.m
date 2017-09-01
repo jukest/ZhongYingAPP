@@ -10,7 +10,9 @@
 #import "CinemaCollectionViewCell.h"
 
 @interface ItemBaseView()
+
 @property (nonatomic, assign)BOOL hasNavigationBar;
+
 @end
 @implementation ItemBaseView
 

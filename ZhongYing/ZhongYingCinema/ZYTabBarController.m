@@ -16,6 +16,9 @@
 #import "ZYMapManager.h"
 #import "ZYInformationMaintViewController.h"
 
+//测试
+#import "ZYConfirmTicketOrderViewController.h"
+
 
 @interface ZYTabBarController ()
 
@@ -32,7 +35,10 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"ZYMallViewController",@"ZYInformationMaintViewController",@"MyViewController"];
+//    NSArray *ctlNameArr = @[@"MainCimemaViewController",@"ZYMallViewController",@"ZYInformationMaintViewController",@"MyViewController"];
+    //测试
+    NSArray *ctlNameArr = @[@"ZYConfirmTicketOrderViewController",@"ZYMallViewController",@"ZYInformationMaintViewController",@"MyViewController"];
+
     NSArray *ctlTitleArr = @[@"影院",@"商城",@"资讯",@"我的"];
     NSArray *ctlIconArr = @[@"tabbar_info_selected",@"tabbar_mall_selected",@"tabbar_cinema_selected",@"tabbar_my_selected"];
     NSArray *ctlNotIconArr = @[@"tabbar_info_not_selected",@"tabbar_mall_not_selected",@"tabbar_cinema_not_selected",@"tabbar_my_not_selected"];

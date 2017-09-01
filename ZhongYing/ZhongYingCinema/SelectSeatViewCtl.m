@@ -19,6 +19,10 @@
 #import "UIViewController+BackButtonHandler.h"
 #import "UIView+Extension.h"
 #import "UIImage+DrawText.h"
+
+#import "ZYConfirmTicketOrderViewController.h"
+
+
 @interface SelectSeatViewCtl ()<UITableViewDelegate,UITableViewDataSource,PackageTableViewCellDelegate,SelectSeatViewDelegate,MovieTimesViewDelegate>
 {
     SelectSeatView *_headerView;
@@ -145,9 +149,9 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_HUD hide:NO];
+        [_HUD hideAnimated:NO];
     } failure:^(NSError *error) {
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -265,7 +269,8 @@
                     [goods addObject:goods_dict];
                 }
             }
-            ConfirmTicketOrderViewCtl *confirmOrder = [[ConfirmTicketOrderViewCtl alloc] init];
+//            ConfirmTicketOrderViewCtl *confirmOrder = [[ConfirmTicketOrderViewCtl alloc] init];
+            ZYConfirmTicketOrderViewController *confirmOrder = [[ZYConfirmTicketOrderViewController alloc]init];
             confirmOrder.film_id = self.schedule.id;
             confirmOrder.seat_id = seat_id;
             confirmOrder.selectedSeats = self.selectedSeats;

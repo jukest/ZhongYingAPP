@@ -70,6 +70,7 @@
 		18397B661F57AAA10003CA20 /* ZYInformationBoxOfficeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B651F57AAA10003CA20 /* ZYInformationBoxOfficeView.m */; };
 		18397B691F57B2D30003CA20 /* ZYInformationScrollBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */; };
 		18397B741F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */; };
+		1846F7291F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */; };
 		184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC6251F5012C6006A86BC /* ZYMallViewController.m */; };
 		185E94C61F4AABE300F364F2 /* MovePictureSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */; };
 		185E94CD1F4AACB700F364F2 /* SCAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C91F4AACB700F364F2 /* SCAdCollectionViewLayout.m */; };
@@ -534,6 +535,8 @@
 		18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationScrollBaseView.m; sourceTree = "<group>"; };
 		18397B721F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformantionMainNetworingRequst.h; sourceTree = "<group>"; };
 		18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformantionMainNetworingRequst.m; sourceTree = "<group>"; };
+		1846F7271F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYConfirmTicketOrderViewController.h; sourceTree = "<group>"; };
+		1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConfirmTicketOrderViewController.m; sourceTree = "<group>"; };
 		184DC6241F5012C6006A86BC /* ZYMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallViewController.h; sourceTree = "<group>"; };
 		184DC6251F5012C6006A86BC /* ZYMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallViewController.m; sourceTree = "<group>"; };
 		185E94C41F4AABE300F364F2 /* MovePictureSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePictureSliderView.h; sourceTree = "<group>"; };
@@ -2737,6 +2740,8 @@
 			children = (
 				1808E7761F56B4F8004AD97A /* ConfirmTicketOrderViewCtl.h */,
 				1808E7771F56B4F8004AD97A /* ConfirmTicketOrderViewCtl.m */,
+				1846F7271F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.h */,
+				1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */,
 			);
 			name = "购票确认订单";
 			sourceTree = "<group>";
@@ -4130,6 +4135,7 @@
 				18123BBF1F4BD04500A42EDB /* ZYCityManager.m in Sources */,
 				34D5A5161DE2F80500F129E5 /* MyBillViewController.m in Sources */,
 				E4FB3CB41E2CBC9D008BF3FE /* OrderDetails.m in Sources */,
+				1846F7291F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m in Sources */,
 				34B00D141DE5752B00937351 /* UIWindow+LJWPresentViewController.m in Sources */,
 				E407AA921DFB8F6A000CE0A2 /* UIView+SDExtension.m in Sources */,
 				E407AABB1DFB9242000CE0A2 /* SDWebImageDownloaderOperation.m in Sources */,

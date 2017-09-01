@@ -91,3 +91,37 @@ UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVier
 /** 商城确认订单页tableViewSectionFooter上label的高度  */
 UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight;
 
+#pragma mark -- ZYConfirmTicketOrderViewController 常量
+
+/** 确认订单详情页的 间距 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerMarge;
+
+/** 确认订单详情页的左右边距 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerLeftRigthMarge;
+
+/** 确认订单详情 头 距离顶部的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerHeaderMarge;
+
+/** 确认订单详情 头 大label的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerHeaderBigLabelHeight;
+
+/** 确认订单详情 头 小label的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerHeaderSmallLabelHeight;
+
+/** 确认订单详情 中间内容 大label的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerMidellContentBigLabelHeight;
+
+/** 确认订单详情 中间内容 小label的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerMidellContentSmallLabelHeight;
+
+/** 确认订单详情 中间内容 距离 头 的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerMidellContentTopMarge;
+
+/** 大号字体 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerBigFont;
+
+/** 小号字体 */
+UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerSmallFont;
+
+
+

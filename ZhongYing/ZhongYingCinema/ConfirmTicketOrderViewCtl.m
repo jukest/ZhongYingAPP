@@ -33,6 +33,9 @@
 @property(nonatomic,assign) NSInteger couponPrice; //!<< 优惠价格
 @property(nonatomic,assign) float souvenirPrice; //!<< 推荐商品价格
 
+
+
+
 @end
 
 @implementation ConfirmTicketOrderViewCtl
@@ -366,7 +369,7 @@
         payHeight = 144;
     }
     UIView *payView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 46, ScreenWidth, payHeight) backgroundColor:[UIColor whiteColor]];
-    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
+    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
     [payView addSubview:self.finalPaymentLb];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.finalPaymentLb.text];
     NSRange strRange = [self.finalPaymentLb.text rangeOfString:@"还需支付："];
@@ -434,7 +437,7 @@
             [couponArr addObject:c.id];
         }
         [weak.couponLb setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
-        weak.finalPaymentLb.text = [NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"last_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0];
+        weak.finalPaymentLb.text = [NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0];
         
         NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.finalPaymentLb.text];
         NSRange strRange = [self.finalPaymentLb.text rangeOfString:@"还需支付："];
