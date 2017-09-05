@@ -123,5 +123,33 @@ UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerBigFont;
 /** 小号字体 */
 UIKIT_EXTERN CGFloat const ZYConfirmTicketOrderViewControllerSmallFont;
 
+/** 确认订单详情 头部 圆角半径 */
+UIKIT_EXTERN CGFloat const ZYConfirmOrderTableViewHeaderRadius;
 
+/** 确认订单详情 头部圆角矩形 的 边距 */
+UIKIT_EXTERN CGFloat const ZYConfirmOrderTableViewHeaderMarge;
+
+/** 确认订单详情 头部 虚线距离底部的高度 */
+UIKIT_EXTERN CGFloat const ZYConfirmOrderTableViewHeaderXuXianBottomHeight;
+
+
+/** 我的枚举 */
+typedef enum : NSUInteger {
+    MyOrder = 1,
+    MyCoupon,
+    MyNews,
+    NoComment,
+    
+    MyBill = 5,
+    MyFilmCritic,
+    AttentionCinema,
+    
+    MyLove,
+    MyComment,
+    IntegralMall,
+    
+    SuggestedStatistics,
+    AboutUS
+    
+} MyEnum;
 

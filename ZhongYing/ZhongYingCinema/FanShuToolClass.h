@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 
+@class ZYButton;
 @interface FanShuToolClass : NSObject
 
 // UITableView
@@ -24,6 +25,10 @@
 + (UIView *)createViewWithFrame:(CGRect)frame backgroundColor:(UIColor *)color;
 // UIButton
 + (UIButton *)createButtonWithFrame:(CGRect)rect title:(NSString *)title titleColor:(UIColor *)color target:(id)target action:(SEL)action tag:(NSInteger)tag;
+
+// UIButton
++ (ZYButton *)zy_createButtonWithFrame:(CGRect)rect title:(NSString *)title titleColor:(UIColor *)color target:(id)target action:(SEL)action tag:(NSInteger)tag;
+
 + (UIButton *)createButtonWithFrame:(CGRect)rect image:(UIImage *)image target:(id)target action:(SEL)action tag:(NSInteger)tag;
 // 电影票按钮操作[退票、退货、预售...]
 + (UIButton *)createButtonWithFrame:(CGRect)rect title:(NSString *)title titleColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius font:(UIFont *)font backgroundColor:(UIColor *)backgroundColor target:(id)target action:(SEL)action tag:(NSInteger)tag;

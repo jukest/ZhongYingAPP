@@ -27,7 +27,7 @@ CGFloat const ItemBaseViewConllectViewCellLineSpace = 10;
 CGFloat const ItemBaseViewConllectViewCellWidth = 150;
 
 /** 正在热映电影cell的高度 */
-CGFloat const ItemBaseViewConllectViewCellHeight = 285;
+CGFloat const ItemBaseViewConllectViewCellHeight = 250;
 
 /** 正在热映电影cell的电影图片的高度 */
 CGFloat const ItemBaseViewConllectViewCellFilmImgHeight = 200;
@@ -128,7 +128,14 @@ CGFloat const ZYConfirmTicketOrderViewControllerBigFont = 16;
 /** 小号字体 */
 CGFloat const ZYConfirmTicketOrderViewControllerSmallFont = 12;
 
+/** 确认订单详情 头部 圆角半径 */
+CGFloat const ZYConfirmOrderTableViewHeaderRadius = 10;
 
+/** 确认订单详情 头部圆角矩形 的 边距 */
+CGFloat const ZYConfirmOrderTableViewHeaderMarge = 20;
+
+/** 确认订单详情 头部 虚线距离底部的高度 */
+CGFloat const ZYConfirmOrderTableViewHeaderXuXianBottomHeight = 40;
 
 
 

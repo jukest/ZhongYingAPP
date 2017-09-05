@@ -271,10 +271,13 @@
             }
 //            ConfirmTicketOrderViewCtl *confirmOrder = [[ConfirmTicketOrderViewCtl alloc] init];
             ZYConfirmTicketOrderViewController *confirmOrder = [[ZYConfirmTicketOrderViewController alloc]init];
+            
             confirmOrder.film_id = self.schedule.id;
             confirmOrder.seat_id = seat_id;
             confirmOrder.selectedSeats = self.selectedSeats;
             confirmOrder.cinema_name = self.cinemaMsg.title;
+            confirmOrder.schedule = self.schedule;
+            confirmOrder.film = self.filmMessage;
             if (goods.count != 0) {
                 NSData *data = [NSJSONSerialization dataWithJSONObject:goods options:NSJSONWritingPrettyPrinted error:nil];
                 NSString *goods_info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -553,40 +556,18 @@
     return 66;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (self.goodsList.count != 0) {
-        return 47;
-    }else{
-        return 0;
-    }
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.0001f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (self.goodsList.count != 0) {
-        UIView *headerView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 47)
-                                                  backgroundColor:Color(245, 245, 245, 1.0)];
-        UILabel *lb = [FanShuToolClass createLabelWithFrame:CGRectMake(12, 20, 200, 20)
-                                                       text:@"观影套餐"
-                                                       font:[UIFont systemFontOfSize:15]
-                                                  textColor:[UIColor grayColor] alignment:NSTextAlignmentLeft];
-        [headerView addSubview:lb];
-        return headerView;
-    }else{
-        return nil;
-    }
-}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.goodsList.count;
+    return 0;//self.goodsList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

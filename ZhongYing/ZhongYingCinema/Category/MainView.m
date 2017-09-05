@@ -18,14 +18,6 @@
 
 
 @interface MainView ()<MainTableViewControllerLoadDataDelegate,CinemaCollectionViewCellDelegate,CinemaComplaintViewDelegate>
-{
-
-    MBProgressHUD *_HUD1;
-
-
-}
-@property (nonatomic, strong) CinemaComplaintView *complaintView;
-@property (nonatomic, strong) UIView *sugeestView;
 @property (nonatomic, strong) UIViewController *currentController;
 
 @property (nonatomic, strong) UIViewController *vc;
@@ -39,24 +31,6 @@
 static NSString *cellID = @"cinemaCollectionCell";
 
 
-- (UIView *)sugeestView {
-    if (!_sugeestView) {
-        _sugeestView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 40) backgroundColor:[UIColor whiteColor]];
-        CGSize complaintSize = [@"投诉" sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
-        for (int i = 0; i < 2; i ++) {
-            UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(50 + ((ScreenWidth -100 -complaintSize.width) / 2 + complaintSize.width) * i, 25, (ScreenWidth -100 -complaintSize.width) / 2, 1) backgroundColor:Color(232, 232, 232, 1.0)];
-            [_sugeestView addSubview:line];
-        }
-        UILabel *complaintLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, 0, complaintSize.width +10, complaintSize.height) text:@"投诉" font:[UIFont systemFontOfSize:18] textColor:[UIColor blackColor] alignment:NSTextAlignmentCenter];
-        complaintLb.backgroundColor = [UIColor whiteColor];
-        complaintLb.center = CGPointMake(ScreenWidth / 2, 25);
-        [_sugeestView addSubview:complaintLb];
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(complaintBtnDidClicked:)];
-        [_sugeestView addGestureRecognizer:tap];
-    }
-    return _sugeestView;
-}
 
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -136,23 +110,23 @@ static NSString *cellID = @"cinemaCollectionCell";
 }
 
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    
-    // UICollectionElementKindSectionHeader是一个const修饰的字符串常量,所以可以直接使用==比较
-    if (kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *footerView =  [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footView" forIndexPath:indexPath];
-        
-        footerView.backgroundColor = [UIColor whiteColor];
-        
-        [footerView addSubview:self.sugeestView];
-        
-        return footerView;
-
-    }
-    return nil;
-    
-    
-}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    
+//    // UICollectionElementKindSectionHeader是一个const修饰的字符串常量,所以可以直接使用==比较
+//    if (kind == UICollectionElementKindSectionFooter) {
+//        UICollectionReusableView *footerView =  [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footView" forIndexPath:indexPath];
+//        
+//        footerView.backgroundColor = [UIColor whiteColor];
+//        
+//        [footerView addSubview:self.sugeestView];
+//        
+//        return footerView;
+//
+//    }
+//    return nil;
+//    
+//    
+//}
 
 
 - (void)setViewController:(UIViewController *)viewController {
@@ -162,76 +136,7 @@ static NSString *cellID = @"cinemaCollectionCell";
 }
 
 
-#pragma mark - view Handles
-- (void)complaintBtnDidClicked:(UIGestureRecognizer *)tap
-{
-    
-    NSLog(@"投诉");
-    if (![LoginYesOrNoStr isEqualToString:@"YES"]) { // 用户未登录
-        LoginViewController *login = [[LoginViewController alloc] init];
-        [login setHidesBottomBarWhenPushed:YES];
-        [self.vc.navigationController pushViewController:login animated:YES];
-    }else{
-        _complaintView = [[CinemaComplaintView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 240 * heightFloat)];
-        _complaintView.delegate = self;
-        [_complaintView show];
-    }
-}
 
-#pragma mark - CinemaComplaintViewDelegate
-- (void)sendComplaint:(NSString *)complaint
-{
-    [self keyBoardDown];
-    
-    if (complaint.length < 6) {
-        [self showMessage:@"投诉至少6个字"];
-    }else{
-        if (_complaintView.complaintFld.text.length >= 6 && _complaintView.complaintFld.text.length <= 256) {
-            
-            _HUD1 = [FanShuToolClass createMBProgressHUDWithText:@"发送中..." target:self];
-            [[UIApplication sharedApplication].keyWindow addSubview:_HUD1];
-            
-            NSLog(@"%@",complaint);
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserComplaintURL];
-            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-            parameters[@"token"] = ApiTokenStr;
-            parameters[@"content"] = _complaintView.complaintFld.text;
-            ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
-            [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
-                NSLog(@"sendComplaint >>>>>>>> %@",dataBack);
-                if ([dataBack[@"code"] integerValue] == 0){
-                    [self showMessage:@"投诉成功"];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [_complaintView hiddenView];
-                    });
-                }
-                [_HUD1 hide:YES];
-            } failure:^(NSError *error) {
-                [self showMessage:@"连接服务器失败!"];
-                [_HUD1 hide:YES];
-            }];
-        }else{
-            [self showMessage:@"投诉最多256个字"];
-        }
-    }
-}
-
-- (void)keyBoardDown
-{
-    [_complaintView.complaintFld resignFirstResponder];
-}
-
-- (void)showMessage:(NSString *)message
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:_complaintView animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText = message;
-    hud.margin = 10;
-    hud.removeFromSuperViewOnHide = YES;
-    hud.yOffset = 0 +90;
-    hud.labelFont = [UIFont systemFontOfSize:15];
-    [hud hide:YES afterDelay:1.0f];
-}
 
 
 #pragma mark - MainTableViewControllerLoadDataDelegate

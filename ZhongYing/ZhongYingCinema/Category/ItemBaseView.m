@@ -58,8 +58,8 @@
     
     //注册尾部
     // 注册尾部
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footView"];
-    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.width, 50);
+//    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footView"];
+//    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.width, 50);
 
 }
 

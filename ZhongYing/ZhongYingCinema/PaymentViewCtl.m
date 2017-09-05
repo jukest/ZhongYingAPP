@@ -13,13 +13,17 @@
 #import "WXApiRequestHandler.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
-@interface PaymentViewCtl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+#import "RefundView.h"
+
+@interface PaymentViewCtl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,RefundViewDelegate>
 {
     PaymentView *_headerView;
     NSIndexPath *_index;
     MBProgressHUD *_HUD;
     MBProgressHUD *_payHUD;
     float _remain;
+    MBProgressHUD *_unlockHUD;
+
 }
 
 @property(nonatomic,strong) NSMutableDictionary *order;
@@ -411,5 +415,83 @@
     }
     return cell;
 }
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)navigationShouldPopOnBackButton
+{
+    if (self.isTicket) {
+        
+        return [self canBack];
+    } else {
+        return YES;
+    }
+    
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.isTicket) {
+        
+        return [self canBack];
+        
+    } else {
+        return YES;
+    }
+
+}
+
+- (BOOL)canBack
+{
+    NSString *content = @"返回后，您当前选中的座位将不再保留";
+    CGSize contentSize = [FanShuToolClass createString:content font:[UIFont systemFontOfSize:16] lineSpacing:7 maxSize:CGSizeMake(ScreenWidth -60 -80, ScreenHeight)];
+    RefundView *refund = [[RefundView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth -60, 95 +contentSize.height) WithContent:content];
+    refund.headerView.hidden = YES;
+    refund.contentView.frame = CGRectMake(23, 20 +17 +5, ScreenWidth -60 -80, contentSize.height);
+    refund.contentView.center = CGPointMake(refund.frame.size.width / 2, (95 +contentSize.height -47) / 2);
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:content];
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.alignment = NSTextAlignmentCenter;
+    paraStyle.firstLineHeadIndent = 0;
+    [paraStyle setLineSpacing:7];
+    [str addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, content.length)];
+    refund.contentView.attributedText = str;
+    
+    refund.delegate = self;
+    [refund show];
+    return NO;
+}
+
+#pragma mark - RefundViewDelegate
+- (void)gotoRefundViewEvents:(NSInteger)tag
+{
+    _unlockHUD = [FanShuToolClass  createMBProgressHUDWithText:@"座位解锁中..." target:self];
+    [self.view addSubview:_unlockHUD];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserUnlockURL];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"token"] = ApiTokenStr;
+    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
+    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
+        NSLog(@"getUnlock>>>>>>>>>>>>>>>>>>>>>%@",dataBack);
+        NSDictionary *content = dataBack[@"content"];
+        if ([dataBack[@"code"] integerValue] == 0) {
+            if ([content[@"result"] boolValue]) {
+                
+                NSLog(@"解锁成功!");
+            }
+        }else{
+            NSLog(@"%@",dataBack[@"message"]);
+        }
+//        [_timer invalidate];
+        [self.navigationController popViewControllerAnimated:YES];
+        [_unlockHUD hideAnimated:YES];
+    } failure:^(NSError *error) {
+        NSLog(@"连接服务器失败!error = %@",error);
+        [self showHudMessage:@"解锁失败!"];
+        [_unlockHUD hideAnimated:YES];
+    }];
+}
+
 
 @end

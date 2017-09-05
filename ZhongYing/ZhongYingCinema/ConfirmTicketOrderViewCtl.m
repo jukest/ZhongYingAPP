@@ -157,7 +157,8 @@
                                              }
                                              [self.souvenirList addObject:souvenir];
                                          }
-                                         
+                                         //TODO:--测试数据
+                                         self.souvenirList = [@[@1,@1,@1] mutableCopy];
                                          //[self.recommendTableView reloadData];
                                          [self setupConfirmOrderUI];
                                          [self showHudMessage:@"订单提交成功!"];
@@ -369,7 +370,7 @@
         payHeight = 144;
     }
     UIView *payView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 46, ScreenWidth, payHeight) backgroundColor:[UIColor whiteColor]];
-    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
+    self.finalPaymentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -15 -200, 15, 200, 20) text:[NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice + self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0] font:[UIFont systemFontOfSize:16] textColor:Color(247, 86, 109, 1.0) alignment:NSTextAlignmentRight];
     [payView addSubview:self.finalPaymentLb];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.finalPaymentLb.text];
     NSRange strRange = [self.finalPaymentLb.text rangeOfString:@"还需支付："];
@@ -389,6 +390,7 @@
 
 - (void)timerAction
 {
+    
     if (_time != 0) {
         _time --;
         [self.countdownLb setTitle:[[NSString stringWithFormat:@"%zd",_time] transforTomyyyyMMddWithFormatter:@"支付剩余时间：mm:ss"] forState:UIControlStateNormal];
@@ -592,9 +594,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Souvenir *souvenir = self.souvenirList[indexPath.row];
+//    Souvenir *souvenir = self.souvenirList[indexPath.row];
     RecommendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecommendTableViewCell"];
-    [cell configCellWithModel:souvenir];
+//    [cell configCellWithModel:souvenir];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.index = indexPath;
     cell.delegate = self;

@@ -37,6 +37,10 @@
 		18123BFA1F4C29BB00A42EDB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18123BF31F4C29BB00A42EDB /* libssl.a */; };
 		18123BFB1F4C29BB00A42EDB /* updatelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18123BF41F4C29BB00A42EDB /* updatelog.txt */; };
 		1814277F1F454A2B009590F2 /* CinemaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814277E1F454A2B009590F2 /* CinemaCollectionViewCell.m */; };
+		182B16281F5E72650055E8CE /* ZYMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B16271F5E72650055E8CE /* ZYMyViewController.m */; };
+		182B162B1F5E7CDB0055E8CE /* ZYButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B162A1F5E7CDB0055E8CE /* ZYButton.m */; };
+		182B162E1F5E872A0055E8CE /* ZYMyUpListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B162D1F5E872A0055E8CE /* ZYMyUpListView.m */; };
+		182B16311F5E95500055E8CE /* ZYMoreListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B16301F5E95500055E8CE /* ZYMoreListView.m */; };
 		182BD92E1F55104C009085A7 /* ZYMallConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BD92D1F55104C009085A7 /* ZYMallConfirmViewController.m */; };
 		182D7C8F1F44294B0028F4ED /* ItemBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D7C821F44294B0028F4ED /* ItemBaseView.m */; };
 		182D7C901F44294B0028F4ED /* LHTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D7C841F44294B0028F4ED /* LHTabView.m */; };
@@ -82,6 +86,7 @@
 		18A001701F53B1AC00F1EEA2 /* ZYMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0016F1F53B1AC00F1EEA2 /* ZYMemberViewController.m */; };
 		18A001741F53BDE500F1EEA2 /* WXMoveBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */; };
 		18A001771F53E58600F1EEA2 /* ZYMallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001761F53E58600F1EEA2 /* ZYMallCell.m */; };
+		18A8EF3B1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */; };
 		342337A51DE3D44C005069D2 /* MyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A41DE3D44C005069D2 /* MyLoginView.m */; };
 		342337A81DE3D87B005069D2 /* LoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A71DE3D87B005069D2 /* LoginData.m */; };
 		342337AF1DE3DF7E005069D2 /* RegisterViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337AE1DE3DF7E005069D2 /* RegisterViewCtl.m */; };
@@ -467,6 +472,14 @@
 		18123BF41F4C29BB00A42EDB /* updatelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = updatelog.txt; sourceTree = "<group>"; };
 		1814277D1F454A2B009590F2 /* CinemaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinemaCollectionViewCell.h; sourceTree = "<group>"; };
 		1814277E1F454A2B009590F2 /* CinemaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CinemaCollectionViewCell.m; sourceTree = "<group>"; };
+		182B16261F5E72650055E8CE /* ZYMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMyViewController.h; sourceTree = "<group>"; };
+		182B16271F5E72650055E8CE /* ZYMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMyViewController.m; sourceTree = "<group>"; };
+		182B16291F5E7CDB0055E8CE /* ZYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYButton.h; sourceTree = "<group>"; };
+		182B162A1F5E7CDB0055E8CE /* ZYButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYButton.m; sourceTree = "<group>"; };
+		182B162C1F5E872A0055E8CE /* ZYMyUpListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMyUpListView.h; sourceTree = "<group>"; };
+		182B162D1F5E872A0055E8CE /* ZYMyUpListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMyUpListView.m; sourceTree = "<group>"; };
+		182B162F1F5E95500055E8CE /* ZYMoreListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMoreListView.h; sourceTree = "<group>"; };
+		182B16301F5E95500055E8CE /* ZYMoreListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMoreListView.m; sourceTree = "<group>"; };
 		182BD92C1F55104C009085A7 /* ZYMallConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallConfirmViewController.h; sourceTree = "<group>"; };
 		182BD92D1F55104C009085A7 /* ZYMallConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallConfirmViewController.m; sourceTree = "<group>"; };
 		182D7C811F44294B0028F4ED /* ItemBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemBaseView.h; sourceTree = "<group>"; };
@@ -560,6 +573,8 @@
 		18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMoveBtn.m; sourceTree = "<group>"; };
 		18A001751F53E58600F1EEA2 /* ZYMallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallCell.h; sourceTree = "<group>"; };
 		18A001761F53E58600F1EEA2 /* ZYMallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallCell.m; sourceTree = "<group>"; };
+		18A8EF391F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYConfirmOrderTableViewHeader.h; sourceTree = "<group>"; };
+		18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConfirmOrderTableViewHeader.m; sourceTree = "<group>"; };
 		342337A31DE3D44C005069D2 /* MyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLoginView.h; sourceTree = "<group>"; };
 		342337A41DE3D44C005069D2 /* MyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLoginView.m; sourceTree = "<group>"; };
 		342337A61DE3D87B005069D2 /* LoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginData.h; sourceTree = "<group>"; };
@@ -1591,6 +1606,15 @@
 			path = "商城_view";
 			sourceTree = "<group>";
 		};
+		18A8EF351F5CE52400A1B0CA /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				18A8EF391F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.h */,
+				18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		342337A91DE3DF49005069D2 /* 登录、注册、注册协议 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1835,6 +1859,8 @@
 			children = (
 				1808E77E1F56BE7F004AD97A /* MyViewController.h */,
 				1808E77F1F56BE7F004AD97A /* MyViewController.m */,
+				182B16261F5E72650055E8CE /* ZYMyViewController.h */,
+				182B16271F5E72650055E8CE /* ZYMyViewController.m */,
 				342337A91DE3DF49005069D2 /* 登录、注册、注册协议 */,
 				347793391DDE90A400DF3D18 /* 我的资料 */,
 				347F24AB1DDD815C00CD41B1 /* 充值 */,
@@ -1928,6 +1954,12 @@
 				348CEA6E1DDC39AD00FFF211 /* MyView.m */,
 				348CEA6A1DDC353F00FFF211 /* MyTableViewCell.h */,
 				348CEA6B1DDC353F00FFF211 /* MyTableViewCell.m */,
+				182B16291F5E7CDB0055E8CE /* ZYButton.h */,
+				182B162A1F5E7CDB0055E8CE /* ZYButton.m */,
+				182B162C1F5E872A0055E8CE /* ZYMyUpListView.h */,
+				182B162D1F5E872A0055E8CE /* ZYMyUpListView.m */,
+				182B162F1F5E95500055E8CE /* ZYMoreListView.h */,
+				182B16301F5E95500055E8CE /* ZYMoreListView.m */,
 				E4E1D3661DFA62D6002042A3 /* 积分商城 */,
 				E4031C151DF9542800895E19 /* 待评价 */,
 				E4031C0B1DF90D6D00895E19 /* 我的评论 */,
@@ -1959,6 +1991,7 @@
 		348CEA691DDC351700FFF211 /* 影院 */ = {
 			isa = PBXGroup;
 			children = (
+				18A8EF351F5CE52400A1B0CA /* Order */,
 				182D7C801F4429210028F4ED /* Category */,
 				182D7C991F44296F0028F4ED /* CustomCell.h */,
 				182D7C9A1F44296F0028F4ED /* CustomCell.m */,
@@ -3907,6 +3940,7 @@
 				34B00D181DE580D100937351 /* LFSPopupView.m in Sources */,
 				E4022E8B1E1CDBEB00DC0E8F /* Evaluate.m in Sources */,
 				349D74161DE82BE100E5A7CD /* ProcotolViewController.m in Sources */,
+				182B16311F5E95500055E8CE /* ZYMoreListView.m in Sources */,
 				E422D1F91E0773E700ED0DF0 /* Coupon.m in Sources */,
 				E4093D701E0516FD004F02FD /* MJRefreshAutoStateFooter.m in Sources */,
 				E4093D6D1E0516FD004F02FD /* MJRefreshHeader.m in Sources */,
@@ -3935,9 +3969,11 @@
 				E4416F7F1E1B9507008861FB /* MJFoundation.m in Sources */,
 				347793491DDEA90300DF3D18 /* HistoryTableViewCtl.m in Sources */,
 				E4093D691E0516FD004F02FD /* MJRefreshAutoFooter.m in Sources */,
+				182B162B1F5E7CDB0055E8CE /* ZYButton.m in Sources */,
 				34B6582C1DF101D9008B6645 /* DataConnect.m in Sources */,
 				34B6583A1DF16291008B6645 /* OrderDetailsCtl.m in Sources */,
 				34B00D0F1DE5752B00937351 /* LJWKeyboardHandler.m in Sources */,
+				18A8EF3B1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m in Sources */,
 				E40A44201DF644D100D9084C /* AFURLRequestSerialization.m in Sources */,
 				347F24B41DDD81CC00CD41B1 /* EvaluateViewCtl.m in Sources */,
 				E4093D851E053485004F02FD /* MJChiBaoZiFooter2.m in Sources */,
@@ -4167,6 +4203,7 @@
 				E407AAB71DFB9242000CE0A2 /* SDImageCache.m in Sources */,
 				E41052E31DF7BFFC002EEF98 /* MyMessageViewCtl.m in Sources */,
 				E4416F5E1E1B8AE9008861FB /* ZFSeatSelectionView.m in Sources */,
+				182B16281F5E72650055E8CE /* ZYMyViewController.m in Sources */,
 				E4093D721E0516FD004F02FD /* MJRefreshBackNormalFooter.m in Sources */,
 				E4F12ECE1E14E54D00D97068 /* MASConstraint.m in Sources */,
 				1862AF581F441A080003C5BF /* MainTableView.m in Sources */,
@@ -4187,6 +4224,7 @@
 				347F24AE1DDD818F00CD41B1 /* RechargeViewController.m in Sources */,
 				E442C2841DFE4D3B001409C8 /* JSONModelClassProperty.m in Sources */,
 				1808E7781F56B4F8004AD97A /* ConfirmTicketOrderViewCtl.m in Sources */,
+				182B162E1F5E872A0055E8CE /* ZYMyUpListView.m in Sources */,
 				E40A44281DF644D100D9084C /* UIButton+AFNetworking.m in Sources */,
 				E4F12ECF1E14E54D00D97068 /* MASConstraintMaker.m in Sources */,
 				E4064F101DE671F700829074 /* CinemaSliderView.m in Sources */,

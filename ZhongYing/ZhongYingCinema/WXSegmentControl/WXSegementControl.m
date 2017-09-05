@@ -97,6 +97,7 @@
     for (int i = 0; i < self.items.count; i++) {
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         btn.frame = CGRectMake(i * btnW, 0, btnW, btnH);
         btn.tag = i;
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];

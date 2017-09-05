@@ -30,7 +30,7 @@ typedef void(^SegementControlCallBlock)(NSInteger);
 
 - (void)btnAction:(UIButton *)sender;
 
-- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state forIndex:(NSInteger)index;
+//- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state forIndex:(NSInteger)index;
 
 //- (void)setBackgroundColor:(UIColor *)color forIndex:(NSInteger)index;
 //- (void)setSelectedBackgroundColor:(UIColor *)color forIndex:(NSInteger)index;

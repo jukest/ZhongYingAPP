@@ -8,6 +8,7 @@
 
 #import "FanShuToolClass.h"
 #import "UIImage+GIF.h"
+#import "ZYButton.h"
 
 @implementation FanShuToolClass
 
@@ -56,6 +57,16 @@
 // UIButton
 + (UIButton *)createButtonWithFrame:(CGRect)rect title:(NSString *)title titleColor:(UIColor *)color target:(id)target action:(SEL)action tag:(NSInteger)tag{
     UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
+    b.frame = rect;
+    b.tag = tag;
+    [b setTitle:title forState:UIControlStateNormal];
+    [b setTitleColor:color forState:UIControlStateNormal];
+    [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    return b;
+}
+// UIButton
++ (ZYButton *)zy_createButtonWithFrame:(CGRect)rect title:(NSString *)title titleColor:(UIColor *)color target:(id)target action:(SEL)action tag:(NSInteger)tag{
+    ZYButton *b = [ZYButton buttonWithType:UIButtonTypeCustom];
     b.frame = rect;
     b.tag = tag;
     [b setTitle:title forState:UIControlStateNormal];

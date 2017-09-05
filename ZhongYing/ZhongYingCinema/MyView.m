@@ -61,27 +61,28 @@
         self.myRechargeBtn.layer.borderWidth = 1.0f;
         [self addSubview:self.myRechargeBtn];
         
-        UIView *myBottomView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 230, ScreenWidth, 50) backgroundColor:[UIColor whiteColor]];
-        [self addSubview:myBottomView];
         
-        self.myOrderBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(20, 0, ScreenWidth/2-40, 50) title:@"我的订单" titleColor:[UIColor blackColor] target:self action:@selector(myViewClick:) tag:101];
-        self.myOrderBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.myOrderBtn setImage:[UIImage imageNamed:@"my_order"] forState:UIControlStateNormal];
-        [self.myOrderBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 5)];
-        [myBottomView addSubview:self.myOrderBtn];
-        
-        UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(ScreenWidth / 2, 5, 1, 40) backgroundColor:Color(236, 236, 236, 1.0)];
-        [myBottomView addSubview:line];
-        
-        NSString *evaluate = @"待评价（0）";
-        if (ApiMyCommentStr) {
-            evaluate = [NSString stringWithFormat:@"待评价（%@）",ApiMyCommentStr];
-        }
-        self.myEvaluateBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(20+ScreenWidth/2, 0, ScreenWidth/2-40, 50) title:evaluate titleColor:[UIColor blackColor] target:self action:@selector(myViewClick:) tag:102];
-        self.myEvaluateBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.myEvaluateBtn setImage:[UIImage imageNamed:@"my_not_evaluate"] forState:UIControlStateNormal];
-        [self.myEvaluateBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 5)];
-        [myBottomView addSubview:self.myEvaluateBtn];
+//        UIView *myBottomView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 230, ScreenWidth, 50) backgroundColor:[UIColor whiteColor]];
+//        [self addSubview:myBottomView];
+//        
+//        self.myOrderBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(20, 0, ScreenWidth/2-40, 50) title:@"我的订单" titleColor:[UIColor blackColor] target:self action:@selector(myViewClick:) tag:101];
+//        self.myOrderBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [self.myOrderBtn setImage:[UIImage imageNamed:@"my_order"] forState:UIControlStateNormal];
+//        [self.myOrderBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 5)];
+//        [myBottomView addSubview:self.myOrderBtn];
+//        
+//        UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(ScreenWidth / 2, 5, 1, 40) backgroundColor:Color(236, 236, 236, 1.0)];
+//        [myBottomView addSubview:line];
+//        
+//        NSString *evaluate = @"待评价（0）";
+//        if (ApiMyCommentStr) {
+//            evaluate = [NSString stringWithFormat:@"待评价（%@）",ApiMyCommentStr];
+//        }
+//        self.myEvaluateBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(20+ScreenWidth/2, 0, ScreenWidth/2-40, 50) title:evaluate titleColor:[UIColor blackColor] target:self action:@selector(myViewClick:) tag:102];
+//        self.myEvaluateBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [self.myEvaluateBtn setImage:[UIImage imageNamed:@"my_not_evaluate"] forState:UIControlStateNormal];
+//        [self.myEvaluateBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 5)];
+//        [myBottomView addSubview:self.myEvaluateBtn];
     }
     return self;
 }

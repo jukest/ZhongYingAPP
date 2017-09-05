@@ -96,7 +96,7 @@
     self.descripLabel = [FanShuToolClass createLabelWithFrame:CGRectZero text:description font:[UIFont systemFontOfSize:12] textColor:Color(65, 65, 65, 1.0) alignment:NSTextAlignmentLeft];
     self.descripLabel.numberOfLines = 2;
     self.descripLabel.userInteractionEnabled = NO;
-    [self addSubview:self.descripLabel];
+//    [self addSubview:self.descripLabel];
     
 
     
@@ -148,9 +148,9 @@
     self.buyBtn.frame = CGRectMake(self.width - ItemBaseViewConllectViewCellBuyBtnW, self.cinemaTitleLabel.y, ItemBaseViewConllectViewCellBuyBtnW, self.cinemaTitleLabel.height);
     
     //描述
-    self.descripLabel.text = hotFilm.sketch;
+//    self.descripLabel.text = hotFilm.sketch;
     
-    self.descripLabel.frame = CGRectMake(0, (CGRectGetMaxY(self.cinemaTitleLabel.frame ) + 10 ), self.width, ItemBaseViewConllectViewCellDescrip);
+//    self.descripLabel.frame = CGRectMake(0, (CGRectGetMaxY(self.cinemaTitleLabel.frame ) + 10 ), self.width, ItemBaseViewConllectViewCellDescrip);
     
     
     
