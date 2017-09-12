@@ -173,7 +173,7 @@
     
     self.mallDetailLabel.frame = CGRectMake(x, _mallDetailLabel.y, ScreenWidth - x - ZYMallViewControllerMarge, size.height);
     
-    self.mallPriceLabel.text = [NSString stringWithFormat:@"￥%ld",(long)good.price];
+    self.mallPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",good.price];
     
     if (good.selectedNumber != 0) {
         

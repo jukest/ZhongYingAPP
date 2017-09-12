@@ -15,9 +15,10 @@
 #import "Cinema.h"
 #import "MovieDetailsViewCtl.h"
 #import "CinemaCollectionViewCell.h"
+#import "ZYCinemaMainNetworkingRequst.h"
 
 
-@interface MainView ()<MainTableViewControllerLoadDataDelegate,CinemaCollectionViewCellDelegate,CinemaComplaintViewDelegate>
+@interface MainView ()<MainTableViewControllerLoadDataDelegate,CinemaCollectionViewCellDelegate>
 @property (nonatomic, strong) UIViewController *currentController;
 
 @property (nonatomic, strong) UIViewController *vc;
@@ -40,20 +41,34 @@ static NSString *cellID = @"cinemaCollectionCell";
         self.backgroundColor = random_color;
         
         
-        
-        //self.collectionView.tableFooterView.height = 50;
-        //self.collectionView.tableFooterView = self.complaintView;
-        
-//        self.currentController = [self getCurrentVC];
-        MainTableViewController *mainVC = (MainTableViewController *)self.viewController;
-        mainVC.loadDataDelegate = self;
-        
+        //添加通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updataNowPlayingFilmNotification:) name:ZYCimemaUpdataNowPlayingFilmNotification object:nil];
         
     }
     
     return self;
 }
 
+- (void)addRefreshView
+{
+//    __weak typeof(self) weakSelf = self;
+    
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+//        [weakSelf.collectionView reloadData];
+        
+        //发送通知 加载 更多数据
+        [[NSNotificationCenter defaultCenter] postNotificationName:ZYCimemaUpdataMoreNowPlayingFilmNotification object:nil];
+    }];
+    
+}
+
+- (void)endRefresh {
+    if ([self.collectionView.mj_footer isRefreshing]) {
+        [self.collectionView.mj_footer endRefreshing];
+    }
+}
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -61,14 +76,14 @@ static NSString *cellID = @"cinemaCollectionCell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.datas.count;
+    return [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CinemaCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CinemaCollectionViewCell" forIndexPath:indexPath];
-    cell.hotFilm = self.datas[indexPath.item];
+    cell.hotFilm = [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray[indexPath.item];
     cell.indexPath = indexPath;
     cell.delegate = self;
     return cell;
@@ -77,17 +92,18 @@ static NSString *cellID = @"cinemaCollectionCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    UIViewController *vc = [self topVC:[UIApplication sharedApplication].keyWindow.rootViewController];
+
     MovieDetailsViewCtl *movieDetails = [[MovieDetailsViewCtl alloc] init];
-    HotFilm *hotFilm = self.datas[indexPath.row];
+    HotFilm *hotFilm = [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray[indexPath.row];
     movieDetails.hotFilm = hotFilm;
     movieDetails.cinemaMsg = self.cinemaMsg;
-    movieDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
+    movieDetails.filmsArr = [NSMutableArray arrayWithArray:[ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray];
     movieDetails.type = @"海报";
     movieDetails.indexPath = indexPath.row;
     movieDetails.isApn = NO;
     [movieDetails setHidesBottomBarWhenPushed:YES];
-    [self.vc.navigationController pushViewController:movieDetails animated:YES];
+    [vc.navigationController pushViewController:movieDetails animated:YES];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 
 }
@@ -110,23 +126,6 @@ static NSString *cellID = @"cinemaCollectionCell";
 }
 
 
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-//    
-//    // UICollectionElementKindSectionHeader是一个const修饰的字符串常量,所以可以直接使用==比较
-//    if (kind == UICollectionElementKindSectionFooter) {
-//        UICollectionReusableView *footerView =  [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footView" forIndexPath:indexPath];
-//        
-//        footerView.backgroundColor = [UIColor whiteColor];
-//        
-//        [footerView addSubview:self.sugeestView];
-//        
-//        return footerView;
-//
-//    }
-//    return nil;
-//    
-//    
-//}
 
 
 - (void)setViewController:(UIViewController *)viewController {
@@ -139,19 +138,15 @@ static NSString *cellID = @"cinemaCollectionCell";
 
 
 
-#pragma mark - MainTableViewControllerLoadDataDelegate
-- (void)mainTableViewControllerFinshLoadData:(MainTableViewController *)mainTableViewController dataArray:(NSArray *)datas withCinemaMsg:(Cinema *)cinemaMsg{
-    self.datas = [datas mutableCopy];
-    self.cinemaMsg = cinemaMsg;
-    [self.collectionView reloadData];
-    
-}
 
 
 #pragma mark - CinemaCollectionViewCellDelegate
 - (void)gotoCinemaCollectionViewCellEvents:(CinemaConllectionViewCellEvents)event indexPath:(NSIndexPath *)indexPath
 {
-    HotFilm *film = self.datas[indexPath.row];
+    UIViewController *vc = [self topVC:[UIApplication sharedApplication].keyWindow.rootViewController];
+
+    
+    HotFilm *film = [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray[indexPath.row];
     if (event == CinemaTableViewCellBuyEvents) {
         NSLog(@"购票");
         CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
@@ -161,7 +156,7 @@ static NSString *cellID = @"cinemaCollectionCell";
         cinemaDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
         cinemaDetails.indexPath = indexPath.row;
         [cinemaDetails setHidesBottomBarWhenPushed:YES];
-        [self.vc.navigationController pushViewController:cinemaDetails animated:YES];
+        [vc.navigationController pushViewController:cinemaDetails animated:YES];
     }else if (event == CinemaTableViewCellPreSaleEvents){
         NSLog(@"预售");
         CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
@@ -171,7 +166,7 @@ static NSString *cellID = @"cinemaCollectionCell";
         cinemaDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
         cinemaDetails.indexPath = indexPath.row;
         [cinemaDetails setHidesBottomBarWhenPushed:YES];
-        [self.vc.navigationController pushViewController:cinemaDetails animated:YES];
+        [vc.navigationController pushViewController:cinemaDetails animated:YES];
     }else if (event == CinemaTableViewCellPlayEvents){
         NSLog(@"播放");
         MovieDetailsViewCtl *movieDetails = [[MovieDetailsViewCtl alloc] init];
@@ -183,10 +178,26 @@ static NSString *cellID = @"cinemaCollectionCell";
         movieDetails.indexPath = indexPath.row;
         movieDetails.isApn = NO;
         [movieDetails setHidesBottomBarWhenPushed:YES];
-        [self.vc.navigationController pushViewController:movieDetails animated:YES];
+        [vc.navigationController pushViewController:movieDetails animated:YES];
     }
 }
 
+
+#pragma mark -- 通知相关
+- (void)updataNowPlayingFilmNotification:(NSNotification *)noti {
+    self.vc = [self topVC:[UIApplication sharedApplication].keyWindow.rootViewController];
+    self.datas = [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray;
+    self.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;
+    [self.collectionView reloadData];
+    
+    [self endRefresh];
+    
+    
+    if (self.collectionView.mj_footer == nil) {
+        
+        [self addRefreshView];
+    }
+}
 
 
 

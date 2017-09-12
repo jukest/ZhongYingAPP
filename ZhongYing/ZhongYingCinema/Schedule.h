@@ -12,7 +12,7 @@
 
 @property(nonatomic,assign) NSInteger start_time; //!<<影片开始时间
 @property(nonatomic,assign) NSInteger end_time; //!<<影片结束时间
-@property(nonatomic,assign) NSInteger market_price; //!<<售卖价格
+@property(nonatomic,assign) float market_price; //!<<售卖价格
 @property(nonatomic,copy) NSString *name; //!<<影厅名字
 @property(nonatomic,assign) NSInteger seat_available_num; //!<<该场次的剩余可售座位数
 @property(nonatomic,copy) NSString <Optional>*tags; //!<<影院标签

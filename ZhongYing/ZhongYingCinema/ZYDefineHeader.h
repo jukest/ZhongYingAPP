@@ -17,6 +17,11 @@
 static const CGFloat  TitleViewHeight = 44;
 static CGFloat  NavigationHeight = 64;
 
+//选择影院后 刷新数据
+#define SelectedCimemaUpdataMainCimemaDataNotification @"SelectedCimemaUpdataAllDataNotification"
+#define SelectedCimemaUpdataOtherDataNotification @"SelectedCimemaUpdataOtherDataNotification"
+
+
 #define TabViewScrollToTopNotification @"TabViewScrollToTopNotification"
 #define ItemScrollToTopNotification @"ItemScrollToTopNotification"
 
@@ -33,6 +38,16 @@ static CGFloat  NavigationHeight = 64;
 
 //加载更多票房数据的通知
 #define ZYInformationUpdataMoreBoxOfficeNotification @"ZYInformationUpdataMoreBoxOfficeNotification"
+
+//更新正在热映数据的通知
+#define ZYCimemaUpdataNowPlayingFilmNotification @"ZYCimemaUpdataNowPlayingFilmNotification"
+//加载更多正在热映电影的通知
+#define ZYCimemaUpdataMoreNowPlayingFilmNotification @"ZYCimemaUpdataMoreNowPlayingFilmNotification"
+
+//更新即将上映的通知
+#define ZYCimemaUpdataWillPlayFilmNotification @"ZYCimemaUpdataWillPlayFilmNotification"
+//加载更多即将上映的通知
+#define ZYCimemaUpdataMoreWillPlayFilmNotification @"ZYCimemaUpdataMoreWillPlayFilmNotification"
 
 
 #define random_color  [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
@@ -116,7 +131,8 @@ static CGFloat  NavigationHeight = 64;
 // 影院组id
 #define ApiGroup_ID @"1"
 
-#define BASE_URL @"https://www.jkmovies.jukest.cn/"
+#define BASE_URL @"https://www.jkmovies.jukest.cn/"//线上
+//#define BASE_URL @"https://test.jkmovies.jukest.cn/"//测试
 #define Image_URL @"https://www.jkmovies.jukest.cn"
 #define ImageDetail_URL @"https://www.jkmovies.jukest.cn/"
 
@@ -258,6 +274,8 @@ static CGFloat  NavigationHeight = 64;
 #define ApiPublicRegistrationAgreementURL @"Api/Public/registrationAgreement"
 // 卖品订单支付页
 #define ApiUserGoodsOrderURL @"Api/User/goodsOrder"
+//支持多个卖品订单支付也
+#define ApiUserGoodsOrderNewURL @"Api/User/goodsOrderNew"
 // 支付
 #define ApiUserPayOrderURL @"Api/User/payOrder"
 // 订单详情

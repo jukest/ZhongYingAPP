@@ -18,13 +18,13 @@ CGFloat const CinemaViewControllerHeaderScrollImageH = 201 ;
 CGFloat const CinemaViewControllerFilmCagetoryTagViewH = 30;
 
 /** 正在热映电影cell的列间距 */
-CGFloat const ItemBaseViewConllectViewCellInteritemSpace = 10;
+CGFloat const ItemBaseViewConllectViewCellInteritemSpace = 20;
 
 /** 正在热映电影cell的行间距  */
 CGFloat const ItemBaseViewConllectViewCellLineSpace = 10;
 
 /** 正在热映电影cell的宽度 */
-CGFloat const ItemBaseViewConllectViewCellWidth = 150;
+CGFloat const ItemBaseViewConllectViewCellWidth = 140;
 
 /** 正在热映电影cell的高度 */
 CGFloat const ItemBaseViewConllectViewCellHeight = 250;
@@ -58,6 +58,18 @@ CGFloat const InformationViewControllerTableViewHeaderImgHeight = 201;
 
 /** 资讯首页tableViewcell中图片的高度 */
 CGFloat const InformationViewControllerTableViewCellImgWidth = 150;
+
+/** 票房头部视图 日历相关视图的 高度 */
+CGFloat const ZYInformationBoxOfficeHeaderViewCalendarViewHeigth = 50;
+
+/** 票房头部视图 票房相关视图的 高度 */
+CGFloat const ZYInformationBoxOfficeHeaderViewBoxOfficeViewHeigth = 100;
+/** 票房 表格视图 cell 左边label的 距离左边的边距 */
+CGFloat const ZYInformationBoxOfficeHeaderViewCellLeftLabelLeftMarge = 10;
+/** 票房 表格视图 cell 左边label的 宽度 */
+CGFloat const ZYInformationBoxOfficeHeaderViewCellLeftLabelWidth = 85;
+
+
 
 #pragma mark -- 商场常量
 

@@ -18,4 +18,7 @@
 @interface ZYMyUpListView : UIView
 - (instancetype)initWithFrame:(CGRect)frame withImgs:(NSArray <NSString *> *)imgs withTitles:(NSArray <NSString *> *)titles;
 @property (nonatomic, weak) id <ZYMyUpListViewDelegate> delegate;
+
+@property (nonatomic, strong) NSString *comment;
+
 @end

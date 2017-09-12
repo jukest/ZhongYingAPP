@@ -26,6 +26,7 @@
 
 @property (nonatomic, assign) NSInteger totalNumber;
 
+
 @end
 
 
@@ -68,6 +69,12 @@ static NSString *reuseIdentifier = @"mallCell";
     
     //加载数据
 //    [self loadData];
+    
+    
+    
+    //添加 选择影院之后 的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadFood) name:SelectedCimemaUpdataOtherDataNotification object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,7 +108,7 @@ static NSString *reuseIdentifier = @"mallCell";
 - (void)addRefreshView
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadData];
+        [self loadFood];
     }];
     [self.tableView.mj_header beginRefreshing];
 //    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -212,7 +219,7 @@ static NSString *reuseIdentifier = @"mallCell";
 
 #pragma mark - 加载数据
 
-- (void)loadData {
+- (void)loadFood {
     __weak typeof (self) weakSelf = self;
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiCommonGoodsURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -231,6 +238,9 @@ static NSString *reuseIdentifier = @"mallCell";
         
         NSLog(@"getGoods>>>>>>>>>>>>>>%@",dataBack);
         if ([dataBack[@"code"] integerValue] == 0) {
+            
+            [weakSelf.goodsList removeAllObjects];
+            
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"goods"]) {
                 Goods *goods = [Goods mj_objectWithKeyValues:dict];

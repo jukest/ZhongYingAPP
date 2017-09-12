@@ -30,7 +30,7 @@
 
 @property(nonatomic,strong) UIButton *gotoPayBtn;
 
-@property(nonatomic,assign) NSInteger couponPrice; //!<< 优惠价格
+@property(nonatomic,assign) float couponPrice; //!<< 优惠价格
 @property(nonatomic,strong) NSArray *selectCou;
 
 @end
@@ -72,13 +72,13 @@ static NSString *reuseIdentifier = @"mallCell";
         UILabel *label = [FanShuToolClass createLabelWithFrame:CGRectMake(10, 2, 100, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) text:@"优惠券" font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [_sectionFooterView addSubview:label];
         
-        self.couponBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(0, 2,ScreenWidth-10, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) title:@"减0元" titleColor:Color(247, 86, 109, 1.0) target:self action:@selector(couponAction:) tag:1];
+        self.couponBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(0, 2,ScreenWidth-10, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) title:@"减0.00元" titleColor:Color(247, 86, 109, 1.0) target:self action:@selector(couponAction:) tag:1];
         [_sectionFooterView addSubview:self.couponBtn];
         [self.couponBtn setImage:[UIImage imageNamed:@"cinema_back"] forState:UIControlStateNormal];
         self.couponBtn.backgroundColor = [UIColor clearColor];
         self.couponBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-        self.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -45);
+        self.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -70);
         
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight + 4, ScreenWidth, 2)];
         lineView.backgroundColor = Color(230, 230, 230, 1);
@@ -168,7 +168,8 @@ static NSString *reuseIdentifier = @"mallCell";
 //    NSLog(@"买%ld",(long)good.selectedNumber);
     
     
-    self.totalPricrLb.text = [NSString stringWithFormat:@"%.2f",[self totalMoney]];
+    NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+    self.totalPricrLb.text = price;
 
     
 }
@@ -190,22 +191,9 @@ static NSString *reuseIdentifier = @"mallCell";
         
     }
     
-//    if (self.goodsList.count == 1) {
-//        
-//        Goods *good = self.goodsList[index];
-//        if (good.selectedNumber == 1) {
-//            
-//            good.selectedNumber++;
-//            
-//        } else {
-//
-//        }
-//        
-//        
-//    }
     
-    self.totalPricrLb.text = [NSString stringWithFormat:@"%.2f",[self totalMoney]];
-
+    NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+    self.totalPricrLb.text = price;
     
 }
 
@@ -217,6 +205,7 @@ static NSString *reuseIdentifier = @"mallCell";
         Goods *good = self.goodsList[i];
         money += good.selectedNumber * good.price;
     }
+    
     return money;
     
 }
@@ -242,10 +231,13 @@ static NSString *reuseIdentifier = @"mallCell";
         self.couponPrice = 0;
         NSMutableArray *couponArr = [NSMutableArray array];
         for (Coupon *c in coupons) {
-            self.couponPrice = self.couponPrice +[c.price integerValue];
+            self.couponPrice = self.couponPrice +[c.price floatValue];
             [couponArr addObject:c.id];
         }
-        [weak.couponBtn setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
+        [weak.couponBtn setTitle:[NSString stringWithFormat:@"减%.2f元",self.couponPrice] forState:UIControlStateNormal];
+        weak.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+        weak.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -weak.couponBtn.titleLabel.width);
+
         NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
         weak.totalPricrLb.text = price;
         weak.selectCou = couponArr;
@@ -259,16 +251,20 @@ static NSString *reuseIdentifier = @"mallCell";
 - (void)sureBtnAction:(UIButton *)sender {
     NSLog(@"确认支付");
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSMutableArray *goodsArray = [NSMutableArray arrayWithCapacity:10];
+    
     
     for (int i = 0; i < self.goodsList.count; i++) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
         Goods *good = self.goodsList[i];
         
         dict[@"id"] = @(good.id);
         dict[@"number"] = @(good.selectedNumber);
+        [goodsArray addObject:dict];
     }
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:goodsArray options:NSJSONWritingPrettyPrinted error:nil];
     NSString *goods_info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     PaymentViewCtl *payment = [[PaymentViewCtl alloc] init];
     if (self.selectCou.count != 0) {
@@ -278,6 +274,7 @@ static NSString *reuseIdentifier = @"mallCell";
     }
     payment.goods = [self pictureArrayToJSON:goods_info];
     payment.isTicket = NO;
+    payment.moreGoods = YES;
     [payment setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:payment animated:YES];
 }
@@ -308,10 +305,14 @@ static NSString *reuseIdentifier = @"mallCell";
             if ([content[@"coupon"] count] != 0) {
                 _coupon.id = [NSString stringWithFormat:@"%@",content[@"coupon"][0][@"id"]];
                 _coupon.price = [NSString stringWithFormat:@"%@",content[@"coupon"][0][@"price"]];
-                self.couponPrice = [_coupon.price integerValue];
+                self.couponPrice = [_coupon.price floatValue];
                 self.selectCou = @[_coupon.id];
             }
-            [self.couponBtn setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
+            [self.couponBtn setTitle:[NSString stringWithFormat:@"减%.2f元",self.couponPrice] forState:UIControlStateNormal];
+            [self.couponBtn layoutIfNeeded];
+            self.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+            self.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -self.couponBtn.titleLabel.width);
+            
             NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
             self.totalPricrLb.text = price;
             

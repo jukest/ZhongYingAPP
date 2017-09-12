@@ -11,6 +11,7 @@
 
 
 
+
 @interface ZYMallViewController ()<WXSegementControlDelegate,UIScrollViewDelegate>
 
 /**
@@ -85,6 +86,9 @@
     };
 
     [self addChildViewControlers];
+    
+    
+    
 
 }
 

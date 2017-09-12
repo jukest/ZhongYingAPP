@@ -7,7 +7,11 @@
 //
 
 #import "ZYViewController.h"
+#import "WXSegementControl.h"
 
+
+@class WXSegementControl;
 @interface MainCimemaViewController : ZYViewController
+@property (nonatomic, strong) WXSegementControl *segemetnControl;
 
 @end

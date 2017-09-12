@@ -14,7 +14,8 @@
 #import "CinemaSliderView.h"
 #import "CinemaComplaintView.h"
 #import "CustomCell.h"
-
+#import "ZYCinemaMainNetworkingRequst.h"
+#import "MainCimemaViewController.h"
 
 
 
@@ -32,9 +33,11 @@
 @property(nonatomic,strong)  Cinema *cinemaMsg;   // 影院信息
 @property(nonatomic,strong) NSMutableArray *filmsArr;   // 电影
 @property(nonatomic,strong) MBProgressHUD *HUD;
-@property(nonatomic,assign) NSInteger currentPage;
+@property(nonatomic,assign) NSInteger nowPlayingFilmcurrentPage;
+@property(nonatomic, assign) NSInteger willPlayFilmCurrentPage;
+@property(nonatomic, assign) BOOL shouldScroll;
 
-@property (nonatomic, assign) BOOL shouldScroll;
+@property(nonatomic, strong) void(^notificationBlock)(void);
 
 @end
 
@@ -44,16 +47,30 @@
     [super viewDidLoad];
     [self.view addSubview:self.mainTableView];
     _loadADImge = NO;
-    [self loadCinemaMessage];
+    
+    
     [self addNotification];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.shouldScroll = YES;
+    __weak typeof(self) weakSelf = self;
     
     self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _currentPage = 0;
-        [self loadCinemaMessage];
+        
+        [weakSelf loadWillPlaFilm];
+        [weakSelf loadNowPlayingFilm];
     }];
+    [self.mainTableView.mj_header beginRefreshing];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreNowPlayingFilm) name:ZYCimemaUpdataMoreNowPlayingFilmNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreWillPayFilm) name:ZYCimemaUpdataMoreWillPlayFilmNotification object:nil];
+    
+    
+   
+
+    
+    //添加 选择影院之后 的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDataNotification:) name:SelectedCimemaUpdataMainCimemaDataNotification object:nil];
 }
 
 - (void)addNotification {
@@ -162,15 +179,94 @@
     
 }
 
+#pragma mark -- 网络请求
+
+- (void)refreshDataNotification:(NSNotification *)notification {
+    self.notificationBlock = ^{
+        //发送通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:SelectedCimemaUpdataOtherDataNotification object:nil userInfo:nil];
+    };
+    
+    [self loadNowPlayingFilm];
+}
+
+/**
+ 加载正在热映
+ */
+- (void)loadNowPlayingFilm {
+    self.nowPlayingFilmcurrentPage = 0;
+    [self loadCinemaMessage];
+}
+
+/**
+ 加载更多正在热映
+ */
+- (void)loadMoreNowPlayingFilm {
+    self.nowPlayingFilmcurrentPage++;
+    [self loadCinemaMessage];
+}
+
+
+
+/**
+ 加载即将上映
+ */
+- (void)loadWillPlaFilm {
+    self.willPlayFilmCurrentPage = 0;
+    [self loadWillPlayFilmMessage];
+
+}
+
+/**
+ 加载更多即将上映
+ */
+- (void)loadMoreWillPayFilm {
+    self.willPlayFilmCurrentPage++;
+    [self loadWillPlayFilmMessage];
+
+}
+
+
+- (void)loadWillPlayFilmMessage {
+    //Api/Common/upComing
+    __weak typeof(self) weakSelf = self;
+    NSString *urlStr = [NSString stringWithFormat:@"%@Api/Common/upComing",BASE_URL];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (ApiTokenStr) {
+        parameters[@"token"] = ApiTokenStr;
+    }else{
+        parameters[@"lng"] = ApiLngStr;
+        parameters[@"lat"] = ApiLatStr;
+        parameters[@"group_id"] = ApiGroup_ID;
+    }
+    parameters[@"cinema_id"] = ApiCinemaIDStr;
+    parameters[@"page"] = @(self.willPlayFilmCurrentPage);
+    parameters[@"size"] = @(10);
+    NSLog(@"%@",parameters);
+    
+    
+    [[ZYCinemaMainNetworkingRequst shareInstance] loadWillPlayFilmWithURL:urlStr withParameters:parameters completeHandle:^(BOOL success, NSString *error) {
+        
+        if (success) {
+            //发送通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:ZYCimemaUpdataWillPlayFilmNotification object:nil userInfo:nil];
+        }else {
+            [BZProgressHUD showToView:self.view text:error time:1];
+        }
+        
+    }];
+    
+}
 
 - (void)loadCinemaMessage
 {
-    if (_HUD == nil) {
-        _HUD = [FanShuToolClass createMBProgressHUDWithText:@"加载中..." target:self];
-        _HUD.backgroundColor = [UIColor clearColor];
-        [self.view addSubview:_HUD];
+    if (self.HUD == nil) {
+        self.HUD = [FanShuToolClass createMBProgressHUDWithText:@"加载中..." target:self];
+        self.HUD.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:self.HUD];
     }
     
+    __weak typeof(self) weakSelf = self;
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiCommonCinemaURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     if (ApiTokenStr) {
@@ -181,31 +277,26 @@
         parameters[@"group_id"] = ApiGroup_ID;
     }
     parameters[@"cinema_id"] = ApiCinemaIDStr;
-    parameters[@"page"] = @(_currentPage);
+    parameters[@"page"] = @(self.nowPlayingFilmcurrentPage);
     parameters[@"size"] = @(10);
     NSLog(@"%@",parameters);
-    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
-    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
-        NSLog(@"getCinemaMessage >>>>>> %@",dataBack);
+    
+    [[ZYCinemaMainNetworkingRequst shareInstance] loadNowPlayingFilmWithURL:urlStr withParameters:parameters completeHandle:^(BOOL success, NSString *error) {
         
-        if (self.mainTableView != nil) {
-            [self endRefresh];
+        [self.HUD hideAnimated:YES];
+        
+        if ([self.mainTableView.mj_header isRefreshing]) {
+            [self.mainTableView.mj_header endRefreshing];
         }
-        if (_currentPage == 0) {
-            [self.filmsArr removeAllObjects];
-        }
-        if ([dataBack[@"code"] intValue] == 0) {
-            [self.slidersArr removeAllObjects];
+        
+        if (success) {//成功
+
+            self.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;
+            self.slidersArr = [ZYCinemaMainNetworkingRequst shareInstance].sliderImgsArray;
             
-            NSDictionary *content = dataBack[@"content"];
-            if (![content[@"sliders"] isEqual:[NSNull null]]) {
-                [self.slidersArr addObjectsFromArray:content[@"sliders"]];
-            }
-            
-            NSError *cinema_error;
-            self.cinemaMsg = [[Cinema alloc] initWithDictionary:content[@"cinema"] error:&cinema_error];
-            self.cinemaMsg.id = content[@"cinema"][@"cinema_id"];
-            
+            MainCimemaViewController *parentVC = (MainCimemaViewController *)self.parentViewController;
+            parentVC.segemetnControl.hidden = NO;
+
             // 下载本影院的图
             if (_loadADImge) {
                 
@@ -215,54 +306,32 @@
                 _loadADImge = YES;
             }
             
-            if (cinema_error) {
-                NSLog(@"cinema_error=%@",cinema_error);
-            }
-            NSError *error;
-            for (NSDictionary *hot_film in content[@"hot_films"]) {
-                HotFilm *hotFilm = [[HotFilm alloc] initWithDictionary:hot_film error:&error];
-                [self.filmsArr addObject:hotFilm];
-            
-            }
-            
-           
-            
-            for (int i = 0; i < self.slidersArr.count; i ++) {
-                [self.slidersArr replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@%@",Image_URL,self.slidersArr[i]]];
-            }
             //加载头部滚动图片
             [self initCinemaViewCtlUI];
             [_cinemaHeaderView configCellWithArray:self.slidersArr cinemaMsg:self.cinemaMsg];
             
+            
+                if (error.length != 0) {
+                    [BZProgressHUD showToView:self.view text:error time:1];
+                }
+            
+            
             [self.mainTableView reloadData];
             
-            
-            if (self.loadDataDelegate != nil) {
-                if ([self.loadDataDelegate respondsToSelector:@selector(mainTableViewControllerFinshLoadData:dataArray:withCinemaMsg:)]) {
-                    [self.loadDataDelegate mainTableViewControllerFinshLoadData:self dataArray:self.filmsArr withCinemaMsg:self.cinemaMsg];
-                }
+            if (weakSelf.notificationBlock) {
+                weakSelf.notificationBlock();
+                weakSelf.notificationBlock = nil;
             }
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:ZYCimemaUpdataNowPlayingFilmNotification object:nil userInfo:nil];
             
-            
-        }else if ([dataBack[@"code"] intValue] == 46005){
-            if (_currentPage == 0) {
-                [self showHudMessage:@"没有电影信息!"];
-            }else{
-                [self showHudMessage:@"没有更多了!"];
-            }
-        }else{
-            [self showHudMessage:dataBack[@"message"]];
+        } else {//失败
+            [BZProgressHUD showProgressToView:self.view text:error time:1];
         }
-        [_HUD hideAnimated:YES];
-    } failure:^(NSError *error) {
-        if (self.mainTableView != nil) {
-            [self endRefresh];
-        }
-        [self showHudMessage:@"连接服务器失败!"];
-        [_HUD hideAnimated:YES];
+        
     }];
-}
+    
+   }
 
 
 - (void)initCinemaViewCtlUI

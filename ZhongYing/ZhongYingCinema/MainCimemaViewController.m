@@ -22,7 +22,6 @@
     
 }
 
-@property (nonatomic, strong) WXSegementControl *segemetnControl;
 @property (nonatomic, strong) NSArray <NSString *> *segementControlTitles;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -60,7 +59,12 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCityName:) name:@"updateCityNotification" object:nil];
     
+    
+    
 }
+
+
+
 
 - (void)updateCityName:(NSNotification *)notification {
     NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]);
@@ -148,6 +152,7 @@
 
 - (void)addSegmentContro {
     self.navigationItem.titleView = self.segemetnControl;
+    self.segemetnControl.hidden = YES;
 
 }
 

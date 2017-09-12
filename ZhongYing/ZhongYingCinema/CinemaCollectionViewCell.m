@@ -78,7 +78,7 @@
 
     //电影名字
     NSString *name = @"鲁滨逊漂流记";
-    self.cinemaTitleLabel = [FanShuToolClass createLabelWithFrame:CGRectZero text:name font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+    self.cinemaTitleLabel = [FanShuToolClass createLabelWithFrame:CGRectZero text:name font:[UIFont systemFontOfSize:13] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
     self.cinemaTitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self addSubview:self.cinemaTitleLabel];
     

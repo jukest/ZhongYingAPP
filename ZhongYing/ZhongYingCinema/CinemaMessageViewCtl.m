@@ -189,6 +189,11 @@
 - (void)gotoChangeCinemaEvent
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.cinema.id forKey:@"Apicinema_id"];// 影院ID
+    [[NSUserDefaults standardUserDefaults] synchronize ];
+    
+    //发送通知重新加载 影院 资讯 商城的 所有数据
+    [[NSNotificationCenter defaultCenter] postNotificationName:SelectedCimemaUpdataMainCimemaDataNotification object:nil];
+    
     [(ZYTabBarController *)self.tabBarController popToCinemaViewController];
 }
 

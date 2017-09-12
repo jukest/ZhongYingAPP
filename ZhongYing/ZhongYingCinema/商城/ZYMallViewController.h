@@ -8,6 +8,7 @@
 
 #import "ZYViewController.h"
 
+
 @class ZYMallViewController;
 
 @protocol ZYMallViewControllerScrollViewDelegate <NSObject>

@@ -16,7 +16,7 @@
     MBProgressHUD *_LoadCouponHUD;
     Coupon *_coupon;
 }
-@property(nonatomic,assign) NSInteger couponPrice; //!<< 优惠价格
+@property(nonatomic,assign) float couponPrice; //!<< 优惠价格
 @property(nonatomic,strong) NSArray *selectCou;
 @end
 
@@ -72,7 +72,7 @@
         [view addSubview:lb];
     }
     
-    self.unitPriceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -12 -50, 14 + 90 +30, 50, 45 -28) text:[NSString stringWithFormat:@"%zd 元",self.goods.price] font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
+    self.unitPriceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -12 -80, 14 + 90 +30, 80, 45 -28) text:[NSString stringWithFormat:@"%.2f 元",self.goods.price] font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
     
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -117,7 +117,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoCoupon:)];
     [backView addGestureRecognizer:tap];
     
-    self.totalPricrLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -12 -50, 14 + 225 +30, 50, 45 -28) text:[NSString stringWithFormat:@"%zd 元",self.goods.price] font:[UIFont systemFontOfSize:17] textColor:Color(199, 0, 0, 1.0) alignment:NSTextAlignmentRight];
+    self.totalPricrLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth -12 -50, 14 + 225 +30, 50, 45 -28) text:[NSString stringWithFormat:@"%.2f 元",self.goods.price] font:[UIFont systemFontOfSize:17] textColor:Color(199, 0, 0, 1.0) alignment:NSTextAlignmentRight];
     [self addAttributedText];
     [view addSubview:self.totalPricrLb];
     
@@ -159,11 +159,11 @@
             if ([content[@"coupon"] count] != 0) {
                 _coupon.id = [NSString stringWithFormat:@"%@",content[@"coupon"][0][@"id"]];
                 _coupon.price = [NSString stringWithFormat:@"%@",content[@"coupon"][0][@"price"]];
-                self.couponPrice = [_coupon.price integerValue];
+                self.couponPrice = [_coupon.price floatValue];
                 self.selectCou = @[_coupon.id];
             }
-            [self.couponLb setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
-            NSString *price = [NSString stringWithFormat:@"%zd 元",(self.goods.price * [self.amountFld.text integerValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text integerValue] -_couponPrice : 0];
+            [self.couponLb setTitle:[NSString stringWithFormat:@"减%.2f元",self.couponPrice] forState:UIControlStateNormal];
+            NSString *price = [NSString stringWithFormat:@"%.2f 元",(self.goods.price * [self.amountFld.text floatValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text floatValue] -_couponPrice : 0];
             CGSize priceSize = [price sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
             self.totalPricrLb.frame = CGRectMake(ScreenWidth -12 -priceSize.width, 14 + 225 +30, priceSize.width, 45 -28);
             self.totalPricrLb.text = price;
@@ -224,7 +224,7 @@
                 [self showHudMessage:@"该套餐最多能选择9份"];
             }
         }
-        NSString *price = [NSString stringWithFormat:@"%zd 元",(self.goods.price * [self.amountFld.text integerValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text integerValue] -_couponPrice : 0];
+        NSString *price = [NSString stringWithFormat:@"%.2f 元",(self.goods.price * [self.amountFld.text floatValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text floatValue] -_couponPrice : 0];
         CGSize priceSize = [price sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
         self.totalPricrLb.frame = CGRectMake(ScreenWidth -12 -priceSize.width, 14 + 225 +30, priceSize.width, 45 -28);
         self.totalPricrLb.text = price;
@@ -282,11 +282,11 @@
         self.couponPrice = 0;
         NSMutableArray *couponArr = [NSMutableArray array];
         for (Coupon *c in coupons) {
-            self.couponPrice = self.couponPrice +[c.price integerValue];
+            self.couponPrice = self.couponPrice +[c.price floatValue];
             [couponArr addObject:c.id];
         }
-        [weak.couponLb setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
-        NSString *price = [NSString stringWithFormat:@"%zd 元",(self.goods.price * [self.amountFld.text integerValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text integerValue] -_couponPrice : 0];
+        [weak.couponLb setTitle:[NSString stringWithFormat:@"减%.2f元",self.couponPrice] forState:UIControlStateNormal];
+        NSString *price = [NSString stringWithFormat:@"%.2f",(self.goods.price * [self.amountFld.text floatValue] -_couponPrice) > 0 ? self.goods.price * [self.amountFld.text floatValue] -_couponPrice : 0];
         CGSize priceSize = [price sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
         self.totalPricrLb.frame = CGRectMake(ScreenWidth -12 -priceSize.width, 14 + 225 +30, priceSize.width, 45 -28);
         self.totalPricrLb.text = price;

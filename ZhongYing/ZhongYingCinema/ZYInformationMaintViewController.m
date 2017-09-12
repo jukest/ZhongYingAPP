@@ -12,6 +12,8 @@
 #import "informationSliderView.h"
 #import "ZYInformantionMainNetworingRequst.h"
 
+
+
 @interface ZYInformationMaintViewController ()<UITableViewDelegate,UITableViewDataSource,infoSliderViewDelegate,UINavigationControllerDelegate>
 {
     informationSliderView *_infoSliderView;
@@ -81,10 +83,7 @@
     [self addNotification];
     [self setupUI];
     
-    [BZProgressHUD showProgressToView:self.view];
-    //加载 新闻资讯 和 票房
-    [self loadNewsMessage];
-    [self loadBoxOfficeData];
+    
     
     self.navigationController.delegate = self;
     
@@ -104,6 +103,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreBoxOfficeData) name:ZYInformationUpdataMoreBoxOfficeNotification object:nil];
     
+    //添加 选择影院之后 的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:SelectedCimemaUpdataOtherDataNotification object:nil];
     
 }
 
@@ -127,12 +128,10 @@
 - (void)addRefresh{
     __weak typeof (self) weakSelf = self;
     self.mainTableView.mj_header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        weakSelf.newsCurrentPage = 0;
-        weakSelf.boxOfficeCurrentPage = 0;
-        [weakSelf loadNewsMessage];
+        [weakSelf loadNewsData];
         [weakSelf loadBoxOfficeData];
     }];
-
+    [self.mainTableView.mj_header beginRefreshing];
 }
 
 - (void)setNavigationbar {
@@ -168,9 +167,6 @@
     
     
 }
-
-
-
 
 
 #pragma mark -- 懒加载
@@ -249,15 +245,31 @@
 
 #pragma mark -- 通知相关
 
+- (void)loadData {
+    [self loadNewsData];
+    [self loadBoxOfficeData];
+}
+
+- (void)loadNewsData {
+    self.newsCurrentPage = 0;
+    [self loadNewsMessage];
+    
+}
+
 - (void)loadMoreNewsData {
     self.newsCurrentPage++;
     [self loadNewsMessage];
     
 }
 
+- (void)loadBoxOfficeData {
+    self.boxOfficeCurrentPage = 0;
+    [self loadBoxOfficeMessage];
+}
+
 - (void)loadMoreBoxOfficeData {
     self.boxOfficeCurrentPage++;
-    [self loadBoxOfficeData];
+    [self loadBoxOfficeMessage];
     
 }
 
@@ -280,10 +292,7 @@
     [[ZYInformantionMainNetworingRequst shareInstance] loadNewsWithURL:urlStr withParameters:parameters completeHandle:^(BOOL success, NSString *error) {
         
         [weakSelf endRefresh];
-        weakSelf.requstCount += 1;
-        if (weakSelf.requstCount == 2) {
-            [BZProgressHUD hiddenFromeView:self.view];
-        }
+        
         if (success) {
             
             [weakSelf.mainTableView reloadData];
@@ -293,7 +302,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:ZYInformationUpdataNewsDataNotification object:nil];
 
         } else {
+            
             [BZProgressHUD showProgressToView:self.view text:error time:1];
+            
         }
         
         
@@ -302,7 +313,7 @@
 }
 
 
-- (void)loadBoxOfficeData {
+- (void)loadBoxOfficeMessage {
     
     __weak typeof(self) weakSelf = self;
 
@@ -321,10 +332,7 @@
         
         [weakSelf endRefresh];
         
-        weakSelf.requstCount += 1;
-        if (weakSelf.requstCount == 2) {
-            [BZProgressHUD hiddenFromeView:self.view];
-        }
+        
         
         if (success) {
             
@@ -334,8 +342,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:ZYInformationUpdataBoxOfficeNotification object:nil];
             
         } else {
-            [BZProgressHUD showProgressToView:self.view text:error time:1];
-
+            
+//            [BZProgressHUD showProgressToView:self.view text:error time:1];
+            
         }
 
         

@@ -30,6 +30,7 @@
     }else{
         self.navigationItem.title = @"影院详情";
     }
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.MoreCinemaTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self.cinemaList removeAllObjects];
@@ -110,13 +111,13 @@
             [self showHudMessage:@"您还没有关注影院哦~"];
         }
         [self.MoreCinemaTableView reloadData];
-        [_HUD hide:NO];
+        [_HUD hideAnimated:NO];
     } failure:^(NSError *error) {
         if (self.MoreCinemaTableView != nil) {
             [self.MoreCinemaTableView.mj_header endRefreshing];
         }
         [self showHudMessage:@"连接服务器失败!"];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 

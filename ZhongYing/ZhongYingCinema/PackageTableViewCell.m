@@ -121,9 +121,10 @@
 {
     [self.packageImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,goods.images]] placeholderImage:[UIImage imageNamed:@"cinema_package"]];
     //CGRectMake(68, 12, 200, 20)
-    CGSize detailSize = [goods.name sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+//    CGSize detailSize = [goods.name sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
     self.packageContent.text = goods.name;
-    self.packagePrice.text = [NSString stringWithFormat:@"%zd元",goods.price];
+    self.packagePrice.text = [NSString stringWithFormat:@"%.2f元",goods.price];
+    [self.packagePrice sizeToFit];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField

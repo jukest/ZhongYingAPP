@@ -282,12 +282,12 @@
             [self endRefresh];
             self.currentPage --;
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
         [self endRefresh];
         self.currentPage --;
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 
@@ -359,10 +359,10 @@
         NSString *urlStr;
         if (!_headerView.movieMessage.collectBtn.selected) {
             urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserMovieCollectionURL];
-            _collectHUD.labelText = @"收藏中...";
+            _collectHUD.label.text = @"收藏中...";
         }else{
             urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserCancelCollectionURL];
-            _collectHUD.labelText = @"取消收藏中...";
+            _collectHUD.label.text = @"取消收藏中...";
         }
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
         parameters[@"token"] = ApiTokenStr;
@@ -381,10 +381,10 @@
             }else{
                 [self showHudMessage:dataBack[@"message"]];
             }
-            [_collectHUD hide:YES];
+            [_collectHUD hideAnimated:YES];
         } failure:^(NSError *error) {
             [self showHudMessage:@"连接服务器失败!"];
-            [_collectHUD hide:YES];
+            [_collectHUD hideAnimated:YES];
         }];
     }
 }

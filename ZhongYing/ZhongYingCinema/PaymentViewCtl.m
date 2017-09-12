@@ -14,6 +14,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "RefundView.h"
+#import "ZYPaymentViewCtlHeader.h"
 
 @interface PaymentViewCtl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,RefundViewDelegate>
 {
@@ -23,12 +24,17 @@
     MBProgressHUD *_payHUD;
     float _remain;
     MBProgressHUD *_unlockHUD;
+    ZYPaymentViewCtlHeader *_moreGoodsHeaderView;
 
 }
 
 @property(nonatomic,strong) NSMutableDictionary *order;
 @property(nonatomic,strong) NSMutableArray *packageList;
 
+/**
+ 总价格
+ */
+@property(nonatomic,strong) NSString *last_price;
 @end
 
 @implementation PaymentViewCtl
@@ -106,9 +112,17 @@
 
 - (void)loadGoodsOrder
 {
+    __weak typeof(self) weakSelf = self;
     _HUD = [FanShuToolClass createMBProgressHUDWithText:@"加载中..." target:self];
     [self.view addSubview:_HUD];
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserGoodsOrderURL];
+    NSString *urlStr = @"";
+    if (self.moreGoods) {
+       urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserGoodsOrderNewURL];
+
+    } else {
+        urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserGoodsOrderURL];
+        
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;
     if (self.coupon_id != nil) {
@@ -119,35 +133,64 @@
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         NSLog(@"getGoodsOrder>>>>>>>>>%@",dataBack);
         if ([dataBack[@"code"] integerValue] == 0) {
-            NSDictionary *content = dataBack[@"content"];
-            if (![content[@"goods_order"][@"remain"] isEqual:[NSNull null]]) {
-                _remain = [content[@"goods_order"][@"remain"] floatValue];
-            }else{
-                _remain = 0;
-            }
-            self.order = [NSMutableDictionary dictionary];
-            self.order[@"price"] = content[@"goods_order"][@"last_price"];
-            self.order [@"name"] = content[@"goods_order"][@"name"];
-            self.order[@"cover"] = content[@"goods_order"][@"images"];
-            self.order[@"orderform_id"] = content[@"goods_order"][@"order_id"];
-            self.order[@"coupon_id"] = content[@"goods_order"][@"coupon_id"];
-            self.order[@"number"] = content[@"goods_order"][@"number"];
-            //for (NSInteger i = 1; i < [content[@"goods_order"] count]; i ++) {
+            if (weakSelf.moreGoods) {//多类商品
+                
+                NSDictionary *content = dataBack[@"content"];//数组
+                
+                //账户余额
+                if (![content[@"remain"] isEqual:[NSNull null]]) {
+                    _remain = [content[@"remain"] floatValue];
+                }else{
+                    _remain = 0;
+                }
+                
+                //商品信息
+                NSArray *goods = content[@"goods"];
+                for (int i = 0; i < goods.count; i ++) {
+                NSDictionary *dict = goods[i];
+                NSMutableDictionary *pack = [NSMutableDictionary dictionary];
+                pack[@"name"] = [NSString stringWithFormat:@"%@",dict[@"name"]];
+                pack[@"number"] = dict[@"number"];
+                pack[@"price"] = dict[@"price"];
+                [weakSelf.packageList addObject:pack];
+                }
+                
+                self.last_price = content[@"last_price"];
+                
+                weakSelf.order[@"orderform_id"] = content[@"order_id"];
+                weakSelf.order[@"coupon_id"] = content[@"coupon_id"];
+                
+            } else { //单类商品
+                
+                NSDictionary *content = dataBack[@"content"];
+                if (![content[@"goods_order"][@"remain"] isEqual:[NSNull null]]) {
+                    _remain = [content[@"goods_order"][@"remain"] floatValue];
+                }else{
+                    _remain = 0;
+                }
+                weakSelf.order[@"price"] = content[@"goods_order"][@"last_price"];
+                weakSelf.order [@"name"] = content[@"goods_order"][@"name"];
+                weakSelf.order[@"cover"] = content[@"goods_order"][@"images"];
+                weakSelf.order[@"orderform_id"] = content[@"goods_order"][@"order_id"];
+                weakSelf.order[@"coupon_id"] = content[@"goods_order"][@"coupon_id"];
+                weakSelf.order[@"number"] = content[@"goods_order"][@"number"];
+                //for (NSInteger i = 1; i < [content[@"goods_order"] count]; i ++) {
                 NSDictionary *dict = content[@"goods_order"];
                 NSMutableDictionary *pack = [NSMutableDictionary dictionary];
                 pack[@"name"] = [NSString stringWithFormat:@"￥%@",dict[@"last_price"]];
                 pack[@"detail"] = dict[@"name"];
-                [self.packageList addObject:pack];
-            //}
-            [self setupPaymentHeaderView];
+                [weakSelf.packageList addObject:pack];
+                //}
+            }
+            [weakSelf setupPaymentHeaderView];
         }else{
             if (![dataBack[@"message"] isEqual:[NSNull null]]) {
-                [self showHudMessage:dataBack[@"message"]];
+                [weakSelf showHudMessage:dataBack[@"message"]];
             }
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -213,14 +256,14 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"getAlipayProcessFromPayment" object:resultDic];
                 }];
             }
-            [_payHUD hide:YES];
+            [_payHUD hideAnimated:YES];
         }else{
             [self showHudMessage:dataBack[@"message"]];
-            [_payHUD hide:YES];
+            [_payHUD hideAnimated:YES];
         }
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
-        [_payHUD hide:YES];
+        [_payHUD hideAnimated:YES];
     }];
 }
 
@@ -251,7 +294,8 @@
 #pragma mark - getAlipayProcessFromPayment
 - (void)getAlipayProcessFromPayment:(NSNotification *)note
 {
-    [_payHUD show:YES];
+    
+    [_payHUD showAnimated:YES];
     NSDictionary *result = note.object;
     if ([result[@"resultStatus"] integerValue] == 9000) {
         // 上传支付宝购买回调到服务器
@@ -281,16 +325,16 @@
         } failure:^(NSError *error) {
             [self showHudMessage:@"连接服务器失败!"];
         }];
-        [_payHUD hide: YES];
+        [_payHUD hideAnimated: YES];
     }else if([result[@"resultStatus"] integerValue] == 6001){
         [self showAlertTitle:@"" message:@"用户取消了支付!"];
-        [_payHUD hide: YES];
+        [_payHUD hideAnimated: YES];
     }else if ([result[@"resultStatus"] integerValue] == 4000){
         [self showAlertTitle:@"支付结果" message:@"支付结果：失败!"];
-        [_payHUD hide: YES];
+        [_payHUD hideAnimated: YES];
     }else{
         [self showHudMessage:result[@"memo"]];
-        [_payHUD hide: YES];
+        [_payHUD hideAnimated: YES];
     }
 }
 
@@ -331,8 +375,16 @@
         height = -131;
         type = PaymentNotShowMovieMessage;
     }
-    _headerView = [[PaymentView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130 + height + 65 * self.packageList.count) type:type packageArr:self.packageList movieMessage:self.order];
-    self.paymentTableView.tableHeaderView = _headerView;
+    
+    if (self.moreGoods) {
+        _moreGoodsHeaderView = [[ZYPaymentViewCtlHeader alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, (self.packageList.count + 1) * 15 + (self.packageList.count + 1) * 10) packageArr:self.packageList lastPrice:self.last_price];
+        self.paymentTableView.tableHeaderView = _moreGoodsHeaderView;
+    } else {
+        
+        _headerView = [[PaymentView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 130 + height + 65 * self.packageList.count) type:type packageArr:self.packageList movieMessage:self.order];
+        self.paymentTableView.tableHeaderView = _headerView;
+    }
+    
     
     //[_headerView configPaymentHeaderViewWithInfo:self.order];
     CGFloat footerH = (ScreenHeight -64 > (_headerView.frame.size.height+19 +19 +3 *50 +110)) ? (ScreenHeight -64 - (_headerView.frame.size.height+19 +19 +3 *50)) : (19 + 110);
@@ -365,6 +417,13 @@
     return _packageList;
 }
 
+
+- (NSMutableDictionary *)order {
+    if (!_order) {
+        _order = [NSMutableDictionary dictionaryWithCapacity:10];
+    }
+    return _order;
+}
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -38,7 +38,7 @@
         self.backgroundImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(0, 0, 115, 135) image:[UIImage imageNamed:arr[arc4random() % 3]] tag:101];
         [couponView addSubview:self.backgroundImg];
         
-        self.amountLb = [FanShuToolClass createLabelWithFrame:CGRectMake(18, 35, 100, 50) text:[NSString stringWithFormat:@"%zd元",(arc4random() % 50 +1)] font:[UIFont systemFontOfSize:45] textColor:[UIColor whiteColor] alignment:NSTextAlignmentCenter];
+        self.amountLb = [FanShuToolClass createLabelWithFrame:CGRectMake(18, 35, 130, 50) text:[NSString stringWithFormat:@"%zd元",(arc4random() % 50 +1)] font:[UIFont systemFontOfSize:35] textColor:[UIColor whiteColor] alignment:NSTextAlignmentCenter];
         self.amountLb.center = CGPointMake(57.5, 18 +35);
         [self.backgroundImg addSubview:self.amountLb];
         
@@ -78,13 +78,13 @@
 
 - (void)configCellWithModel:(Coupon *)coupon
 {
-    NSString *price = [NSString stringWithFormat:@"%@元",[coupon.price componentsSeparatedByString:@"."][0]];
+    NSString *price = [NSString stringWithFormat:@"%@元",coupon.price];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:price];
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[price rangeOfString:@"元"]];
     //[str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [price length])];
     self.amountLb.attributedText = str;
     
-    CGSize amountSize = [[coupon.price componentsSeparatedByString:@"."][0] sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:45]}];
+    CGSize amountSize = [coupon.price sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:40]}];
     CGSize size = [@"元" sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:20]}];
     _lineView.frame = CGRectMake(0, 0, amountSize.width +size.width, 2);
     _lineView.center = CGPointMake(57.5, 18 +35 +20 +2);;

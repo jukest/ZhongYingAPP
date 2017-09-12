@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"投诉统计";
+    self.navigationItem.title = @"反馈统计";
     _currentPage = 0;
     
     [self loadUserMyComplaint];
@@ -71,7 +71,7 @@
             }
         }else if([dataBack[@"code"] integerValue] == 46005){
             if (self.currentPage == 0) {
-                [self showHudMessage:@"你还没有投诉信息!"];
+                [self showHudMessage:@"你还没有反馈信息!"];
                 [self.complaintTableView reloadData];
             }else{
                 [self showHudMessage:@"没有更多了!"];

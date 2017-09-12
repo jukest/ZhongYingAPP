@@ -56,6 +56,16 @@ UIKIT_EXTERN CGFloat const InformationViewControllerTableViewHeaderImgHeight;
 /** 资讯首页tableViewcell中图片的宽度 */
 UIKIT_EXTERN CGFloat const InformationViewControllerTableViewCellImgWidth;
 
+/** 票房头部视图 日历相关视图的 高度 */
+UIKIT_EXTERN CGFloat const ZYInformationBoxOfficeHeaderViewCalendarViewHeigth;
+
+/** 票房头部视图 票房相关视图的 高度 */
+UIKIT_EXTERN CGFloat const ZYInformationBoxOfficeHeaderViewBoxOfficeViewHeigth;
+/** 票房 表格视图 cell 左边label的 距离左边的边距 */
+UIKIT_EXTERN CGFloat const ZYInformationBoxOfficeHeaderViewCellLeftLabelLeftMarge;
+/** 票房 表格视图 cell 左边label的 宽度 */
+UIKIT_EXTERN CGFloat const ZYInformationBoxOfficeHeaderViewCellLeftLabelWidth;
+
 #pragma mark -- 商场常量
 
 /** 商场首页cell的高度 */
@@ -90,6 +100,9 @@ UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVier
 
 /** 商城确认订单页tableViewSectionFooter上label的高度  */
 UIKIT_EXTERN CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight;
+
+
+
 
 #pragma mark -- ZYConfirmTicketOrderViewController 常量
 
@@ -131,6 +144,9 @@ UIKIT_EXTERN CGFloat const ZYConfirmOrderTableViewHeaderMarge;
 
 /** 确认订单详情 头部 虚线距离底部的高度 */
 UIKIT_EXTERN CGFloat const ZYConfirmOrderTableViewHeaderXuXianBottomHeight;
+
+
+
 
 
 /** 我的枚举 */

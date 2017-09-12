@@ -34,9 +34,11 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor clearColor];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView registerClass:[InfoTableViewCell class] forCellReuseIdentifier:@"informationTableViewCell"];
     [self.tableView registerClass:[BoxOfficeTableViewCell class] forCellReuseIdentifier:@"BoxOfficeTableViewCell"];
+    [self.tableView registerClass:[ZYInformationBoxOfficeCell class] forCellReuseIdentifier:@"ZYInformationBoxOfficeCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self addSubview:self.tableView];

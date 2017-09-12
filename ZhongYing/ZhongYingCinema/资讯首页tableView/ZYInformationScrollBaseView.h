@@ -10,6 +10,7 @@
 #import "ZYInformantionMainNetworingRequst.h"
 #import "InfoTableViewCell.h"
 #import "BoxOfficeTableViewCell.h"
+#import "ZYInformationBoxOfficeCell.h"
 
 
 typedef void(^ZYInformationScrollBaseViewBlock)(UITableView *,NSInteger *selectIndex);

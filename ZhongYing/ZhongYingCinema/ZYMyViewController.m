@@ -173,9 +173,11 @@
         _logoutView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.moreListView.frame), ScreenWidth,self.scrollView.contentSize.height - CGRectGetMaxY(self.moreListView.frame))];
         _logoutView.backgroundColor = [UIColor whiteColor];
         
+        
         UIButton *loginOutBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(12, 30, self.view.width -24, 50) title:@"退出登录" titleColor:[UIColor whiteColor] cornerRadius:3.0 font:[UIFont systemFontOfSize:18] backgroundColor:Color(252, 186, 0, 1.0) target:self action:@selector(logoutBtnAction:) tag:13];
         self.logoutBtn = loginOutBtn;
         [_logoutView addSubview:loginOutBtn];
+        
     }
     return _logoutView;
 }
@@ -289,6 +291,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%.2f",[content[@"balance"][@"remain"] floatValue]] forKey:@"myremain"];// 余额
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%zd",[content[@"balance"][@"score"] integerValue]] forKey:@"myscore"];// 积分
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%zd",[content[@"comment"] integerValue]] forKey:@"mycomment"];// 评论
+            self.uplistView.comment = [NSString stringWithFormat:@"%zd",[content[@"comment"] integerValue]];
+            
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
@@ -387,6 +391,8 @@
     //umeng统计账号登出需调用此接口，调用之后不再发送账号相关内容。
     [MobClick profileSignOff];
     [self showHudMessage:@"退出成功"];
+    
+    self.uplistView.comment = nil;
     [self.myInfoHeaderView removeFromSuperview];
     [self.myLoginHeaderView removeFromSuperview];
     [self addHeaderView];
@@ -409,6 +415,12 @@
     self.lineViwe.frame = CGRectMake(0, CGRectGetMaxY(self.uplistView.frame), ScreenWidth, self.lineViwe.height);
     self.moreListView.frame = CGRectMake(0, CGRectGetMaxY(self.lineViwe.frame), ScreenWidth, self.moreListView.height);
     self.logoutView.frame = CGRectMake(0, CGRectGetMaxY(self.moreListView.frame), ScreenWidth, self.logoutView.height);
+    if ([LoginYesOrNoStr isEqualToString:@"YES"]) {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.logoutView.frame));
+    } else {
+        self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.moreListView.frame));
+    
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

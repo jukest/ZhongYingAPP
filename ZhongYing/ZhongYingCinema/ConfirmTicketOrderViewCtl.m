@@ -30,7 +30,7 @@
 @property(nonatomic,strong) NSMutableArray *souvenirList; //!<< 推荐商品
 @property(nonatomic,strong) NSArray *selectCou;
 @property(nonatomic,copy) NSString *souvenirStr; //!<< json形式的推荐商品,例如[{"id":7,"number":1}]
-@property(nonatomic,assign) NSInteger couponPrice; //!<< 优惠价格
+@property(nonatomic,assign) float couponPrice; //!<< 优惠价格
 @property(nonatomic,assign) float souvenirPrice; //!<< 推荐商品价格
 
 

@@ -62,7 +62,6 @@
     [self addSubview:view];
     
     
-    
    
     CGFloat y = 0;
     CGFloat marge = 10;
@@ -94,7 +93,7 @@
 //    [scrollView addSubview:movieDetailsView];
     
     //电影名
-    self.nameLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, marge, view.width - self.countdownLb.width - marge, 20)
+    self.nameLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, marge, view.width, 20)
                                                    text:self.dic[@"name"]
                                                    font:[UIFont systemFontOfSize:20]
                                               textColor:Color(26, 26, 26, 1.0)

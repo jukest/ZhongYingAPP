@@ -81,12 +81,18 @@
         self.layer.borderWidth = 1;
         
         [self setupUI];
+        
+        //添加 选择影院之后 的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshDataNotification:) name:SelectedCimemaUpdataMainCimemaDataNotification object:nil];
     }
     
     return self;
     
 }
 
+- (void)refreshDataNotification:(NSNotification *)notification {
+    [self btnAction:self.buttons[0]];
+}
 
 - (void)setupUI {
     

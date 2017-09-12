@@ -282,7 +282,7 @@
                 NSData *data = [NSJSONSerialization dataWithJSONObject:goods options:NSJSONWritingPrettyPrinted error:nil];
                 NSString *goods_info = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 NSLog(@"seat_id=%@ ,goods_info = %@",seat_id,goods_info);
-                confirmOrder.hasSnack = YES;
+//                confirmOrder.hasSnack = YES;
                 confirmOrder.goods_info = goods_info;
             }else{
                 NSLog(@"seat_id=%@",seat_id);

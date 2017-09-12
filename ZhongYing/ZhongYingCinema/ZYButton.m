@@ -27,7 +27,7 @@
     self.imageView.frame = CGRectMake(x, y, width, width);
     self.imageView.backgroundColor = [UIColor clearColor];
     
-    CGFloat width1 = self.width - (10 * 2);
+    CGFloat width1 = self.width - (5 * 2);
     y = y + width ;
     x = 5;
     self.titleLabel.frame = CGRectMake(x, y, width1, self.height - y);

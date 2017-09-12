@@ -33,7 +33,7 @@
 @property(nonatomic,strong) NSMutableArray *souvenirList; //!<< 推荐商品
 @property(nonatomic,strong) NSArray *selectCou;
 @property(nonatomic,copy) NSString *souvenirStr; //!<< json形式的推荐商品,例如[{"id":7,"number":1}]
-@property(nonatomic,assign) NSInteger couponPrice; //!<< 优惠价格
+@property(nonatomic,assign) float couponPrice; //!<< 优惠价格
 @property(nonatomic,assign) float souvenirPrice; //!<< 推荐商品价格
 
 
@@ -219,11 +219,11 @@
 
         if (indexPath.row == 0) {
             cell.textLabel.text = @"优惠券";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"减%zd元",self.couponPrice];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"减%.2f元",self.couponPrice];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else {
             cell.textLabel.text = @"票价";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%zd元",[self.film[@"market_price"] integerValue] * self.selectedSeats.count];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f元",[self.film[@"market_price"] floatValue] * self.selectedSeats.count];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -294,7 +294,8 @@
         if (indexPath.row == 0) {
             // 优惠券
             CouponViewCtl *coupon = [[CouponViewCtl alloc] init];
-            coupon.hasSnack = self.hasSnack;
+            coupon.hasSnack = NO; //[self judgmentHasSnack]; //判断是否有小吃
+            
             coupon.hasTicket = YES;
             coupon.coupon_ids = self.selectCou;
             __weak typeof(self) weak = self;
@@ -302,7 +303,7 @@
                 self.couponPrice = 0;
                 NSMutableArray *couponArr = [NSMutableArray array];
                 for (Coupon *c in coupons) {
-                    self.couponPrice = self.couponPrice +[c.price integerValue];
+                    self.couponPrice = self.couponPrice +[c.price floatValue];
                     [couponArr addObject:c.id];
                 }
 //                [weak.couponLb setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
@@ -322,37 +323,19 @@
     }
 }
 
-
-
-#pragma mark - RefundViewDelegate
-- (void)gotoRefundViewEvents:(NSInteger)tag
-{
-    _unlockHUD = [FanShuToolClass  createMBProgressHUDWithText:@"座位解锁中..." target:self];
-    [self.view addSubview:_unlockHUD];
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserUnlockURL];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"token"] = ApiTokenStr;
-    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
-    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
-        NSLog(@"getUnlock>>>>>>>>>>>>>>>>>>>>>%@",dataBack);
-        NSDictionary *content = dataBack[@"content"];
-        if ([dataBack[@"code"] integerValue] == 0) {
-            if ([content[@"result"] boolValue]) {
-                
-                NSLog(@"解锁成功!");
-            }
-        }else{
-            NSLog(@"%@",dataBack[@"message"]);
+- (BOOL)judgmentHasSnack {
+    BOOL snack = NO;
+    
+    for (int i = 0; i < self.goodsList.count; i++) {
+        Goods *good = self.goodsList[i];
+        if (good.selectedNumber != 0) {
+            return YES;
         }
-        [_timer invalidate];
-        [self.navigationController popViewControllerAnimated:YES];
-        [_unlockHUD hideAnimated:YES];
-    } failure:^(NSError *error) {
-        NSLog(@"连接服务器失败!error = %@",error);
-        [self showHudMessage:@"解锁失败!"];
-        [_unlockHUD hideAnimated:YES];
-    }];
+    }
+    
+    return snack;
 }
+
 
 
 #pragma mark - Help Methods
@@ -405,16 +388,12 @@
     parameters[@"token"] = ApiTokenStr;
     parameters[@"film_id"] = @(self.film_id);
     parameters[@"seat_id"] = self.seat_id;
-   
-   
-    
+
     NSMutableArray *goods = [NSMutableArray arrayWithCapacity:10];
     
-
     for (int i = 0; i < self.goodsList.count; i++) {
         Goods *good = self.goodsList[i];
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-
         if (good.selectedNumber != 0) {
             
             dict[@"id"] = @(good.id);

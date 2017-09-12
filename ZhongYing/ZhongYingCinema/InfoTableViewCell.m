@@ -7,6 +7,7 @@
 //
 
 #import "InfoTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation InfoTableViewCell
 
@@ -72,7 +73,8 @@
 
 - (void)configCellWithModel:(News *)news
 {
-    [self.headImg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,news.cover]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    [self.headImg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,news.cover]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,news.cover]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     CGSize titleSize = [FanShuToolClass createString:news.title font:[UIFont systemFontOfSize:16 * widthFloat] lineSpacing:3 maxSize:CGSizeMake(ScreenWidth - InformationViewControllerTableViewCellImgWidth * widthFloat, ScreenHeight)];
     

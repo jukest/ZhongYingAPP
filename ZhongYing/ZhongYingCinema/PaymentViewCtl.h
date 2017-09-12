@@ -19,4 +19,6 @@
 @property(nonatomic,copy) NSString *seats;
 @property(nonatomic,assign) BOOL isTicket;
 
+@property (nonatomic,assign) BOOL moreGoods;
+
 @end

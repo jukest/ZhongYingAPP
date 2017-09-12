@@ -35,7 +35,7 @@
 
 - (void)setUpUI {
     
-    CGFloat width = self.width / self.titles.count - 2 * (self.titles.count - 1);
+    CGFloat width = (self.width - 2 * (self.titles.count - 1)) / self.titles.count ;
     
     
     for (int i = 0; i<self.titles.count; i++) {
@@ -55,6 +55,20 @@
         [self.btns addObject:btn];
 
     }
+}
+
+- (void)setComment:(NSString *)comment {
+    _comment = comment;
+    UIButton *commentBtn = self.btns[self.titles.count - 1];
+    if (comment) {
+        NSString *commentStr = [NSString  stringWithFormat:@"待评论(%@)",comment];
+        [commentBtn setTitle:commentStr forState:UIControlStateNormal];
+    } else {
+        NSString *commentStr = [NSString  stringWithFormat:@"待评论"];
+        [commentBtn setTitle:commentStr forState:UIControlStateNormal];
+
+    }
+    
 }
 
 - (void)myViewClickAction:(UIButton *)sender {

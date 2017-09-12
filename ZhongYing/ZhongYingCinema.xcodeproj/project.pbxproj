@@ -74,12 +74,14 @@
 		18397B661F57AAA10003CA20 /* ZYInformationBoxOfficeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B651F57AAA10003CA20 /* ZYInformationBoxOfficeView.m */; };
 		18397B691F57B2D30003CA20 /* ZYInformationScrollBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */; };
 		18397B741F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */; };
+		183C4F051F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C4F041F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m */; };
 		1846F7291F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */; };
 		184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC6251F5012C6006A86BC /* ZYMallViewController.m */; };
 		185E94C61F4AABE300F364F2 /* MovePictureSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */; };
 		185E94CD1F4AACB700F364F2 /* SCAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C91F4AACB700F364F2 /* SCAdCollectionViewLayout.m */; };
 		185E94CE1F4AACB700F364F2 /* SCAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94CB1F4AACB700F364F2 /* SCAdView.m */; };
 		185E94D11F4AB0C900F364F2 /* MovePictureSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94D01F4AB0C900F364F2 /* MovePictureSliderCell.m */; };
+		185F3E101F623E2E00067B1F /* ZYPaymentViewCtlHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F3E0F1F623E2E00067B1F /* ZYPaymentViewCtlHeader.m */; };
 		1862AF551F4419BB0003C5BF /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862AF541F4419BB0003C5BF /* MainTableViewController.m */; };
 		1862AF581F441A080003C5BF /* MainTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1862AF571F441A080003C5BF /* MainTableView.m */; };
 		18A0016D1F53B18D00F1EEA2 /* ZYFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A0016C1F53B18D00F1EEA2 /* ZYFoodViewController.m */; };
@@ -87,6 +89,29 @@
 		18A001741F53BDE500F1EEA2 /* WXMoveBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */; };
 		18A001771F53E58600F1EEA2 /* ZYMallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A001761F53E58600F1EEA2 /* ZYMallCell.m */; };
 		18A8EF3B1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */; };
+		18A9F8731F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F8721F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.m */; };
+		18A9F8761F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F8751F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.m */; };
+		18A9F8791F6120EF008DDF9B /* ZYInformationBoxOfficeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F8781F6120EF008DDF9B /* ZYInformationBoxOfficeCell.m */; };
+		18A9F97D1F61387C008DDF9B /* FSCalendar+Deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F95C1F61387C008DDF9B /* FSCalendar+Deprecated.m */; };
+		18A9F97E1F61387C008DDF9B /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F95E1F61387C008DDF9B /* FSCalendar.m */; };
+		18A9F97F1F61387C008DDF9B /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9601F61387C008DDF9B /* FSCalendarAppearance.m */; };
+		18A9F9801F61387C008DDF9B /* FSCalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9621F61387C008DDF9B /* FSCalendarCalculator.m */; };
+		18A9F9811F61387C008DDF9B /* FSCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9641F61387C008DDF9B /* FSCalendarCell.m */; };
+		18A9F9821F61387C008DDF9B /* FSCalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9661F61387C008DDF9B /* FSCalendarCollectionView.m */; };
+		18A9F9831F61387C008DDF9B /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9681F61387C008DDF9B /* FSCalendarCollectionViewLayout.m */; };
+		18A9F9841F61387C008DDF9B /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F96A1F61387C008DDF9B /* FSCalendarConstants.m */; };
+		18A9F9851F61387C008DDF9B /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F96C1F61387C008DDF9B /* FSCalendarDelegationFactory.m */; };
+		18A9F9861F61387C008DDF9B /* FSCalendarDelegationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F96E1F61387C008DDF9B /* FSCalendarDelegationProxy.m */; };
+		18A9F9871F61387C008DDF9B /* FSCalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9711F61387C008DDF9B /* FSCalendarExtensions.m */; };
+		18A9F9881F61387C008DDF9B /* FSCalendarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9731F61387C008DDF9B /* FSCalendarHeaderView.m */; };
+		18A9F9891F61387C008DDF9B /* FSCalendarScopeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9751F61387C008DDF9B /* FSCalendarScopeHandle.m */; };
+		18A9F98A1F61387C008DDF9B /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9771F61387C008DDF9B /* FSCalendarStickyHeader.m */; };
+		18A9F98B1F61387C008DDF9B /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9791F61387C008DDF9B /* FSCalendarTransitionCoordinator.m */; };
+		18A9F98C1F61387C008DDF9B /* FSCalendarWeekdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F97B1F61387C008DDF9B /* FSCalendarWeekdayView.m */; };
+		18A9F98D1F61387C008DDF9B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18A9F97C1F61387C008DDF9B /* Info.plist */; };
+		18A9F9901F613BD5008DDF9B /* FullScreenExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F98F1F613BD5008DDF9B /* FullScreenExampleViewController.m */; };
+		18A9F9931F613BE6008DDF9B /* LunarFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9921F613BE6008DDF9B /* LunarFormatter.m */; };
+		18C146871F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C146861F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m */; };
 		342337A51DE3D44C005069D2 /* MyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A41DE3D44C005069D2 /* MyLoginView.m */; };
 		342337A81DE3D87B005069D2 /* LoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A71DE3D87B005069D2 /* LoginData.m */; };
 		342337AF1DE3DF7E005069D2 /* RegisterViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337AE1DE3DF7E005069D2 /* RegisterViewCtl.m */; };
@@ -548,6 +573,8 @@
 		18397B681F57B2D30003CA20 /* ZYInformationScrollBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationScrollBaseView.m; sourceTree = "<group>"; };
 		18397B721F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformantionMainNetworingRequst.h; sourceTree = "<group>"; };
 		18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformantionMainNetworingRequst.m; sourceTree = "<group>"; };
+		183C4F031F5F893F00763631 /* ZYCinemaMainNetworkingRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCinemaMainNetworkingRequst.h; sourceTree = "<group>"; };
+		183C4F041F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCinemaMainNetworkingRequst.m; sourceTree = "<group>"; };
 		1846F7271F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYConfirmTicketOrderViewController.h; sourceTree = "<group>"; };
 		1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConfirmTicketOrderViewController.m; sourceTree = "<group>"; };
 		184DC6241F5012C6006A86BC /* ZYMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallViewController.h; sourceTree = "<group>"; };
@@ -561,6 +588,8 @@
 		185E94CC1F4AACB700F364F2 /* SCAdViewRenderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAdViewRenderDelegate.h; sourceTree = "<group>"; };
 		185E94CF1F4AB0C900F364F2 /* MovePictureSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePictureSliderCell.h; sourceTree = "<group>"; };
 		185E94D01F4AB0C900F364F2 /* MovePictureSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovePictureSliderCell.m; sourceTree = "<group>"; };
+		185F3E0E1F623E2E00067B1F /* ZYPaymentViewCtlHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYPaymentViewCtlHeader.h; sourceTree = "<group>"; };
+		185F3E0F1F623E2E00067B1F /* ZYPaymentViewCtlHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYPaymentViewCtlHeader.m; sourceTree = "<group>"; };
 		1862AF531F4419BB0003C5BF /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		1862AF541F4419BB0003C5BF /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		1862AF561F441A080003C5BF /* MainTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainTableView.h; path = ../MainTableView.h; sourceTree = "<group>"; };
@@ -575,6 +604,51 @@
 		18A001761F53E58600F1EEA2 /* ZYMallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallCell.m; sourceTree = "<group>"; };
 		18A8EF391F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYConfirmOrderTableViewHeader.h; sourceTree = "<group>"; };
 		18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConfirmOrderTableViewHeader.m; sourceTree = "<group>"; };
+		18A9F8711F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformationBoxOfficeHeaderView.h; sourceTree = "<group>"; };
+		18A9F8721F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationBoxOfficeHeaderView.m; sourceTree = "<group>"; };
+		18A9F8741F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformationBoxOfficeTableViewSectionHeader.h; sourceTree = "<group>"; };
+		18A9F8751F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationBoxOfficeTableViewSectionHeader.m; sourceTree = "<group>"; };
+		18A9F8771F6120EF008DDF9B /* ZYInformationBoxOfficeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInformationBoxOfficeCell.h; sourceTree = "<group>"; };
+		18A9F8781F6120EF008DDF9B /* ZYInformationBoxOfficeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInformationBoxOfficeCell.m; sourceTree = "<group>"; };
+		18A9F95C1F61387C008DDF9B /* FSCalendar+Deprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FSCalendar+Deprecated.m"; sourceTree = "<group>"; };
+		18A9F95D1F61387C008DDF9B /* FSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendar.h; sourceTree = "<group>"; };
+		18A9F95E1F61387C008DDF9B /* FSCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendar.m; sourceTree = "<group>"; };
+		18A9F95F1F61387C008DDF9B /* FSCalendarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarAppearance.h; sourceTree = "<group>"; };
+		18A9F9601F61387C008DDF9B /* FSCalendarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarAppearance.m; sourceTree = "<group>"; };
+		18A9F9611F61387C008DDF9B /* FSCalendarCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCalculator.h; sourceTree = "<group>"; };
+		18A9F9621F61387C008DDF9B /* FSCalendarCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCalculator.m; sourceTree = "<group>"; };
+		18A9F9631F61387C008DDF9B /* FSCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCell.h; sourceTree = "<group>"; };
+		18A9F9641F61387C008DDF9B /* FSCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCell.m; sourceTree = "<group>"; };
+		18A9F9651F61387C008DDF9B /* FSCalendarCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionView.h; sourceTree = "<group>"; };
+		18A9F9661F61387C008DDF9B /* FSCalendarCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionView.m; sourceTree = "<group>"; };
+		18A9F9671F61387C008DDF9B /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
+		18A9F9681F61387C008DDF9B /* FSCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
+		18A9F9691F61387C008DDF9B /* FSCalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarConstants.h; sourceTree = "<group>"; };
+		18A9F96A1F61387C008DDF9B /* FSCalendarConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarConstants.m; sourceTree = "<group>"; };
+		18A9F96B1F61387C008DDF9B /* FSCalendarDelegationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDelegationFactory.h; sourceTree = "<group>"; };
+		18A9F96C1F61387C008DDF9B /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
+		18A9F96D1F61387C008DDF9B /* FSCalendarDelegationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDelegationProxy.h; sourceTree = "<group>"; };
+		18A9F96E1F61387C008DDF9B /* FSCalendarDelegationProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarDelegationProxy.m; sourceTree = "<group>"; };
+		18A9F96F1F61387C008DDF9B /* FSCalendarDynamicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDynamicHeader.h; sourceTree = "<group>"; };
+		18A9F9701F61387C008DDF9B /* FSCalendarExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarExtensions.h; sourceTree = "<group>"; };
+		18A9F9711F61387C008DDF9B /* FSCalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarExtensions.m; sourceTree = "<group>"; };
+		18A9F9721F61387C008DDF9B /* FSCalendarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarHeaderView.h; sourceTree = "<group>"; };
+		18A9F9731F61387C008DDF9B /* FSCalendarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarHeaderView.m; sourceTree = "<group>"; };
+		18A9F9741F61387C008DDF9B /* FSCalendarScopeHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarScopeHandle.h; sourceTree = "<group>"; };
+		18A9F9751F61387C008DDF9B /* FSCalendarScopeHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarScopeHandle.m; sourceTree = "<group>"; };
+		18A9F9761F61387C008DDF9B /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarStickyHeader.h; sourceTree = "<group>"; };
+		18A9F9771F61387C008DDF9B /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarStickyHeader.m; sourceTree = "<group>"; };
+		18A9F9781F61387C008DDF9B /* FSCalendarTransitionCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarTransitionCoordinator.h; sourceTree = "<group>"; };
+		18A9F9791F61387C008DDF9B /* FSCalendarTransitionCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarTransitionCoordinator.m; sourceTree = "<group>"; };
+		18A9F97A1F61387C008DDF9B /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarWeekdayView.h; sourceTree = "<group>"; };
+		18A9F97B1F61387C008DDF9B /* FSCalendarWeekdayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarWeekdayView.m; sourceTree = "<group>"; };
+		18A9F97C1F61387C008DDF9B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18A9F98E1F613BD5008DDF9B /* FullScreenExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenExampleViewController.h; sourceTree = "<group>"; };
+		18A9F98F1F613BD5008DDF9B /* FullScreenExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenExampleViewController.m; sourceTree = "<group>"; };
+		18A9F9911F613BE6008DDF9B /* LunarFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunarFormatter.h; sourceTree = "<group>"; };
+		18A9F9921F613BE6008DDF9B /* LunarFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunarFormatter.m; sourceTree = "<group>"; };
+		18C146851F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYZYMemberViewControllerTableViewHeaderView.h; sourceTree = "<group>"; };
+		18C146861F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYZYMemberViewControllerTableViewHeaderView.m; sourceTree = "<group>"; };
 		342337A31DE3D44C005069D2 /* MyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLoginView.h; sourceTree = "<group>"; };
 		342337A41DE3D44C005069D2 /* MyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLoginView.m; sourceTree = "<group>"; };
 		342337A61DE3D87B005069D2 /* LoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginData.h; sourceTree = "<group>"; };
@@ -1530,6 +1604,10 @@
 				18397B621F57AA3F0003CA20 /* ZYInformationNewsView.m */,
 				18397B641F57AAA10003CA20 /* ZYInformationBoxOfficeView.h */,
 				18397B651F57AAA10003CA20 /* ZYInformationBoxOfficeView.m */,
+				18A9F8711F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.h */,
+				18A9F8721F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.m */,
+				18A9F8741F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.h */,
+				18A9F8751F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.m */,
 			);
 			path = "资讯首页tableView";
 			sourceTree = "<group>";
@@ -1537,6 +1615,7 @@
 		18397B701F57BCC40003CA20 /* NetworkingRequstManager */ = {
 			isa = PBXGroup;
 			children = (
+				183C4F021F5F88D600763631 /* ZYCinema */,
 				18397B711F57BCC40003CA20 /* ZYInformation */,
 			);
 			path = NetworkingRequstManager;
@@ -1549,6 +1628,15 @@
 				18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */,
 			);
 			path = ZYInformation;
+			sourceTree = "<group>";
+		};
+		183C4F021F5F88D600763631 /* ZYCinema */ = {
+			isa = PBXGroup;
+			children = (
+				183C4F031F5F893F00763631 /* ZYCinemaMainNetworkingRequst.h */,
+				183C4F041F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m */,
+			);
+			path = ZYCinema;
 			sourceTree = "<group>";
 		};
 		184DC6231F501254006A86BC /* 商城 */ = {
@@ -1602,6 +1690,8 @@
 				18A001731F53BDE500F1EEA2 /* WXMoveBtn.m */,
 				18A001751F53E58600F1EEA2 /* ZYMallCell.h */,
 				18A001761F53E58600F1EEA2 /* ZYMallCell.m */,
+				18C146851F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.h */,
+				18C146861F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m */,
 			);
 			path = "商城_view";
 			sourceTree = "<group>";
@@ -1613,6 +1703,48 @@
 				18A8EF3A1F5CE5E500A1B0CA /* ZYConfirmOrderTableViewHeader.m */,
 			);
 			path = Order;
+			sourceTree = "<group>";
+		};
+		18A9F95B1F61387C008DDF9B /* FSCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				18A9F9911F613BE6008DDF9B /* LunarFormatter.h */,
+				18A9F9921F613BE6008DDF9B /* LunarFormatter.m */,
+				18A9F95C1F61387C008DDF9B /* FSCalendar+Deprecated.m */,
+				18A9F95D1F61387C008DDF9B /* FSCalendar.h */,
+				18A9F95E1F61387C008DDF9B /* FSCalendar.m */,
+				18A9F95F1F61387C008DDF9B /* FSCalendarAppearance.h */,
+				18A9F9601F61387C008DDF9B /* FSCalendarAppearance.m */,
+				18A9F9611F61387C008DDF9B /* FSCalendarCalculator.h */,
+				18A9F9621F61387C008DDF9B /* FSCalendarCalculator.m */,
+				18A9F9631F61387C008DDF9B /* FSCalendarCell.h */,
+				18A9F9641F61387C008DDF9B /* FSCalendarCell.m */,
+				18A9F9651F61387C008DDF9B /* FSCalendarCollectionView.h */,
+				18A9F9661F61387C008DDF9B /* FSCalendarCollectionView.m */,
+				18A9F9671F61387C008DDF9B /* FSCalendarCollectionViewLayout.h */,
+				18A9F9681F61387C008DDF9B /* FSCalendarCollectionViewLayout.m */,
+				18A9F9691F61387C008DDF9B /* FSCalendarConstants.h */,
+				18A9F96A1F61387C008DDF9B /* FSCalendarConstants.m */,
+				18A9F96B1F61387C008DDF9B /* FSCalendarDelegationFactory.h */,
+				18A9F96C1F61387C008DDF9B /* FSCalendarDelegationFactory.m */,
+				18A9F96D1F61387C008DDF9B /* FSCalendarDelegationProxy.h */,
+				18A9F96E1F61387C008DDF9B /* FSCalendarDelegationProxy.m */,
+				18A9F96F1F61387C008DDF9B /* FSCalendarDynamicHeader.h */,
+				18A9F9701F61387C008DDF9B /* FSCalendarExtensions.h */,
+				18A9F9711F61387C008DDF9B /* FSCalendarExtensions.m */,
+				18A9F9721F61387C008DDF9B /* FSCalendarHeaderView.h */,
+				18A9F9731F61387C008DDF9B /* FSCalendarHeaderView.m */,
+				18A9F9741F61387C008DDF9B /* FSCalendarScopeHandle.h */,
+				18A9F9751F61387C008DDF9B /* FSCalendarScopeHandle.m */,
+				18A9F9761F61387C008DDF9B /* FSCalendarStickyHeader.h */,
+				18A9F9771F61387C008DDF9B /* FSCalendarStickyHeader.m */,
+				18A9F9781F61387C008DDF9B /* FSCalendarTransitionCoordinator.h */,
+				18A9F9791F61387C008DDF9B /* FSCalendarTransitionCoordinator.m */,
+				18A9F97A1F61387C008DDF9B /* FSCalendarWeekdayView.h */,
+				18A9F97B1F61387C008DDF9B /* FSCalendarWeekdayView.m */,
+				18A9F97C1F61387C008DDF9B /* Info.plist */,
+			);
+			path = FSCalendar;
 			sourceTree = "<group>";
 		};
 		342337A91DE3DF49005069D2 /* 登录、注册、注册协议 */ = {
@@ -1690,6 +1822,7 @@
 		347F248E1DDD523A00CD41B1 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				18A9F95B1F61387C008DDF9B /* FSCalendar */,
 				18397B591F579F010003CA20 /* 滚动嵌套base */,
 				18123BC01F4BFE7800A42EDB /* Map */,
 				18123BAD1F4BC72A00A42EDB /* CustomControl */,
@@ -1885,6 +2018,8 @@
 			children = (
 				18397B5A1F57A0ED0003CA20 /* ZYInformationMaintViewController.h */,
 				18397B5B1F57A0ED0003CA20 /* ZYInformationMaintViewController.m */,
+				18A9F98E1F613BD5008DDF9B /* FullScreenExampleViewController.h */,
+				18A9F98F1F613BD5008DDF9B /* FullScreenExampleViewController.m */,
 				3480D2A61DDA9B2400671769 /* InformationViewController.h */,
 				3480D2A71DDA9B2400671769 /* InformationViewController.m */,
 				E4EEF02A1DE5BAA10021B949 /* 资讯详情 */,
@@ -3102,6 +3237,8 @@
 			children = (
 				E42AF42A1DE442D600F67C87 /* BoxOfficeTableViewCell.h */,
 				E42AF42B1DE442D600F67C87 /* BoxOfficeTableViewCell.m */,
+				18A9F8771F6120EF008DDF9B /* ZYInformationBoxOfficeCell.h */,
+				18A9F8781F6120EF008DDF9B /* ZYInformationBoxOfficeCell.m */,
 			);
 			name = "票房cell";
 			sourceTree = "<group>";
@@ -3650,6 +3787,8 @@
 			children = (
 				E4E3AB011EB18BD200E916AA /* PaymentView.h */,
 				E4E3AB021EB18BD200E916AA /* PaymentView.m */,
+				185F3E0E1F623E2E00067B1F /* ZYPaymentViewCtlHeader.h */,
+				185F3E0F1F623E2E00067B1F /* ZYPaymentViewCtlHeader.m */,
 				E4E3AB041EB19CC800E916AA /* 订单影片详情 */,
 			);
 			name = "支付内容";
@@ -3876,6 +4015,7 @@
 				34F23A511EC152E300A027E7 /* mapapi.bundle in Resources */,
 				E4D3AAA41E2E2BC200201FDA /* Launch Screen.storyboard in Resources */,
 				183022991F42901E007CE14C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				18A9F98D1F61387C008DDF9B /* Info.plist in Resources */,
 				183022741F428F52007CE14C /* UMSocialSDKResources.bundle in Resources */,
 				18123BF61F4C29BB00A42EDB /* baiduNaviSDK.xcassets in Resources */,
 				E442C2821DFE4D3B001409C8 /* Info.plist in Resources */,
@@ -3918,9 +4058,11 @@
 				E442C29A1DFE9A11001409C8 /* News.m in Sources */,
 				E4F12ED21E14E54D00D97068 /* MASViewConstraint.m in Sources */,
 				E40C19AA1E00E98A008A6A85 /* CinemaComment.m in Sources */,
+				18A9F8791F6120EF008DDF9B /* ZYInformationBoxOfficeCell.m in Sources */,
 				E442C2951DFE8961001409C8 /* Cinema.m in Sources */,
 				E4F12ED11E14E54D00D97068 /* MASViewAttribute.m in Sources */,
 				E41ADF921E231B4C00061A5A /* CinemaMapViewCtl.m in Sources */,
+				18A9F9931F613BE6008DDF9B /* LunarFormatter.m in Sources */,
 				E4D3AAB11E2E57FC00201FDA /* UIImage+DrawText.m in Sources */,
 				E4064F171DE6EF2600829074 /* CinemaComplaintView.m in Sources */,
 				E4E526091E8E3D0F00A65ABE /* JT3DScrollView.m in Sources */,
@@ -3946,6 +4088,7 @@
 				E4093D6D1E0516FD004F02FD /* MJRefreshHeader.m in Sources */,
 				E43D8FAF1E1217620061D5C6 /* MovieComment.m in Sources */,
 				18397B691F57B2D30003CA20 /* ZYInformationScrollBaseView.m in Sources */,
+				18A9F9851F61387C008DDF9B /* FSCalendarDelegationFactory.m in Sources */,
 				E4093D761E0516FD004F02FD /* MJRefreshStateHeader.m in Sources */,
 				E4E8C3DF1DE9220400E7BC86 /* MovieBoxOfficeView.m in Sources */,
 				E4093D751E0516FD004F02FD /* MJRefreshNormalHeader.m in Sources */,
@@ -3957,6 +4100,7 @@
 				E4416F821E1B9507008861FB /* MJPropertyType.m in Sources */,
 				E4093D781E0516FD004F02FD /* MJRefreshConst.m in Sources */,
 				E4CB36DF1DEE561400C2E519 /* PGIndexBannerSubiew.m in Sources */,
+				18A9F9811F61387C008DDF9B /* FSCalendarCell.m in Sources */,
 				E42AF4341DE46F3300F67C87 /* FilmHeatTableViewCell.m in Sources */,
 				18A001771F53E58600F1EEA2 /* ZYMallCell.m in Sources */,
 				E40A44221DF644D100D9084C /* AFURLSessionManager.m in Sources */,
@@ -4015,13 +4159,18 @@
 				E40687981E9CC1BA00FCA1DE /* MyNewsCommentViewCtl.m in Sources */,
 				E42503431DF6B4C800854337 /* MyReviewCell.m in Sources */,
 				E43836FA1DE7DFE7009687DD /* CinemaMsgFooterView.m in Sources */,
+				18A9F9901F613BD5008DDF9B /* FullScreenExampleViewController.m in Sources */,
+				18A9F9881F61387C008DDF9B /* FSCalendarHeaderView.m in Sources */,
+				18A9F9891F61387C008DDF9B /* FSCalendarScopeHandle.m in Sources */,
 				342337A51DE3D44C005069D2 /* MyLoginView.m in Sources */,
 				E4064F131DE67CC600829074 /* CinemaTitleView.m in Sources */,
 				E442C2881DFE4D3B001409C8 /* JSONModel+networking.m in Sources */,
 				E402CA101E24E3C200DD6DFF /* UIViewController+BackButtonHandler.m in Sources */,
 				E40A448A1E66ADBE0081FF2F /* WMLightView.m in Sources */,
+				18C146871F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m in Sources */,
 				E4E1D3721DFA93A5002042A3 /* IntegralDescriptionViewCtl.m in Sources */,
 				34BEFF531DEE59EE005249DC /* AboutUsCell.m in Sources */,
+				18A9F9861F61387C008DDF9B /* FSCalendarDelegationProxy.m in Sources */,
 				E4031C1C1DF9757D00895E19 /* RefundView.m in Sources */,
 				E4F12ED51E14E54D00D97068 /* View+MASAdditions.m in Sources */,
 				34B00D121DE5752B00937351 /* UIView+LJWKeyboardHandlerAddtion.m in Sources */,
@@ -4049,6 +4198,7 @@
 				E42AF4281DE43D4900F67C87 /* FilmHeatTableViewCtl.m in Sources */,
 				E4E3AB031EB18BD200E916AA /* PaymentView.m in Sources */,
 				E40E08BA1DF262830000AE72 /* MovieTimesView.m in Sources */,
+				18A9F98A1F61387C008DDF9B /* FSCalendarStickyHeader.m in Sources */,
 				E40AC5481E5555FA007196B4 /* PictureView.m in Sources */,
 				E4416F871E1B9507008861FB /* NSString+MJExtension.m in Sources */,
 				E4D721011E1E64770046C8BE /* HeatFilm.m in Sources */,
@@ -4072,11 +4222,13 @@
 				E42AF4251DE43CE400F67C87 /* BoxOfficeTableViewCtl.m in Sources */,
 				E442C2911DFE4E76001409C8 /* HotFilm.m in Sources */,
 				E40A441D1DF644D100D9084C /* AFNetworkReachabilityManager.m in Sources */,
+				185F3E101F623E2E00067B1F /* ZYPaymentViewCtlHeader.m in Sources */,
 				3480D2AE1DDA9C6300671769 /* ZYNavigationController.m in Sources */,
 				E42AF41A1DE42D2C00F67C87 /* BoxOfficeViewController.m in Sources */,
 				E4031C181DF9545400895E19 /* EvaluateCell.m in Sources */,
 				E407AA901DFB8F6A000CE0A2 /* SDCollectionViewCell.m in Sources */,
 				E4D858B41EA9DFA9008DB531 /* AdvertiseView.m in Sources */,
+				18A9F9831F61387C008DDF9B /* FSCalendarCollectionViewLayout.m in Sources */,
 				34F78CC61DFBDAFE00F68C1D /* NSString+Commen.m in Sources */,
 				E41052EE1DF7F9BB002EEF98 /* MyCollectionViewCtl.m in Sources */,
 				E4E1D3651DFA5CF7002042A3 /* IntegralMallViewCtl.m in Sources */,
@@ -4123,6 +4275,7 @@
 				3480D26A1DDA95F800671769 /* main.m in Sources */,
 				18123BE01F4C19A800A42EDB /* BZProgressHUD.m in Sources */,
 				E4EEF0261DE5B9B10021B949 /* WriteCommentsView.m in Sources */,
+				183C4F051F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m in Sources */,
 				E40A441B1DF644D100D9084C /* AFHTTPRequestOperationManager.m in Sources */,
 				34B00D1C1DE5925100937351 /* LFSPopupYearCell.m in Sources */,
 				E4416F5B1E1B8AE9008861FB /* ZFIndicatorView.m in Sources */,
@@ -4131,6 +4284,7 @@
 				E4093D7B1E0516FD004F02FD /* UIScrollView+MJRefresh.m in Sources */,
 				E400D2F91E6FFF6100887493 /* TipView.m in Sources */,
 				E40C19A51E00D018008A6A85 /* Complaint.m in Sources */,
+				18A9F9871F61387C008DDF9B /* FSCalendarExtensions.m in Sources */,
 				E415829A1E0CD4AB00CBA0DB /* Record.m in Sources */,
 				E4EEF02D1DE5BAB40021B949 /* InfoDetailsViewCtl.m in Sources */,
 				183022A31F429164007CE14C /* WXSegementControl.m in Sources */,
@@ -4155,6 +4309,7 @@
 				E4E8C3E81DE9649B00E7BC86 /* MovieDetailsViewCtl.m in Sources */,
 				E4F76CBA1E20EE33005530CD /* Souvenir.m in Sources */,
 				E41A75A61E135A1A0049891A /* Bill.m in Sources */,
+				18A9F9841F61387C008DDF9B /* FSCalendarConstants.m in Sources */,
 				E4F12ED01E14E54D00D97068 /* MASLayoutConstraint.m in Sources */,
 				E4E1D36F1DFA63CF002042A3 /* ExchangeRecordCell.m in Sources */,
 				E4CB36D51DEE556600C2E519 /* ViewPackagesView.m in Sources */,
@@ -4166,8 +4321,10 @@
 				E4093D711E0516FD004F02FD /* MJRefreshBackGifFooter.m in Sources */,
 				E4EEF0201DE5B9990021B949 /* InfoDetailsHeaderView.m in Sources */,
 				E42909251DED102A0031BF99 /* CinemaDtlHeaderView.m in Sources */,
+				18A9F8761F611313008DDF9B /* ZYInformationBoxOfficeTableViewSectionHeader.m in Sources */,
 				348CEA6F1DDC39AD00FFF211 /* MyView.m in Sources */,
 				185E94CE1F4AACB700F364F2 /* SCAdView.m in Sources */,
+				18A9F9801F61387C008DDF9B /* FSCalendarCalculator.m in Sources */,
 				18123BBF1F4BD04500A42EDB /* ZYCityManager.m in Sources */,
 				34D5A5161DE2F80500F129E5 /* MyBillViewController.m in Sources */,
 				E4FB3CB41E2CBC9D008BF3FE /* OrderDetails.m in Sources */,
@@ -4180,11 +4337,14 @@
 				342337B31DE3F092005069D2 /* UIViewController+Commen.m in Sources */,
 				18397B5F1F57A1C20003CA20 /* InformatiomMainCell.m in Sources */,
 				18123BC31F4BFE8C00A42EDB /* ZYMapManager.m in Sources */,
+				18A9F9821F61387C008DDF9B /* FSCalendarCollectionView.m in Sources */,
 				E4183C321E4D9F3800BFCBFD /* BoxOffice.m in Sources */,
 				E407AAC01DFB9242000CE0A2 /* UIImage+MultiFormat.m in Sources */,
 				E42AF41F1DE42DC600F67C87 /* InfoTableViewCell.m in Sources */,
 				E40A44261DF644D100D9084C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E40A448F1E66ADD20081FF2F /* WMDragView.m in Sources */,
+				18A9F97D1F61387C008DDF9B /* FSCalendar+Deprecated.m in Sources */,
+				18A9F8731F60D79B008DDF9B /* ZYInformationBoxOfficeHeaderView.m in Sources */,
 				348CEA641DDC304D00FFF211 /* FanShuToolClass.m in Sources */,
 				E42AF4221DE42DD500F67C87 /* informationSliderView.m in Sources */,
 				E4416F7E1E1B9507008861FB /* MJExtensionConst.m in Sources */,
@@ -4199,6 +4359,7 @@
 				3480D2A21DDA9AC800671769 /* ZYViewController.m in Sources */,
 				E4093D741E0516FD004F02FD /* MJRefreshGifHeader.m in Sources */,
 				E40A441C1DF644D100D9084C /* AFHTTPSessionManager.m in Sources */,
+				18A9F98C1F61387C008DDF9B /* FSCalendarWeekdayView.m in Sources */,
 				E407AA8C1DFB8F6A000CE0A2 /* TAAbstractDotView.m in Sources */,
 				E407AAB71DFB9242000CE0A2 /* SDImageCache.m in Sources */,
 				E41052E31DF7BFFC002EEF98 /* MyMessageViewCtl.m in Sources */,
@@ -4206,12 +4367,14 @@
 				182B16281F5E72650055E8CE /* ZYMyViewController.m in Sources */,
 				E4093D721E0516FD004F02FD /* MJRefreshBackNormalFooter.m in Sources */,
 				E4F12ECE1E14E54D00D97068 /* MASConstraint.m in Sources */,
+				18A9F97F1F61387C008DDF9B /* FSCalendarAppearance.m in Sources */,
 				1862AF581F441A080003C5BF /* MainTableView.m in Sources */,
 				E40A44211DF644D100D9084C /* AFURLResponseSerialization.m in Sources */,
 				E40A442C1DF644D100D9084C /* UIWebView+AFNetworking.m in Sources */,
 				182D7C8F1F44294B0028F4ED /* ItemBaseView.m in Sources */,
 				E4F8C4731E4C41080087FCAF /* PaymentViewCtl.m in Sources */,
 				18A001741F53BDE500F1EEA2 /* WXMoveBtn.m in Sources */,
+				18A9F98B1F61387C008DDF9B /* FSCalendarTransitionCoordinator.m in Sources */,
 				E41052DC1DF79684002EEF98 /* MyCouponCell.m in Sources */,
 				E4416F5D1E1B8AE9008861FB /* ZFSeatButton.m in Sources */,
 				E4E1D36C1DFA6376002042A3 /* MyIntegralCell.m in Sources */,
@@ -4220,6 +4383,7 @@
 				E4E8C3D01DE91D6F00E7BC86 /* MovieReviewTableViewCell.m in Sources */,
 				E4F40D5F1E49665D00B66427 /* WXApiRequestHandler.m in Sources */,
 				E4093D731E0516FD004F02FD /* MJRefreshBackStateFooter.m in Sources */,
+				18A9F97E1F61387C008DDF9B /* FSCalendar.m in Sources */,
 				E40E08CA1DF29DB00000AE72 /* ConfirmPackageOrderViewCtl.m in Sources */,
 				347F24AE1DDD818F00CD41B1 /* RechargeViewController.m in Sources */,
 				E442C2841DFE4D3B001409C8 /* JSONModelClassProperty.m in Sources */,
@@ -4419,7 +4583,7 @@
 					"$(PROJECT_DIR)/ZhongYingCinema/BaiduNaviSDK/thirdlibs",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Fanc.JKMovies-temp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fanc.JKMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4484,7 +4648,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Fanc.JKMovies-temp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fanc.JKMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
