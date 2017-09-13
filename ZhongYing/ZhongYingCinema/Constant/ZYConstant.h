@@ -77,6 +77,8 @@ UIKIT_EXTERN CGFloat const ZYMallViewControllerCellImgViewHeight;
 /** 商场首页cell上图片的宽度 */
 UIKIT_EXTERN CGFloat const ZYMallViewControllerCellImgViewWeight;
 
+/** 商城首页cell上美食详细label的高度 */
+UIKIT_EXTERN CGFloat const ZYMallViewControllerCellMallDetaLabelHeight;
 /** 商城首页cell上美食名字的高度 */
 UIKIT_EXTERN CGFloat const ZYMallViewControllerCellMallNameHeight;
 

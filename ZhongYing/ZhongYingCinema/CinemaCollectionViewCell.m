@@ -37,7 +37,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
-        self.layer.cornerRadius = 5;
+        self.layer.cornerRadius = 10;
         self.layer.masksToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
         
@@ -52,11 +52,11 @@
 - (void)setupUI {
     
     //电影图片
-    UIImageView *imgeView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.width, ItemBaseViewConllectViewCellFilmImgHeight)];
+    UIImageView *imgeView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.width, ItemBaseViewConllectViewCellFilmImgHeight*heightFloat)];
     imgeView.userInteractionEnabled = NO;
     [self addSubview:imgeView];
     self.imageView = imgeView;
-    self.imageView.layer.cornerRadius = 5;
+    self.imageView.layer.cornerRadius = 10;
     self.imageView.layer.masksToBounds = YES;
 
     

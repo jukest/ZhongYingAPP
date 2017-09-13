@@ -40,9 +40,6 @@
     
     [self loadCinemaList];
     
-    
-    
-    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -73,8 +70,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     if ([self.cinemaType isEqualToString:@"更多影院"]) {
         urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiCommonCinemaListURL];
-        parameters[@"lng"] = ApiLngStr;
-        parameters[@"lat"] = ApiLatStr;
+        
         parameters[@"group_id"] = ApiGroup_ID;
     }else if ([self.cinemaType isEqualToString:@"关注影院"]){
         urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserStarListURL];
@@ -82,6 +78,8 @@
     if (ApiTokenStr) {
         parameters[@"token"] = ApiTokenStr;
     }
+    parameters[@"lng"] = ApiLngStr;
+    parameters[@"lat"] = ApiLatStr;
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         

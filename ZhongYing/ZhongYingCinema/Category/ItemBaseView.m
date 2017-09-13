@@ -134,7 +134,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize size = CGSizeMake(ItemBaseViewConllectViewCellWidth , ItemBaseViewConllectViewCellHeight );
+    CGSize size = CGSizeMake((ScreenWidth - 20 * 2 - ItemBaseViewConllectViewCellInteritemSpace ) *  0.5 , ItemBaseViewConllectViewCellHeight*heightFloat);
     return size;
 }
 
@@ -143,8 +143,9 @@
     CGFloat top = 10;
     CGFloat bottom = 10;
     
-    CGFloat left = (ScreenWidth - ItemBaseViewConllectViewCellWidth  * 2 - ItemBaseViewConllectViewCellInteritemSpace ) *  0.5;
+//    CGFloat left = (ScreenWidth - ItemBaseViewConllectViewCellWidth  * 2 - ItemBaseViewConllectViewCellInteritemSpace ) *  0.5;
     
+    CGFloat left = 20;
     
     return UIEdgeInsetsMake(top, left, bottom, left);
     

@@ -14,7 +14,7 @@
 @optional
 - (void)mallCell:(UITableViewCell *)cell plusBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number; 
 - (void)mallCell:(UITableViewCell *)cell subtractBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number;
-
+- (void)mallCell:(UITableViewCell *)cell imageViewDidClick:(UIImageView *)imageView;
 
 @end
 

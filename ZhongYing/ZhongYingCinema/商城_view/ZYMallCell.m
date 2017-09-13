@@ -67,6 +67,8 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setup];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
     }
          return self;
 }
@@ -74,10 +76,22 @@
 
 - (void)setup {
     
-    UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(2 * ZYMallViewControllerMarge, ZYMallViewControllerMarge, ZYMallViewControllerCellImgViewWeight, ZYMallViewControllerCellImgViewHeight)];
+    UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(2*ZYMallViewControllerMarge, 2*ZYMallViewControllerMarge, ScreenWidth - 4*ZYMallViewControllerMarge, ZYMallViewControllerCellHeight - 2 *ZYMallViewControllerMarge)];
+    backgroundView.backgroundColor = [UIColor whiteColor];
+    backgroundView.layer.cornerRadius = 10;
+    backgroundView.layer.masksToBounds = YES;
+    [self addSubview:backgroundView];
+    
+    
+    UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ZYMallViewControllerCellImgViewWeight, ZYMallViewControllerCellImgViewHeight)];
+    imgView.layer.cornerRadius = 10;
+    imgView.layer.masksToBounds = YES;
     imgView.backgroundColor = [UIColor redColor];
     self.mallImageView = imgView;
-    [self addSubview:imgView];
+    imgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imgViewTapAction:)];
+    [imgView addGestureRecognizer:tap];
+    [backgroundView addSubview:imgView];
     
     CGFloat x = CGRectGetMaxX(imgView.frame) + ZYMallViewControllerMarge;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(x, ZYMallViewControllerMarge, ScreenWidth - x - ZYMallViewControllerMarge, ZYMallViewControllerCellMallNameHeight)];
@@ -85,35 +99,30 @@
     label.font = [UIFont systemFontOfSize:14];
 //    label.backgroundColor = [UIColor redColor];
     self.mallNameLabel = label;
-    [self addSubview:label];
+    [backgroundView addSubview:label];
     
-    CGFloat y = CGRectGetMaxY(label.frame) + ZYMallViewControllerMarge;
-    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, ScreenWidth - x - ZYMallViewControllerMarge, ZYMallViewControllerCellMallNameHeight)];
+    CGFloat y = CGRectGetMaxY(label.frame) ;
+    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, ScreenWidth - x - 4*ZYMallViewControllerMarge - ZYMallViewControllerCellNumberLabelWidth - 2 * ZYMallViewControllerCellBtnWH, ZYMallViewControllerCellMallDetaLabelHeight)];
     detailLabel.text = @"七夕情侣特惠套餐";
-    CGSize size = [detailLabel.text boundingRectWithSize:CGSizeMake(ScreenWidth - x - ZYMallViewControllerMarge, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
-
-    if (size.height > 15.0) {
-        size = CGSizeMake(ScreenWidth - x - ZYMallViewControllerMarge, 30);
-    }
-    
     detailLabel.numberOfLines = 2;
 //    detailLabel.backgroundColor = [UIColor redColor];
     detailLabel.font = [UIFont systemFontOfSize:12];
-    detailLabel.frame = CGRectMake(x, y, ScreenWidth - x - ZYMallViewControllerMarge, size.height);
+    
 
     detailLabel.textColor = [UIColor lightGrayColor];
     self.mallDetailLabel = detailLabel;
-    [self addSubview:detailLabel];
+    [backgroundView addSubview:detailLabel];
     
-    y = CGRectGetMaxY(self.mallDetailLabel.frame)+ZYMallViewControllerMarge;
+    y = CGRectGetMaxY(self.mallDetailLabel.frame);
     UILabel *price = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 100, ZYMallViewControllerCellMallPriceHeight)];
     price.text = @"￥12.00";
     price.textColor = [UIColor redColor];
     self.mallPriceLabel = price;
-    [self addSubview:self.mallPriceLabel];
+    [backgroundView addSubview:self.mallPriceLabel];
     
-    x = ScreenWidth - ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH;
-    y = CGRectGetMaxY(self.mallDetailLabel.frame) + 5;
+    x = ScreenWidth - 4*ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH;
+//    y = CGRectGetMaxY(self.mallDetailLabel.frame) + 5;
+    y = (ZYMallViewControllerCellHeight - ZYMallViewControllerCellBtnWH) * 0.5;
     UIButton *numberPlusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     numberPlusBtn.backgroundColor = Color(252, 186, 0, 1.0);
     numberPlusBtn.titleLabel.font = [UIFont systemFontOfSize:20];
@@ -124,20 +133,20 @@
     [numberPlusBtn addTarget:self action:@selector(plusBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     numberPlusBtn.layer.cornerRadius = ZYMallViewControllerCellBtnWH * 0.5;
 
-    [self addSubview:numberPlusBtn];
+    [backgroundView addSubview:numberPlusBtn];
     self.numberPlusBtn = numberPlusBtn;
     
-    x = ScreenWidth - ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH - ZYMallViewControllerCellNumberLabelWidth;
+    x = ScreenWidth - 4*ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH - ZYMallViewControllerCellNumberLabelWidth;
     UILabel *numberLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, ZYMallViewControllerCellNumberLabelWidth, ZYMallViewControllerCellNumberLabelHeight)];
 //    numberLabel.backgroundColor = [UIColor redColor];
     numberLabel.font = [UIFont systemFontOfSize:14];
     numberLabel.text = @"";
     
     numberLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:numberLabel];
+    [backgroundView addSubview:numberLabel];
     self.numberLabel = numberLabel;
     
-    x = ScreenWidth - ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH - ZYMallViewControllerCellNumberLabelWidth - ZYMallViewControllerCellBtnWH;
+    x = ScreenWidth - 4*ZYMallViewControllerMarge - ZYMallViewControllerCellBtnWH - ZYMallViewControllerCellNumberLabelWidth - ZYMallViewControllerCellBtnWH;
     UIButton *numberSubtractBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [numberSubtractBtn setImage:[UIImage imageNamed:@"mall_plusBtn"] forState:UIControlStateNormal];
     numberSubtractBtn.frame = CGRectMake(x, y, ZYMallViewControllerCellBtnWH, ZYMallViewControllerCellBtnWH);
@@ -147,7 +156,7 @@
     numberSubtractBtn.layer.cornerRadius = ZYMallViewControllerCellBtnWH * 0.5;
     numberSubtractBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     numberSubtractBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [self addSubview:numberSubtractBtn];
+    [backgroundView addSubview:numberSubtractBtn];
     [numberSubtractBtn addTarget:self action:@selector(subtractBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 
     self.numberSubtractBtn = numberSubtractBtn;
@@ -163,15 +172,7 @@
     
     self.mallNameLabel.text = good.name;
     
-    CGFloat x = self.mallDetailLabel.x;
     self.mallDetailLabel.text = good.detail;
-    CGSize size = [good.detail boundingRectWithSize:CGSizeMake(ScreenWidth - x - ZYMallViewControllerMarge, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
-    
-    if (size.height > 15.0) {
-        size = CGSizeMake(ScreenWidth - x - ZYMallViewControllerMarge, 30);
-    }
-    
-    self.mallDetailLabel.frame = CGRectMake(x, _mallDetailLabel.y, ScreenWidth - x - ZYMallViewControllerMarge, size.height);
     
     self.mallPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",good.price];
     
@@ -230,6 +231,18 @@
 
     
 }
+
+- (void)imgViewTapAction:(UITapGestureRecognizer *)tapGesture {
+    
+    UIImageView *imgView = (UIImageView *)tapGesture.view;
+    if (self.delegate != nil) {
+        if ([self.delegate respondsToSelector:@selector(mallCell:imageViewDidClick:)]) {
+            [self.delegate mallCell:self imageViewDidClick:imgView];
+        }
+    }
+    
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

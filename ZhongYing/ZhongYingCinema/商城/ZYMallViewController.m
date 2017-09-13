@@ -87,8 +87,6 @@
 
     [self addChildViewControlers];
     
-    
-    
 
 }
 

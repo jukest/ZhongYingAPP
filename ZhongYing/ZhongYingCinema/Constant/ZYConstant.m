@@ -27,10 +27,10 @@ CGFloat const ItemBaseViewConllectViewCellLineSpace = 10;
 CGFloat const ItemBaseViewConllectViewCellWidth = 140;
 
 /** 正在热映电影cell的高度 */
-CGFloat const ItemBaseViewConllectViewCellHeight = 250;
+CGFloat const ItemBaseViewConllectViewCellHeight = 265;
 
 /** 正在热映电影cell的电影图片的高度 */
-CGFloat const ItemBaseViewConllectViewCellFilmImgHeight = 200;
+CGFloat const ItemBaseViewConllectViewCellFilmImgHeight = 213;
 
 /** 正在热映电影名label的高度 */
 CGFloat const ItemBaseViewConllectViewCellFilmNameLabelH = 30;
@@ -74,19 +74,21 @@ CGFloat const ZYInformationBoxOfficeHeaderViewCellLeftLabelWidth = 85;
 #pragma mark -- 商场常量
 
 /** 商场首页cell的高度 */
-CGFloat const ZYMallViewControllerCellHeight = 115;
+CGFloat const ZYMallViewControllerCellHeight = 100;
 
 /** 商场首页cell上图片的高度 */
-CGFloat const ZYMallViewControllerCellImgViewHeight = 95;
+CGFloat const ZYMallViewControllerCellImgViewHeight = 80;
 
 /** 商场首页cell上图片的宽度 */
 CGFloat const ZYMallViewControllerCellImgViewWeight = ZYMallViewControllerCellImgViewHeight;
 
+/** 商城首页cell上美食详细label的高度 */
+CGFloat const ZYMallViewControllerCellMallDetaLabelHeight = 35;
 /** 商城首页cell上美食名字的高度 */
-CGFloat const ZYMallViewControllerCellMallNameHeight = 20;
+CGFloat const ZYMallViewControllerCellMallNameHeight = 15;
 
 /** 商城首页cell上美食价格label的高度 */
-CGFloat const ZYMallViewControllerCellMallPriceHeight = 20;
+CGFloat const ZYMallViewControllerCellMallPriceHeight = 13;
 
 /** 商城界面的间距 */
 CGFloat const ZYMallViewControllerMarge = 10;
@@ -104,7 +106,7 @@ CGFloat const ZYMallViewControllerCellNumberLabelHeight = ZYMallViewControllerCe
 CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierHeight = 150;
 
 /** 商城确认订单页tableViewSectionFooter上label的高度  */
-CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight = 25;
+CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight = 35;
 
 
 #pragma mark -- ZYConfirmTicketOrderViewController 常量

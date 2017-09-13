@@ -11,11 +11,12 @@
 #import "Goods.h"
 #import "ZYMallCell.h"
 #import "ZYMallConfirmViewController.h"
+#import "PictureView.h"
 
 @interface ZYFoodViewController ()<UITableViewDelegate,UITableViewDataSource,ZYMallCellDelegate>
 
 
-@property (nonatomic, strong)WXMoveBtn *buyBtn;//点我购买
+//@property (nonatomic, strong)WXMoveBtn *buyBtn;//点我购买
 
 /** tableView */
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,6 +28,12 @@
 @property (nonatomic, assign) NSInteger totalNumber;
 
 
+@property (nonatomic, strong) UIView *footerView;
+/** 还需支付 */
+@property (nonatomic, strong) UILabel *totalMoneyLabel;
+/** payBtn */
+@property (nonatomic, strong) UIButton *buyBtn;
+
 @end
 
 
@@ -36,6 +43,17 @@ static NSString *reuseIdentifier = @"mallCell";
 
 
 #pragma mark - 懒加载
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 44 * 2 - 64, ScreenWidth, 44)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 2)];
+        lineView.backgroundColor = Color(247, 247, 247, 1);
+        _footerView.backgroundColor = [UIColor whiteColor];
+        [_footerView addSubview:lineView];
+    }
+    return _footerView;
+}
 
 - (NSMutableArray *)goodsList
 {
@@ -52,6 +70,7 @@ static NSString *reuseIdentifier = @"mallCell";
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
         [_tableView registerClass:[ZYMallCell class] forCellReuseIdentifier:reuseIdentifier];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:_tableView];
         _tableView.tableFooterView = [UIView new];
     }
@@ -67,9 +86,7 @@ static NSString *reuseIdentifier = @"mallCell";
     
     self.totalNumber = 0;
     
-    //加载数据
-//    [self loadData];
-    
+
     
     
     //添加 选择影院之后 的通知
@@ -96,14 +113,35 @@ static NSString *reuseIdentifier = @"mallCell";
 
 #pragma mark -- setupUI
 - (void)setupUI {
-    [self setupMoveBtn];
+    [self setupFooterView];
+
     [self addRefreshView];
     
-    [self.view bringSubviewToFront:self.buyBtn];
+    [self.view bringSubviewToFront:self.footerView];
 
     
 }
 
+
+- (void)setupFooterView{
+    [self.view addSubview:self.footerView];
+    
+    //totalmoney
+    UILabel *label = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 0, ScreenWidth - 100 - 20, self.footerView.height) text:@"需支付 0.0元" font:[UIFont systemFontOfSize:15] textColor:[UIColor redColor] alignment:NSTextAlignmentLeft];
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:label.text];
+    NSRange strRange = [label.text rangeOfString:@"需支付"];
+    [attributeStr addAttribute:NSForegroundColorAttributeName value:Color(60, 60, 60, 1.0) range:strRange];
+    label.attributedText = attributeStr;
+    [self.footerView addSubview:label];
+    self.totalMoneyLabel = label;
+    
+    self.buyBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(20+label.width, 0, 100, self.footerView.height) title:@"立即购买" titleColor:[UIColor whiteColor] target:self action:@selector(payBtnAction:) tag:100];
+    self.buyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    self.buyBtn.backgroundColor = Color(252, 186, 0, 0.9);
+    [self.footerView addSubview:self.buyBtn];
+    
+    
+}
 
 - (void)addRefreshView
 {
@@ -125,35 +163,39 @@ static NSString *reuseIdentifier = @"mallCell";
         self.totalNumber = 0;
     }
     
-    
 }
 
-- (void)setupMoveBtn {
+
+
+- (void)payBtnAction:(UIButton *)sender {
+    
     __weak typeof(self) weakSelf = self;
-    self.buyBtn = [[WXMoveBtn alloc]initWithFrame:CGRectMake(10, ScreenHeight - 64 - 49 - 80, 40, 40)];
-    self.buyBtn.btnDidClickBlock = ^{
-        if (![LoginYesOrNoStr isEqualToString:@"YES"]) {
-            [(ZYNavigationController *)weakSelf.navigationController showLoginViewController];
-        }else{
+    
+    if (![LoginYesOrNoStr isEqualToString:@"YES"]) {
+            [(ZYNavigationController *)self.navigationController showLoginViewController];
+        } else {
             
-            if ([weakSelf selectedGoodsNumber] == 0) {
+            if ([self selectedGoodsNumber] == 0) {
                 
-                [weakSelf showHudMessage:@"请选择商品"];
+                [self showHudMessage:@"请选择商品"];
                 return ;
             }
             ZYMallConfirmViewController *confirmVC = [[ZYMallConfirmViewController alloc]init];
-            confirmVC.goodsList = [[weakSelf selectedGoods] mutableCopy];
+            confirmVC.goodsList = [[self selectedGoods] mutableCopy];
             confirmVC.hidesBottomBarWhenPushed = YES;
             confirmVC.callBack = ^{
                 
                 [weakSelf.tableView reloadData];
+                [weakSelf setTotalMoneyLabelText];
+                
             };
-            [weakSelf.navigationController pushViewController:confirmVC animated:YES];
+            [self.navigationController pushViewController:confirmVC animated:YES];
         }
-    };
-    [self.view addSubview:self.buyBtn];
-
+  
+//    [self.view addSubview:self.buyBtn];
+    
 }
+
 
 #pragma mark - UItableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -178,18 +220,37 @@ static NSString *reuseIdentifier = @"mallCell";
 #pragma mark -- ZYMallCellDelegate
 
 - (void)mallCell:(UITableViewCell *)cell plusBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number {
-    NSInteger index = [self.tableView indexPathForCell:cell].row;
-    Goods *good = self.goodsList[index];
-//    NSLog(@"买%ld",(long)good.selectedNumber);
+   
+    [self setTotalMoneyLabelText];
+    
+
 
 }
 
 - (void)mallCell:(UITableViewCell *)cell subtractBtnDidClick:(UIButton *)button withNumberOfGood:(NSInteger)number {
-    NSInteger index = [self.tableView indexPathForCell:cell].row;
-    Goods *good = self.goodsList[index];
-//    NSLog(@"还剩:%ld",(long)good.selectedNumber);
+    [self setTotalMoneyLabelText];
     
+}
+
+- (void)mallCell:(UITableViewCell *)cell imageViewDidClick:(UIImageView *)imageView {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Goods *good = self.goodsList[indexPath.row];
     
+    // 查看图片
+        NSLog(@"%zd",index);
+        PictureView *pictureView = [[PictureView alloc] initWithFrame:self.view.bounds WithUrlStr:good.images Sliders:@[good.images] Index:0];
+        
+        [pictureView show];
+   
+    
+}
+
+- (void)setTotalMoneyLabelText {
+    self.totalMoneyLabel.text = [NSString stringWithFormat:@"需支付 %.2f元",[self totalMoney]];
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.totalMoneyLabel.text];
+    NSRange strRange = [self.totalMoneyLabel.text rangeOfString:@"需支付"];
+    [attributeStr addAttribute:NSForegroundColorAttributeName value:Color(60, 60, 60, 1.0) range:strRange];
+    self.totalMoneyLabel.attributedText = attributeStr;
 }
 
 #pragma mark -- 获取选中的商品
@@ -215,6 +276,19 @@ static NSString *reuseIdentifier = @"mallCell";
     
     
     return totalNumber;
+}
+
+#pragma mark -- 计算总价
+- (CGFloat)totalMoney {
+    CGFloat money = 0;
+    
+    for (int i = 0; i<self.goodsList.count; i++) {
+        Goods *good = self.goodsList[i];
+        money += good.selectedNumber * good.price;
+    }
+    
+    return money;
+    
 }
 
 #pragma mark - 加载数据
@@ -246,10 +320,12 @@ static NSString *reuseIdentifier = @"mallCell";
                 Goods *goods = [Goods mj_objectWithKeyValues:dict];
                 
                 [weakSelf.goodsList addObject:goods];
+                
 
             }
             
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
+            [weakSelf setTotalMoneyLabelText];
         }else{
             [weakSelf showHudMessage:dataBack[@"message"]];
         }

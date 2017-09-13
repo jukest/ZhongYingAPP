@@ -19,7 +19,7 @@
         [self.orderImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,movie[@"cover"]]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [self addSubview:self.orderImg];
         
-        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(24 + 60 +10 + 20, 18, 100, 20) text:[NSString stringWithFormat:@"￥%@",movie[@"price"]] font:[UIFont systemFontOfSize:20 * widthFloat] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(24 + 60 +10 + 20, 18, 100, 20) text:[NSString stringWithFormat:@"￥%.2f",[movie[@"price"] floatValue]] font:[UIFont systemFontOfSize:20 * widthFloat] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [self addSubview:self.priceLb];
         
         self.nameLb = [FanShuToolClass createLabelWithFrame:CGRectMake(24 + 60 +10 + 20, 18 +20 +10, ScreenWidth -(24 +60 +10 +20 +12), 15) text:movie[@"name"] font:[UIFont systemFontOfSize:15 * widthFloat] textColor:Color(65, 65, 65, 1.0) alignment:NSTextAlignmentLeft];

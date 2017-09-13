@@ -63,16 +63,17 @@ static NSString *reuseIdentifier = @"mallCell";
 - (UIView *)sectionFooterView {
     if (!_sectionFooterView) {
         _sectionFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ZYMallConfirmViewControllerTableViewSectionFooterVierHeight)];
-        _sectionFooterView.backgroundColor = [UIColor whiteColor];
+        _sectionFooterView.backgroundColor =  [UIColor whiteColor]; //[UIColor whiteColor];
         
-        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 2)];
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 10, ScreenWidth, 1)];
         lineView1.backgroundColor = Color(230, 230, 230, 1);
         [_sectionFooterView addSubview:lineView1];
         
-        UILabel *label = [FanShuToolClass createLabelWithFrame:CGRectMake(10, 2, 100, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) text:@"优惠券" font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+        UILabel *label = [FanShuToolClass createLabelWithFrame:CGRectMake(10, CGRectGetMaxY(lineView1.frame), 100, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) text:@"优惠券" font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [_sectionFooterView addSubview:label];
         
-        self.couponBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(0, 2,ScreenWidth-10, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) title:@"减0.00元" titleColor:Color(247, 86, 109, 1.0) target:self action:@selector(couponAction:) tag:1];
+        self.couponBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(0, CGRectGetMaxY(lineView1.frame),ScreenWidth-10, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight) title:@"减0.00元" titleColor:Color(247, 86, 109, 1.0) target:self action:@selector(couponAction:) tag:1];
+        
         [_sectionFooterView addSubview:self.couponBtn];
         [self.couponBtn setImage:[UIImage imageNamed:@"cinema_back"] forState:UIControlStateNormal];
         self.couponBtn.backgroundColor = [UIColor clearColor];
@@ -80,7 +81,7 @@ static NSString *reuseIdentifier = @"mallCell";
         self.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         self.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -70);
         
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight + 4, ScreenWidth, 2)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(label.frame), ScreenWidth, 1)];
         lineView.backgroundColor = Color(230, 230, 230, 1);
         [_sectionFooterView addSubview:lineView];
         
@@ -93,7 +94,7 @@ static NSString *reuseIdentifier = @"mallCell";
         
         y = CGRectGetMaxY(self.totalPricrLb.frame);
         UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, y, ScreenWidth, ZYMallConfirmViewControllerTableViewSectionFooterVierHeight - y)];
-        bottomView.backgroundColor = Color(230, 230, 230, 1);
+        bottomView.backgroundColor =  [UIColor whiteColor]; //Color(230, 230, 230, 1);
         [_sectionFooterView addSubview:bottomView];
         
         UILabel *tipsLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 5, ScreenWidth, 15) text:@"注：本商品可退票，退还金额不包含优惠券。" font:[UIFont systemFontOfSize:14] textColor:Color(84, 84, 84, 1.0) alignment:NSTextAlignmentLeft];
@@ -134,7 +135,7 @@ static NSString *reuseIdentifier = @"mallCell";
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"确认订单";
-    self.view.backgroundColor = Color(230, 230, 230, 1);
+    self.view.backgroundColor = [UIColor whiteColor]; //Color(230, 230, 230, 1);
     
     [self loadGoodsCoupons];
 }
@@ -238,7 +239,7 @@ static NSString *reuseIdentifier = @"mallCell";
         weak.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         weak.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -weak.couponBtn.titleLabel.width);
 
-        NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+        NSString *price = [NSString stringWithFormat:@"%.2f 元",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
         weak.totalPricrLb.text = price;
         weak.selectCou = couponArr;
     };
@@ -313,7 +314,7 @@ static NSString *reuseIdentifier = @"mallCell";
             self.couponBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
             self.couponBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -self.couponBtn.titleLabel.width);
             
-            NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+            NSString *price = [NSString stringWithFormat:@"%.2f 元",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
             self.totalPricrLb.text = price;
             
         }else{

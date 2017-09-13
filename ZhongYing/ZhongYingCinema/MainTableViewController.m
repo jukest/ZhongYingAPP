@@ -337,6 +337,7 @@
 - (void)initCinemaViewCtlUI
 {
     _cinemaHeaderView = [[CinemaSliderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, CinemaViewControllerHeaderScrollImageH)];
+    _cinemaHeaderView.adView.autoScrollTimeInterval = 5;
 //    _cinemaHeaderView.delegate = self;
     // NSMutableArray *arr = [NSMutableArray array];
     // [_cinemaHeaderView configCellWithArray:arr];

@@ -203,7 +203,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         if (self.type != 1) {
-            [self checkForUpdate];
+//            [self checkForUpdate];
         }
         
     }else{

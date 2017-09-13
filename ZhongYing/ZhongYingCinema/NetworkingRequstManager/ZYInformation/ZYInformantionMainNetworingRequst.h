@@ -62,7 +62,7 @@
  @param result 结果
  @return 网络请求的manager
  */
-- (AFHTTPRequestOperationManager *)loadSliderImgWithURL:(NSString *)urlStr withParameters:(NSDictionary *)parameters completeHandle:(void(^)(BOOL,NSString *))result;
+//- (AFHTTPRequestOperationManager *)loadSliderImgWithURL:(NSString *)urlStr withParameters:(NSDictionary *)parameters completeHandle:(void(^)(BOOL,NSString *))result;
 
 
 

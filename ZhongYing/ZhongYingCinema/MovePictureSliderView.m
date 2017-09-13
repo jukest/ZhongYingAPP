@@ -23,6 +23,7 @@
         
         _adView = [[SCAdView alloc] initWithBuilder:^(SCAdViewBuilder *builder) {
             builder.viewFrame = (CGRect){0,28,self.bounds.size.width,self.bounds.size.height-28};
+            builder.infiniteCycle = 5;
             builder.adItemSize = (CGSize){self.bounds.size.width/2.0f,/**self.bounds.size.width/3.8f*/self.bounds.size.height-28};
             builder.minimumLineSpacing = 10;
             builder.secondaryItemMinAlpha = 0.4;
