@@ -182,8 +182,8 @@
 
         _sugeestView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, 60, 40) backgroundColor:[UIColor clearColor]];
        
-        UILabel *complaintLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10, 0, 100, 40) text:@"反馈" font:[UIFont systemFontOfSize:14] textColor:[UIColor whiteColor] alignment:NSTextAlignmentLeft];
-        complaintLb.backgroundColor = [UIColor clearColor];
+        UILabel *complaintLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10, 0, 100, 40) text:@"反馈" font:[UIFont systemFontOfSize:16] textColor:[UIColor whiteColor] alignment:NSTextAlignmentLeft];
+        complaintLb.backgroundColor = [UIColor redColor];
         self.complaintLb = complaintLb;
         [_sugeestView addSubview:complaintLb];
         
