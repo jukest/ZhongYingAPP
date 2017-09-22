@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface test : NSObject
-
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *descriptionTitle;
+- (instancetype)initWithTitle:(NSString *)title withDescriptionTitle:(NSString *)descriptionTitle;
 @end

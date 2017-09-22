@@ -9,5 +9,10 @@
 #import "test.h"
 
 @implementation test
-
+- (instancetype)initWithTitle:(NSString *)title withDescriptionTitle:(NSString *)descriptionTitle {
+    if (self = [super init]) {
+        
+    }
+    return self;
+}
 @end
