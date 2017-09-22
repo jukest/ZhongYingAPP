@@ -81,7 +81,6 @@
 		18397B741F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18397B731F57BCC40003CA20 /* ZYInformantionMainNetworingRequst.m */; };
 		183C4F051F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C4F041F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m */; };
 		1846F7291F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */; };
-		1849D24D1F74A6BC0084D5A9 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 1849D24C1F74A6BC0084D5A9 /* test.m */; };
 		184DC6261F5012C6006A86BC /* ZYMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184DC6251F5012C6006A86BC /* ZYMallViewController.m */; };
 		185E94C61F4AABE300F364F2 /* MovePictureSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C51F4AABE300F364F2 /* MovePictureSliderView.m */; };
 		185E94CD1F4AACB700F364F2 /* SCAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E94C91F4AACB700F364F2 /* SCAdCollectionViewLayout.m */; };
@@ -601,8 +600,6 @@
 		183C4F041F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCinemaMainNetworkingRequst.m; sourceTree = "<group>"; };
 		1846F7271F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYConfirmTicketOrderViewController.h; sourceTree = "<group>"; };
 		1846F7281F5909ED007A5D57 /* ZYConfirmTicketOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYConfirmTicketOrderViewController.m; sourceTree = "<group>"; };
-		1849D24B1F74A6BC0084D5A9 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		1849D24C1F74A6BC0084D5A9 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		184DC6241F5012C6006A86BC /* ZYMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMallViewController.h; sourceTree = "<group>"; };
 		184DC6251F5012C6006A86BC /* ZYMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMallViewController.m; sourceTree = "<group>"; };
 		185E94C41F4AABE300F364F2 /* MovePictureSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovePictureSliderView.h; sourceTree = "<group>"; };
@@ -1684,15 +1681,6 @@
 			path = ZYCinema;
 			sourceTree = "<group>";
 		};
-		1849D24A1F74A67F0084D5A9 /* ApiDebuggingBranchTest0 */ = {
-			isa = PBXGroup;
-			children = (
-				1849D24B1F74A6BC0084D5A9 /* test.h */,
-				1849D24C1F74A6BC0084D5A9 /* test.m */,
-			);
-			path = ApiDebuggingBranchTest0;
-			sourceTree = "<group>";
-		};
 		184DC6231F501254006A86BC /* 商城 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2033,7 +2021,6 @@
 				3480D2B21DDAA4E300671769 /* Main.storyboard */,
 				E4D3AAA31E2E2BC200201FDA /* Launch Screen.storyboard */,
 				3480D2791DDA95F800671769 /* Info.plist */,
-				1849D24A1F74A67F0084D5A9 /* ApiDebuggingBranchTest0 */,
 				3480D2681DDA95F800671769 /* Supporting Files */,
 			);
 			path = ZhongYingCinema;
@@ -4215,7 +4202,6 @@
 				348CEA6C1DDC353F00FFF211 /* MyTableViewCell.m in Sources */,
 				347793421DDEA7AE00DF3D18 /* YSLContainerViewController.m in Sources */,
 				E4093D821E051A6C004F02FD /* MJChiBaoZiHeader.m in Sources */,
-				1849D24D1F74A6BC0084D5A9 /* test.m in Sources */,
 				E4416F821E1B9507008861FB /* MJPropertyType.m in Sources */,
 				E4093D781E0516FD004F02FD /* MJRefreshConst.m in Sources */,
 				E4CB36DF1DEE561400C2E519 /* PGIndexBannerSubiew.m in Sources */,
