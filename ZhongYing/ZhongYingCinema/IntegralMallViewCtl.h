@@ -9,5 +9,5 @@
 #import "ZYViewController.h"
 
 @interface IntegralMallViewCtl : ZYViewController
-
+@property (nonatomic, assign) BOOL mall;
 @end

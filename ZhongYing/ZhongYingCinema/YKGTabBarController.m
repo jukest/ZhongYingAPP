@@ -64,4 +64,9 @@
 
 }
 
+- (void)introDidFinish {
+    //发一个 广告消失 的通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:AdvertiseViewDismissNotification object:nil];
+}
+
 @end

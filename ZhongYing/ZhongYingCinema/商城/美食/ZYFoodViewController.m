@@ -12,8 +12,9 @@
 #import "ZYMallCell.h"
 #import "ZYMallConfirmViewController.h"
 #import "PictureView.h"
+#import "informationSliderView.h"
 
-@interface ZYFoodViewController ()<UITableViewDelegate,UITableViewDataSource,ZYMallCellDelegate>
+@interface ZYFoodViewController ()<UITableViewDelegate,UITableViewDataSource,ZYMallCellDelegate,infoSliderViewDelegate>
 
 
 //@property (nonatomic, strong)WXMoveBtn *buyBtn;//点我购买
@@ -34,6 +35,23 @@
 /** payBtn */
 @property (nonatomic, strong) UIButton *buyBtn;
 
+
+/**
+ 轮播图
+ */
+@property (nonatomic, strong) informationSliderView *infoSliderView;
+
+@property (nonatomic, strong) NSMutableArray *sliderImagesArray;
+
+/**
+ 导航条的背景视图
+ */
+@property (nonatomic, weak) UIImageView *navigationBarBackgroundView;
+/** 导航栏背景的透明度 */
+@property (nonatomic, assign) CGFloat lastAlpha;
+
+/** 记录offset */
+@property (nonatomic, assign) CGPoint offset;
 @end
 
 
@@ -44,9 +62,27 @@ static NSString *reuseIdentifier = @"mallCell";
 
 #pragma mark - 懒加载
 
+- (NSMutableArray *)sliderImagesArray {
+    if (!_sliderImagesArray) {
+        _sliderImagesArray = [NSMutableArray array];
+    }
+    return _sliderImagesArray;
+}
+
+- (informationSliderView *)infoSliderView {
+    if (!_infoSliderView) {
+        _infoSliderView = [[informationSliderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,InformationViewControllerTableViewHeaderImgHeight)];//CinemaViewControllerHeaderScrollImageH
+        
+        _infoSliderView.delegate = self;
+        
+    }
+    return _infoSliderView;
+}
+
+
 - (UIView *)footerView {
     if (!_footerView) {
-        _footerView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 44 * 2 - 64, ScreenWidth, 44)];
+        _footerView = [[UIView alloc]initWithFrame:CGRectMake(0, ScreenHeight - 44 * 2, ScreenWidth, 44)];
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 2)];
         lineView.backgroundColor = Color(247, 247, 247, 1);
         _footerView.backgroundColor = [UIColor whiteColor];
@@ -65,7 +101,7 @@ static NSString *reuseIdentifier = @"mallCell";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64 - 49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -81,35 +117,71 @@ static NSString *reuseIdentifier = @"mallCell";
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor  = Color(246, 246, 246, 1);
-;
+     self.navigationBarBackgroundView = self.navigationController.navigationBar.subviews.firstObject;
+    self.lastAlpha = 0;
+    self.offset = CGPointZero;
+
     [self setupUI];
     
     self.totalNumber = 0;
     
 
     
-    
     //添加 选择影院之后 的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadFood) name:SelectedCimemaUpdataOtherDataNotification object:nil];
     
+    //添加 由 ZYMallViewController 控制器发来的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNavigationBarAlpha:) name:@"ZYallViewControllerDidSegemetnNotification" object:nil];
+    
 }
+
+#pragma mark --通知
+- (void)setNavigationBarAlpha:(NSNotification *)notifica {
+
+    NSDictionary *obj = (NSDictionary *)notifica.object;
+    
+    NSInteger index = [obj[@"index"] integerValue];
+    
+    if (index == 0) {
+        
+        self.navigationBarBackgroundView.alpha = self.lastAlpha;
+        [self.navigationBarBackgroundView layoutSubviews];
+        [self.tableView setContentOffset:self.offset animated:YES];
+    }
+    
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
+    self.navigationController.navigationBar.barTintColor = Color(252, 186, 0, 1.0);
+    //设置透明的导航栏
+    self.navigationController.navigationBar.translucent = YES;
+    
+    //    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationBarBackgroundView.alpha = self.lastAlpha;
+    
+    //去掉透明后导航栏下边的黑边
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+
     self.navigationController.navigationBar.barTintColor = Color(252, 186, 0, 1.0);
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
     //    如果不想让其他页面的导航栏变为透明 需要重置
     [super viewWillDisappear:animated];
+    self.navigationBarBackgroundView.alpha = 1;
     self.navigationController.navigationBar.barTintColor = Color(252, 186, 0, 1.0);
+    [self.navigationController.navigationBar setShadowImage:nil];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
 }
+
 
 #pragma mark -- setupUI
 - (void)setupUI {
@@ -119,8 +191,12 @@ static NSString *reuseIdentifier = @"mallCell";
     
     [self.view bringSubviewToFront:self.footerView];
 
+    self.tableView.tableHeaderView = self.infoSliderView;
+
     
 }
+
+
 
 
 - (void)setupFooterView{
@@ -147,12 +223,10 @@ static NSString *reuseIdentifier = @"mallCell";
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadFood];
+        [self loadCommonSlider];
     }];
     [self.tableView.mj_header beginRefreshing];
-//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        [self loadData];
-//    }];
-    //[self hideRefreshViewsubViews:self.informationTableView];
+
 }
 
 - (void)endRefresh {
@@ -213,6 +287,17 @@ static NSString *reuseIdentifier = @"mallCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return ZYMallViewControllerCellHeight;
 }
+
+//根据滚动设置导航条背景色
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offset = scrollView.contentOffset.y;
+    self.offset = scrollView.contentOffset;
+    CGFloat alpha = (1 / (InformationViewControllerTableViewHeaderImgHeight - 64)) * offset;
+    
+    self.navigationBarBackgroundView.alpha = alpha;
+    self.lastAlpha = alpha;
+}
+
 
 #pragma mark - UITableViewDelegate 
 
@@ -337,6 +422,50 @@ static NSString *reuseIdentifier = @"mallCell";
     }];
 }
 
+- (void)loadCommonSlider {
+    __weak typeof (self) weakSelf = self;
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiCommonSlider];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    if (ApiTokenStr) {
+        parameters[@"token"] = ApiTokenStr;
+    }else{
+        parameters[@"group_id"] = ApiGroup_ID;
+        parameters[@"lng"] = ApiLngStr;
+        parameters[@"lat"] = ApiLatStr;
+    }
+    parameters[@"type"] = @4;
+    
+    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
+    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
+        
+        
+        NSLog(@"getSliderImages>>>>>>>>>>>>>>%@",dataBack);
+        if ([dataBack[@"code"] integerValue] == 0) {
+            
+            [weakSelf.sliderImagesArray removeAllObjects];
+            
+            NSDictionary *content = dataBack[@"content"];
+            for (NSString *str in content[@"sliders"]) {
+                
+                NSString *urlStr = [NSString stringWithFormat:@"%@%@",Image_URL,str];
+                
+                [weakSelf.sliderImagesArray addObject:urlStr];
+                
+            }
+            //刷新轮播图
+            [weakSelf.infoSliderView configCellWithArray:weakSelf.sliderImagesArray];
+            
+           
+        }else{
+            
+        }
+    } failure:^(NSError *error) {
+        
+        [self showHudMessage:@"连接服务器失败!"];
+    }];
+
+
+}
 
 
 @end

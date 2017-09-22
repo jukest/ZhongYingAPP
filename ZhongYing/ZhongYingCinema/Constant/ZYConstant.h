@@ -164,7 +164,6 @@ typedef enum : NSUInteger {
     
     MyLove,
     MyComment,
-    IntegralMall,
     
     SuggestedStatistics,
     AboutUS

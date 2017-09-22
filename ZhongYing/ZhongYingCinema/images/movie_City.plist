@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>initial</key>
+		<string>当前定位城市</string>
+		<key>citys</key>
+		<array>
+			<dict>
+				<key>city_key</key>
+				<string>000</string>
+				<key>city_name</key>
+				<string>点击定位</string>
+				<key>initials</key>
+				<string>000</string>
+				<key>pinyin</key>
+				<string>000</string>
+				<key>short_name</key>
+				<string>000</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>citys</key>
+		<array>
+			<dict>
+				<key>city_key</key>
+				<string>300210000</string>
+				<key>city_name</key>
+				<string>深圳市</string>
+				<key>initials</key>
+				<string>sz</string>
+				<key>pinyin</key>
+				<string>shenzhen</string>
+				<key>short_name</key>
+				<string>深圳</string>
+			</dict>
+		</array>
+		<key>initial</key>
+		<string>S</string>
+	</dict>
+</array>
+</plist>

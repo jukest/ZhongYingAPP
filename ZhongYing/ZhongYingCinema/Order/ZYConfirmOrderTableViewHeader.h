@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Schedule;
 @interface ZYConfirmOrderTableViewHeader : UIView
 
-- (void)setUpFilmInfo:(NSDictionary *)filmDic withCinema_name:(NSString *)cinema_name withSelectSeat:(NSArray *)seats;
+- (void)setUpFilmInfo:(NSDictionary *)filmDic withCinema_name:(NSString *)cinema_name withSelectSeat:(NSArray *)seats withSchedule:(Schedule *)schedule;
 - (void)timerCutWithTime:(NSInteger)time;
 
 @end

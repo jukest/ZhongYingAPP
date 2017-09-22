@@ -11,10 +11,11 @@
 #import "MainTableViewController.h"
 #import "CinemaComplaintView.h"
 #import "LoginViewController.h"
-#import "CinemaDetailsViewCtl.h"
+//#import "CinemaDetailsViewCtl.h"
 #import "Cinema.h"
 #import "MovieDetailsViewCtl.h"
 #import "CinemaCollectionViewCell.h"
+#import "ZYCinemaDetailsViewController.h"
 #import "ZYCinemaMainNetworkingRequst.h"
 
 
@@ -149,7 +150,7 @@ static NSString *cellID = @"cinemaCollectionCell";
     HotFilm *film = [ZYCinemaMainNetworkingRequst shareInstance].nowPlayingFilmArray[indexPath.row];
     if (event == CinemaTableViewCellBuyEvents) {
         NSLog(@"购票");
-        CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
+        ZYCinemaDetailsViewController *cinemaDetails = [[ZYCinemaDetailsViewController alloc] init];
         cinemaDetails.film = film;
         cinemaDetails.title = @"购票";
         cinemaDetails.cinemaMsg = self.cinemaMsg;
@@ -159,7 +160,7 @@ static NSString *cellID = @"cinemaCollectionCell";
         [vc.navigationController pushViewController:cinemaDetails animated:YES];
     }else if (event == CinemaTableViewCellPreSaleEvents){
         NSLog(@"预售");
-        CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
+        ZYCinemaDetailsViewController *cinemaDetails = [[ZYCinemaDetailsViewController alloc] init];
         cinemaDetails.film = film;
         cinemaDetails.title = @"预售";
         cinemaDetails.cinemaMsg = self.cinemaMsg;

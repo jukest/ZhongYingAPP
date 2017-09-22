@@ -88,7 +88,7 @@
     self.priceLb.attributedText = str;
     self.priceLb.frame = CGRectMake(ScreenWidth -53 -8 -65 -5, 20, 65, 22);
     self.priceLb.textAlignment = NSTextAlignmentRight;
-    self.remainingLb.text = [NSString stringWithFormat:@"剩余座位数:%zd",schedule.seat_available_num];
+    self.remainingLb.text = [NSString stringWithFormat:@"含服务费:￥%zd",0];
     CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 * widthFloat]}];
     self.remainingLb.frame = CGRectMake(ScreenWidth -53 -8 -5 -remainSize.width, 15 +22 +7, remainSize.width, 15);
 }

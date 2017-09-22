@@ -56,6 +56,7 @@
 
 - (BOOL)navigationShouldPopOnBackButton
 {
+    
     return [self canBack];
 }
 

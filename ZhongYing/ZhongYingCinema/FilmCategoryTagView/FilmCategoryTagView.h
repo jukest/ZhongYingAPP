@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LHTabView.h"
+#import "WXTabView.h"
 
 @protocol FilmCategoryTagViewDelegate <NSObject>
 
@@ -21,7 +22,7 @@
 typedef void (^LHTitleViewSelectRow)(NSInteger row);
 
 
-@interface FilmCategoryTagView : UIView<LHTabViewDelegate>
+@interface FilmCategoryTagView : UIView<LHTabViewDelegate,WXTabViewDelegate>
 
 
 

@@ -9,10 +9,10 @@
 #import "InformatiomMainCell.h"
 #import "ZYInformationNewsView.h"
 #import "ZYInformationBoxOfficeView.h"
-#import "LHTabView.h"
+#import "WXTabView.h"
 
 @interface InformatiomMainCell ()
-@property (nonatomic, strong) LHTabView *tabView;
+@property (nonatomic, strong) WXTabView *tabView;
 @end
 
 @implementation InformatiomMainCell
@@ -35,14 +35,11 @@
 
 - (void)setup {
     ZYInformationNewsView *newsView = [[ZYInformationNewsView alloc] init];
-//    mainView.viewController = self.VC;
-//    [self.itemBaseViews addObject:mainView];
+
     
     ZYInformationBoxOfficeView *boxOfficeView = [[ZYInformationBoxOfficeView alloc] init];
-//    weiboView.viewController = self.VC;
-//    [self.itemBaseViews addObject:weiboView];
     
-    _tabView = [[LHTabView alloc]initWithItemsName:@[@"资讯",@"票房"] withImages:@[@"info_news",@"info_boxoffice"] childrenView:@[newsView,boxOfficeView] withTableView:YES withHasNavigationBar:NO];// [[LHTabView alloc]initWithItemsName:@[@"新闻",@"票房"] childrenView:@[newsView,boxOfficeView] withTableView:YES ];//@[@"info_news",@"info_boxoffice"]
+    _tabView = [[WXTabView alloc]initWithItemsName:@[@"资讯",@"票房"] withImages:@[@"info_news",@"info_boxoffice"] childrenView:@[newsView,boxOfficeView] withTableView:YES withHasNavigationBar:NO];
     [self.contentView addSubview:_tabView];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     

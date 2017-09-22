@@ -251,7 +251,7 @@
             //发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:ZYCimemaUpdataWillPlayFilmNotification object:nil userInfo:nil];
         }else {
-            [BZProgressHUD showToView:self.view text:error time:1];
+            [BZProgressHUD showToView:weakSelf.view text:error time:1];
         }
         
     }];

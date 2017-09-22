@@ -89,9 +89,11 @@
         parameters[@"group_id"] = ApiGroup_ID;
         parameters[@"lng"] = ApiLngStr;
         parameters[@"lat"] = ApiLatStr;
-        NSLog(@"parameters = %@",parameters);
     }
     parameters[@"movie_id"] = self.movie_id;
+    
+    NSLog(@"parameters = %@",parameters);
+
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         if (_cinemaDetailsTableView != nil && _cinemaDetailsTableView.mj_header.isRefreshing) {
@@ -108,7 +110,7 @@
             NSDictionary *content = dataBack[@"content"];
             if ([content[@"list"] count] == 0 || [content[@"film"] count] == 0) {
                 [self showHudMessage:@"此影片已结束上映"];
-                [_HUD hide:YES];
+                [_HUD hideAnimated:YES];
                 _isOnShow = NO;
                 [self.cinemaDetailsTableView removeFromSuperview];
                 //[self initCinemaDetailUI];

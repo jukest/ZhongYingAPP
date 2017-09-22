@@ -12,7 +12,10 @@
 #import "ExchangeRecordTableViewCtl.h"
 #import "YSLContainerViewController.h"
 
-@interface IntegralMallViewCtl ()<YSLContainerViewControllerDelegate>
+#import "informationSliderView.h"
+
+
+@interface IntegralMallViewCtl ()<YSLContainerViewControllerDelegate,infoSliderViewDelegate>
 
 @end
 
@@ -29,6 +32,8 @@
     [self initIntegralMallUI];
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -42,6 +47,8 @@
 }
 
 - (void)initIntegralMallUI{
+    
+    
     MyIntegralTableViewCtl *myIntegral = [[MyIntegralTableViewCtl alloc] init];
     myIntegral.title = [NSString stringWithFormat:@"我的积分：%@分",ApiMyScoreStr];
     
@@ -49,7 +56,8 @@
     exchangeRecord.title = @"兑换记录";
     
     [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:@"kYSLScrollMenuCount"];
-    YSLContainerViewController *YSLContainer = [[YSLContainerViewController alloc] initWithControllers:@[myIntegral,exchangeRecord] topBarHeight:HEIGHT_STATUSBAR+HEIGHT_NAVBAR parentViewController:self];
+   
+    YSLContainerViewController *YSLContainer = [[YSLContainerViewController alloc] initWithControllers:@[myIntegral,exchangeRecord] topBarHeight:64 parentViewController:self];
     YSLContainer.delegate = self;
     YSLContainer.menuItemFont = [UIFont systemFontOfSize:16 * widthFloat];
     [self.view addSubview:YSLContainer.view];

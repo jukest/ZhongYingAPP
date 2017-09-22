@@ -29,6 +29,15 @@ typedef void(^MapManagerLoactionBlock)(NSString *cityName,BOOL);
 - (void)stopLocation;
 
 
+/**
+ 地理反编码
+
+ @param latitude 维度
+ @param longitude 经度
+ */
+- (void)reverseGeoCodeWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
+
+
 
 @property (nonatomic, strong) MapManagerLoactionBlock locationBlock;
 

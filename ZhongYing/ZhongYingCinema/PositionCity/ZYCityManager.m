@@ -81,7 +81,7 @@ static ZYCityManager *_instance;
     
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:100];
     
-    NSString *fileStr = [[NSBundle mainBundle] pathForResource:@"CityData.plist" ofType:nil];
+    NSString *fileStr = [[NSBundle mainBundle] pathForResource:@"movie_City.plist" ofType:nil];
     
     NSArray *allCitys = [NSArray arrayWithContentsOfFile:fileStr];
     

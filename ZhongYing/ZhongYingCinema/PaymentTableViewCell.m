@@ -48,7 +48,7 @@
 
 - (void)configCellWithRemain:(float)remain
 {
-    self.balanceLb.text = [NSString stringWithFormat:@"余额：%.0f元",remain];
+    self.balanceLb.text = [NSString stringWithFormat:@"余额：%.2f元",remain];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.balanceLb.text];
     NSRange range = [self.balanceLb.text rangeOfString:@"余额："];
     [str addAttribute:NSForegroundColorAttributeName value:Color(248, 91, 118, 1.0) range:NSMakeRange(range.length, [self.balanceLb.text length] -range.length)];

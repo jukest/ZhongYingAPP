@@ -31,6 +31,7 @@
 #import "ComplaintViewCtl.h"
 #import "IntegralMallViewCtl.h"
 #import "RefundView.h"
+#import "ZYMemberViewController.h"
 
 
 // 最上面视图高度
@@ -216,21 +217,21 @@
 
 - (NSArray *)upListImgData {
     if (!_upListImgData) {
-        _upListImgData = @[@"my_order",@"my_coupon",@"my_news",@"my_not_evaluate"];
+        _upListImgData = @[@"my_order",@"memberCard",@"my_news",@"my_not_evaluate"];
     }
     return _upListImgData;
 }
 
 - (NSArray *)upListTitleData {
     if (!_upListTitleData) {
-        _upListTitleData = @[@"我的订单",@"我的优惠券",@"我的消息",@"待评价"];
+        _upListTitleData = @[@"我的订单",@"会员卡",@"我的消息",@"待评价"];
     }
     return _upListTitleData;
 }
 
 - (NSArray *)moreListImgData {
     if (!_moreListImgData) {
-        _moreListImgData = @[@"my_0_0",@"my_0_1",@"my_1_0",@"my_0_3",@"my_0_4",@"my_1_1",@"my_1_2",@"my_1_3"];
+        _moreListImgData = @[@"my_0_0",@"my_0_1",@"my_1_0",@"my_0_3",@"my_0_4",@"my_1_2",@"my_1_3"];
     }
     return _moreListImgData;
 
@@ -238,7 +239,7 @@
 
 - (NSArray *)moreListTitleData {
     if (!_moreListTitleData) {
-        _moreListTitleData = @[@"我的账单",@"我的影评",@"关注影院",@"我的收藏",@"我的评论",@"积分商城",@"反馈统计",@"关于我们"];
+        _moreListTitleData = @[@"我的账单",@"我的影评",@"关注影院",@"我的收藏",@"我的评论",@"反馈统计",@"关于我们"];
     }
     return _moreListTitleData;
 }
@@ -398,6 +399,10 @@
     [self addHeaderView];
     [self showLogoutBtn];
     [self layoutSubViews];
+    
+    
+    //发送通知 退出登录
+    [[NSNotificationCenter defaultCenter] postNotificationName:LogOutNotification object:nil];
 
     [self.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
 }
@@ -460,11 +465,6 @@
             [myComment setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:myComment animated:YES];
 
-        } else if (button.tag == IntegralMall) {//积分商城
-            IntegralMallViewCtl *integralMall = [[IntegralMallViewCtl alloc] init];
-            [integralMall setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:integralMall animated:YES];
-
         } else if (button.tag == SuggestedStatistics) {//反馈统计
             ComplaintViewCtl *complaint = [[ComplaintViewCtl alloc] init];
             [complaint setHidesBottomBarWhenPushed:YES];
@@ -491,8 +491,9 @@
             [myOrder setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:myOrder animated:YES];
             
-        } else if(button.tag == MyCoupon) {//我的优惠券
-            MyCouponViewCtl *coupon = [[MyCouponViewCtl alloc] init];
+        } else if(button.tag == MyCoupon) {//会员卡
+            ZYMemberViewController *coupon = [[ZYMemberViewController alloc] init];
+            coupon.title = @"会员卡";
             [coupon setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:coupon animated:YES];
             

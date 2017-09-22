@@ -71,6 +71,9 @@
     // 账号在其他地方登陆通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToCinemaViewController) name:@"AccountDidReLogin" object:nil];
     
+    //添加通知 广告页 消失了
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(advertiseViewDismissNotification:) name:AdvertiseViewDismissNotification object:nil];
+    
     
 }
 
@@ -162,6 +165,40 @@
 //        [informationCtl.informationArr removeAllObjects];
 //        [informationCtl.slidersArr removeAllObjects];
 //    }
+}
+
+- (void)advertiseViewDismissNotification:(NSNotification *)notification {
+    
+    BOOL isUserCityChanged = [[NSUserDefaults standardUserDefaults] boolForKey:IsUserCityChanged];
+    
+    if (isUserCityChanged) {//发生了改变,提醒用户切换城市
+        
+        NSString *newCity = [[NSUserDefaults standardUserDefaults] objectForKey:@"newCity"];
+        NSString *oldCity = UserCurrentCityName;
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:[NSString stringWithFormat:@"您所在的城市为%@,将为您切换到%@?",newCity,newCity] preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 添加按钮
+        __weak typeof(alert) weakAlert = alert;
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            [[NSUserDefaults standardUserDefaults] setObject:newCity forKey:@"currentCityName"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PositionCityChangedNotification object:nil];
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            NSLog(@"点击了取消按钮");
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:IsUserCityChanged];
+        
+    } else {
+        
+        
+    }
+  
 }
 
 @end

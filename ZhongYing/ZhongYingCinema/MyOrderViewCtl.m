@@ -24,6 +24,33 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的订单";
     [self initMyOrderViewUI];
+    [self setBackItem];
+}
+
+- (void)setBackItem {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //        [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"movie_back"] forState:UIControlStateNormal];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    button.frame = CGRectMake(0, 0, 50, 30);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //        button.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+    [button addTarget:self action:@selector(backItemAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item= [[UIBarButtonItem alloc]initWithCustomView:button];;
+    
+    self.navigationItem.leftBarButtonItem = item;
+}
+
+- (void)backItemAction {
+    
+    if (self.isFromPayMent) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromPayMent"];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)initMyOrderViewUI{

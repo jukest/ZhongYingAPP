@@ -13,6 +13,9 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 
+#define sectionHeight 35
+#define marge 10
+
 @interface RechargeViewController ()<UIScrollViewDelegate,WXApiDelegate,UIAlertViewDelegate,UIWebViewDelegate>
 {
     UIScrollView *_scrollView;
@@ -21,15 +24,35 @@
     UILabel *_balanceLb;
     UITextField *_moneyTextField;
     NSMutableArray *_chooseArr;
-    UIWebView *_protocolWV;
+    UIWebView *_protocolWV; 
     UIButton *_sureBtn;
     MBProgressHUD *_rechargeHUD;
     NSString *_orderfrom_id; //!<< 订单id
     MBProgressHUD *_HUD;
 }
+
+@property (nonatomic, strong) NSMutableArray *sectionArray;
+
+@property (nonatomic, strong) NSMutableArray <UIButton *>*sectionButtons;
+
+@property (nonatomic, strong) UIButton *userSelectedBtn;
 @end
 
 @implementation RechargeViewController
+
+- (NSMutableArray<UIButton *> *)sectionButtons {
+    if (!_sectionButtons) {
+        _sectionButtons = [NSMutableArray array];
+    }
+    return _sectionButtons;
+}
+
+- (NSMutableArray *)sectionArray {
+    if (!_sectionArray) {
+        _sectionArray = [NSMutableArray array];
+    }
+    return _sectionArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,17 +65,31 @@
     // 微信支付回调通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getWXPayProcessFromPayment:) name:@"WXPay_BuyTicket_Success" object:nil];
     
-    _scrollView = [UIViewController createScrollView];
+    
+    [self loadChargeExplain];
+    
+    //加载充值范围
+    [self loadRechargeRange];
+}
+
+- (void)setupUI {
+    
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight -  64)];
+    _scrollView.contentSize = CGSizeMake(ScreenWidth, ScreenHeight);
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeKeyBoard)];
     [_scrollView addGestureRecognizer:tap];
     _scrollView.backgroundColor = Color(242, 242, 242, 1.0);
     _scrollView.delegate = self;
     [self.view addSubview:_scrollView];
     
-    _rechargeContentView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 100) backgroundColor:[UIColor whiteColor]];
+    int count = self.sectionArray.count % 3 == 0 ? ((int)self.sectionArray.count / 3) : ((int)self.sectionArray.count / 3 + 1);
+    CGFloat countH = count*sectionHeight + count * marge;
+    _rechargeContentView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 70 + countH ) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:_rechargeContentView];
     
-    _rechargeChooseView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 115, ScreenWidth, 100) backgroundColor:[UIColor whiteColor]];
+    CGFloat y = CGRectGetMaxY(_rechargeContentView.frame) + 10;
+    _rechargeChooseView = [FanShuToolClass createViewWithFrame:CGRectMake(0, y, ScreenWidth, 100) backgroundColor:[UIColor whiteColor]];
     [_scrollView addSubview:_rechargeChooseView];
     
     [self initRechargeUI];
@@ -66,19 +103,8 @@
         }
     }];
     
-    // 提示
-//    NSString *tipStr = @"注：";
-//    CGSize tipSize = [FanShuToolClass createString:tipStr font:[UIFont systemFontOfSize:16] lineSpacing:0 maxSize:CGSizeMake(ScreenWidth/2, 50)];
-//    UILabel *tipLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 230, tipSize.width, tipSize.height) text:tipStr font:[UIFont systemFontOfSize:16] textColor:[UIColor redColor] alignment:NSTextAlignmentLeft];
-//    [_scrollView addSubview:tipLb];
-    
-//    NSString *prompStr = @"在2016-08-06至2016-08-08期间，凡在本平台进行充值的用户，都可以享受充值送多少送50%的优惠活动。";
-//    CGSize prompSize = [FanShuToolClass createString:prompStr font:[UIFont systemFontOfSize:16] lineSpacing:3 maxSize:CGSizeMake(ScreenWidth-40-tipSize.width, 100)];
-//    _promptLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20+tipSize.width, 230, ScreenWidth-40-tipSize.width, prompSize.height) text:prompStr font:[UIFont systemFontOfSize:16] textColor:[UIColor grayColor] alignment:NSTextAlignmentLeft];
-//    _promptLb.numberOfLines = 0;
-//    _promptLb.attributedText = [FanShuToolClass getAttributeStringWithContent:prompStr withLineSpaceing:3];
-//    [_scrollView addSubview:_promptLb];
-    _protocolWV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 215, ScreenWidth, ScreenHeight)];
+    y = CGRectGetMaxY(_rechargeChooseView.frame);
+    _protocolWV = [[UIWebView alloc] initWithFrame:CGRectMake(0, y, ScreenWidth, ScreenHeight)];
     _protocolWV.delegate = self;
     _protocolWV.scrollView.bounces = NO;
     _protocolWV.scrollView.showsHorizontalScrollIndicator = NO;
@@ -95,34 +121,92 @@
     
     _sureBtn.enabled = YES;
     _sureBtn.backgroundColor = COLOR_NAVAAR;
-    
-    [self loadChargeExplain];
 }
 
 - (void)initRechargeUI{
-    NSArray *contentArr = @[@"账户余额：",@"金额："];
+    NSArray *contentArr = @[@"账户余额：",@"选择金额"];
     for (int i=0; i<contentArr.count; i++) {
         CGSize leftSize = [FanShuToolClass createString:contentArr[i] font:[UIFont systemFontOfSize:17] lineSpacing:0 maxSize:CGSizeMake(ScreenWidth/2, 50)];
-        UILabel *leftLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 50*i, leftSize.width, 50) text:contentArr[i] font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
-        [_rechargeContentView addSubview:leftLb];
+        
         
         if (i == 0) {
+            
+            UILabel *leftLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 50*i, leftSize.width, 50) text:contentArr[i] font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+            [_rechargeContentView addSubview:leftLb];
+            
             _balanceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20+leftSize.width, 50*i, ScreenWidth-40-leftSize.width, 50) text:[NSString stringWithFormat:@"%@元",ApiMyRemainStr] font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
             [_rechargeContentView addSubview:_balanceLb];
             
             UIView *lineView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 49.5, ScreenWidth, 0.5f) backgroundColor:[UIColor lightGrayColor]];
             [_rechargeContentView addSubview:lineView];
         }else {
-            // 金额
-            _moneyTextField = [FanShuToolClass createTextFieldWithFrame:CGRectMake(20+leftSize.width, 50*i, ScreenWidth-40-leftSize.width, 50) textColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self];
-            [_moneyTextField addTarget:self action:@selector(gotoTextFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
-            _moneyTextField.backgroundColor = [UIColor whiteColor];
-            _moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
-            _moneyTextField.textAlignment = NSTextAlignmentLeft;
-            _moneyTextField.placeholder = @"请输入充值金额";
-            [_rechargeContentView addSubview:_moneyTextField];
+            
+            UILabel *leftLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 50*i, leftSize.width, 20) text:contentArr[i] font:[UIFont systemFontOfSize:14] textColor:[UIColor lightGrayColor] alignment:NSTextAlignmentLeft];
+            [_rechargeContentView addSubview:leftLb];
+            
+//            // 金额
+//            _moneyTextField = [FanShuToolClass createTextFieldWithFrame:CGRectMake(20+leftSize.width, 50*i, ScreenWidth-40-leftSize.width, 50) textColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self];
+//            [_moneyTextField addTarget:self action:@selector(gotoTextFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
+//            _moneyTextField.backgroundColor = [UIColor whiteColor];
+//            _moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
+//            _moneyTextField.textAlignment = NSTextAlignmentLeft;
+//            _moneyTextField.placeholder = @"请选择充值金额";
+//            [_rechargeContentView addSubview:_moneyTextField];
         }
     }
+    
+    
+   
+    
+    CGFloat sectionWidth = (ScreenWidth - 4 * marge) / 3;
+    CGFloat y = CGRectGetMaxY(_balanceLb.frame) + 20;
+    for (int i = 0; i < self.sectionArray.count; i++) {
+        
+        int col = i / 3;//列
+        int row = i % 3;//行
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(row*(sectionWidth + marge) + marge,col*(sectionHeight + marge)+ y , sectionWidth, sectionHeight);
+        NSDictionary *dic = self.sectionArray[i];
+        NSString *money = dic[@"value"];
+        btn.layer.cornerRadius = 10;
+        btn.layer.borderWidth = 2;
+        btn.layer.borderColor = Color(252, 186, 0, 1.0).CGColor;
+        [btn setTitle:[NSString stringWithFormat:@"%@元",money] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(didClickToRecharge:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.backgroundColor = [UIColor clearColor];
+        btn.tag = i;
+        [_rechargeContentView addSubview:btn];
+        [_sectionButtons addObject:btn];
+    }
+    
+    
+}
+
+#pragma mark -- 选择的充值金额
+- (void)didClickToRecharge:(UIButton *)sender {
+    
+    if (self.userSelectedBtn == sender) {
+        
+        self.userSelectedBtn.backgroundColor = Color(252, 186, 0, 1);
+    } else {
+        self.userSelectedBtn.backgroundColor = [UIColor whiteColor];
+        sender.backgroundColor = Color(252, 186, 0, 1);
+    }
+    
+    self.userSelectedBtn = sender;
+    
+    NSLog(@"%@",[self selectedSectionWithButton:self.userSelectedBtn]);
+
+    
+}
+
+- (NSString *)selectedSectionWithButton:(UIButton *)selectedBtn {
+    
+    NSDictionary *dic = self.sectionArray[selectedBtn.tag];
+    
+    return dic[@"value"];
 }
 
 - (void)showAlertTitle:(NSString *)title message:(NSString *)message
@@ -131,6 +215,29 @@
     
     [alter show];
 }
+
+- (void)loadRechargeRange {
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiCommonRechargeSection];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"token"] = ApiTokenStr;
+    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
+    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
+        NSLog(@"getCommonRechargeSection >>>>>>>> %@",dataBack);
+        NSDictionary *content = dataBack[@"content"];
+        if ([dataBack[@"code"] integerValue] == 0) {
+            for (NSDictionary *dic in content[@"section"]) {
+                [self.sectionArray addObject:dic];
+            }
+            [self setupUI];
+        }else{
+            [self showHudMessage:dataBack[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        [self showHudMessage:@"连接服务器失败！"];
+    }];
+}
+
 
 - (void)loadChargeExplain
 {
@@ -144,7 +251,7 @@
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         NSLog(@"getChargeExplain >>>>>>>> %@",dataBack);
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         NSDictionary *content = dataBack[@"content"];
         if ([dataBack[@"code"] integerValue] == 0) {
             [_protocolWV loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL,content[@"url"]]]]];
@@ -153,16 +260,16 @@
         }
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败！"];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [_HUD hide:YES];
+    [_HUD hideAnimated:YES];
     NSInteger height = [[webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"] integerValue];
-    _protocolWV.frame=CGRectMake(0, 215, ScreenWidth, height);
+    _protocolWV.frame=CGRectMake(0, CGRectGetMaxY(_rechargeChooseView.frame), ScreenWidth, height);
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -280,7 +387,7 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserRechargeURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;
-    parameters[@"money"] = @([_moneyTextField.text floatValue]);
+    parameters[@"money"] = @([[self selectedSectionWithButton:self.userSelectedBtn] floatValue]);
     parameters[@"type"] = @(type);
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
@@ -308,19 +415,17 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_rechargeHUD hide:YES];
+        [_rechargeHUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
-        [_rechargeHUD hide:YES];
+        [_rechargeHUD hideAnimated:YES];
     }];
 }
 
 - (void)gotoRechargeEvent:(UIButton *)btn{
     if (btn.tag == 10000) {
-        if ([_moneyTextField.text isEqualToString:@""]) {
-            [self showHudMessage:@"请输入充值金额!"];
-        }else if (!([_moneyTextField.text integerValue] >=10 && [_moneyTextField.text integerValue] <= 10000)){
-            [self showHudMessage:@"充值范围为10-10000元!"];
+        if (self.userSelectedBtn == nil) {
+            [self showHudMessage:@"请选择充值金额!"];
         }else{
             RechargeModel *model = _chooseArr[0];
             if (model.isOpen) { // 微信支付

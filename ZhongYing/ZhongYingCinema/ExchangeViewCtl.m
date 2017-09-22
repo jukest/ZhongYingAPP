@@ -41,9 +41,8 @@
     UIScrollView *scrollView = [FanShuToolClass createScrollViewWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) contentSize:CGSizeMake(ScreenWidth, ScreenHeight -63) target:self];
     [self.view addSubview:scrollView];
     
-    UIView *headView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 162) backgroundColor:Color(239, 239, 239, 1.0)];
-    [scrollView addSubview:headView];
-    
+//    UIView *headView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 162) backgroundColor:Color(239, 239, 239, 1.0)];
+//    [scrollView addSubview:headView];
     // 轮播图
     _adView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, ScreenWidth, 150) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     //cycleScrollView3.currentPageDotImage = [UIImage imageNamed:@"pageControlCurrentDot"];
@@ -52,9 +51,9 @@
     //cycleScrollView2.titlesGroup = titles;
     _adView.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
     _adView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
-    [headView addSubview:_adView];
+//    [headView addSubview:_adView];
     
-    UIView *goodsView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 162, ScreenWidth, 63) backgroundColor:[UIColor whiteColor]];
+    UIView *goodsView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 63) backgroundColor:[UIColor whiteColor]];
     [scrollView addSubview:goodsView];
     
     NSString *typeName;
@@ -97,15 +96,15 @@
     NSArray *titles = @[@"影院：",@"活动时间：",@"详情说明："];
     //    NSArray *contents = @[@"中影UL城市影院（乐尚店）",@"2016-0812 至 2016-08-30",@"•  本电影票在活动时间内可兑换本影院任意一张电影票。\n•  兑换的电影票概不接受“退票”“换票”。\n•  本商品仅限在本影院使用。"];
     for (int i = 0; i < 3; i ++) {
-        UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(12, 225 + i *45, ScreenWidth -24, 1) backgroundColor:Color(236, 236, 236, 1.0)];
+        UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(12, 63 + i *45, ScreenWidth -24, 1) backgroundColor:Color(236, 236, 236, 1.0)];
         [scrollView addSubview:line];
         
         CGSize titleSize = [titles[i] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]}];
-        UILabel *titleLb = [FanShuToolClass createLabelWithFrame:CGRectMake(12, 226 + i *45 +13, titleSize.width, 18) text:titles[i] font:[UIFont systemFontOfSize:15] textColor:Color(253, 147, 45, 1.0) alignment:NSTextAlignmentLeft];
+        UILabel *titleLb = [FanShuToolClass createLabelWithFrame:CGRectMake(12, 63 + i *45 +13, titleSize.width, 18) text:titles[i] font:[UIFont systemFontOfSize:15] textColor:Color(253, 147, 45, 1.0) alignment:NSTextAlignmentLeft];
         [scrollView addSubview:titleLb];
         
         if (i != 2) {
-            UILabel *contentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(12 +titleSize.width, 225 + i *45 +13, 250, 18) text:@"" font:[UIFont systemFontOfSize:15] textColor:Color(60, 60, 60, 1.0) alignment:NSTextAlignmentLeft];
+            UILabel *contentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(12 +titleSize.width, 63 + i *45 +13, 250, 18) text:@"" font:[UIFont systemFontOfSize:15] textColor:Color(60, 60, 60, 1.0) alignment:NSTextAlignmentLeft];
             [scrollView addSubview:contentLb];
             if (i == 0) {
                 _cinemaNameLb = contentLb;
@@ -114,7 +113,7 @@
             }
         }else{
             CGSize descriptionSize = [FanShuToolClass createString:@"" font:[UIFont systemFontOfSize:14] lineSpacing:10 maxSize:CGSizeMake(ScreenWidth -24, ScreenHeight)];
-            UILabel *description = [FanShuToolClass createLabelWithFrame:CGRectMake(12, 226 + i *45 +13 +18 +12, ScreenWidth -24, descriptionSize.height) text:@"" font:[UIFont systemFontOfSize:14] textColor:Color(67, 67, 67, 1.0) alignment:NSTextAlignmentLeft];
+            UILabel *description = [FanShuToolClass createLabelWithFrame:CGRectMake(12, 63 + i *45 +13 +18 +12, ScreenWidth -24, descriptionSize.height) text:@"" font:[UIFont systemFontOfSize:14] textColor:Color(67, 67, 67, 1.0) alignment:NSTextAlignmentLeft];
             description.numberOfLines = 0;
             _descriptionLb = description;
             [scrollView addSubview:description];
@@ -190,7 +189,7 @@
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         if ([dataBack[@"code"] integerValue]== 0) {
-            [_exchangeHUD hide:YES];
+            [_exchangeHUD hideAnimated:YES];
             NSDictionary *content = dataBack[@"content"];
             if ([content[@"is_ok"] boolValue]) {
                 
@@ -201,10 +200,10 @@
             }
         }else{
             [self showHudMessage:dataBack[@"message"]];
-            [_exchangeHUD hide:YES];
+            [_exchangeHUD hideAnimated:YES];
         }
     } failure:^(NSError *error) {
-        [_exchangeHUD hide:YES];
+        [_exchangeHUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -312,7 +311,7 @@
     _cinemaNameLb.text = self.cinemaName;
     _timeLb.text = [NSString stringWithFormat:@"%@ 至 %@",[self.shopDict[@"start_time"] transforTomyyyyMMddWithFormatter:@"yyyy-MM-dd"],[self.shopDict[@"end_time"] transforTomyyyyMMddWithFormatter:@"yyyy-MM-dd"]];
     CGSize descriptionSize = [FanShuToolClass createString:[NSString stringWithFormat:@"%@",self.shopDict[@"shop_detail"]] font:[UIFont systemFontOfSize:14] lineSpacing:10 maxSize:CGSizeMake(ScreenWidth -24, ScreenHeight)];
-    _descriptionLb.frame = CGRectMake(12, 226 + 2 *45 +13 +18 +12, ScreenWidth -24, descriptionSize.height);
+    _descriptionLb.frame = CGRectMake(12, 63 + 2 *45 +13 +18 +12, ScreenWidth -24, descriptionSize.height);
     _descriptionLb.attributedText = [FanShuToolClass getAttributeStringWithContent:[NSString stringWithFormat:@"%@",self.shopDict[@"shop_detail"]] withLineSpaceing:10];
 }
 

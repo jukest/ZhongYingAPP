@@ -12,4 +12,6 @@
 
 @property(nonatomic,strong) UITableView *couponTableView;
 
+@property(nonatomic,strong) NSMutableArray *couponList;
+
 @end

@@ -33,12 +33,12 @@
 }
 
 @property(nonatomic,strong) NSMutableDictionary *filmMessage;
-@property(nonatomic,strong) NSMutableArray *todaySchedule;  //!<< 今天时间表
-@property(nonatomic,strong) NSMutableArray *afterSchedule;  //!<< 后天时间表
-@property(nonatomic,strong) NSMutableArray *tomorrowSchedule;  //!<< 明天时间表
+
 @property(nonatomic,strong) NSMutableArray *seatsList;  //!<< 座位表
 @property(nonatomic,strong) NSMutableArray *selectedSeats; //!<< 选中座位表
 @property(nonatomic,strong) NSMutableDictionary *dict;  //!<< 选中套餐
+
+@property (nonatomic, strong) NSMutableArray *filmPlayPlanModels;
 
 @end
 
@@ -61,6 +61,7 @@
     dict[@"start_time"] = @(self.schedule.start_time);
     dict[@"language"] = self.schedule.language;
     dict[@"tags"] = self.schedule.tags;
+    dict[@"scheduleShowInfo"] = self.schedule.showInfo;
     [_headerView configMovieRoomWithDict:dict];
     
     UIView *footerView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth, 74) backgroundColor:[UIColor whiteColor]];
@@ -112,9 +113,9 @@
         NSLog(@"getSelectSeat >>>>>>>>>>>>>>> %@",dataBack);
         if ([dataBack[@"code"] intValue] == 0) {
             NSDictionary *content = dataBack[@"content"];
-            [self.todaySchedule removeAllObjects];
-            [self.tomorrowSchedule removeAllObjects];
-            [self.afterSchedule removeAllObjects];
+
+            [self.filmPlayPlanModels removeAllObjects];
+            
             [self.seatsList removeAllObjects];
             [self.selectedSeats removeAllObjects];
             _dict = [NSMutableDictionary dictionary];
@@ -124,24 +125,13 @@
             [_headerView.movieRoomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             
             self.filmMessage = [NSMutableDictionary dictionaryWithDictionary:content[@"film"]];
-            for (NSDictionary *dict in content[@"other_film"]) {
-                NSError *error;
-                Schedule *schedule = [[Schedule alloc] initWithDictionary:dict error:&error];
-                if (error) {
-                    NSLog(@"selectSeat_error = %@",error);
-                }
-                if (schedule.time_type == 1) {  // 今天
-                    [self.todaySchedule addObject:schedule];
-                }else if (schedule.time_type == 2){  // 明天
-                    [self.tomorrowSchedule addObject:schedule];
-                }else{  // 后天
-                    [self.afterSchedule addObject:schedule];
-                }
-            }
+            
+            NSArray *playPlanModels = [Schedule wx_objectArrayWithKeyValuesArray:content[@"other_film"]];
+            [self.filmPlayPlanModels addObjectsFromArray:playPlanModels];
+            
             _recommend = content[@"recommend"];
             
             self.seatsList = [self fillSeatsListWithSeats:content[@"seat"]];
-            self.filmMessage[@"index"] = @(self.index);
             [_headerView configMovieRoomWithDict:self.filmMessage];
             [_headerView changeBestSeatViewWith:self.selectedSeats SeatsCount:4];
             [self initSelectionView:self.seatsList];
@@ -188,18 +178,18 @@
 {
     NSMutableArray *arr = [NSMutableArray array];
     for (NSArray *rowSeat in seats) {
-        ZFSeatsModel *seatsModel = [[ZFSeatsModel alloc] init];
+        ZFSeatsModel *seatsModel = [[ZFSeatsModel alloc] init];//行坐标 模型(里面有座位模型数组)
         NSMutableArray *seatsModelArray = [NSMutableArray array];
         for (NSDictionary *seat in rowSeat) {
             NSError *error;
-            ZFSeatModel *seatModel = [[ZFSeatModel alloc] initWithDictionary:seat error:&error];
+            ZFSeatModel *seatModel = [[ZFSeatModel alloc] initWithDictionary:seat error:&error];//座位模型
             if (error) {
                 NSLog(@"seat_Model_Error=%@",error);
             }
             [seatsModelArray addObject:seatModel];
         }
         seatsModel.columns = seatsModelArray;
-        seatsModel.rowId = [(ZFSeatModel *)seatsModelArray[0] x];
+        seatsModel.rowId = [(ZFSeatModel *)seatsModelArray[0] x];//把座位纵坐标值给 行坐标 模型
         seatsModel.rowNum = [(ZFSeatModel *)seatsModelArray[0] x];
         [arr addObject:seatsModel];
     }
@@ -297,6 +287,13 @@
 }
 
 #pragma mark - 懒加载
+
+- (NSMutableArray *)filmPlayPlanModels {
+    if (!_filmPlayPlanModels) {
+        _filmPlayPlanModels = [NSMutableArray array];
+    }
+    return _filmPlayPlanModels;
+}
 - (UITableView *)SelectSeatTableView
 {
     if (_SelectSeatTableView == nil) {
@@ -305,30 +302,6 @@
         [self.view addSubview:_SelectSeatTableView];
     }
     return _SelectSeatTableView;
-}
-
-- (NSMutableArray *)todaySchedule
-{
-    if (_todaySchedule == nil) {
-        _todaySchedule = [NSMutableArray array];
-    }
-    return _todaySchedule;
-}
-
-- (NSMutableArray *)tomorrowSchedule
-{
-    if (_tomorrowSchedule == nil) {
-        _tomorrowSchedule = [NSMutableArray array];
-    }
-    return _tomorrowSchedule;
-}
-
-- (NSMutableArray *)afterSchedule
-{
-    if (_afterSchedule == nil) {
-        _afterSchedule = [NSMutableArray array];
-    }
-    return _afterSchedule;
 }
 
 - (NSMutableArray *)seatsList
@@ -353,35 +326,14 @@
     if (event == ExchangeMovieEvent) {
         NSLog(@"换一场");
         CGFloat height;
-        if (self.todaySchedule.count >= 3) {
-            height = 241;
-        }else{
-            if (self.todaySchedule.count != 0) {
-                height = 40 +67 * self.todaySchedule.count;
-            }else{
-                if (self.tomorrowSchedule.count >= 3) {
-                    height = 241;
-                }else{
-                    if (self.tomorrowSchedule.count != 0) {
-                        height = 40 +67 * self.tomorrowSchedule.count;
-                    }else{
-                        if (self.afterSchedule.count >= 3) {
-                            height = 241;
-                        }else{
-                            height = 40 +67 * self.afterSchedule.count;
-                        }
-                    }
-                }
-            }
-        }
-        MovieTimesView *movieTimes = [[MovieTimesView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth -58, height)
-                                                              WithTodayArr:self.todaySchedule
-                                                               tomorrowArr:self.tomorrowSchedule
-                                                                     after:self.afterSchedule];
+        height = 241;
+
+        MovieTimesView *movieTimes = [[MovieTimesView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth -58, height) withFilmPlayPlans:self.filmPlayPlanModels];
         movieTimes.delegate = self;
         movieTimes.layer.cornerRadius = 3.0f;
         movieTimes.layer.masksToBounds = YES;
         [movieTimes show];
+        
     }else if (event == SelectOneSeatEvent){
         if (self.selectedSeats.count == 0) {
             if (![_recommend isEqual:[NSNull null]]&&_recommend.count != 0) {
@@ -525,15 +477,20 @@
  */
 - (void)gotoMovieTimesViewEventIndexPath:(NSIndexPath *)indexPath index:(NSInteger)index
 {
-    Schedule *schedule;
-    if (index == 0) {  //今天
-        schedule = self.todaySchedule[indexPath.row];
-    }else if (index == 1){  //明天
-        schedule = self.tomorrowSchedule[indexPath.row];
-    }else{  //后天
-        schedule = self.afterSchedule[indexPath.row];
-    }
-    self.index = index;
+//    Schedule *schedule;
+//    if (index == 0) {  //今天
+//        schedule = self.todaySchedule[indexPath.row];
+//    }else if (index == 1){  //明天
+//        schedule = self.tomorrowSchedule[indexPath.row];
+//    }else{  //后天
+//        schedule = self.afterSchedule[indexPath.row];
+//    }
+//    self.index = index;
+//    self.schedule = schedule;
+//    [self loadSeatWithFilmID:schedule.id];
+}
+
+- (void)gotoMovieTimesViewEventIndexPath:(NSIndexPath *)indexPath withSchedule:(Schedule *)schedule {
     self.schedule = schedule;
     [self loadSeatWithFilmID:schedule.id];
 }

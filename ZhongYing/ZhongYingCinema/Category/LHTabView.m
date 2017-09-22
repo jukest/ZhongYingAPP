@@ -10,6 +10,7 @@
 #import "LHTitleView.h"
 #import "ItemBaseView.h"
 #import "FilmCategoryTagView.h"
+#import "ZYIntegralScrollBaseView.h"
 
 @interface LHTabView()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *itemContainer;
@@ -17,7 +18,7 @@
 @end
 @implementation LHTabView
 
-- (instancetype)initWithItemsName:(NSArray *)itemsName withImages:(NSArray *)imges childrenView:(NSArray *)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar
+- (instancetype)initWithItemsName:(NSArray *)itemsName withImages:(NSArray *)imges childrenView:(NSArray *)childrenView withTableView:(BOOL)isTableView withHasNavigationBar:(BOOL)hasNavigationBar isMain:(BOOL)isMain
 {
     self = [super init];
     if (self) {
@@ -26,8 +27,12 @@
         
         [self addSubview:_titleView];
 
+        CGFloat height = HEIGHT - 64 - TitleViewHeight - 49;
+        if (!isMain) {
+            height = HEIGHT - 64 - TitleViewHeight ;
+        }
   
-        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, HEIGHT - (hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49)];
+        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, height)];
         _itemContainer.pagingEnabled = YES;
         _itemContainer.bounces = NO;
         _itemContainer.delegate = self;
@@ -36,8 +41,8 @@
         [self addSubview:_itemContainer];
         
         for (NSInteger i = 0; i < childrenView.count; i++) {
-            ItemBaseView *itemView = childrenView[i];
-            [itemView renderWithIndex:i withTableView:isTableView hasNavigationBar:hasNavigationBar];
+            ZYIntegralScrollBaseView *itemView = childrenView[i];
+            [itemView renderWithIndex:i withTableView:isTableView hasNavigationBar:hasNavigationBar isMain:isMain];
             [_itemContainer addSubview:itemView];
         }
         __weak typeof(self) weakSelf= self;
@@ -47,6 +52,12 @@
         self.delegate = _titleView;
     }
     return self;
+}
+
+- (void)setFirstTitle:(NSString *)firstTitle {
+    _firstTitle = firstTitle;
+    UIButton *button = self.titleView.buttons[0];
+    [button setTitle:firstTitle forState:UIControlStateNormal];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

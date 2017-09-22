@@ -76,9 +76,11 @@
         [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitle:self.items[i] forState:UIControlStateNormal];
         
-        if (self.images.count != 0) {
-            [btn setImage:[UIImage imageNamed:self.images[i]] forState:UIControlStateNormal];
-            btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        if (self.images != nil) {
+            if (self.images.count != 0) {
+                [btn setImage:[UIImage imageNamed:self.images[i]] forState:UIControlStateNormal];
+                btn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+            }
         }
         
         btn.backgroundColor = [UIColor colorWithWhite:255 alpha:1];
@@ -152,6 +154,14 @@
     
     [self btnAction:self.buttons[index]];
 
+}
+
+- (void)WXTabViewDidEndDecelerating:(WXTabView *)tabView {
+    CGFloat offSetX = tabView.offset.x ;
+    
+    NSInteger index = offSetX / ScreenWidth;
+    
+    [self btnAction:self.buttons[index]];
 }
 
 

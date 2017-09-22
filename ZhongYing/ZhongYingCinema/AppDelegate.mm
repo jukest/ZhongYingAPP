@@ -23,6 +23,8 @@
 #import "AdvertiseView.h"
 #import "MainCimemaViewController.h"
 
+#import "ZYMapManager.h"
+
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -43,6 +45,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     // 前往主界面ZYTabBarController
     [self gotoZYTabBarController];
     
@@ -86,6 +90,16 @@
         self.advertise = advertiseView;
         advertiseView.filePath = filePath;
         [advertiseView show];
+        
+    } else {
+        
+        //加入引导页
+        NSString *app_Version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"version"] isEqualToString:app_Version]) {//第一次进来
+        } else {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:AdvertiseViewDismissNotification object:nil];
+        }
         
     }
 }
@@ -374,6 +388,7 @@
     if (!ret) {
         NSLog(@"地图管理启动失败!");
     }
+    [BNCoreServices_Instance setTTSAppId:BAIDU_NAVI_TTS_APPID];
     [BNCoreServices_Instance initServices:NAVI_TEST_APP_KEY];
     [BNCoreServices_Instance startServicesAsyn:nil fail:nil];
 }
@@ -598,6 +613,31 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",coordinate.latitude] forKey:@"lat"];
     // 2.停止定位
     [manager stopUpdatingLocation];
+    
+
+    //反编码解析出城市名
+    [ZYMapManager shareMapManager].locationBlock = ^(NSString *cityName, BOOL success) {
+     
+        if (success) {
+            NSString *currentCity = cityName;
+            NSString *lastCity = (NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"];
+            if ([currentCity isEqualToString:lastCity]) {//还在以前的城市
+                [[NSUserDefaults standardUserDefaults] setObject:cityName forKey:@"currentCityName"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:IsUserCityChanged];
+
+            }else {//换了城市,提醒用户切换城市
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:IsUserCityChanged];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [[NSUserDefaults standardUserDefaults] setObject:cityName forKey:@"newCity"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            
+        }
+        
+    };
+    [[ZYMapManager shareMapManager] reverseGeoCodeWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager

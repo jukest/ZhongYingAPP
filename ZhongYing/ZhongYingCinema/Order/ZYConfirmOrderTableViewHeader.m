@@ -8,6 +8,7 @@
 
 #import "ZYConfirmOrderTableViewHeader.h"
 #import "ZFSeatButton.h"
+#import "Schedule.h"
 
 @interface ZYConfirmOrderTableViewHeader (){
     NSInteger _time;
@@ -31,6 +32,7 @@
 @property (nonatomic, strong)NSString *cinema_name;
 @property (nonatomic, strong)NSArray *seats;
 
+@property (nonatomic, strong) Schedule *schedule;
 
 @end
 
@@ -47,10 +49,11 @@
     return self;
 }
 
-- (void)setUpFilmInfo:(NSDictionary *)filmDic withCinema_name:(NSString *)cinema_name withSelectSeat:(NSArray *)seats{
+- (void)setUpFilmInfo:(NSDictionary *)filmDic withCinema_name:(NSString *)cinema_name withSelectSeat:(NSArray *)seats withSchedule:(Schedule *)schedule{
     self.dic = filmDic;
     self.cinema_name = cinema_name;
     self.seats = seats;
+    self.schedule = schedule;
     [self setupUI];
 }
 
@@ -100,21 +103,8 @@
                                               alignment:NSTextAlignmentLeft];
     [view addSubview:self.nameLb];
     
-    NSString *date = @"";
-    NSString *d = [[NSString stringWithFormat:@"%@",self.dic[@"start_time"]] transforTomyyyyMMddWithFormatter:@"MM月dd日"];
-    switch ([@"1" integerValue]) {
-        case 1: //今天
-            date = [NSString stringWithFormat:@"今天%@",d];
-            break;
-        case 2: //明天
-            date = [NSString stringWithFormat:@"明天%@",d];
-            break;
-        case 3: //后天
-            date = [NSString stringWithFormat:@"后天%@",d];
-            break;
-        default:
-            break;
-    }
+    NSString *date = self.schedule.showInfo;
+    
     CGSize dateSize = [date sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]}];
     y = CGRectGetMaxY(self.nameLb.frame) + marge;
     self.dateLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, y, dateSize.width, 15)
@@ -187,11 +177,11 @@
     [btn1 setTitleColor:Color(82, 82, 82, 1.0) forState:UIControlStateNormal];
     [btn1 setTitle:@"不可退票" forState:UIControlStateNormal];
     btn1.titleLabel.font = [UIFont systemFontOfSize:12];
-    [view addSubview:btn1];
+//    [view addSubview:btn1];
     
-    UIButton *btn2 = [FanShuToolClass createButtonWithFrame:CGRectMake(80, view.height - ZYConfirmOrderTableViewHeaderXuXianBottomHeight, view.width - 80, ZYConfirmOrderTableViewHeaderXuXianBottomHeight) image:[UIImage imageNamed:@"order_yes"] target:nil action:nil tag:101];
+    UIButton *btn2 = [FanShuToolClass createButtonWithFrame:CGRectMake(10, view.height - ZYConfirmOrderTableViewHeaderXuXianBottomHeight, view.width - 80, ZYConfirmOrderTableViewHeaderXuXianBottomHeight) image:[UIImage imageNamed:@"order_yes"] target:nil action:nil tag:101];
     [btn2 setTitleColor:Color(82, 82, 82, 1.0) forState:UIControlStateNormal];
-    [btn2 setTitle:@"开场前1小时可改签(有改签费)" forState:UIControlStateNormal];
+    [btn2 setTitle:@"开场前3小时可退票(有手续费)" forState:UIControlStateNormal];
     btn2.titleLabel.font = [UIFont systemFontOfSize:12];
     [view addSubview:btn2];
     

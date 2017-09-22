@@ -78,8 +78,7 @@
               for (int i = 0; i < self.sliderImgsArray.count; i ++) {
                   [self.sliderImgsArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%@%@",Image_URL,self.sliderImgsArray[i]]];
               }
-              //TODO:--测试
-//              [self.sliderImgsArray removeObjectAtIndex:0];
+
           } else {
               
           }

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self resetBackBarItem];
+//    [self resetBackBarItem];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +38,10 @@
 - (void)resetBackBarItem
 {
     NSArray *viewControllerArray = [self.navigationController viewControllers];
-    long previousViewControllerIndex = [viewControllerArray indexOfObject:self] - 1;
+    
+   
+    
+    int  previousViewControllerIndex = [viewControllerArray indexOfObject:self] - 1;
     UIViewController *previous;
     if (previousViewControllerIndex >= 0) {
         previous = [viewControllerArray objectAtIndex:previousViewControllerIndex];

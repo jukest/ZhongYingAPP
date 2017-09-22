@@ -146,6 +146,10 @@ static int const showtime = 3;
         
     }];
     
+    //发送通知,广告消失
+    [[NSNotificationCenter defaultCenter] postNotificationName:AdvertiseViewDismissNotification object:nil];
+    
+    
 }
 
 @end

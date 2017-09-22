@@ -56,18 +56,16 @@
     [self setup];
     [self setupLeftNavigationItem];
     
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCityName:) name:@"updateCityNotification" object:nil];
-    
-    
-    
+    //添加通知城市切换通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCityName:) name:PositionCityChangedNotification object:nil];
+
 }
 
 
 
 
 - (void)updateCityName:(NSNotification *)notification {
-    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]);
+    NSLog(@"currentCityName%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]);
     [self.leftButton setTitle:UserCurrentCityName forState:UIControlStateNormal];
 }
 
@@ -100,6 +98,19 @@
     
     //去掉透明后导航栏下边的黑边
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    //支付成功后从我的订单返回根控制器的操作
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isFromPayMent"] isEqualToString:@"YES"]) {
+        self.tabBarController.selectedIndex = 3;
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromPayMent"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isFromApn"] isEqualToString:@"YES"]) {
+        self.tabBarController.selectedIndex = 0;
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromApn"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+    }
 }
 
 #pragma mark - 初始化
@@ -117,7 +128,7 @@
     
     [leftButton setImage:[UIImage imageNamed:@"down_1"] forState:UIControlStateNormal];
     
-    [leftButton setTitle:UserCurrentCityName? UserCurrentCityName:@"深圳市" forState:UIControlStateNormal];
+    [leftButton setTitle:UserCurrentCityName? UserCurrentCityName:@"定位" forState:UIControlStateNormal];
 
     [leftButton addTarget:self action:@selector(locationBtn:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:leftButton];
@@ -164,9 +175,6 @@
     
     cinemaController.view.frame = CGRectMake(0 * ScreenWidth, 0, ScreenWidth, ScreenHeight - 49);
     [self.scrollView addSubview:cinemaController.view];
-    
-    
-
     
     MoreCinemaViewCtl *moreCinemaVC = [[MoreCinemaViewCtl alloc]init];
     moreCinemaVC.cinemaType = @"更多影院";
@@ -347,10 +355,10 @@
                         [_complaintView hiddenView];
                     });
                 }
-                [_HUD1 hide:YES];
+                [_HUD1 hideAnimated:YES];
             } failure:^(NSError *error) {
                 [self showMessage:@"连接服务器失败!"];
-                [_HUD1 hide:YES];
+                [_HUD1 hideAnimated:YES];
             }];
         }else{
             [self showMessage:@"投诉最多256个字"];

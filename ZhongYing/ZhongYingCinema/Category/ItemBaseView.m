@@ -12,6 +12,7 @@
 @interface ItemBaseView()
 
 @property (nonatomic, assign)BOOL hasNavigationBar;
+@property (nonatomic, assign)BOOL isMain;
 
 @end
 @implementation ItemBaseView
@@ -20,23 +21,30 @@
 
 
 
-- (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar
+- (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar isMain:(BOOL)isMain
 {
     self.hasNavigationBar = hasNavigationBar;
+    self.isMain = isMain;
     if (isTableView) {//tableView
         [self setupTalbeView];
     } else { //collectionView
     [self setupCollectionView];
     }
     
-    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - NavigationHeight - TitleViewHeight - 49);
+    CGFloat height = HEIGHT - NavigationHeight - TitleViewHeight - 49;
+    
+    if (!isMain) {
+        height = HEIGHT - NavigationHeight - TitleViewHeight;
+    }
+    
+    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, height);
     self.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollAction:) name:TabViewScrollToTopNotification object:nil];
     
 }
 
 - (void)setupTalbeView {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:20) - TitleViewHeight - (self.isMain?49:0)) style:UITableViewStylePlain];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"tableViewCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -77,6 +85,7 @@
     BOOL ret = [noti.object boolValue];
     self.shouldScroll = ret;
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
     

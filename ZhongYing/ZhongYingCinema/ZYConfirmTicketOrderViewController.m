@@ -13,11 +13,11 @@
 #import "Souvenir.h"
 #import "ZYConfirmOrderTableViewHeader.h"
 #import "CouponViewCtl.h"
-#import "RefundView.h"
+//#import "RefundView.h"
 #import "Coupon.h"
 #import "PaymentViewCtl.h"
 
-@interface ZYConfirmTicketOrderViewController ()<UITableViewDelegate,UITableViewDataSource,RefundViewDelegate,PackageTableViewCellDelegate>{
+@interface ZYConfirmTicketOrderViewController ()<UITableViewDelegate,UITableViewDataSource,PackageTableViewCellDelegate>{
     MBProgressHUD *_HUD;
     NSInteger _time;
     UIButton *_payBtn;
@@ -118,6 +118,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     
     self.navBarHairlineImageView.hidden = NO;
+
     
 }
 
@@ -128,6 +129,9 @@
     //去掉透明后导航栏下边的黑边
     self.navBarHairlineImageView.hidden = YES;
 //    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
 }
 
 //通过一个方法来找到这个黑线(findHairlineImageViewUnder):
@@ -365,7 +369,7 @@
             
                 if (self.goodsList.count != 0) {
                     [self setTotalMoney];
-                    [self.header setUpFilmInfo:self.film withCinema_name:self.cinema_name withSelectSeat:self.selectedSeats];
+                    [self.header setUpFilmInfo:self.film withCinema_name:self.cinema_name withSelectSeat:self.selectedSeats withSchedule:self.schedule];
                     
                     [self.tableView reloadData];
 

@@ -17,7 +17,7 @@
     CGFloat width = 0;
 
     if (self.width < ScreenWidth / 4) {
-        width = 20;
+        width = 25;
     } else {
         width = 40;
     }

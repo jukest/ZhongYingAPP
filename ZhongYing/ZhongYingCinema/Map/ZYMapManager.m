@@ -127,7 +127,7 @@ static ZYMapManager *_instance;
         
          self.latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"lat"] floatValue];
          self.longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"lng"] floatValue];
-        [self reverseGeoCode];
+        [self reverseGeoCodeWithLatitude:self.latitude longitude:self.longitude];
          return;
     }
     
@@ -173,10 +173,10 @@ static ZYMapManager *_instance;
 /**
  反地理编码
  */
-- (void)reverseGeoCode {
+- (void)reverseGeoCodeWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude {
     
     //发起反向地理编码检索
-    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.latitude, self.longitude};
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){latitude, longitude};
     BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
     BMKReverseGeoCodeOption alloc]init];
     reverseGeoCodeSearchOption.reverseGeoPoint = pt;
@@ -242,7 +242,7 @@ static ZYMapManager *_instance;
     self.latitude = userLocation.location.coordinate.latitude;
     self.longitude = userLocation.location.coordinate.longitude;
     
-    [self reverseGeoCode];
+    [self reverseGeoCodeWithLatitude:self.latitude longitude:self.longitude];
 }
 
 

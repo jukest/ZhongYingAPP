@@ -24,16 +24,18 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.goodsImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(29, 9, 66, 92) image:[UIImage imageNamed:[NSString stringWithFormat:@"movie_poster_%zd",arc4random() % 3 +1]] tag:100];
+        self.goodsImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(29, 20, 90, 80) image:[UIImage imageNamed:[NSString stringWithFormat:@"movie_poster_%zd",arc4random() % 3 +1]] tag:100];
         [self.contentView addSubview:self.goodsImg];
+        self.goodsImg.layer.cornerRadius = 10;
+        self.goodsImg.layer.masksToBounds = YES;
         
-        self.goodsTypeLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 +66 +22, 22, 150, 15) text:@"电影票" font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+        self.goodsTypeLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 + 90 +22, 22, 150, 15) text:@"电影票" font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.goodsTypeLb];
         
-        self.goodsNameLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 +66 +22, 22 +15 +9, 200, 15) text:@"机械师2：复活" font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+        self.goodsNameLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 + 90 +22, 22 +15 +9, 200, 15) text:@"机械师2：复活" font:[UIFont systemFontOfSize:14] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.goodsNameLb];
         
-        self.integralLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 +66 +22, 22 +15 +9 +15 +11, 150, 15) text:@"积分 20" font:[UIFont systemFontOfSize:15] textColor:Color(0, 144, 230, 1.0) alignment:NSTextAlignmentLeft];
+        self.integralLb = [FanShuToolClass createLabelWithFrame:CGRectMake(29 + 90 +22, 22 +15 +9 +15 +11, 150, 15) text:@"积分 20" font:[UIFont systemFontOfSize:15] textColor:Color(0, 144, 230, 1.0) alignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.integralLb];
         
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.integralLb.text];

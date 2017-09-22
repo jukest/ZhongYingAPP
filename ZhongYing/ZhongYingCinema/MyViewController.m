@@ -237,6 +237,7 @@
     _myTableView.tableHeaderView = [self getTableHeaderView];
     _myTableView.tableFooterView = [self getTableFooterView];
     [_myTableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
 }
 
 #pragma mark - UITableViewDataSource

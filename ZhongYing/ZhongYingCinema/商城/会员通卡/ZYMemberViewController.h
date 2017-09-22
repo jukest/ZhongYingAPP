@@ -8,6 +8,8 @@
 
 #import "ZYViewController.h"
 
+
 @interface ZYMemberViewController : ZYViewController
+
 
 @end

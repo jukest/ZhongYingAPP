@@ -66,7 +66,7 @@
         weiboView.viewController = self.VC;
         [self.itemBaseViews addObject:weiboView];
 
-        _tabView = [[LHTabView alloc]initWithItemsName:@[@"正在热映",@"即将上映"] withImages:nil childrenView:@[mainView,weiboView] withTableView:NO withHasNavigationBar:YES]; // [[LHTabView alloc]initWithItemsName:@[@"正在热映",@"即将上映"] childrenView:@[mainView,weiboView] withTableView:NO];
+        _tabView = [[LHTabView alloc]initWithItemsName:@[@"正在热映",@"即将上映"] withImages:nil childrenView:@[mainView,weiboView] withTableView:NO withHasNavigationBar:YES isMain:YES]; // [[LHTabView alloc]initWithItemsName:@[@"正在热映",@"即将上映"] childrenView:@[mainView,weiboView] withTableView:NO];
         [self.contentView addSubview:_tabView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }

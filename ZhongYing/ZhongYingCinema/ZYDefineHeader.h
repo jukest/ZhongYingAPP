@@ -22,11 +22,17 @@ static CGFloat  NavigationHeight = 64;
 #define SelectedCimemaUpdataOtherDataNotification @"SelectedCimemaUpdataOtherDataNotification"
 
 
+
 #define TabViewScrollToTopNotification @"TabViewScrollToTopNotification"
 #define ItemScrollToTopNotification @"ItemScrollToTopNotification"
 
 #define ZYInformationTabViewScrollToTopNotification @"ZYInformationTabViewScrollToTopNotification"
 #define ZYInformationScrollBaseScrollToTopNotification @"ZYInformationScrollBaseScrollToTopNotification"
+
+//商城 积分 首页 tableview 滚动到顶部 的通知
+#define ZYIntegralMianTableViewScrollToTopNotification @"ZYIntegralMianTableViewScrollToTopNotification"
+//商城 积分 首页 子视图 tableview 滚动到顶部 的 通知
+#define ZYIntegralScrollBaseViewScrollToTopNotification @"ZYIntegralScrollBaseViewScrollToTopNotification"
 
 //更新新闻资讯数据的通知
 #define ZYInformationUpdataNewsDataNotification @"ZYInformationUpdataNewsDataNotification"
@@ -49,12 +55,24 @@ static CGFloat  NavigationHeight = 64;
 //加载更多即将上映的通知
 #define ZYCimemaUpdataMoreWillPlayFilmNotification @"ZYCimemaUpdataMoreWillPlayFilmNotification"
 
+//退出登录的通知
+#define LogOutNotification @"LogOutNotification"
+
+//定位城市发生改变的通知
+#define PositionCityChangedNotification @"PositionCityChangedNotification"
+
+//广告页消失的通知
+#define AdvertiseViewDismissNotification @"AdvertiseViewDismissNotification"
+
 
 #define random_color  [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
 
 
 // 百度地图APP KEY
 #define NAVI_TEST_APP_KEY @"ebEBregcbGaLhtSfe2rdnVzUWicf5qoY"
+// 百度导航TTS授权注册 APPID
+#define BAIDU_NAVI_TTS_APPID @"9288147"
+
 // 友盟APP KEY
 #define UM_TEST_APP_KEY @"589bc2b075ca351ce3000887"
 // 微信APP KEY 和 APP SECRET
@@ -109,6 +127,8 @@ static CGFloat  NavigationHeight = 64;
 
 //当前所在的城市
 #define UserCurrentCityName [[NSUserDefaults standardUserDefaults] objectForKey:@"currentCityName"]
+//城市是否不一样
+#define IsUserCityChanged @"IsUserCityChanged"
 
 // 影院id
 #define ApiCinemaIDStr [[NSUserDefaults standardUserDefaults] objectForKey:@"Apicinema_id"]
@@ -131,10 +151,13 @@ static CGFloat  NavigationHeight = 64;
 // 影院组id
 #define ApiGroup_ID @"1"
 
-#define BASE_URL @"https://www.jkmovies.jukest.cn/"//线上
 //#define BASE_URL @"https://test.jkmovies.jukest.cn/"//测试
-#define Image_URL @"https://www.jkmovies.jukest.cn"
-#define ImageDetail_URL @"https://www.jkmovies.jukest.cn/"
+//#define Image_URL @"https://test.jkmovies.jukest.cn"//测试
+//#define ImageDetail_URL @"https://test.jkmovies.jukest.cn/"//测试
+
+#define BASE_URL @"https://www.jkmovies.jukest.cn/"//线上
+#define Image_URL @"https://www.jkmovies.jukest.cn"//线上
+#define ImageDetail_URL @"https://www.jkmovies.jukest.cn/"//线上
 
 //#define BASE_URL @"http://zytd.ctkey.com.cn/index.php/"
 //#define Image_URL @"http://zytd.ctkey.com.cn"
@@ -144,6 +167,14 @@ static CGFloat  NavigationHeight = 64;
 //#define BASE_URL @"http://192.168.1.80/zhongying/index.php/"
 //#define Image_URL @"http://192.168.1.80/zhongying"
 //#define ImageDetail_URL @"http://192.168.1.80/zhongying/index.php/"
+
+//获取服务费
+#define ApiGetPoundageOld @"Api/Common/getPoundageOld"
+
+//充值范围
+#define ApiCommonRechargeSection @"Api/Common/rechargeSection"
+//轮播图
+#define ApiCommonSlider @"Api/Common/slider"
 // 验证码
 #define ApiVerifyURL @"Api/Login/verify"
 // 用户登录

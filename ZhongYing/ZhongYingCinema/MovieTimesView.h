@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Schedule;
 @protocol MovieTimesViewDelegate <NSObject>
 
 - (void)gotoMovieTimesViewEventIndexPath:(NSIndexPath *)indexPath index:(NSInteger)index;
+- (void)gotoMovieTimesViewEventIndexPath:(NSIndexPath *)indexPath withSchedule:(Schedule *)schedule;
 
 @end
 @interface MovieTimesView : UIView
@@ -22,6 +24,8 @@
 @property(nonatomic,strong) NSArray *tomorrowSchedule;  //!<< 明天时间表
 
 - (instancetype)initWithFrame:(CGRect)frame WithTodayArr:(NSArray *)today tomorrowArr:(NSArray *)tomorrow after:(NSArray *)after;
+
+- (instancetype)initWithFrame:(CGRect)frame withFilmPlayPlans:(NSArray *)filmPlayPlans;
 
 - (void)show;
 

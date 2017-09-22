@@ -11,7 +11,8 @@
 #import "CinemaCollectionViewCell.h"
 #import "MovieDetailsViewCtl.h"
 #import "Cinema.h"
-#import "CinemaDetailsViewCtl.h"
+//#import "CinemaDetailsViewCtl.h"
+#import "ZYCinemaDetailsViewController.h"
 
 
 @interface WeiboView ()<CinemaCollectionViewCellDelegate>
@@ -91,7 +92,7 @@ static NSString *cellID = @"cinemaCollectionCell";
     MovieDetailsViewCtl *movieDetails = [[MovieDetailsViewCtl alloc] init];
     HotFilm *hotFilm = [ZYCinemaMainNetworkingRequst shareInstance].willPlayFilmsArray[indexPath.row];
     movieDetails.hotFilm = hotFilm;
-    movieDetails.cinemaMsg = self.cinemaMsg;
+    movieDetails.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;
     movieDetails.filmsArr = [NSMutableArray arrayWithArray:[ZYCinemaMainNetworkingRequst shareInstance].willPlayFilmsArray];
     movieDetails.type = @"海报";
     movieDetails.indexPath = indexPath.row;
@@ -129,20 +130,20 @@ static NSString *cellID = @"cinemaCollectionCell";
     HotFilm *film = [ZYCinemaMainNetworkingRequst shareInstance].willPlayFilmsArray[indexPath.row];
     if (event == CinemaConllectionViewCellBuyEvents) {
         NSLog(@"购票");
-        CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
+        ZYCinemaDetailsViewController *cinemaDetails = [[ZYCinemaDetailsViewController alloc] init];
         cinemaDetails.film = film;
         cinemaDetails.title = @"购票";
-        cinemaDetails.cinemaMsg = self.cinemaMsg;
+        cinemaDetails.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;;
         cinemaDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
         cinemaDetails.indexPath = indexPath.row;
         [cinemaDetails setHidesBottomBarWhenPushed:YES];
         [vc.navigationController pushViewController:cinemaDetails animated:YES];
     }else if (event == CinemaConllectionViewCellPreSaleEvents){
         NSLog(@"预售");
-        CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
+        ZYCinemaDetailsViewController *cinemaDetails = [[ZYCinemaDetailsViewController alloc] init];
         cinemaDetails.film = film;
         cinemaDetails.title = @"预售";
-        cinemaDetails.cinemaMsg = self.cinemaMsg;
+        cinemaDetails.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;;
         cinemaDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
         cinemaDetails.indexPath = indexPath.row;
         [cinemaDetails setHidesBottomBarWhenPushed:YES];
@@ -152,7 +153,7 @@ static NSString *cellID = @"cinemaCollectionCell";
         MovieDetailsViewCtl *movieDetails = [[MovieDetailsViewCtl alloc] init];
         HotFilm *hotFilm = self.datas[indexPath.row];
         movieDetails.hotFilm = hotFilm;
-        movieDetails.cinemaMsg = self.cinemaMsg;
+        movieDetails.cinemaMsg = [ZYCinemaMainNetworkingRequst shareInstance].cinemaMsg;;
         movieDetails.filmsArr = [NSMutableArray arrayWithArray:self.datas];
         movieDetails.type = @"预告片";
         movieDetails.indexPath = indexPath.row;

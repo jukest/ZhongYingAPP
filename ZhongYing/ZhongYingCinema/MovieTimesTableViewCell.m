@@ -36,7 +36,7 @@
         self.hallNumberLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10 +55 +18, 15 +22 +5, 36, 15) text:@"" font:[UIFont systemFontOfSize:11 * widthFloat] textColor:Color(90, 90, 90, 1.0) alignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.hallNumberLb];
         
-        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10 +55 +18 +40 +55, 15, 45, 22) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:Color(199, 0, 0, 1.0) alignment:NSTextAlignmentRight];
+        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10 +55 +40 +55, 15, 60, 22) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:Color(199, 0, 0, 1.0) alignment:NSTextAlignmentRight];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.priceLb.text];
         NSRange range = [self.priceLb.text rangeOfString:@"元"];
         [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12 * widthFloat] range:range];
@@ -78,12 +78,12 @@
     self.hallNumberLb.text = schedule.name;
     CGSize hallSize = [self.hallNumberLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
     self.hallNumberLb.frame = CGRectMake(10 +60, 15 +22 +6, hallSize.width, 15);
-    self.priceLb.text = [NSString stringWithFormat:@"%zd元",schedule.market_price];
+    self.priceLb.text = [NSString stringWithFormat:@"%.2f元",schedule.market_price];
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:self.priceLb.text];
     NSRange range = [self.priceLb.text rangeOfString:@"元"];
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11 * widthFloat] range:range];
     self.priceLb.attributedText = str;
-    self.priceLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -12 -45 -8, 15, 45, 22);
+    self.priceLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -32 -45 -8, 15, 65, 22);
     self.remainingLb.text = [NSString stringWithFormat:@"剩余座位数:%zd",schedule.seat_available_num];
     CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
     self.remainingLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -12 -remainSize.width -8, 15 +22 +7, remainSize.width, 15);

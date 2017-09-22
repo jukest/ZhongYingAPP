@@ -1319,6 +1319,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 
 - (void)setLabelFont:(UIFont *)labelFont {
     MBMainThreadAssert();
+//    self.label.font = labelFont;
     self.label.font = labelFont;
 }
 

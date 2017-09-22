@@ -16,7 +16,6 @@
 
 @interface ZYInformationMaintViewController ()<UITableViewDelegate,UITableViewDataSource,infoSliderViewDelegate,UINavigationControllerDelegate>
 {
-    informationSliderView *_infoSliderView;
     MBProgressHUD *_HUD;
 }
 
@@ -67,6 +66,13 @@
  */
 @property (nonatomic, assign) NSInteger requstCount;
 
+
+/**
+ 资讯首页轮播图
+ */
+@property (nonatomic, strong) informationSliderView *infoSliderView;
+
+
 @end
 
 @implementation ZYInformationMaintViewController
@@ -82,7 +88,6 @@
     
     [self addNotification];
     [self setupUI];
-    
     
     
     self.navigationController.delegate = self;
@@ -114,6 +119,9 @@
     [self addRefresh];
 
     [self setupStatusBarBackground];
+    
+    self.mainTableView.tableHeaderView = self.infoSliderView;
+
 
 }
 
@@ -171,6 +179,17 @@
 
 #pragma mark -- 懒加载
 
+- (informationSliderView *)infoSliderView {
+    if (!_infoSliderView) {
+        _infoSliderView = [[informationSliderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,InformationViewControllerTableViewHeaderImgHeight)];//CinemaViewControllerHeaderScrollImageH
+        
+        [_infoSliderView configCellWithArray:[ZYInformantionMainNetworingRequst shareInstance].sliderImgsArray];
+        _infoSliderView.delegate = self;
+
+    }
+    return _infoSliderView;
+}
+
 - (MainTableView *)mainTableView {
     
     if (!_mainTableView) {
@@ -218,12 +237,9 @@
 #pragma mark -- UITableViewDelegate
 
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offsetY = scrollView.contentOffset.y;
-    
-    
     
     if(offsetY >= InformationViewControllerTableViewHeaderImgHeight){
         
@@ -355,11 +371,7 @@
 
 - (void)initInfoViewCtlUI
 {
-    _infoSliderView = [[informationSliderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,InformationViewControllerTableViewHeaderImgHeight)];//CinemaViewControllerHeaderScrollImageH
-    
-    [_infoSliderView configCellWithArray:[ZYInformantionMainNetworingRequst shareInstance].sliderImgsArray];
-    _infoSliderView.delegate = self;
-    self.mainTableView.tableHeaderView = _infoSliderView;
+    [self.infoSliderView configCellWithArray:[ZYInformantionMainNetworingRequst shareInstance].sliderImgsArray];
 }
 
 

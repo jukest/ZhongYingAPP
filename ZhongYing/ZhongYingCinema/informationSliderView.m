@@ -27,7 +27,7 @@
         self.adView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
         
         
-        self.adView.currentPageDotColor = Color(252, 186, 0, 1.0); // 自定义分页控件小圆标颜色
+        self.adView.currentPageDotColor = Color(252, 186, 0, 1.0); // [UIColor redColor];// 自定义分页控件小圆标颜色
         self.adView.pageDotColor = [UIColor whiteColor];
         //self.adView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:self.adView];

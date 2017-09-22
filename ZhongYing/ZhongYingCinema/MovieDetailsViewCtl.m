@@ -12,7 +12,9 @@
 #import "InfoDetailsShareView.h"
 #import "CinemaCommentViewCtl.h"
 #import "AlbumViewController.h"
-#import "CinemaDetailsViewCtl.h"
+//#import "CinemaDetailsViewCtl.h"
+#import "ZYCinemaDetailsViewController.h"
+
 #import "UIImageView+WebCache.h"
 #import "Movie.h"
 #import "MovieComment.h"
@@ -82,7 +84,6 @@
     _picArr = @[@"",@"",@"",@"",@"",@"",@""];
     _headerView = [[MovieDetailsHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 610 +64) pictures:_picArr Film:self.hotFilm type:self.type];
     _headerView.movieMessage.delegate = self;
-//    _headerView.moviePicSlider.delegate = self;
     _headerView.pictureSliderView.delegate = self;
     self.movieDetailsTableView.tableHeaderView = _headerView;
     
@@ -248,7 +249,8 @@
                 }else{
                     [_headerView.movieMessage configMovieMessageViewWithModel:self.movie];
                     [_backgroundImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,self.movie.cover]] placeholderImage:[UIImage imageNamed:@""]];
-//                    [_headerView.moviePicSlider configMoviePicSliderViewWithSliders:self.movie.picture];
+
+                    
                     [_headerView.pictureSliderView configMoviePicSliderViewWithSliders:self.movie.picture];
                     
                     [_headerView.movieBoxOffice configMovieBoxOfficeViewWithDictionary:self.box_office];
@@ -434,7 +436,7 @@
         [shareView show];
     }else if (btn.tag == MovieDetailsBuyTicketEvent){
         NSLog(@"立即购票");
-        CinemaDetailsViewCtl *cinemaDetails = [[CinemaDetailsViewCtl alloc] init];
+        ZYCinemaDetailsViewController *cinemaDetails = [[ZYCinemaDetailsViewController alloc] init];
         cinemaDetails.cinemaMsg = self.cinemaMsg;
         cinemaDetails.filmsArr = self.filmsArr;
         cinemaDetails.film = self.hotFilm;

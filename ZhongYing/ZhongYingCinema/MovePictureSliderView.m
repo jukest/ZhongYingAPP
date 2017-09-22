@@ -68,6 +68,7 @@
 
 - (void)configMoviePicSliderViewWithSliders:(NSArray *)sliders
 {
+   
     [self.adView play];
     self.pictureArray = sliders;
     [self.adView reloadWithDataArray:sliders];

@@ -16,7 +16,7 @@
 #import "RefundView.h"
 #import "ZYPaymentViewCtlHeader.h"
 
-@interface PaymentViewCtl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,RefundViewDelegate>
+@interface PaymentViewCtl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,RefundViewDelegate,UIGestureRecognizerDelegate>
 {
     PaymentView *_headerView;
     NSIndexPath *_index;
@@ -57,6 +57,52 @@
     else{
         [self loadGoodsOrder];
     }
+    
+    [self setBackItem];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+}
+
+- (void)setBackItem {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //        [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"movie_back"] forState:UIControlStateNormal];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    button.frame = CGRectMake(0, 0, 50, 30);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //        button.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+    [button addTarget:self action:@selector(backItemAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item= [[UIBarButtonItem alloc]initWithCustomView:button];;
+    
+    self.navigationItem.leftBarButtonItem = item;
+}
+- (void)backItemAction {
+    
+    
+    if (self.isTicket) {
+        BOOL canBack = [self canBack];
+
+        if (canBack) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            
+        }
+    } else {
+       
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -197,6 +243,8 @@
 
 - (void)payOrderWithPayType:(NSInteger)type
 {
+    
+    
     if (type == 1) { // 余额支付
         if (_remain == 0) {
             [self showHudMessage:@"当前余额为0，请充值再购买！"];
@@ -222,6 +270,7 @@
     }
     
     parameters[@"type"] = @(type);
+    
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         if ([dataBack[@"code"] integerValue] == 0) {
@@ -258,7 +307,12 @@
             }
             [_payHUD hideAnimated:YES];
         }else{
-            [self showHudMessage:dataBack[@"message"]];
+            if (dataBack[@"message"]) {
+                
+                [self showHudMessage:dataBack[@"message"]];
+            } else {
+                [self showHudMessage:@"支付失败"];
+            }
             [_payHUD hideAnimated:YES];
         }
     } failure:^(NSError *error) {
@@ -448,6 +502,9 @@
     [self.paymentTableView reloadData];
 }
 
+
+
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -490,6 +547,7 @@
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
+    
     if (self.isTicket) {
         
         return [self canBack];

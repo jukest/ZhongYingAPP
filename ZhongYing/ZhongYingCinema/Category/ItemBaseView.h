@@ -24,7 +24,7 @@ typedef void(^ItemBaseViewBlock)(UITableView *,NSInteger *selectIndex);
 
 @property (nonatomic, strong) UIViewController *viewController;
 
-- (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar;
+- (void)renderWithIndex:(NSInteger)index withTableView:(BOOL)isTableView hasNavigationBar:(BOOL)hasNavigationBar isMain:(BOOL)isMain;
 
 
 

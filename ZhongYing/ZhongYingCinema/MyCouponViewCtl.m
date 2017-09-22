@@ -14,7 +14,7 @@
 {
     MBProgressHUD *_HUD;
 }
-@property(nonatomic,strong) NSMutableArray *couponList;
+
 
 @end
 
@@ -66,11 +66,11 @@
             [self showHudMessage:dataBack[@"message"]];
         }
         [self.couponTableView reloadData];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
         NSLog(@"error = %@",error);
         [self showHudMessage:@"连接服务器失败!"];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 

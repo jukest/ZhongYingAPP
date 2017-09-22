@@ -13,7 +13,7 @@
 
 
 /** 首页顶部视图的高度 */
-CGFloat const CinemaViewControllerHeaderScrollImageH = 201 ;
+CGFloat const CinemaViewControllerHeaderScrollImageH = 215 ;
 
 CGFloat const CinemaViewControllerFilmCagetoryTagViewH = 30;
 
@@ -53,7 +53,7 @@ CGFloat const ItemBaseViewConllectViewCellDescrip = 40;
 CGFloat const InformationViewControllerTableViewCellHeight = 115;
 
 /** 资讯首页头部图片的高度 */
-CGFloat const InformationViewControllerTableViewHeaderImgHeight = 201;
+CGFloat const InformationViewControllerTableViewHeaderImgHeight = 215;
 
 
 /** 资讯首页tableViewcell中图片的高度 */

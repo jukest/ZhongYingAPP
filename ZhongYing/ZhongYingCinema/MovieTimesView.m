@@ -9,6 +9,9 @@
 #import "MovieTimesView.h"
 #import "MovieTimesTableViewCell.h"
 #import "Schedule.h"
+#import "WXSegmentView.h"
+#import "WXScheduleDataManager.h"
+#import "CBSegmentView.h"
 
 @interface MovieTimesView ()<UITableViewDelegate,UITableViewDataSource,MovieTimesTableViewCellDelegate>
 {
@@ -16,8 +19,50 @@
     UIView *_lineView;
     UIButton *_maskView;
 }
+
+@property (nonatomic, strong) NSArray *playPlans;
+
+
+@property (nonatomic, strong) WXSegmentView *sliderSegmentView;
+
+/**
+ 安排的日期数组
+ */
+@property (nonatomic, strong) NSMutableArray *playDates;
+
+@property (nonatomic, assign) NSInteger selectedPlayDateIndex;
 @end
 @implementation MovieTimesView
+
+
+- (WXSegmentView *)sliderSegmentView {
+    if (!_sliderSegmentView) {
+        __weak typeof(self) weakSelf = self;
+        _sliderSegmentView = [[WXSegmentView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth-58, 40)];
+        [_sliderSegmentView setTitleArray:self.playDates withStyle:WXSegmentStyleSlider];
+        _sliderSegmentView.titleChooseReturn = ^(NSInteger x) {
+            weakSelf.selectedPlayDateIndex = x;
+            [weakSelf.movieTimesTableView reloadData];
+        };
+    }
+    return _sliderSegmentView;
+}
+
+
+- (instancetype)initWithFrame:(CGRect)frame withFilmPlayPlans:(NSArray *)filmPlayPlans {
+    self  = [super initWithFrame:frame];
+    if (self) {
+        _maskView = [FanShuToolClass createButtonWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) title:nil titleColor:[UIColor blackColor] target:self action:@selector(hiddenView) tag:1000];
+        _maskView.backgroundColor = [UIColor blackColor];
+        self.playPlans = filmPlayPlans;
+        self.selectedPlayDateIndex = 0;
+        [self numberOfTotalDayForFilms];
+        [self addSubview:self.movieTimesTableView];
+        
+
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame WithTodayArr:(NSArray *)today tomorrowArr:(NSArray *)tomorrow after:(NSArray *)after
 {
@@ -40,6 +85,12 @@
 }
 
 #pragma mark - 懒加载
+- (NSMutableArray *)playDates {
+    if (!_playDates) {
+        _playDates = [[NSMutableArray alloc]init];
+    }
+    return _playDates;
+}
 - (UITableView *)movieTimesTableView
 {
     if (_movieTimesTableView == nil) {
@@ -90,44 +141,17 @@
     [view.layer addAnimation:animation forKey:nil];
 }
 
-- (void)btnDidClicked:(UIButton *)btn
-{
-    CGFloat height;
-    
-    if (btn.tag == 38) {
-        _index = 0;
-        if (self.todaySchedule.count >= 3) {
-            height = 241;
-        }else{
-            height = 40 +67 * self.todaySchedule.count;
-        }
 
-    }else if (btn.tag == 39){
-        _index = 1;
-        if (self.tomorrowSchedule.count >= 3) {
-            height = 241;
-        }else{
-            height = 40 +67 * self.tomorrowSchedule.count;
-        }
-    }else if (btn.tag == 40){
-        _index = 2;
-        if (self.afterSchedule.count >= 3) {
-            height = 241;
-        }else{
-            height = 40 +67 * self.afterSchedule.count;
-        }
-    }
-
-    self.movieTimesTableView.frame = CGRectMake(0, 0, ScreenWidth -58, height);
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, ScreenWidth -58, height);
-    [self.movieTimesTableView reloadData];
-}
 
 #pragma mark - MovieTimesTableViewCellDelegate
 - (void)gotoSelectedMovieTimeIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.delegate respondsToSelector:@selector(gotoMovieTimesViewEventIndexPath:index:)]) {
         [self.delegate gotoMovieTimesViewEventIndexPath:indexPath index:_index];
+    }
+    if ([self.delegate respondsToSelector:@selector(gotoMovieTimesViewEventIndexPath:withSchedule:)]) {
+        NSArray *schedules = [self schedulesWithSelectedPlayDateIndex:self.selectedPlayDateIndex];
+        [self.delegate gotoMovieTimesViewEventIndexPath:indexPath withSchedule:schedules[indexPath.row]];
     }
     [self hiddenView];
 }
@@ -153,47 +177,8 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *today = [NSString stringWithFormat:@"今天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-    NSString *tomorrow =  [NSString stringWithFormat:@"明天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] +86400] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-    NSString *after =  [NSString stringWithFormat:@"后天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] +86400 * 2] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-    NSMutableArray *dates = [NSMutableArray array];
-    if (self.todaySchedule.count != 0) {
-        [dates addObject:today];
-    }
-    if (self.tomorrowSchedule.count != 0) {
-        [dates addObject:tomorrow];
-    }
-    if (self.afterSchedule.count != 0) {
-        [dates addObject:after];
-    }
-    
-    UIView *datesView = [FanShuToolClass createViewWithFrame:CGRectMake(0, 0, ScreenWidth -58, 40) backgroundColor:[UIColor whiteColor]];
-    UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(0, 39, ScreenWidth -58, 1) backgroundColor:Color(240, 240, 240, 1.0)];
-    [datesView addSubview:line];
-    for (int i = 0; i < dates.count; i ++) {
-        UIButton *btn = [FanShuToolClass createButtonWithFrame:CGRectMake(i * (ScreenWidth -58) / 3, 0, (ScreenWidth -58) / 3 -1, 38) title:dates[i] titleColor:Color(199, 0, 0, 1.0) target:self action:@selector(btnDidClicked:) tag:0];
-        if ([dates[i] hasPrefix:@"后天"]) {
-            btn.tag = 40;
-        }
-        if ([dates[i] hasPrefix:@"明天"]) {
-            btn.tag = 39;
-        }
-        if ([dates[i] hasPrefix:@"今天"]) {
-            btn.tag = 38;
-        }
-        btn.backgroundColor = [UIColor whiteColor];
-        btn.titleLabel.font = [UIFont systemFontOfSize:14 * widthFloat];
-        
-        if (btn.tag == _index +38) {
-            [btn setTitleColor:Color(199, 0, 0, 1.0) forState:UIControlStateNormal];
-            _lineView = [FanShuToolClass createViewWithFrame:CGRectMake(i * (ScreenWidth -58) / 3, 38, (ScreenWidth -58) / 3 -1, 2) backgroundColor:Color(201, 0, 0, 1.0)];
-            [datesView addSubview:_lineView];
-        }else {
-            [btn setTitleColor:Color(120, 120, 120, 1.0) forState:UIControlStateNormal];
-        }
-        [datesView addSubview:btn];
-    }
-    return datesView;
+
+    return self.sliderSegmentView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -204,31 +189,102 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_index == 0) {
-        return self.todaySchedule.count;
-    }else if (_index == 1){
-        return self.tomorrowSchedule.count;
-    }else{
-        return self.afterSchedule.count;
-    }
+//    if (_index == 0) {
+//        return self.todaySchedule.count;
+//    }else if (_index == 1){
+//        return self.tomorrowSchedule.count;
+//    }else{
+//        return self.afterSchedule.count;
+//    }
+    
+    return [self schedulesWithSelectedPlayDateIndex:self.selectedPlayDateIndex].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MovieTimesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieTimesTableViewCell"];
     cell.indexPath = indexPath;
-    Schedule *schedule;
-    if (_index == 0) {
-        schedule = self.todaySchedule[indexPath.row];
-    }else if (_index == 1){
-        schedule = self.tomorrowSchedule[indexPath.row];
-    }else{
-        schedule = self.afterSchedule[indexPath.row];
-    }
+    Schedule *schedule = (Schedule *)[self schedulesWithSelectedPlayDateIndex:self.selectedPlayDateIndex][indexPath.row];
+
     [cell configCellWithModel:schedule];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;
 }
+
+
+#pragma mark --对排片计划模型数组进行处理
+
+//计算 总共售卖 多少天
+- (NSInteger)numberOfTotalDayForFilms {
+    
+    
+    NSMutableDictionary *resultDict = [[NSMutableDictionary alloc] initWithCapacity:self.playPlans.count];
+    for (Schedule *schedule in self.playPlans) {
+        [resultDict setObject:@(schedule.date) forKey:@(schedule.date)];
+    }
+    NSArray *resultArray = resultDict.allValues;
+    
+    //排序
+    resultArray = [resultArray sortedArrayUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    
+    //获取模型
+    NSMutableArray *resultModels = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < resultArray.count; i++) {
+        
+        NSInteger startTime = [resultArray[i] integerValue];
+        for (int j = 0; j<self.playPlans.count; j++) {
+            Schedule *schedule = self.playPlans[j];
+            if (schedule.date == startTime) {
+                [resultModels addObject:schedule];
+            }
+        }
+    }
+    
+    [self.playDates removeAllObjects];
+    
+    for (int i = 0; i < resultModels.count; i++) {
+        Schedule *schedule = resultModels[i];
+        
+        [self.playDates addObject:[[WXScheduleDataManager shareScheduleDataManager] showInfoWithDate:[NSDate dateWithTimeIntervalSince1970:schedule.start_time]]];
+    }
+    //去重
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSString *string in self.playDates) {
+        if (![result containsObject:string]) {
+            [result addObject:string];
+        }
+    }
+    self.playDates = result;
+    NSLog(@"%@",self.playDates);
+
+    
+    return self.playDates.count;
+
+}
+
+- (NSArray *)schedulesWithSelectedPlayDateIndex:(NSInteger)selectedIndex {
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (int i = 0; i < self.playPlans.count; i++) {
+        Schedule *schedule = self.playPlans[i];
+        
+        if ([self.playDates[selectedIndex] isEqualToString:schedule.showInfo]) {
+            [array addObject:schedule];
+        }
+        
+    }
+    
+    
+    return array;
+}
+
 
 @end

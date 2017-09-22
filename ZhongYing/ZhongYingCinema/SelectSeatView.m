@@ -11,6 +11,8 @@
 #import "ZFSeatModel.h"
 #import "ZFSeatSelectionView.h"
 #import "ZFSeatButton.h"
+#import "WXScheduleDataManager.h"
+#import "WXCalender.h"
 
 @interface SelectSeatView ()
 {
@@ -120,22 +122,17 @@
 - (void)configMovieRoomWithDict:(NSDictionary *)dict
 {
     self.nameLb.text = dict[@"name"];
-    switch ([dict[@"index"] intValue]) {
-        case 0:
-            self.dateLb.text = [NSString stringWithFormat:@"今天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-            break;
-        case 1:
-            self.dateLb.text = [NSString stringWithFormat:@"明天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] +86400] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-            break;
-        case 2:
-            self.dateLb.text = [NSString stringWithFormat:@"后天%@",[[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] +86400 * 2] transforTomyyyyMMddWithFormatter:@"MM月dd日"]];
-            break;
-        default:
-            break;
+    if (dict[@"scheduleShowInfo"]) {
+        
+        self.dateLb.text = dict[@"scheduleShowInfo"];
+    } else {
+        self.dateLb.text = [[WXScheduleDataManager shareScheduleDataManager] showInfoWithDate:[NSDate dateWithTimeIntervalSince1970:[dict[@"start_time"] integerValue]]];
     }
+    
     CGSize dateSize = [self.dateLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     self.dateLb.frame = CGRectMake(12, 40, dateSize.width, 15);
-    self.timeLb.text = [[NSString stringWithFormat:@"%@",dict[@"start_time"]] transforTomyyyyMMddWithFormatter:@"HH:mm"];
+    NSString *dateStr = [[WXCalender shareCalender] dateStrWithDate:[NSDate dateWithTimeIntervalSince1970:[dict[@"start_time"] integerValue]] dateStrFormatterStr:@"HH:mm"];
+    self.timeLb.text = [NSString stringWithFormat:@"%@",dateStr];
     CGSize timeSize = [self.timeLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}];
     self.timeLb.frame = CGRectMake(12 +dateSize.width +8, 40, timeSize.width +3, 15);
     if (![dict[@"tags"] isEqual:[NSNull null]]) {

@@ -95,7 +95,7 @@
         self.descriptionLb.text = [NSString stringWithFormat:@"%@ %@",order.cinema_name,order.hall_name];
         self.priceLb.text = [NSString stringWithFormat:@"总价：%@元",order.price];
         [self.refundBtn setTitle:@"退票" forState:UIControlStateNormal];
-        self.refundBtn.hidden = YES;
+        self.refundBtn.hidden = NO;
         self.refundBtn.backgroundColor = Color(0, 151, 235, 1.0);
         self.timeLb.hidden = NO;
     }else if ([order.orderform_type intValue] == 2){  //卖品
