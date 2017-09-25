@@ -53,13 +53,13 @@
     NSMutableArray *texts = [[NSMutableArray alloc] init];
     if ([box_office[@"today"] integerValue] / 10000 == 0) {
         
-        [texts addObject:[NSString stringWithFormat:@"%@\n今日票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"today"] integerValue] / 10000]]]];
+        [texts addObject:[NSString stringWithFormat:@"%@\n今日票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"today"] integerValue]]]]];
     }else{
         
         [texts addObject:[NSString stringWithFormat:@"%@万\n今日票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"today"] integerValue] / 10000]]]];
     }
     if ([box_office[@"history"] integerValue] / 10000 == 0) {
-        [texts addObject:[NSString stringWithFormat:@"%@\n历史票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"history"] integerValue] / 10000]]]];
+        [texts addObject:[NSString stringWithFormat:@"%@\n历史票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"history"] integerValue] ]]]];
     }else{
         [texts addObject:[NSString stringWithFormat:@"%@万\n历史票房",[self insertIntoString:[NSString stringWithFormat:@"%zd",[box_office[@"history"] integerValue] / 10000]]]];
     }

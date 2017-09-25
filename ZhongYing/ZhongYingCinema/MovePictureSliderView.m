@@ -54,9 +54,13 @@
 - (instancetype)initWithFrame:(CGRect)frame pictures:(NSArray *)picArr
 {
     if (self = [self initWithFrame:frame]) {
-        self.pictureArray = picArr;
+        if (picArr.count == 0) {
+            
+        } else {
+            self.pictureArray = picArr;
+            [self addSubview:self.adView];
+        }
         
-        [self addSubview:self.adView];
         
 //        self.scrollView = [FanShuToolClass createScrollViewWithFrame:CGRectMake(0, 36, ScreenWidth, 100) contentSize:CGSizeMake(12 + 85 * count + 10 * (count -1) + 12 + more, 100) target:self];
 //        self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -68,7 +72,12 @@
 
 - (void)configMoviePicSliderViewWithSliders:(NSArray *)sliders
 {
-   
+    if (sliders.count == 0) {
+        return;
+    } else {
+        [self addSubview:self.adView];
+    }
+    
     [self.adView play];
     self.pictureArray = sliders;
     [self.adView reloadWithDataArray:sliders];

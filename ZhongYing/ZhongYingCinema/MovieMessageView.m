@@ -128,7 +128,7 @@
 
 - (void)configMovieMessageViewWithModel:(Movie *)movie
 {
-    [self.movieImg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,movie.cover]] placeholderImage:[UIImage imageNamed:@""]];
+    [self.movieImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,movie.cover]] placeholderImage:[UIImage imageNamed:@""]];
     self.nameLb.text = movie.name;
     self.foreNameLb.text = movie.english_name;
     self.addressLb.text = [NSString stringWithFormat:@"%@ / %@分钟",movie.source,movie.length];

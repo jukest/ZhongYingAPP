@@ -31,7 +31,6 @@
     MovieDetailsHeaderView *_headerView;
     NSString *_description;
     UIButton *_buyBtn;
-    NSArray *_picArr;
     UIImageView *_backgroundImage;
     UIView *_navigationBar;
     UIToolbar *_toolbar;
@@ -49,7 +48,7 @@
 @property(nonatomic,strong) WMPlayer *player;
 @property(nonatomic,assign) NSInteger currentPage;
 @property(nonatomic,strong) UILabel *titleLb;
-
+@property (nonatomic ,strong) NSMutableArray *picArr;
 @end
 
 @implementation MovieDetailsViewCtl
@@ -81,8 +80,7 @@
     _toolbar = toolbar;
     [_backgroundImage addSubview:toolbar];
     
-    _picArr = @[@"",@"",@"",@"",@"",@"",@""];
-    _headerView = [[MovieDetailsHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 610 +64) pictures:_picArr Film:self.hotFilm type:self.type];
+    _headerView = [[MovieDetailsHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 610 +64) pictures:self.picArr Film:self.hotFilm type:self.type];
     _headerView.movieMessage.delegate = self;
     _headerView.pictureSliderView.delegate = self;
     self.movieDetailsTableView.tableHeaderView = _headerView;
@@ -176,8 +174,12 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-    
-    [_headerView.pictureSliderView.adView play];
+    if (self.picArr.count == 0) {
+        
+    } else {
+        
+        [_headerView.pictureSliderView.adView play];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -193,8 +195,10 @@
     if (_shareView != nil) {
         [_shareView hiddenView];
     }
-    
-    [_headerView.pictureSliderView.adView pause];
+    if (self.picArr.count != 0) {
+        
+        [_headerView.pictureSliderView.adView pause];
+    }
 
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -226,11 +230,9 @@
         if ([dataBack[@"code"] intValue] == 0) {
             NSDictionary *content = dataBack[@"content"];
             if (self.currentPage == 0) {
-                NSError *error;
-                self.movie = [[Movie alloc] initWithDictionary:content[@"movie"] error:&error];
-                if (error) {
-                    NSLog(@"movie_error = %@",error);
-                }
+                NSLog(@"%@",content[@"movie"]);
+                self.movie = [Movie mj_objectWithKeyValues:content[@"movie"]];//[[Movie alloc] initWithDictionary:content[@"movie"] error:&error];
+                
                 self.box_office = content[@"box_office"];
                 for (NSDictionary *dict in content[@"comment"]) {
                     NSError *comment_error;
@@ -241,16 +243,20 @@
                     [self.comments addObject:comment];
                 }
                 
-                if ([content[@"movie"][@"picture"] isEqual:[NSNull null]]) {
-                    _picArr = @[];
+                if (self.movie.picture.count == 0) {
+                    [self.picArr removeAllObjects];
                     [self configHeaderViewWithHeight:610 +64];
                     _headerView.frame = CGRectMake(0, 0, ScreenWidth, 610 +64 -154);
                     self.movieDetailsTableView.tableHeaderView = _headerView;
-                }else{
-                    [_headerView.movieMessage configMovieMessageViewWithModel:self.movie];
-                    [_backgroundImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,self.movie.cover]] placeholderImage:[UIImage imageNamed:@""]];
 
+                }else{
+                    self.picArr = [self.movie.picture mutableCopy];
+                    [self configHeaderViewWithHeight:610 +64];
+                    _headerView.frame = CGRectMake(0, 0, ScreenWidth, 610 +64);
+                    self.movieDetailsTableView.tableHeaderView = _headerView;
                     
+                    [_headerView.movieMessage configMovieMessageViewWithModel:self.movie];
+                    [_backgroundImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",Image_URL,self.movie.cover]] placeholderImage:[UIImage imageNamed:@""]];
                     [_headerView.pictureSliderView configMoviePicSliderViewWithSliders:self.movie.picture];
                     
                     [_headerView.movieBoxOffice configMovieBoxOfficeViewWithDictionary:self.box_office];
@@ -392,6 +398,12 @@
 }
 
 #pragma mark - 懒加载
+- (NSMutableArray *)picArr {
+    if (!_picArr) {
+        _picArr = [NSMutableArray arrayWithCapacity:10];
+    }
+    return _picArr;
+}
 - (UITableView *)movieDetailsTableView
 {
     if (_movieDetailsTableView == nil) {
@@ -582,7 +594,7 @@
             height = 610 + 64;
         }
         [self configHeaderViewWithHeight:height];
-        if (_picArr.count == 0) {
+        if (self.picArr.count == 0) {
             _headerView.frame = CGRectMake(0, 0, ScreenWidth, height -155);
             self.movieDetailsTableView.tableHeaderView = _headerView;
         }
@@ -621,7 +633,7 @@
 
 - (void)configHeaderViewWithHeight:(CGFloat)height
 {
-    _headerView = [[MovieDetailsHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height) pictures:_picArr Film:self.hotFilm type:self.type];
+    _headerView = [[MovieDetailsHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, height) pictures:self.picArr Film:self.hotFilm type:self.type];
     [_headerView.movieMessage configMovieMessageViewWithModel:self.movie];
 //    [_headerView.moviePicSlider configMoviePicSliderViewWithSliders:self.movie.picture];
     [_headerView.pictureSliderView configMoviePicSliderViewWithSliders:self.movie.picture];

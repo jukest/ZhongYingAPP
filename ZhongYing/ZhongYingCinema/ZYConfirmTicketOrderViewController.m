@@ -298,7 +298,7 @@
         if (indexPath.row == 0) {
             // 优惠券
             CouponViewCtl *coupon = [[CouponViewCtl alloc] init];
-            coupon.hasSnack = NO; //[self judgmentHasSnack]; //判断是否有小吃
+            coupon.hasSnack = NO; //判断是否有小吃 //; //[self judgmentHasSnack]
             
             coupon.hasTicket = YES;
             coupon.coupon_ids = self.selectCou;
@@ -310,15 +310,8 @@
                     self.couponPrice = self.couponPrice +[c.price floatValue];
                     [couponArr addObject:c.id];
                 }
-//                [weak.couponLb setTitle:[NSString stringWithFormat:@"减%zd元",self.couponPrice] forState:UIControlStateNormal];
-//                weak.finalPaymentLb.text = [NSString stringWithFormat:@"还需支付：%.0f元",([self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice) > 0 ? [self.price[@"all_price"] floatValue] -self.couponPrice +self.souvenirPrice : 0];
                 [weak.tableView reloadData];
                 [weak setTotalMoney];
-//                NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:self.finalPaymentLb.text];
-//                NSRange strRange = [self.finalPaymentLb.text rangeOfString:@"还需支付："];
-//                [attributeStr addAttribute:NSForegroundColorAttributeName value:Color(60, 60, 60, 1.0) range:strRange];
-//                self.finalPaymentLb.attributedText = attributeStr;
-                
                 weak.selectCou = couponArr;
             };
             [coupon setHidesBottomBarWhenPushed:YES];
@@ -424,11 +417,14 @@
             self.goods = content[@"goods"];
             self.price = content[@"price"];
             self.orderform = content[@"orderform"];
-//            self.selectCou = self.price[@"coupon_id"];
-//            self.couponPrice = [self.price[@"diff_price"] integerValue];
             
-            [self loadSouvenir];
-//            [self loadGoods];
+            [_HUD hideAnimated:YES];
+
+            [self showHudMessage:@"订单提交成功!"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self goPay];
+            });
 
             
         }else if ([dataBack[@"code"] integerValue] == 305501){

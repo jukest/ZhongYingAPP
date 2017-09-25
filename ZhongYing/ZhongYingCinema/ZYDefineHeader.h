@@ -151,13 +151,13 @@ static CGFloat  NavigationHeight = 64;
 // 影院组id
 #define ApiGroup_ID @"1"
 
-//#define BASE_URL @"https://test.jkmovies.jukest.cn/"//测试
-//#define Image_URL @"https://test.jkmovies.jukest.cn"//测试
-//#define ImageDetail_URL @"https://test.jkmovies.jukest.cn/"//测试
+#define BASE_URL @"https://test.jkmovies.jukest.cn/"//测试
+#define Image_URL @"https://test.jkmovies.jukest.cn"//测试
+#define ImageDetail_URL @"https://test.jkmovies.jukest.cn/"//测试
 
-#define BASE_URL @"https://www.jkmovies.jukest.cn/"//线上
-#define Image_URL @"https://www.jkmovies.jukest.cn"//线上
-#define ImageDetail_URL @"https://www.jkmovies.jukest.cn/"//线上
+//#define BASE_URL @"https://www.jkmovies.jukest.cn/"//线上
+//#define Image_URL @"https://www.jkmovies.jukest.cn"//线上
+//#define ImageDetail_URL @"https://www.jkmovies.jukest.cn/"//线上
 
 //#define BASE_URL @"http://zytd.ctkey.com.cn/index.php/"
 //#define Image_URL @"http://zytd.ctkey.com.cn"
