@@ -57,7 +57,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    
+    //画虚线
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 1.0);
     CGContextSetStrokeColorWithColor(context, [UIColor darkGrayColor].CGColor);

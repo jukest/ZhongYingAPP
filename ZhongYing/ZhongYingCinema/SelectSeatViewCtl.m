@@ -146,6 +146,7 @@
     }];
 }
 
+
 //创建选座模块
 -(void)initSelectionView:(NSMutableArray *)seatsModelArray{
     

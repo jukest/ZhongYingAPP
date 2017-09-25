@@ -52,9 +52,10 @@
         //初始化滚动视图
         [self initScrollView];
         
-        //[self initappLogo];
+//        [self initappLogo];//添加logo
         //座位视图
         [self initSeatsView:seatsArray];
+        
         //左上角指示器
         [self initindicator:seatsArray];
         //左边索引条
@@ -103,6 +104,7 @@
     self.seatScrollView.showsVerticalScrollIndicator = NO;
     self.seatScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;//自动调整子控件与父控件中间的位置，宽高。
     [self addSubview:self.seatScrollView];
+    
 }
 
 -(void)initappLogo{
@@ -133,6 +135,7 @@
     [self.seatScrollView addSubview:rowindexView];
 }
 
+//中线
 -(void)initcenterLine:(NSMutableArray *)seatsArray{
     ZFCenterLineView *centerLine = [[ZFCenterLineView alloc]init];
     centerLine.backgroundColor = [UIColor clearColor];
@@ -143,6 +146,8 @@
     self.centerLine.y = self.seatScrollView.contentOffset.y + ZFCenterLineY;
     [self.seatScrollView addSubview:self.centerLine];
 }
+
+//厅的logo
 -(void)inithallLogo:(NSString *)HallName{
     ZFHallLogoView *logoView = [[ZFHallLogoView alloc]init];
     self.hallLogo = logoView;
@@ -183,8 +188,10 @@
     self.seatView = seatView;
     seatView.frame = CGRectMake(0, 0,seatView.seatViewWidth, seatView.seatViewHeight);
     [self.seatScrollView insertSubview:seatView atIndex:0];
-    self.seatScrollView.maximumZoomScale = ZFseastMaxW_H / seatView.seatBtnWidth;
+    self.seatScrollView.maximumZoomScale = ZFseastMaxW_H / seatView.seatBtnWidth;//最大放大倍数
     self.seatScrollView.contentInset = UIEdgeInsetsMake(ZFseastsColMargin, (self.width - seatView.seatViewWidth)/2,ZFseastsColMargin,(self.width - seatView.seatViewWidth)/2);
+//    self.seatView.backgroundColor = [UIColor redColor];
+    
 }
 
 //设置左上角的指示器

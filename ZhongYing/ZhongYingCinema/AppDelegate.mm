@@ -388,7 +388,7 @@
     if (!ret) {
         NSLog(@"地图管理启动失败!");
     }
-    [BNCoreServices_Instance setTTSAppId:BAIDU_NAVI_TTS_APPID];
+    [BNCoreServices_Instance setTTSAppId:BAIDU_NAVI_TTS_APPID];//百度导航TTS授权注册
     [BNCoreServices_Instance initServices:NAVI_TEST_APP_KEY];
     [BNCoreServices_Instance startServicesAsyn:nil fail:nil];
 }

@@ -29,14 +29,15 @@
         ZFSeatsModel *seatsModel = seatsArray.firstObject;
         
         self.selectCount = 0;
-        NSUInteger cloCount = [seatsModel.columns count];
+        NSUInteger cloCount = [seatsModel.columns count];//第一排的座位数(包括过道)
         
-        if (cloCount % 2) cloCount += 1;//偶数列数加1 防止中线压住座位
+        if (cloCount % 2) cloCount += 1;//奇列数加1 防止中线压住座位
         
         CGFloat seatViewW = maxW - 2 * ZFseastsRowMargin;//整个座位视图的宽度
         
         CGFloat seatBtnW = seatViewW / cloCount;//座位按钮的宽度
         
+        //不能超过最小的 宽高
         if (seatBtnW > ZFseastMinW_H) {
             seatBtnW = ZFseastMinW_H;
             seatViewW = cloCount * ZFseastMinW_H;
@@ -47,7 +48,7 @@
         self.seatBtnWidth = seatBtnW;
         self.seatBtnHeight = seatBtnH;
         self.seatViewWidth = seatViewW;
-        self.seatViewHeight = [seatsArray count] * seatBtnH;
+        self.seatViewHeight = [seatsArray count] * seatBtnH;//计算高度
         //初始化座位
         [self initSeatBtns:seatsArray];
         
@@ -63,22 +64,13 @@
             
             ZFSeatModel *seatModel = seatsModel.columns[i];
             ZFSeatButton *seatBtn = [[ZFSeatButton alloc] init];
-//            seatBtn.backgroundColor = [UIColor redColor];
             seatBtn.seatmodel = seatModel;
             seatBtn.seatsmodel = seatsModel;
             
             if (![seatModel.type isEqualToString:@"road"]) {
                 
-//                NSLog(@"seatsModel:%d----seatModel:%d",idx,i);
-//                NSLog(@"x:%@---y:%@,rowValue:%@---cloValue:%@",seatModel.x,seatModel.y,seatModel.rowValue,seatModel.columnValue);
-                
                 if ([seatModel.seatStatus isEqualToString:@"ok"]) {
                     [seatBtn setImage:[UIImage imageNamed:@"choosable"] forState:UIControlStateNormal];//这里更改座位图标
-//                    UIImage *image = [UIImage imageNamed:@"selected"];
-//                    //                    NSInteger row = [seatBtn.seatmodel.rowValue integerValue];
-//                    //                    NSInteger col = [seatBtn.seatmodel.columnValue integerValue];
-//                    //                    image = [image imageWithTitle:[NSString stringWithFormat:@"%zd排\n%zd座",row,col] fontSize:5.5];
-//                    [seatBtn setImage:image forState:UIControlStateSelected];
                     seatBtn.tag = [seatModel.cineSeatId integerValue];
                 }else if ([seatModel.seatStatus isEqualToString:@"locked"] || [seatModel.seatStatus isEqualToString:@"booked"] || [seatModel.seatStatus isEqualToString:@"selled"] || [seatModel.seatStatus isEqualToString:@"repair"]){
                     [seatBtn setImage:[UIImage imageNamed:@"sold"] forState:UIControlStateNormal];
@@ -86,6 +78,9 @@
                 }
             }else{
                 continue;
+                //测试使用用来查看整个座位的排列
+//                [seatBtn setImage:[UIImage imageNamed:@"choosable"] forState:UIControlStateNormal];//这里更改座位图标
+
             }
             [seatBtn addTarget:self action:@selector(seatBtnAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:seatBtn];
