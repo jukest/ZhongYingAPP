@@ -25,8 +25,22 @@
     MBProgressHUD *_HUD;
     NSInteger _yearIndex;
     NSInteger _sexIndex;
+    
+    
 }
+//用户名
+@property (nonatomic, strong) NSString *nickName;
+//手机号
+@property (nonatomic, strong) NSString *phoneString;
+//姓名
+@property (nonatomic, strong) NSString *userName;
+//年龄
+@property (nonatomic, strong) NSString *ageStr;
+//性别
+@property (nonatomic, strong) NSString *sexStr;
 
+//是否修改了资料
+@property (nonatomic, assign,getter=isReviseInfo) BOOL reviseInfo;
 @end
 
 @implementation MyInformationViewCtl
@@ -36,7 +50,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的资料";
-    
+    self.reviseInfo = NO;
     _scrollView = [UIViewController createScrollView];
     [self.view addSubview:_scrollView];
     
@@ -151,6 +165,12 @@
 
 - (void)uploadAvatar
 {
+    if (self.reviseInfo) {
+        
+    } else {
+        return;
+    }
+    
     _HUD = [FanShuToolClass createMBProgressHUDWithText:@"修改中..." target:self];
     [self.view addSubview:_HUD];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
@@ -169,35 +189,46 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 
 - (void)uploadProfile
 {
+    
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserModifyProfileURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;
     parameters[@"nickname"] = _userNameTextField.text;
-    parameters[@"name"] = _nameTextField.text;
+    if (_nameTextField.text.length!=0) {
+        parameters[@"name"] = _nameTextField.text;
+    }
     parameters[@"age"] = @(_yearIndex);
     parameters[@"gender"] = @(_sexIndex);
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
+        
         if ([dataBack[@"code"] integerValue] == 0) {
             [[NSUserDefaults standardUserDefaults] setObject:_nameTextField.text forKey:@"Apiname"];// 用户姓名
             [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:@"Apinickname"];// 用户昵称
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%zd",_sexIndex] forKey:@"Apigender"];// 性别，枚举值，0-未设置|1-男|2-女
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%zd",_yearIndex] forKey:@"Apiage"];// 年龄，枚举值，0-未设置|1-20岁以下|2-20-30岁|3-31-40岁|4-40岁以上
+            if (self.reviseInfo) {
+                
+            } else {
+                
+                [self showHudMessage:@"修改成功"];
+            }
+
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -234,6 +265,7 @@
 }
 
 - (void)gotoMyInformationEvent:(UIButton *)btn{
+//    [self reviseInfoForUser];
     [self keyBoardDown];
     if (btn.tag == 100) {
         [self uploadAvatar];  //上传头像
@@ -285,8 +317,20 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     _myInformationHeadImg.image = [info objectForKey: UIImagePickerControllerEditedImage];
     [picker dismissViewControllerAnimated:YES completion:^{
-        
+        self.reviseInfo = YES;
     }];
+}
+
+- (BOOL)reviseInfoForUser {
+    BOOL reviseInfo = NO;
+    
+    if (self.nibName == _userNameTextField.text && self.phoneString == _phoneTextField.text && self.userName == _nameTextField.text && self.ageStr == _yearLb.text && self.sexStr == _sexLb.text) {
+        reviseInfo = NO;
+    } else {
+        reviseInfo = YES;
+    }
+    self.reviseInfo = reviseInfo;
+    return reviseInfo;
 }
 
 @end
