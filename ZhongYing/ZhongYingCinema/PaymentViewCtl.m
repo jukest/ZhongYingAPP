@@ -364,6 +364,9 @@
             parameters[@"conpon_id"] = self.order[@"coupon_id"];
         }
         parameters[@"content"] = result[@"result"];
+        
+        NSLog(@"支付宝结果上传到服务器的参数:%@",parameters);
+        
         ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
         [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
             NSLog(@"服务器验证支付宝结果>>>>>>>>>>>>>>>%@",dataBack);

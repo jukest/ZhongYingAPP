@@ -9,6 +9,8 @@
 #import "HistoryTableViewCtl.h"
 #import "NoTicketCell.h"
 #import "OrderDetailsCtl.h"
+#import "ZYNoTicketCell.h"
+#import "ZYOrderDetailsCtl.h"
 
 @interface HistoryTableViewCtl ()
 {
@@ -25,7 +27,10 @@
     [super viewDidLoad];
     
     self.tableView.backgroundColor = Color(245, 245, 245, 1.0);
-    [self.tableView registerClass:[NoTicketCell class] forCellReuseIdentifier:@"NoTicketCell"];
+//    [self.tableView registerClass:[NoTicketCell class] forCellReuseIdentifier:@"NoTicketCell"];
+    
+    [self.tableView registerClass:[ZYNoTicketCell class] forCellReuseIdentifier:@"ZYNoTicketCell"];
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.currentPage = 0;
     
@@ -56,7 +61,9 @@
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"list"]) {
                 NSError *error;
-                Order *order = [[Order alloc] initWithDictionary:dict error:&error];
+//                Order *order = [[Order alloc] initWithDictionary:dict error:&error];
+                Order *order = [Order mj_objectWithKeyValues:dict];
+
                 if (error) {
                     NSLog(@"error ====== %@",error);
                 }
@@ -124,7 +131,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NoTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoTicketCell" forIndexPath:indexPath];
+    ZYNoTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZYNoTicketCell" forIndexPath:indexPath];
     Order *order = self.orders[indexPath.row];
     [cell configCellWithModel:order];
     cell.refundBtn.hidden = YES;
@@ -135,10 +142,45 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Order *order = self.orders[indexPath.row];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    OrderDetailsCtl *orderDetails = [[OrderDetailsCtl alloc] init];
-    orderDetails.order = order;
-    [self.navigationController pushViewController:orderDetails animated:YES];
+    
+    
+    UIViewController *orderDetails;
+    
+    if ([order.orderform_type intValue] == 1) {  //电影
+        
+        orderDetails = [[OrderDetailsCtl alloc] init];
+        
+    }else if ([order.orderform_type intValue] == 2){  //卖品
+        
+        orderDetails = [[ZYOrderDetailsCtl alloc] init];
+        
+    }else{  //积分商品
+        
+        if ([order.score_type intValue] == 1) {  //积分商品-电影
+            
+            orderDetails = [[OrderDetailsCtl alloc] init];
+            
+        }else if ([order.score_type intValue] == 2){ //积分商品-纪念品
+            
+            orderDetails = [[ZYOrderDetailsCtl alloc] init];
+            
+        }else{ //积分商品-观影套餐
+            
+            orderDetails = [[ZYOrderDetailsCtl alloc] init];
+        }
+    }
+    
+    if ([orderDetails isKindOfClass:[ZYOrderDetailsCtl class]]) {
+        ZYOrderDetailsCtl *orderDetialVC = (ZYOrderDetailsCtl *)orderDetails;
+        orderDetialVC.order = order;
+        [self.navigationController pushViewController:orderDetialVC animated:YES];
+        
+    } else {
+        OrderDetailsCtl *orderDetailVC = (OrderDetailsCtl *)orderDetails;
+        orderDetailVC.order = order;
+        [self.navigationController pushViewController:orderDetailVC animated:YES];
+        
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

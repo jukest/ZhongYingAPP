@@ -334,7 +334,7 @@
     [self keyBoardDown];
     
     if (complaint.length < 6) {
-        [self showMessage:@"投诉至少6个字"];
+        [self showMessage:@"反馈至少6个字"];
     }else{
         if (_complaintView.complaintFld.text.length >= 6 && _complaintView.complaintFld.text.length <= 256) {
             
@@ -350,7 +350,7 @@
             [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
                 NSLog(@"sendComplaint >>>>>>>> %@",dataBack);
                 if ([dataBack[@"code"] integerValue] == 0){
-                    [self showMessage:@"投诉成功"];
+                    [self showMessage:@"反馈成功"];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [_complaintView hiddenView];
                     });
@@ -361,7 +361,7 @@
                 [_HUD1 hideAnimated:YES];
             }];
         }else{
-            [self showMessage:@"投诉最多256个字"];
+            [self showMessage:@"建议最多256个字"];
         }
     }
 }
@@ -384,14 +384,6 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

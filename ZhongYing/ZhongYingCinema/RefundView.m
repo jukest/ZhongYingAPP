@@ -25,8 +25,9 @@
         [self addSubview:headerLb];
         self.headerView = headerLb;
         
-        CGSize contentSize = [FanShuToolClass createString:content font:[UIFont systemFontOfSize:16] lineSpacing:5 maxSize:CGSizeMake(frame.size.width -46, ScreenHeight)];
-        UILabel *contentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(23, 20 +17 +5, frame.size.width -46, contentSize.height) text:content font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+//        CGSize contentSize = [FanShuToolClass createString:content font:[UIFont systemFontOfSize:16] lineSpacing:5 maxSize:CGSizeMake(frame.size.width -46, ScreenHeight)];
+        UILabel *contentLb = [FanShuToolClass createLabelWithFrame:CGRectMake(23, 20 +17 +5, frame.size.width -46, self.height - 17 - 47 - 30) text:content font:[UIFont systemFontOfSize:16] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+//        contentLb.backgroundColor = [UIColor redColor];
         contentLb.numberOfLines = 0;
         [self addSubview:contentLb];
         self.contentView = contentLb;

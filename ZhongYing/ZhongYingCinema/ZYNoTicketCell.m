@@ -1,14 +1,15 @@
 //
-//  NoTicketCell.m
+//  ZYNoTicketCell.m
 //  ZhongYingCinema
 //
-//  Created by 小菜皮 on 2016/12/2.
-//  Copyright © 2016年 小菜皮. All rights reserved.
+//  Created by apple on 2017/9/26.
+//  Copyright © 2017年 小菜皮. All rights reserved.
 //
 
-#import "NoTicketCell.h"
+#import "ZYNoTicketCell.h"
+#import "WXCalender.h"
 
-@implementation NoTicketCell
+@implementation ZYNoTicketCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -27,7 +28,8 @@
         [self.contentView addSubview:view];
         
         // 电影图片
-        self.movieImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(15, 10, 65, 90) color:[UIColor whiteColor]];
+        self.movieImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(15, 10, 50, 90) color:[UIColor whiteColor]];
+        self.movieImg.contentMode = UIViewContentModeScaleAspectFit;
         [view addSubview:self.movieImg];
         
         // 电影标题
@@ -46,11 +48,17 @@
         [view addSubview:self.descriptionLb];
         
         // 电影价格
-        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(90, 75, ScreenWidth-90, 25) text:@"" font:[UIFont systemFontOfSize:16 * widthFloat] textColor:Color(40, 40, 40, 1.0) alignment:NSTextAlignmentLeft];
+        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(90, 80, 100, 25) text:@"" font:[UIFont systemFontOfSize:16 * widthFloat] textColor:Color(40, 40, 40, 1.0) alignment:NSTextAlignmentLeft];
         [view addSubview:self.priceLb];
+//        self.priceLb.backgroundColor = [UIColor redColor];
         
-        self.refundBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(ScreenWidth-56 * widthFloat -14, 60, 56 * widthFloat, 30 * heightFloat) title:@"退票" titleColor:[UIColor whiteColor] cornerRadius:4.0f font:[UIFont systemFontOfSize:15 * widthFloat] backgroundColor:Color(0, 151, 235, 1.0) target:self action:@selector(noTicketClick:) tag:100];
+        self.refundBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(ScreenWidth-56 * widthFloat -14, 45, 56 * widthFloat, 30 * heightFloat) title:@"退票" titleColor:[UIColor whiteColor] cornerRadius:4.0f font:[UIFont systemFontOfSize:15 * widthFloat] backgroundColor:Color(0, 151, 235, 1.0) target:self action:@selector(noTicketClick:) tag:100];
         [view addSubview:self.refundBtn];
+        
+        //订单时间
+        self.creatTimeLabel = [FanShuToolClass createLabelWithFrame:CGRectMake(0, 0, 10, 10) text:@"" font:[UIFont systemFontOfSize:13] textColor:[UIColor lightGrayColor] alignment:NSTextAlignmentRight];
+        [view addSubview:self.creatTimeLabel];
+        
     }
     return self;
 }
@@ -70,6 +78,10 @@
     }else{
         self.nameLb.frame = CGRectMake(90, 10, nameSize.width, 40);
     }
+    self.nameLb.text = order.name;
+    
+    
+    
     if ([order.orderform_type intValue] == 1) {  //电影
         NSTimeInterval currentInterval = [[NSDate date] timeIntervalSince1970];
         NSTimeInterval interval =[order.time doubleValue] - currentInterval;
@@ -84,7 +96,7 @@
                 self.timeLb.text = [NSString stringWithFormat:@"距开场%d天%d小时%d分钟",(int)interval / 86400,((int)interval % 86400) / 3600, (((int)interval % 86400) % 3600) / 60];
             }
         }else{
-           self.timeLb.text = @"";
+            self.timeLb.text = @"";
         }
         CGSize timeSize = [self.timeLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 * widthFloat]}];
         self.nameLb.frame = CGRectMake(90, 10, nameSize.width > (ScreenWidth -100 -timeSize.width -14) ? (ScreenWidth -100 -timeSize.width -14) : nameSize.width, 40);
@@ -100,9 +112,11 @@
         self.timeLb.hidden = NO;
     }else if ([order.orderform_type intValue] == 2){  //卖品
         self.timeLb.hidden = YES;
-        self.nameLb.text = @"观影套餐";
+//        self.nameLb.text = @"观影套餐";
+        self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+
         self.nameLb.frame = CGRectMake(90, 10, 200, 40);
-        self.descriptionLb.text = order.detail;
+//        self.descriptionLb.text = order.detail;
         self.priceLb.text = [NSString stringWithFormat:@"总价：%@元",order.price];
         [self.refundBtn setTitle:@"退货" forState:UIControlStateNormal];
         self.refundBtn.hidden = YES;
@@ -137,18 +151,31 @@
             self.refundBtn.hidden = YES;
             self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
         }else if ([order.score_type intValue] == 2){ //积分商品-纪念品
-            self.nameLb.text = @"纪念品";
-            self.descriptionLb.text = order.name;
+//            self.nameLb.text = @"纪念品";
+            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+
+//            self.descriptionLb.text = order.name;
             self.refundBtn.hidden = YES;
             self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
         }else{ //积分商品-观影套餐
-            self.nameLb.text = @"观影套餐";
+//            self.nameLb.text = @"观影套餐";
+            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+
             self.nameLb.frame = CGRectMake(90, 10, 200, 40);
-            self.descriptionLb.text = order.name;
+//            self.descriptionLb.text = order.name;
             self.refundBtn.hidden = YES;
             self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
         }
     }
+    
+    //订单时间
+    if (order.create_time > 10) {
+        self.creatTimeLabel.frame = CGRectMake(CGRectGetMaxX(self.priceLb.frame), self.priceLb.y, ScreenWidth - self.priceLb.x - self.priceLb.width - 10, self.priceLb.height);
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:order.create_time];
+        NSString *dateStr = [[WXCalender shareCalender] dateStrWithDate:date dateStrFormatterStr:@"yyyy-MM-dd HH:mm"];
+        self.creatTimeLabel.text = dateStr;
+    } else {
+        self.creatTimeLabel.frame = CGRectZero;
+    }
 }
-
 @end

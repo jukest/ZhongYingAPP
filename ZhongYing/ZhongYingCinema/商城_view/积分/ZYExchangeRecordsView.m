@@ -77,7 +77,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
 
+// 获取当前VC
+- (UIViewController *)topVC:(UIViewController *)rootViewController{
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tab = (UITabBarController *)rootViewController;
+        return [self topVC:tab.selectedViewController];
+    }else if ([rootViewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navc = (UINavigationController *)rootViewController;
+        return [self topVC:navc.visibleViewController];
+    }else if (rootViewController.presentedViewController){
+        UIViewController *pre = (UIViewController *)rootViewController.presentedViewController;
+        return [self topVC:pre];
+    }else{
+        return rootViewController;
+    }
 }
 
 @end

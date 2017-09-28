@@ -169,7 +169,7 @@ static NSString *reuseIdentifier = @"mallCell";
 //    NSLog(@"买%ld",(long)good.selectedNumber);
     
     
-    NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+    NSString *price = [NSString stringWithFormat:@"￥ %.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
     self.totalPricrLb.text = price;
 
     
@@ -193,7 +193,7 @@ static NSString *reuseIdentifier = @"mallCell";
     }
     
     
-    NSString *price = [NSString stringWithFormat:@"%.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
+    NSString *price = [NSString stringWithFormat:@"￥ %.2f ",([self totalMoney] -_couponPrice) > 0 ? [self totalMoney] -_couponPrice : 0];
     self.totalPricrLb.text = price;
     
 }

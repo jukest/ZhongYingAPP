@@ -24,5 +24,7 @@
 @property(nonatomic,strong) NSNumber<Optional> *time; //!<< 电影播放时间
 //@property(nonatomic,copy) NSString<Optional> *score_name; //!<< 积分商城名字
 @property(nonatomic,strong) NSNumber<Optional> *score; //!<< 所需积分
+@property(nonatomic,assign) NSInteger number;//数量
+@property(nonatomic,assign) NSTimeInterval create_time;//订单时间
 
 @end

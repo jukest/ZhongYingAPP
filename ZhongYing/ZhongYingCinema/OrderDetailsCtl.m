@@ -32,16 +32,18 @@
     [self.view addSubview:_scrollView];
     
     
-    if ([self.order.orderform_type integerValue] == 1 || ([self.order.orderform_type integerValue] == 3 && [self.order.score_type integerValue] == 1)) { // 电影
-        _arr = @[@"影片：",@"影院：",@"场次：",@"座位："];
-        //_contents = @[@"中影UL城市影院(乐尚店)",@"小黄人公仔1个"];
-    }else if ([self.order.orderform_type integerValue] == 2){ // 卖品
-        _arr = @[@"影院：",@"食品："];
-        //_contents = @[@"中影UL城市影院(乐尚店)",@"小爆米花1份+小可乐1杯"];
-    }else{ // 积分商城
-        _arr = @[@"影院：",@"商品："];
-        //_contents = @[@"机械师2：复活",@"中影UL城市影院(乐尚店)",@"2016-7-18（周一）16：30",@"3号厅  6排6座"];
-    }
+//    if ([self.order.orderform_type integerValue] == 1 || ([self.order.orderform_type integerValue] == 3 && [self.order.score_type integerValue] == 1)) { // 电影
+//        _arr = @[@"影片：",@"影院：",@"场次：",@"座位："];
+//        //_contents = @[@"中影UL城市影院(乐尚店)",@"小黄人公仔1个"];
+//    }else if ([self.order.orderform_type integerValue] == 2){ // 卖品
+//        _arr = @[@"影院：",@"食品："];
+//        //_contents = @[@"中影UL城市影院(乐尚店)",@"小爆米花1份+小可乐1杯"];
+//    }else{ // 积分商城
+//        _arr = @[@"影院：",@"商品："];
+//        //_contents = @[@"机械师2：复活",@"中影UL城市影院(乐尚店)",@"2016-7-18（周一）16：30",@"3号厅  6排6座"];
+//    }
+    
+    
     
     [self loadOrderDetail];
 }
@@ -78,6 +80,8 @@
     UILabel *getCodeLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, 0, ScreenWidth, 20) text:[NSString stringWithFormat:@"订单号：%@",orderNum] font:[UIFont systemFontOfSize:16 * widthFloat] textColor:[UIColor blackColor] alignment:NSTextAlignmentCenter];
     getCodeLb.center = CGPointMake(ScreenWidth / 2, 50 * heightFloat * _arr.count +80 -12 -20 -12 -10);
     [_scrollView addSubview:getCodeLb];
+    
+    _scrollView.contentSize = CGSizeMake(ScreenWidth, CGRectGetMaxY(codeImg.frame));
 }
 
 - (void)loadOrderDetail
@@ -88,18 +92,21 @@
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserOrderformDetailURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;
+    
     parameters[@"orderform_id"] = self.order.orderform_id;
+    
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         NSLog(@"getOrderformDetail%@",dataBack);
         if ([dataBack[@"code"] integerValue] == 0) {
             NSDictionary *info = dataBack[@"content"][@"info"];
             NSError *error;
-            OrderDetails *details = [[OrderDetails alloc] initWithDictionary:info error:&error];
+            OrderDetails *details = [OrderDetails mj_objectWithKeyValues:info];
             _details = details;
             if (error) {
                 NSLog(@"orderDetails_error=%@",error);
             }
+           
             if ([self.order.orderform_type integerValue] == 1 || ([self.order.orderform_type integerValue] == 3 && [self.order.score_type integerValue] == 1)) { // 电影
                 NSString *dateStr = [details.time transforTomyyyyMMddWithFormatter:@"yyyy-MM-dd"];
                 NSString *weakStr = [NSString getWeekDayFordate:[details.time doubleValue]];
@@ -112,21 +119,23 @@
                     [seatArr addObject:string];
                 }
                 NSString *seatStr = [seatArr componentsJoinedByString:@" "];
-                _contents = @[details.name,details.cinema_name,str,[NSString stringWithFormat:@"%@ %@",hallStr,seatStr]];
-                
+                _contents = @[details.name,details.cinema_name,str,[NSString stringWithFormat:@"%@ %@",hallStr,seatStr],@"￥30.00",@"￥19.99",@"￥10.00"];
+                _arr = @[@"影片：",@"影院：",@"场次：",@"座位：",@"总价：",@"优惠价：",@"实付："];
+
             }else if ([self.order.orderform_type integerValue] == 2){ // 卖品
                 _contents = @[details.cinema_name,details.name];
             }else{ // 积分商城
                 _contents = @[details.cinema_name,details.name];
             }
+            
             [self createOrderDetailsUI];
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 

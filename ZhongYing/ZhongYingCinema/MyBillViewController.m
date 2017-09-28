@@ -75,9 +75,9 @@
             [self showHudMessage:dataBack[@"message"]];
         }
         [self.myBillTableView reloadData];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }
@@ -90,7 +90,7 @@
     }else{
         _deleteHUD.labelText = @"删除中...";
         _deleteHUD.mode = MBProgressHUDModeIndeterminate;
-        [_deleteHUD show:YES];
+        [_deleteHUD showAnimated:YES];
     }
     NSMutableArray *bill_ids = [NSMutableArray array];
     for (Bill *bill in self.deleteBills) {
@@ -130,13 +130,13 @@
             // Optional label text.
             _deleteHUD.labelText = @"删除成功";
             
-            [_deleteHUD hide:YES afterDelay:0.5];
+            [_deleteHUD hideAnimated:YES afterDelay:0.5];
         }else{
-            [_deleteHUD hide:YES];
+            [_deleteHUD hideAnimated:YES];
             [self showHudMessage:dataBack[@"message"]];
         }
     } failure:^(NSError *error) {
-        [_deleteHUD hide:YES];
+        [_deleteHUD hideAnimated:YES];
         [self showHudMessage:@"连接服务器失败!"];
     }];
 }

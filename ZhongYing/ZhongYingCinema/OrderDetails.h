@@ -18,5 +18,6 @@
 @property(nonatomic,strong) NSArray<NSDictionary *><Optional> *seat; //!<<取票码
 @property(nonatomic,copy) NSString *ticket_code; //!<<订单信息名字
 @property(nonatomic,copy) NSString *qrcode; //!<<二维码路径
-
+@property(nonatomic,assign) CGFloat total_price;
+@property(nonatomic,assign)NSInteger type;
 @end
