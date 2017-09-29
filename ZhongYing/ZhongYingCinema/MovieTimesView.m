@@ -59,7 +59,6 @@
         [self numberOfTotalDayForFilms];
         [self addSubview:self.movieTimesTableView];
         
-
     }
     return self;
 }
@@ -94,7 +93,7 @@
 - (UITableView *)movieTimesTableView
 {
     if (_movieTimesTableView == nil) {
-        _movieTimesTableView = [FanShuToolClass createTableViewPlainWithFrame:CGRectMake(0, 0, ScreenWidth -58, self.frame.size.height) style:UITableViewStylePlain target:self];
+        _movieTimesTableView = [FanShuToolClass createTableViewPlainWithFrame:CGRectMake(0, 0, ScreenWidth -40, self.frame.size.height) style:UITableViewStylePlain target:self];
         [_movieTimesTableView registerClass:[MovieTimesTableViewCell class] forCellReuseIdentifier:@"MovieTimesTableViewCell"];
         _movieTimesTableView.bounces = NO;
         [self addSubview:_movieTimesTableView];
@@ -207,6 +206,7 @@
     Schedule *schedule = (Schedule *)[self schedulesWithSelectedPlayDateIndex:self.selectedPlayDateIndex][indexPath.row];
 
     [cell configCellWithModel:schedule];
+    cell.serviceMoney = self.serviceMoney;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;

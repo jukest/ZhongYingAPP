@@ -14,11 +14,12 @@
 @interface ZYOrderDetailsCtl ()<UITableViewDelegate,UITableViewDataSource>
 {
     MBProgressHUD *_HUD;
-
+    NSArray *_arr;
 }
 @property (nonatomic, strong) OrderDetails *orderDetails;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *goods;
+
 @end
 
 @implementation ZYOrderDetailsCtl
@@ -80,7 +81,7 @@
 
 
 - (UIView *)tableViewHeaderView{
-    NSArray *_arr = @[@"影院：",@"总价：",@"优惠价：",@"实付"];
+    
     CGFloat height = 50;
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth,_arr.count * height)];
     
@@ -110,15 +111,15 @@
             [view addSubview:rightLb];
 
         } else if (i == 2){
-            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(CGRectGetMaxX(leftLb.frame), i * height, ScreenWidth - CGRectGetMaxX(leftLb.frame)-10, 50 * heightFloat -1) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
+            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(CGRectGetMaxX(leftLb.frame), i * height, ScreenWidth - CGRectGetMaxX(leftLb.frame)-10, 50 * heightFloat -1) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:[UIColor redColor] alignment:NSTextAlignmentRight];
             rightLb.numberOfLines = 0;
-            rightLb.text = @"￥9.9";
+            rightLb.text = [NSString stringWithFormat:@"-￥%.2f",self.orderDetails.coupon_price];
             [view addSubview:rightLb];
 
         } else if (i == 3) {
-            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(CGRectGetMaxX(leftLb.frame), i * height, ScreenWidth - CGRectGetMaxX(leftLb.frame)-10, 50 * heightFloat -1) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
+            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(CGRectGetMaxX(leftLb.frame), i * height, ScreenWidth - CGRectGetMaxX(leftLb.frame)-10, 50 * heightFloat -1) text:@"" font:[UIFont systemFontOfSize:15 * widthFloat] textColor:[UIColor redColor] alignment:NSTextAlignmentRight];
             rightLb.numberOfLines = 0;
-            rightLb.text = @"￥10.00";
+            rightLb.text = [NSString stringWithFormat:@"￥%.2f",self.orderDetails.true_price];
             [view addSubview:rightLb];
         }
         
@@ -182,6 +183,17 @@
             NSArray *goods = dataBack[@"content"][@"info"][@"goods"];
             
             self.goods = [Order mj_objectArrayWithKeyValuesArray:goods];
+            
+            
+            if (details.coupon_price > 0.001 ) {//有优惠券
+                
+                _arr = @[@"影院：",@"原价：",@"优惠减免：",@"实付："];
+            } else { //没有优惠券
+                
+                _arr = @[@"影院：",@"总价："];
+                
+            }
+
             
             if (self.goods.count != 0) {
                 self.tableView.tableHeaderView = [self tableViewHeaderView];

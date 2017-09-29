@@ -48,7 +48,7 @@
         [view addSubview:self.descriptionLb];
         
         // 电影价格
-        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(90, 80, 100, 25) text:@"" font:[UIFont systemFontOfSize:16 * widthFloat] textColor:Color(40, 40, 40, 1.0) alignment:NSTextAlignmentLeft];
+        self.priceLb = [FanShuToolClass createLabelWithFrame:CGRectMake(90, 80, 100, 35) text:@"" font:[UIFont systemFontOfSize:14] textColor:Color(40, 40, 40, 1.0) alignment:NSTextAlignmentLeft];
         [view addSubview:self.priceLb];
 //        self.priceLb.backgroundColor = [UIColor redColor];
         
@@ -105,7 +105,7 @@
         
         self.nameLb.text = order.name;
         self.descriptionLb.text = [NSString stringWithFormat:@"%@ %@",order.cinema_name,order.hall_name];
-        self.priceLb.text = [NSString stringWithFormat:@"总价：%@元",order.price];
+        self.priceLb.text = [NSString stringWithFormat:@"价格：%@元",order.price];
         [self.refundBtn setTitle:@"退票" forState:UIControlStateNormal];
         self.refundBtn.hidden = NO;
         self.refundBtn.backgroundColor = Color(0, 151, 235, 1.0);
@@ -113,11 +113,11 @@
     }else if ([order.orderform_type intValue] == 2){  //卖品
         self.timeLb.hidden = YES;
 //        self.nameLb.text = @"观影套餐";
-        self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+        self.descriptionLb.text = [NSString stringWithFormat:@"数量：%ld份",(long)order.number];
 
         self.nameLb.frame = CGRectMake(90, 10, 200, 40);
 //        self.descriptionLb.text = order.detail;
-        self.priceLb.text = [NSString stringWithFormat:@"总价：%@元",order.price];
+        self.priceLb.text = [NSString stringWithFormat:@"价格：%@元",order.price];
         [self.refundBtn setTitle:@"退货" forState:UIControlStateNormal];
         self.refundBtn.hidden = YES;
         self.refundBtn.backgroundColor = Color(252, 186, 0, 1.0);
@@ -149,22 +149,22 @@
             self.nameLb.text = order.name;
             self.descriptionLb.text = [NSString stringWithFormat:@"%@ %@",order.cinema_name,order.hall_name];
             self.refundBtn.hidden = YES;
-            self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
+            self.priceLb.text = [NSString stringWithFormat:@"价格：%@积分",order.score];
         }else if ([order.score_type intValue] == 2){ //积分商品-纪念品
 //            self.nameLb.text = @"纪念品";
-            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%ld份",(long)order.number];
 
 //            self.descriptionLb.text = order.name;
             self.refundBtn.hidden = YES;
-            self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
+            self.priceLb.text = [NSString stringWithFormat:@"价格：%@积分",order.score];
         }else{ //积分商品-观影套餐
 //            self.nameLb.text = @"观影套餐";
-            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%d份",order.number];
+            self.descriptionLb.text = [NSString stringWithFormat:@"数量：%ld份",(long)order.number];
 
             self.nameLb.frame = CGRectMake(90, 10, 200, 40);
 //            self.descriptionLb.text = order.name;
             self.refundBtn.hidden = YES;
-            self.priceLb.text = [NSString stringWithFormat:@"%@积分",order.score];
+            self.priceLb.text = [NSString stringWithFormat:@"价格：%@积分",order.score];
         }
     }
     

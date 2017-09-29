@@ -272,6 +272,7 @@
         NSLog(@"getGoods>>>>>>>>>>>>>>%@",dataBack);
         _loadGoodsFinish = YES;
         if ([dataBack[@"code"] integerValue] == 0) {
+            [self.goodsList removeAllObjects];
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"goods"]) {
                 
@@ -519,6 +520,7 @@
         selectSeat.goodsList = self.goodsList;
         selectSeat.index = self.selectedPlayDateIndex;
         selectSeat.cinemaMsg = self.cinemaMsg;
+        selectSeat.serviceMoney = self.serviceMoney;
         [selectSeat setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:selectSeat animated:YES];
     }

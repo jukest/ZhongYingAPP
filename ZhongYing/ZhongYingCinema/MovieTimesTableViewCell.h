@@ -25,6 +25,8 @@
 @property(nonatomic,strong) UIButton *selectBtn;
 @property(nonatomic,strong) NSIndexPath *indexPath;
 
+@property(nonatomic,strong) NSString *serviceMoney;//服务费
+
 @property(nonatomic,weak) id<MovieTimesTableViewCellDelegate> delegate;
 
 - (void)configCellWithModel:(Schedule *)schedule;

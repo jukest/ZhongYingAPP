@@ -170,7 +170,12 @@
 #pragma mark - RefundViewDelegate
 - (void)gotoRefundViewEvents:(NSInteger)tag
 {
+    //发送通知刷新
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ExchangeNotification" object:nil];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 #pragma mark - help Methods

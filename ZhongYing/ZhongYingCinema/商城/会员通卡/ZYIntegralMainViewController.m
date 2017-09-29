@@ -112,6 +112,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreExchangeRecordsData) name:@"UpdataMoreExchangeRecordNotification" object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeNotification) name:@"ExchangeNotification" object:nil];
+    
     //添加 选择影院之后 的通知
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:SelectedCimemaUpdataOtherDataNotification object:nil];
     
@@ -253,6 +256,11 @@
 
 
 #pragma mark -- 网络请求
+
+- (void)exchangeNotification {
+    [self loadMyIntegralData];
+    [self loadExchangeRecordsData];
+}
 
 - (void)loadMyIntegralData {
     self.myIntegralCurrentPage = 0;

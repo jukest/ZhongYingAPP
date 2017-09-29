@@ -60,10 +60,17 @@
         
         UIView *line = [FanShuToolClass createViewWithFrame:CGRectMake(20, 50 * heightFloat -1 + 50 * heightFloat * i, ScreenWidth -40, 1) backgroundColor:Color(243, 243, 243, 1.0)];
         [_whiteView addSubview:line];
-        
-        UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20+leftSize.width, 50 * heightFloat*i, ScreenWidth-40-leftSize.width, 50 * heightFloat -1) text:_contents[i] font:[UIFont systemFontOfSize:15 * widthFloat] textColor:Color(60, 60, 60, 1.0) alignment:NSTextAlignmentRight];
-        rightLb.numberOfLines = 0;
-        [_whiteView addSubview:rightLb];
+        if (i > 3) {
+            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20+leftSize.width, 50 * heightFloat*i, ScreenWidth-40-leftSize.width, 50 * heightFloat -1) text:_contents[i] font:[UIFont systemFontOfSize:15 * widthFloat] textColor:[UIColor redColor] alignment:NSTextAlignmentRight];
+            rightLb.numberOfLines = 0;
+            [_whiteView addSubview:rightLb];
+
+        } else {
+            
+            UILabel *rightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20+leftSize.width, 50 * heightFloat*i, ScreenWidth-40-leftSize.width, 50 * heightFloat -1) text:_contents[i] font:[UIFont systemFontOfSize:15 * widthFloat] textColor:Color(60, 60, 60, 1.0) alignment:NSTextAlignmentRight];
+            rightLb.numberOfLines = 0;
+            [_whiteView addSubview:rightLb];
+        }
     }
     //392 256
     UIImageView *codeImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(0, 0, 280 * widthFloat, 280 * widthFloat) image:nil tag:100];
@@ -119,8 +126,15 @@
                     [seatArr addObject:string];
                 }
                 NSString *seatStr = [seatArr componentsJoinedByString:@" "];
-                _contents = @[details.name,details.cinema_name,str,[NSString stringWithFormat:@"%@ %@",hallStr,seatStr],@"￥30.00",@"￥19.99",@"￥10.00"];
-                _arr = @[@"影片：",@"影院：",@"场次：",@"座位：",@"总价：",@"优惠价：",@"实付："];
+                if (details.coupon_price > 0.001 ) {//有优惠券
+                    _contents = @[details.name,details.cinema_name,str,[NSString stringWithFormat:@"%@ %@",hallStr,seatStr],[NSString stringWithFormat:@"￥%.2f",details.total_price],[NSString stringWithFormat:@"-￥%.2f",details.coupon_price],[NSString stringWithFormat:@"￥%.2f",details.true_price]];
+                    _arr = @[@"影片：",@"影院：",@"场次：",@"座位：",@"原价：",@"优惠减免：",@"实付："];
+                } else { //没有优惠券
+                    
+                    _contents = @[details.name,details.cinema_name,str,[NSString stringWithFormat:@"%@ %@",hallStr,seatStr],[NSString stringWithFormat:@"￥%.2f",details.total_price]];
+                    _arr = @[@"影片：",@"影院：",@"场次：",@"座位：",@"总价："];
+                    
+                }
 
             }else if ([self.order.orderform_type integerValue] == 2){ // 卖品
                 _contents = @[details.cinema_name,details.name];
