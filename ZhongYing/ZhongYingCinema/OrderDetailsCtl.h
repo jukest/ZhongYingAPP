@@ -8,9 +8,11 @@
 
 #import "ZYViewController.h"
 #import "Order.h"
+#import "Record.h"
 
 @interface OrderDetailsCtl : ZYViewController
 
 @property (nonatomic,strong) Order *order;
+
 
 @end

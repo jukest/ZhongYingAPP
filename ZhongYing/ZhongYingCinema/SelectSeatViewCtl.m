@@ -76,8 +76,8 @@
     [footerView addSubview:confirmBtn];
     _confirmBtn = confirmBtn;
     self.SelectSeatTableView.tableFooterView = footerView;
-    
     [self loadSeatWithFilmID:self.schedule.id];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +88,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -329,7 +331,8 @@
         CGFloat height;
         height = 241;
 
-        MovieTimesView *movieTimes = [[MovieTimesView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth -58, height) withFilmPlayPlans:self.filmPlayPlanModels];
+        MovieTimesView *movieTimes = [[MovieTimesView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth -40, height) withFilmPlayPlans:self.filmPlayPlanModels];
+        movieTimes.serviceMoney = self.serviceMoney;
         movieTimes.delegate = self;
         movieTimes.layer.cornerRadius = 3.0f;
         movieTimes.layer.masksToBounds = YES;

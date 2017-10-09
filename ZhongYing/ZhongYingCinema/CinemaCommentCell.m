@@ -67,15 +67,15 @@
 - (void)configCellWithModel:(CinemaComment *)cinemaComment
 {
     NSString *name = cinemaComment.title;
-    CGSize nameSize = [name sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
-    self.nameLb.frame = CGRectMake(12, 16, nameSize.width, 17);
+//    CGSize nameSize = [name sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    self.nameLb.frame = CGRectMake(12, 16, ScreenWidth - self.dateLb.width - 15 - 12 - 10, 17);
     self.nameLb.text = name;
-    _backgroundView.frame = CGRectMake(12 +self.nameLb.frame.size.width +8, 16, 80, 15);
-    self.starView.frame = CGRectMake(12 +self.nameLb.frame.size.width +8, 16, 80 * ([cinemaComment.stars floatValue] / 10.0) , 15);
+    _backgroundView.frame = CGRectMake(12, CGRectGetMaxY(self.nameLb.frame)+5, 80, 15);
+    self.starView.frame = CGRectMake(12, CGRectGetMaxY(self.nameLb.frame)+5, 80 * ([cinemaComment.stars floatValue] / 10.0) , 15);
     self.markLb.text = cinemaComment.stars;
-    self.markLb.frame = CGRectMake(12 +self.nameLb.frame.size.width +8 +_backgroundView.frame.size.width +5, 16, 30, 15);
+    self.markLb.frame = CGRectMake(CGRectGetMaxX(_backgroundView.frame) +5, CGRectGetMaxY(self.nameLb.frame)+5, 30, 15);
     CGSize commentSize = [FanShuToolClass createString:cinemaComment.content font:[UIFont systemFontOfSize:16] lineSpacing:3 maxSize:CGSizeMake(ScreenWidth -12 -45, ScreenHeight)];
-    self.commentLb.frame = CGRectMake(12, 48, ScreenWidth -12 -45, commentSize.height);
+    self.commentLb.frame = CGRectMake(12, CGRectGetMaxY(_backgroundView.frame)+5, ScreenWidth -12 -45, commentSize.height);
     self.commentLb.attributedText = [FanShuToolClass getAttributeStringWithContent:cinemaComment.content withLineSpaceing:3];
     self.dateLb.text = [cinemaComment.created_time transforTomyyyyMMddWithFormatter:@"MM-dd"];
     

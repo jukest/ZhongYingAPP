@@ -148,11 +148,11 @@
             [self.myMovieCommentTableView setContentOffset:CGPointMake(0,0) animated:NO];
         }
         [self.myMovieCommentTableView reloadData];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self.parentViewController showHudMessage:@"连接服务器失败!"];
         [self endRefreshing];
-        [_HUD hide:YES];
+        [_HUD hideAnimated:YES];
     }];
 }
 
@@ -170,7 +170,6 @@
         [cinema loadMyMovieCommentList];
     }];
     
-    //[self hideRefreshViewsubViews:self.CommentTableView];
 }
 
 /**
@@ -287,7 +286,7 @@
     }else{
         _deleteHUD.labelText = @"删除中...";
         _deleteHUD.mode = MBProgressHUDModeIndeterminate;
-        [_deleteHUD show:YES];
+        [_deleteHUD showAnimated:YES];
     }
     NSMutableArray *comments = [NSMutableArray array];
     for (FilmComment *comment in self.deleteComments) {
@@ -315,21 +314,24 @@
             // Optional label text.
             _deleteHUD.labelText = @"删除成功";
             
-            [_deleteHUD hide:YES afterDelay:0.5];
+            [_deleteHUD hideAnimated:YES afterDelay:0.5];
         }else{
             [self.parentViewController showHudMessage:dataBack[@"message"]];
-            [_deleteHUD hide:YES];
+            [_deleteHUD hideAnimated:YES];
         }
     } failure:^(NSError *error) {
         [self.parentViewController showHudMessage:@"连接服务器失败!"];
-        [_deleteHUD hide:YES];
+        [_deleteHUD hideAnimated:YES];
     }];
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 115;
+    FilmComment *comment = self.movieComments[indexPath.row];
+    CGSize commentSize = [FanShuToolClass createString:comment.content font:[UIFont systemFontOfSize:16] lineSpacing:3 maxSize:CGSizeMake(ScreenWidth -12 -45, ScreenHeight)];
+    return 90 +commentSize.height;
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -388,7 +390,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     FilmComment *comment = self.movieComments[indexPath.row];
     MovieCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myMovieCommentTableViewCell"];
     [cell configCellWithModel:comment];

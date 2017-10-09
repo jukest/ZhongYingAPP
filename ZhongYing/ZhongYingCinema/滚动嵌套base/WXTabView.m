@@ -29,7 +29,7 @@
         [self addSubview:_titleView];
         
         
-        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, HEIGHT - (hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49)];
+        _itemContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleView.frame), WIDTH, HEIGHT - (hasNavigationBar?NavigationHeight:0) - TitleViewHeight - 49)];
         _itemContainer.pagingEnabled = YES;
         _itemContainer.bounces = NO;
         _itemContainer.delegate = self;

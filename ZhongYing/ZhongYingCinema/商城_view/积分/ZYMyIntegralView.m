@@ -10,6 +10,9 @@
 #import "ZYMallIntegralNetworkingRequst.h"
 #import "ExchangeViewCtl.h"
 
+@interface ZYMyIntegralView ()
+
+@end
 
 @implementation ZYMyIntegralView
 

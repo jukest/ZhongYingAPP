@@ -100,10 +100,13 @@
             for (NSDictionary *dict in cinemas) {
                 NSError *error;
                 Cinema *cinema = [[Cinema alloc] initWithDictionary:dict error:&error];
-                if (error) {
+                if (error) {//模型失败
                     NSLog(@"%@",error);
+                } else {
+                    
+                    [self.cinemaList addObject:cinema];
                 }
-                [self.cinemaList addObject:cinema];
+                
             }
         }else if ([dataBack[@"code"] integerValue] == 46005){
             [self showHudMessage:@"您还没有关注影院哦~"];

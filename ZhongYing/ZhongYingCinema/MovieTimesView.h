@@ -23,6 +23,8 @@
 @property(nonatomic,strong) NSArray *afterSchedule;  //!<< 后天时间表
 @property(nonatomic,strong) NSArray *tomorrowSchedule;  //!<< 明天时间表
 
+@property(nonatomic,strong) NSString *serviceMoney;//服务费
+
 - (instancetype)initWithFrame:(CGRect)frame WithTodayArr:(NSArray *)today tomorrowArr:(NSArray *)tomorrow after:(NSArray *)after;
 
 - (instancetype)initWithFrame:(CGRect)frame withFilmPlayPlans:(NSArray *)filmPlayPlans;

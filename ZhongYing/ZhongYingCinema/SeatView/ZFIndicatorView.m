@@ -120,7 +120,9 @@
         
         self.miniIndicator.width = (self.width * (self.myScrollview.width - self.myScrollview.contentInset.right)/ self.mapView.width);
         if (self.myScrollview.contentOffset.x < 0) {
-            self.miniIndicator.width =  self.miniIndicator.width - ABS(self.myScrollview.contentOffset.x * self.width) / self.myScrollview.contentSize.width;
+            CGFloat abs = ABS(self.myScrollview.contentOffset.x * self.width);
+            CGFloat f1 = abs / (self.myScrollview.contentSize.height == 0 ?150:self.myScrollview.contentSize.height);
+            self.miniIndicator.width =  self.miniIndicator.width - f1;
             self.miniIndicator.x = 0;
             
         }
@@ -137,7 +139,10 @@
         self.miniIndicator.height = self.height * (self.myScrollview.height - ZFseastsColMargin) / self.mapView.height;
         if (self.myScrollview.contentOffset.y < 0) {
             self.miniIndicator.y = 0;
-            self.miniIndicator.height =  self.miniIndicator.height - ABS(self.myScrollview.contentOffset.y * self.height) / self.myScrollview.contentSize.height;
+            CGFloat abs = ABS(self.myScrollview.contentOffset.y * self.height);
+
+            CGFloat f2 = abs / (self.myScrollview.contentSize.height == 0 ? 150:self.myScrollview.contentSize.height) ;
+            self.miniIndicator.height =  self.miniIndicator.height - f2;
         }
         if (self.myScrollview.contentOffset.y > self.mapView.height - self.myScrollview.height + ZFseastsColMargin) {
             self.miniIndicator.height =  self.miniIndicator.height -(self.myScrollview.contentOffset.y - (self.mapView.height - self.myScrollview.height + ZFseastsColMargin)) * self.height / self.myScrollview.contentSize.height;

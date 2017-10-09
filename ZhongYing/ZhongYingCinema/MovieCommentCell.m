@@ -84,4 +84,9 @@
     self.commentLb.text = comment.content;
 }
 
+- (void)layoutSubviews {
+    self.commentLb.frame = CGRectMake(self.commentLb.x, self.commentLb.y, self.commentLb.width, self.height - CGRectGetMaxY(self.markLb.frame));
+
+}
+
 @end

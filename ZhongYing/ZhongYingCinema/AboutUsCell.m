@@ -22,10 +22,10 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.aboutUsLeftLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 10, ScreenWidth/2, 30) text:@"" font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
+        self.aboutUsLeftLb = [FanShuToolClass createLabelWithFrame:CGRectMake(20, 10, ScreenWidth/2 - 10, 30) text:@"" font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentLeft];
         [self.contentView addSubview:self.aboutUsLeftLb];
         
-        self.aboutUsRightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth/2, 10, ScreenWidth/2-20, 30) text:@"" font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
+        self.aboutUsRightLb = [FanShuToolClass createLabelWithFrame:CGRectMake(0, 10, ScreenWidth-10, 30) text:@"" font:[UIFont systemFontOfSize:17] textColor:[UIColor blackColor] alignment:NSTextAlignmentRight];
         [self.contentView addSubview:self.aboutUsRightLb];
     }
     return self;

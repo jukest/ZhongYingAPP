@@ -113,7 +113,7 @@
             }else if (i == 3) {
                 // 姓名
                 _nameTextField = [FanShuToolClass createTextFieldWithFrame:CGRectMake(20+leftSize.width, 0, ScreenWidth-40-leftSize.width, 50) textColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self];
-                _nameTextField.placeholder = @"非必填";
+                _nameTextField.placeholder = @"必填";
                 _nameTextField.backgroundColor = [UIColor whiteColor];
                 _nameTextField.textAlignment = NSTextAlignmentRight;
                 _nameTextField.text = ApiNameStr ? ApiNameStr : @"";
@@ -135,7 +135,13 @@
                 _sexLb = [FanShuToolClass createLabelWithFrame:CGRectMake(ScreenWidth-70, 0, 30, 50) text:sexs[_sexIndex] font:[UIFont systemFontOfSize:17] textColor:[UIColor grayColor] alignment:NSTextAlignmentRight];
                 [sixView addSubview:_sexLb];
                 
-                _sexImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(ScreenWidth-80, 14, 14, 22) image:[UIImage imageNamed:@"Login_sex_man"] tag:1001];
+                if ([_sexLb.text isEqualToString:@"女"]) {
+                    _sexImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(ScreenWidth-80, 14, 14, 22) image:[UIImage imageNamed:@"Login_sex_woman"] tag:1001];
+
+                } else {
+                    
+                    _sexImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(ScreenWidth-80, 14, 14, 22) image:[UIImage imageNamed:@"Login_sex_man"] tag:1001];
+                }
                 [sixView addSubview:_sexImg];
                 
                 UIImageView *rightImg = [FanShuToolClass createImageViewWithFrame:CGRectMake(ScreenWidth-30, 16, 10, 18) image:[UIImage imageNamed:@"Login_arrow"] tag:1000];
@@ -198,7 +204,6 @@
 
 - (void)uploadProfile
 {
-    
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserModifyProfileURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;
@@ -206,8 +211,11 @@
     if (_nameTextField.text.length!=0) {
         parameters[@"name"] = _nameTextField.text;
     }
+    if (_sexIndex == 1 || _sexIndex == 2) {
+        
+        parameters[@"gender"] = @(_sexIndex);
+    }
     parameters[@"age"] = @(_yearIndex);
-    parameters[@"gender"] = @(_sexIndex);
     ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
     [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
         

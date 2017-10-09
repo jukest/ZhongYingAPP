@@ -103,7 +103,7 @@ CGFloat const ZYMallViewControllerCellNumberLabelWidth = 30;
 CGFloat const ZYMallViewControllerCellNumberLabelHeight = ZYMallViewControllerCellBtnWH;
 
 /** 商城确认订单页tableViewSectionFooter的高度 */
-CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierHeight = 150;
+CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierHeight = 200;
 
 /** 商城确认订单页tableViewSectionFooter上label的高度  */
 CGFloat const ZYMallConfirmViewControllerTableViewSectionFooterVierLabelHeight = 35;

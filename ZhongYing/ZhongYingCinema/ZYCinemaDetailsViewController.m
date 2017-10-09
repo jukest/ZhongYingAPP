@@ -78,7 +78,6 @@
     self.movie_id = self.film.id;
     
     [self loadCinemaPlay];
-    [self loadGoods];
     [self loadServiceMoney];
 }
 
@@ -148,6 +147,10 @@
                 return ;
             }
             
+            //再加商品
+            [self loadGoods];
+
+            
             //电影 播放 计划
             NSArray *playPlanModels = [Schedule wx_objectArrayWithKeyValuesArray:content[@"list"]];
             [self.filmPlayPlanModels addObjectsFromArray:playPlanModels];
@@ -174,8 +177,6 @@
                 }
                 [self.filmsArr addObject:film];
             }
-            
-            if (_loadCinemaFinish&&_loadGoodsFinish) {
                 if (_once) {//显示头部
                     _headerView = [[CinemaDtlHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 287) CinemaMsg:self.cinemaMsg filmsArr:self.filmsArr index:self.indexPath];
                     _headerView.cinemaMsgView.delegate = self;
@@ -189,11 +190,15 @@
                 if (self.goodsList.count != 0) {
                     [self initCinemaDetailUI];
                 }
-            }
+            
         }else if([dataBack[@"code"] integerValue] == 46005){
             [self.filmPlayPlanModels removeAllObjects];
             [self showHudMessage:@"此影片已结束上映"];
             _isOnShow = NO;
+            
+            //取消当前网络
+            [[ZhongYingConnect shareInstance] cancel];
+            
             [self.cinemaDetailsTableView removeFromSuperview];
          
             
@@ -267,6 +272,7 @@
         NSLog(@"getGoods>>>>>>>>>>>>>>%@",dataBack);
         _loadGoodsFinish = YES;
         if ([dataBack[@"code"] integerValue] == 0) {
+            [self.goodsList removeAllObjects];
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"goods"]) {
                 
@@ -274,22 +280,31 @@
                 
                 [self.goodsList addObject:goods];
             }
-            if (_loadCinemaFinish&&_loadGoodsFinish) {
-                if (_once) {
-                    _headerView = [[CinemaDtlHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 287) CinemaMsg:self.cinemaMsg filmsArr:self.filmsArr index:self.indexPath];
-                    _headerView.cinemaMsgView.delegate = self;
-                    _headerView.movieSliderView.delegate = self;
-                    self.cinemaDetailsTableView.tableHeaderView = _headerView;
-                    [_headerView.movieSliderView.pageFlowView scrollToPage:self.indexPath];
-                    _once = NO;
-                }
-                
-                [self showFilmMessage];
-                if (self.goodsList.count != 0) {
-                    [self initCinemaDetailUI];
-                }
-                [self.cinemaDetailsTableView reloadData];
+            
+            [self showFilmMessage];
+            if (self.goodsList.count != 0) {
+                [self initCinemaDetailUI];
             }
+            [self.cinemaDetailsTableView reloadData];
+            
+            
+//            if (_loadCinemaFinish&&_loadGoodsFinish) {
+//                if (_once) {
+//                    
+//                    _headerView = [[CinemaDtlHeaderView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 287) CinemaMsg:self.cinemaMsg filmsArr:self.filmsArr index:self.indexPath];
+//                    _headerView.cinemaMsgView.delegate = self;
+//                    _headerView.movieSliderView.delegate = self;
+//                    self.cinemaDetailsTableView.tableHeaderView = _headerView;
+//                    [_headerView.movieSliderView.pageFlowView scrollToPage:self.indexPath];
+//                    _once = NO;
+//                }
+//                
+//                [self showFilmMessage];
+//                if (self.goodsList.count != 0) {
+//                    [self initCinemaDetailUI];
+//                }
+//                [self.cinemaDetailsTableView reloadData];
+//            }
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
@@ -505,6 +520,7 @@
         selectSeat.goodsList = self.goodsList;
         selectSeat.index = self.selectedPlayDateIndex;
         selectSeat.cinemaMsg = self.cinemaMsg;
+        selectSeat.serviceMoney = self.serviceMoney;
         [selectSeat setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:selectSeat animated:YES];
     }

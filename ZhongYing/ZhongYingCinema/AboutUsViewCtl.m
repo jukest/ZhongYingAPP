@@ -86,10 +86,10 @@
         }else{
             [self showHudMessage:dataBack[@"message"]];
         }
-        [_versionHUD hide:YES];
+        [_versionHUD hideAnimated:YES];
     } failure:^(NSError *error) {
         [self showHudMessage:@"连接服务器失败!"];
-        [_versionHUD hide:YES];
+        [_versionHUD hideAnimated:YES];
     }];
 }
 
@@ -235,9 +235,11 @@
     if (indexPath.row == 0) {
         about.aboutUsRightLb.text = [NSString stringWithFormat:@"V%@",self.aboutUsArr[indexPath.row]];
         about.aboutUsRightLb.textColor = [UIColor blackColor];
+        
     }else {
         about.aboutUsRightLb.text = self.aboutUsArr[indexPath.row];
         about.aboutUsRightLb.textColor = [UIColor redColor];
+        
     }
     return about;
 }

@@ -125,12 +125,11 @@
             }
             NSDictionary *content = dataBack[@"content"];
             for (NSDictionary *dict in content[@"list"]) {
-                NSError *error;
-                InfoComment *comment = [[InfoComment alloc] initWithDictionary:dict error:&error];
-                if (error) {
-                    NSLog(@"%@",error);
-                }
+                
+                InfoComment *comment = [InfoComment mj_objectWithKeyValues:dict];
+                
                 [self.comments addObject:comment];
+               
             }
         }else if([dataBack[@"code"] integerValue] == 46005){
             if (self.currentPage != 0) {

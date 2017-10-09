@@ -7,6 +7,10 @@
 //
 
 #import "MovieTimesTableViewCell.h"
+#import "Schedule.h"
+@interface MovieTimesTableViewCell ()
+@property (nonatomic,strong) Schedule *schedule;
+@end
 
 @implementation MovieTimesTableViewCell
 
@@ -43,7 +47,8 @@
         self.priceLb.attributedText = str;
         [self.contentView addSubview:self.priceLb];
         
-        self.remainingLb = [FanShuToolClass createLabelWithFrame:CGRectMake(10 +55 +18 +40 +55 +45 -85, 15 +22 +6, 85, 15) text:@"" font:[UIFont systemFontOfSize:11 * widthFloat] textColor:Color(233, 126, 8, 1.0) alignment:NSTextAlignmentRight];
+        self.remainingLb = [FanShuToolClass createLabelWithFrame:CGRectMake(self.width - 85 - 10, 15 +22 +6, 85, 15) text:@"" font:[UIFont systemFontOfSize:11 * widthFloat] textColor:Color(233, 126, 8, 1.0) alignment:NSTextAlignmentRight];
+//        self.remainingLb.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:self.remainingLb];
         
         self.selectBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(ScreenWidth -58 -50 * widthFloat -12, 18, 50 * widthFloat, 30 * heightFloat) title:@"" titleColor:[UIColor whiteColor] target:self action:@selector(selectBtnDidClicked:) tag:123];
@@ -58,6 +63,7 @@
 
 - (void)configCellWithModel:(Schedule *)schedule
 {
+    
     self.endLb.text = [NSString stringWithFormat:@"%@散场",[[NSString stringWithFormat:@"%zd",schedule.end_time] transforTomyyyyMMddWithFormatter:@"HH:mm"]];
     CGSize endSize = [self.endLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 * widthFloat]}];
     self.endLb.frame = CGRectMake(10, 15 +22 +6, endSize.width, 15);
@@ -84,9 +90,9 @@
     [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11 * widthFloat] range:range];
     self.priceLb.attributedText = str;
     self.priceLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -32 -45 -8, 15, 65, 22);
-    self.remainingLb.text = [NSString stringWithFormat:@"剩余座位数:%zd",schedule.seat_available_num];
-    CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
-    self.remainingLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -12 -remainSize.width -8, 15 +22 +7, remainSize.width, 15);
+//    self.remainingLb.text = [NSString stringWithFormat:@"剩余座位数:%zd",schedule.seat_available_num];
+//    CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
+//    self.remainingLb.frame = CGRectMake(ScreenWidth -58 -50 * widthFloat -12 -remainSize.width -8, 15 +22 +7, remainSize.width, 15);
     if ([schedule.is_now boolValue]) {
         [self.selectBtn setTitle:@"当前场次" forState:UIControlStateNormal];
         self.selectBtn.backgroundColor = Color(252, 186, 0, 1.0);
@@ -96,6 +102,22 @@
         self.selectBtn.backgroundColor = Color(25, 153, 232, 1.0);
         self.selectBtn.enabled = YES;
     }
+}
+
+- (void)setServiceMoney:(NSString *)serviceMoney {
+    _serviceMoney = serviceMoney;
+//    self.remainingLb.text = [NSString stringWithFormat:@"含服务费:￥%@",serviceMoney];
+//    CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
+//    self.remainingLb.frame = CGRectMake(self.width - remainSize.width - 10, 15 +22 +7, remainSize.width, 15);
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.selectBtn.frame = CGRectMake(self.width - self.selectBtn.width - 10, self.selectBtn.y, self.selectBtn.width, self.selectBtn.height);
+    self.priceLb.frame = CGRectMake(self.width - self.priceLb.width - self.selectBtn.width - 10 - 10, self.priceLb.y, self.priceLb.width, self.priceLb.height);
+    self.remainingLb.text = [NSString stringWithFormat:@"含服务费:￥%@",self.serviceMoney];
+    CGSize remainSize = [self.remainingLb.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 * widthFloat]}];
+    self.remainingLb.frame = CGRectMake(self.width - self.selectBtn.width -10  - remainSize.width - 10, 15 +22 +7, remainSize.width, 15);
 }
 
 - (void)selectBtnDidClicked:(UIButton *)btn

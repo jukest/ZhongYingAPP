@@ -125,6 +125,9 @@
 		18A9F9901F613BD5008DDF9B /* FullScreenExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F98F1F613BD5008DDF9B /* FullScreenExampleViewController.m */; };
 		18A9F9931F613BE6008DDF9B /* LunarFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A9F9921F613BE6008DDF9B /* LunarFormatter.m */; };
 		18C146871F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C146861F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m */; };
+		18C7E5921F7A54D800B6170E /* ZYNoTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C7E5911F7A54D800B6170E /* ZYNoTicketCell.m */; };
+		18C7E5951F7A829F00B6170E /* ZYOrderDetailsCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C7E5941F7A829F00B6170E /* ZYOrderDetailsCtl.m */; };
+		18C7E59C1F7A87CC00B6170E /* ZYOrderDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C7E59A1F7A87CC00B6170E /* ZYOrderDetailsCell.m */; };
 		342337A51DE3D44C005069D2 /* MyLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A41DE3D44C005069D2 /* MyLoginView.m */; };
 		342337A81DE3D87B005069D2 /* LoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337A71DE3D87B005069D2 /* LoginData.m */; };
 		342337AF1DE3DF7E005069D2 /* RegisterViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 342337AE1DE3DF7E005069D2 /* RegisterViewCtl.m */; };
@@ -688,6 +691,12 @@
 		18A9F9921F613BE6008DDF9B /* LunarFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunarFormatter.m; sourceTree = "<group>"; };
 		18C146851F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZYZYMemberViewControllerTableViewHeaderView.h; path = "商城_view/ZYZYMemberViewControllerTableViewHeaderView.h"; sourceTree = "<group>"; };
 		18C146861F5FDD650052A2AD /* ZYZYMemberViewControllerTableViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZYZYMemberViewControllerTableViewHeaderView.m; path = "商城_view/ZYZYMemberViewControllerTableViewHeaderView.m"; sourceTree = "<group>"; };
+		18C7E5901F7A54D800B6170E /* ZYNoTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNoTicketCell.h; sourceTree = "<group>"; };
+		18C7E5911F7A54D800B6170E /* ZYNoTicketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNoTicketCell.m; sourceTree = "<group>"; };
+		18C7E5931F7A829F00B6170E /* ZYOrderDetailsCtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYOrderDetailsCtl.h; sourceTree = "<group>"; };
+		18C7E5941F7A829F00B6170E /* ZYOrderDetailsCtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYOrderDetailsCtl.m; sourceTree = "<group>"; };
+		18C7E5991F7A87CC00B6170E /* ZYOrderDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYOrderDetailsCell.h; sourceTree = "<group>"; };
+		18C7E59A1F7A87CC00B6170E /* ZYOrderDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYOrderDetailsCell.m; sourceTree = "<group>"; };
 		342337A31DE3D44C005069D2 /* MyLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLoginView.h; sourceTree = "<group>"; };
 		342337A41DE3D44C005069D2 /* MyLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLoginView.m; sourceTree = "<group>"; };
 		342337A61DE3D87B005069D2 /* LoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginData.h; sourceTree = "<group>"; };
@@ -1901,6 +1910,8 @@
 				347793451DDEA8E000DF3D18 /* NoTicketTableViewCtl.m */,
 				34B658381DF16291008B6645 /* OrderDetailsCtl.h */,
 				34B658391DF16291008B6645 /* OrderDetailsCtl.m */,
+				18C7E5931F7A829F00B6170E /* ZYOrderDetailsCtl.h */,
+				18C7E5941F7A829F00B6170E /* ZYOrderDetailsCtl.m */,
 			);
 			name = "未取票订单";
 			sourceTree = "<group>";
@@ -2322,6 +2333,10 @@
 			children = (
 				34B658351DF122FD008B6645 /* NoTicketCell.h */,
 				34B658361DF122FD008B6645 /* NoTicketCell.m */,
+				18C7E5901F7A54D800B6170E /* ZYNoTicketCell.h */,
+				18C7E5911F7A54D800B6170E /* ZYNoTicketCell.m */,
+				18C7E5991F7A87CC00B6170E /* ZYOrderDetailsCell.h */,
+				18C7E59A1F7A87CC00B6170E /* ZYOrderDetailsCell.m */,
 				E4031C191DF9755E00895E19 /* 退票弹窗 */,
 			);
 			name = "我的订单";
@@ -4239,6 +4254,7 @@
 				E422EE9A1DEC2AA400B2237C /* AlbumViewController.m in Sources */,
 				E4416F581E1B8AE9008861FB /* ZFAppLogoView.m in Sources */,
 				18123BE11F4C19A800A42EDB /* MBProgressHUD.m in Sources */,
+				18C7E59C1F7A87CC00B6170E /* ZYOrderDetailsCell.m in Sources */,
 				E442C2831DFE4D3B001409C8 /* JSONModel.m in Sources */,
 				E4F12ED31E14E54D00D97068 /* NSArray+MASAdditions.m in Sources */,
 				E40647FD1E16412D00D05781 /* Collection.m in Sources */,
@@ -4341,6 +4357,7 @@
 				E4D858B41EA9DFA9008DB531 /* AdvertiseView.m in Sources */,
 				18A9F9831F61387C008DDF9B /* FSCalendarCollectionViewLayout.m in Sources */,
 				34F78CC61DFBDAFE00F68C1D /* NSString+Commen.m in Sources */,
+				18C7E5951F7A829F00B6170E /* ZYOrderDetailsCtl.m in Sources */,
 				E41052EE1DF7F9BB002EEF98 /* MyCollectionViewCtl.m in Sources */,
 				E4E1D3651DFA5CF7002042A3 /* IntegralMallViewCtl.m in Sources */,
 				E4416F591E1B8AE9008861FB /* ZFCenterLineView.m in Sources */,
@@ -4392,6 +4409,7 @@
 				183C4F051F5F893F00763631 /* ZYCinemaMainNetworkingRequst.m in Sources */,
 				E40A441B1DF644D100D9084C /* AFHTTPRequestOperationManager.m in Sources */,
 				34B00D1C1DE5925100937351 /* LFSPopupYearCell.m in Sources */,
+				18C7E5921F7A54D800B6170E /* ZYNoTicketCell.m in Sources */,
 				E4416F5B1E1B8AE9008861FB /* ZFIndicatorView.m in Sources */,
 				E40A442A1DF644D100D9084C /* UIProgressView+AFNetworking.m in Sources */,
 				E41052D81DF79558002EEF98 /* MyCouponViewCtl.m in Sources */,

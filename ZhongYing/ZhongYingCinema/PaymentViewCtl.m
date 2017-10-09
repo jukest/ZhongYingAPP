@@ -358,12 +358,15 @@
         parameters[@"token"] = ApiTokenStr;
         if (self.orderform_id != nil) {
             parameters[@"orderform_id"] = [self.order[@"orderform_id"] componentsJoinedByString:@","];
-            parameters[@"conpon_id"] = [self.order[@"coupon_id"] componentsJoinedByString:@","];
+            parameters[@"coupon_id"] = [self.order[@"coupon_id"] componentsJoinedByString:@","];
         }else{
             parameters[@"orderform_id"] = self.order[@"orderform_id"];
-            parameters[@"conpon_id"] = self.order[@"coupon_id"];
+            parameters[@"coupon_id"] = self.order[@"coupon_id"];
         }
         parameters[@"content"] = result[@"result"];
+        
+        NSLog(@"支付宝结果上传到服务器的参数:%@",parameters);
+        
         ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
         [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
             NSLog(@"服务器验证支付宝结果>>>>>>>>>>>>>>>%@",dataBack);

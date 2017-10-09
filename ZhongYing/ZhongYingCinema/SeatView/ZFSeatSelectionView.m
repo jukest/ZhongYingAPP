@@ -65,7 +65,7 @@
         
         
         [self inithallLogo:hallName];
-        [self startAnimation];//开场动画
+//        [self startAnimation];//开场动画
     }
     return self;
 }

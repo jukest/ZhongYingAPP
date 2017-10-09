@@ -319,12 +319,12 @@
             [_deleteHUD hide:YES afterDelay:0.5];
         }else{
             [self.parentViewController showHudMessage:dataBack[@"message"]];
-            [_deleteHUD hide:YES];
+            [_deleteHUD hideAnimated:YES];
         }
         
     } failure:^(NSError *error) {
         [self.parentViewController showHudMessage:@"连接服务器失败!"];
-        [_deleteHUD hide:YES];
+        [_deleteHUD hideAnimated:YES];
     }];
 }
 
