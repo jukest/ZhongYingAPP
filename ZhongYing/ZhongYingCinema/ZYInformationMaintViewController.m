@@ -118,7 +118,7 @@
 - (void)setupUI{
     [self addRefresh];
 
-    [self setupStatusBarBackground];
+//    [self setupStatusBarBackground];
     
     self.mainTableView.tableHeaderView = self.infoSliderView;
 
@@ -193,7 +193,7 @@
 - (MainTableView *)mainTableView {
     
     if (!_mainTableView) {
-        _mainTableView = [[MainTableView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, ScreenHeight - 49 - 20) style:UITableViewStylePlain];
+        _mainTableView = [[MainTableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 49) style:UITableViewStylePlain];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
         _mainTableView.showsVerticalScrollIndicator = NO;
@@ -218,7 +218,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ScreenHeight - 20 - 49;
+    return ScreenHeight - 49;
 }
 
 

@@ -38,7 +38,7 @@
 - (WXSegmentView *)sliderSegmentView {
     if (!_sliderSegmentView) {
         __weak typeof(self) weakSelf = self;
-        _sliderSegmentView = [[WXSegmentView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth-58, 40)];
+        _sliderSegmentView = [[WXSegmentView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth-40, 40)];
         [_sliderSegmentView setTitleArray:self.playDates withStyle:WXSegmentStyleSlider];
         _sliderSegmentView.titleChooseReturn = ^(NSInteger x) {
             weakSelf.selectedPlayDateIndex = x;

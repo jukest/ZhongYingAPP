@@ -104,7 +104,7 @@ static NSString *reuseIdentifier = @"mallCell";
         tipsLb.attributedText = str2;
         [bottomView addSubview:tipsLb];
         
-        self.gotoPayBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(15, bottomView.height - 35, ScreenWidth -30, 35) title:@"确认支付" titleColor:[UIColor whiteColor] target:self action:@selector(sureBtnAction:) tag:2];
+        self.gotoPayBtn = [FanShuToolClass createButtonWithFrame:CGRectMake(15, bottomView.height - 75, ScreenWidth -30, 35) title:@"确认支付" titleColor:[UIColor whiteColor] target:self action:@selector(sureBtnAction:) tag:2];
         self.gotoPayBtn.backgroundColor = Color(252, 186, 0, 1.0);
         self.gotoPayBtn.layer.cornerRadius = 5.0;
         self.gotoPayBtn.layer.masksToBounds = YES;
@@ -295,6 +295,7 @@ static NSString *reuseIdentifier = @"mallCell";
 {
     _LoadCouponHUD = [FanShuToolClass createMBProgressHUDWithText:@"加载中..." target:self];
     [self.view addSubview:_LoadCouponHUD];
+    [self.view bringSubviewToFront:_LoadCouponHUD];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiUserGoodsCouponsURL];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"token"] = ApiTokenStr;

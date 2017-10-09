@@ -24,14 +24,14 @@
 
     }
     
-    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - 20 - TitleViewHeight - 49);
+    self.frame = CGRectMake(WIDTH * index, 0, WIDTH, HEIGHT - 0 - TitleViewHeight - 49);
     self.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollAction:) name:ZYInformationTabViewScrollToTopNotification object:nil];
     
 }
 
 - (void)setupTalbeView {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:20) - TitleViewHeight - 49) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, HEIGHT - (self.hasNavigationBar?NavigationHeight:0) - TitleViewHeight - 49) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor clearColor];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

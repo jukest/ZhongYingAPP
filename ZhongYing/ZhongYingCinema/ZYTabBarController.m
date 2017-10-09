@@ -74,7 +74,6 @@
     //添加通知 广告页 消失了
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(advertiseViewDismissNotification:) name:AdvertiseViewDismissNotification object:nil];
     
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,8 +166,53 @@
 //    }
 }
 
-- (void)advertiseViewDismissNotification:(NSNotification *)notification {
+- (void)checkForUpdate
+{
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",BASE_URL,ApiPublicVersionURL];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"os"] = @"ios";
+    parameters[@"version"] = AppVersion;
+    parameters[@"group_id"] = ApiGroup_ID;
+    ZhongYingConnect *connect = [ZhongYingConnect shareInstance];
+    [connect getZhongYingDictSuccessURL:urlStr parameters:parameters result:^(id dataBack, NSString *currentPager) {
+        if ([dataBack[@"code"] integerValue] == 0) {
+            if ([dataBack[@"content"][@"result"] isEqualToString:@"lower"]) {
+                [self showAlertWithMessage:dataBack[@"content"][@"update_title"] log:dataBack[@"content"][@"update_log"]];
+            }else{
+            }
+        }else{
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
+/**
+ 显示提示信息
+ 
+ @param title 提示标题
+ @param log   提示信息
+ */
+- (void)showAlertWithMessage:(NSString *)title log:(NSString *)log
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:log preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }];
     
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+   
+    [alertController addAction:cancelAction];
+    [alertController addAction:deleteAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+
+- (void)advertiseViewDismissNotification:(NSNotification *)notification {
+    [self checkForUpdate];
+
     BOOL isUserCityChanged = [[NSUserDefaults standardUserDefaults] boolForKey:IsUserCityChanged];
     
     if (isUserCityChanged) {//发生了改变,提醒用户切换城市

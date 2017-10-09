@@ -113,7 +113,7 @@
             }else if (i == 3) {
                 // 姓名
                 _nameTextField = [FanShuToolClass createTextFieldWithFrame:CGRectMake(20+leftSize.width, 0, ScreenWidth-40-leftSize.width, 50) textColor:[UIColor grayColor] font:[UIFont systemFontOfSize:17] target:self];
-                _nameTextField.placeholder = @"非必填";
+                _nameTextField.placeholder = @"必填";
                 _nameTextField.backgroundColor = [UIColor whiteColor];
                 _nameTextField.textAlignment = NSTextAlignmentRight;
                 _nameTextField.text = ApiNameStr ? ApiNameStr : @"";

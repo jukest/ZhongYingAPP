@@ -142,23 +142,49 @@
 }
 
 #pragma mark - View Handle
+
+- (void)dd {
+    
+}
+
+
 - (void)exchangeBtnDidClicked:(UIButton *)btn
 {
-    if ([self.shopDict[@"shop_type"] intValue] == 1) { //电影票
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认兑换该商品吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        ExchangeTicketViewCtl *exchangeTicket = [[ExchangeTicketViewCtl alloc] init];
-        exchangeTicket.id = self.shop.id;
-        exchangeTicket.name = self.cinemaName;
-        [exchangeTicket setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:exchangeTicket animated:YES];
+        if ([self.shopDict[@"shop_type"] intValue] == 1) { //电影票
+            
+            ExchangeTicketViewCtl *exchangeTicket = [[ExchangeTicketViewCtl alloc] init];
+            exchangeTicket.id = self.shop.id;
+            exchangeTicket.name = self.cinemaName;
+            [exchangeTicket setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:exchangeTicket animated:YES];
+            
+        }else if ([self.shopDict[@"shop_type"] intValue] == 2){ //观影套餐
+            NSString *message = @"观影套餐兑换成功，相应积分将自动扣除，观影套餐请在“我的订单”里面查看。";
+            [self exchangeGoodsWithMessage:message];
+        }else{ //纪念品
+            NSString *message = @"纪念品兑换成功，相应积分将自动扣除，观影套餐请在“我的订单”里面查看。";
+            [self exchangeGoodsWithMessage:message];
+        }
         
-    }else if ([self.shopDict[@"shop_type"] intValue] == 2){ //观影套餐
-        NSString *message = @"观影套餐兑换成功，相应积分将自动扣除，观影套餐请在“我的订单”里面查看。";
-        [self exchangeGoodsWithMessage:message];
-    }else{ //纪念品
-        NSString *message = @"纪念品兑换成功，相应积分将自动扣除，观影套餐请在“我的订单”里面查看。";
-        [self exchangeGoodsWithMessage:message];
-    }
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:deleteAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
+    
+    
+    
 }
 
 #pragma mark - SDCycleScrollViewDelegate
